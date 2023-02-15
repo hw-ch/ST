@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class studyJoinDTO {
+public class StudyJoinDTO {
 	
 	private String sjNo, userId, sNo, approve, regDate;
 
