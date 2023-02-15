@@ -18,7 +18,7 @@ import util.ConnectionPool;
 //버전  기록 : 0.1(시작 23/02/15) 
 
 
-public class userDAO {
+public class UserDAO {
 
 	//My Study
 	public static String myList(String sWriter) 
