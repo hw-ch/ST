@@ -1,3 +1,10 @@
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 김도영(difbfl4750@naver.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- -------------------------------------------------------- -->
+
 <%@page import="java.lang.ProcessBuilder.Redirect"%>
 <%@page import="market.vo.ProductVO"%>
 <%@page import="market.dao.ProductDAO"%>
