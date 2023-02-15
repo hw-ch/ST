@@ -11,6 +11,11 @@
 </head>
 <body>
 <div class="container-sm">
+	<div class="row">
+		<div class="col justify-content-end">
+			<button class="col btn btn-outline-primary btn-sm">글작성</button>
+		</div>
+	</div>
   <table class="table table-hover">
   <tbody id="notice">
   </tbody>
@@ -40,7 +45,7 @@
  				var notices = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < notices.length; i++){
- 					str += "<tr><td class=\"span1\">" + notices[i].bNo + "</td>";
+ 					str += "<tr><small><td class=\"span1\">" + notices[i].bNo + "</small></td>";
  					str += "<td class=\"w-75\">" + notices[i].title + "</td>";
  					str += "<td class=\"span1\">" + notices[i].regDate +"</td></tr>";
 
