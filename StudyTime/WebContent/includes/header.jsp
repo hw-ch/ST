@@ -88,6 +88,81 @@
       }
     </style>
 
+
+<!--  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-light" aria-label="Tenth navbar example"> -->
+<!--     <div class="container-fluid"> -->
+
+
+    
+<!-- <!--       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation"> --> -->
+<!-- <!--         <span class="navbar-toggler-icon"></span> --> -->
+<!-- <!--       </button> --> -->
+      
+      
+<!--     <a href="../main.jsp" class="w3-bar-item w3-button w3-wide"><img class="box" style="width: 25px; height: 25px;" src="../images/DA.png"> DaDaMall </a>  -->
+
+
+<!--     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()"> -->
+<!--       <i class="fa fa-bars"></i> -->
+<!--     </a> -->
+<!--       <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08"> -->
+<!--         <ul class="navbar-nav"> -->
+        
+        
+                   
+<%--             <%if(sid != null) { %> --%>
+<!--             <li class="nav-item"> -->
+<!--             <a class="nav-link active text-dark" aria-current="page" href="../user/logout.jsp"><i class="fa fa-user-o"></i> 로그아웃　</a> -->
+<!--             </li> -->
+<!--             <li class="nav-item"> -->
+<!--             <a class="nav-link active text-dark" aria-current="page" href="../user/signout.jsp"><i class="fa fa-envelope-o"></i> 회원탈퇴　</a> -->
+<!--             </li> -->
+<%--             <% }else { %> --%>
+<!--             <li class="nav-item"> -->
+<!--             <a class="nav-link active text-dark" aria-current="page" href="../user/login.jsp"><i class="fa fa-user"></i> 로그인　</a> -->
+<!--             </li> -->
+<!--             <li class="nav-item"> -->
+<!--             <a class="nav-link active text-dark" aria-current="page" href="../user/signup.jsp"><i class="fa fa-envelope"></i> 회원가입　</a> -->
+<!--             </li> -->
+<%--               <% } %> --%>
+<!--               <li class="nav-item"> -->
+<!--             <a class="nav-link active text-dark" aria-current="page" href="../product/productList.jsp"><i class="fa fa-usd"></i> 상품목록　</a> -->
+<!--           </li> -->
+
+<%--           <%if(sid != null && sid.equals("admin")) { %> --%>
+<!--                    <li class="nav-item dropdown"> -->
+<!--             <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-th"></i> 관리자 메뉴</a> -->
+<!--             <ul class="dropdown-menu"> -->
+            
+<!--               <li><a class="dropdown-item" href="../admin/userAllAJAX.jsp">회원관리</a></li> -->
+<!--               <li><a class="dropdown-item" href="../admin/purchasedList.jsp">상품관리</a></li> -->
+<!--             </ul> -->
+<!--           </li> -->
+<%--           <% }%> --%>
+<!--         </ul> -->
+
+<%--                     <%if(sid == null) { %> --%>
+<!--     </div> <span class="text-secondary"><small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16"> -->
+<!--   <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/> -->
+<!--   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/> -->
+<!-- </svg> 비회원</small></span> -->
+<%--             <% }else if(sid != null && sid.equals("admin")){ %> --%>
+<!--             </div> <span class="text-success"><small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16"> -->
+<!--             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> -->
+<!--             <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/> -->
+<%--           </svg> <%=sid %>(관리자)님 </small></span> --%>
+<%--                         <% }else if(userDAO.exist(sid)){ %> --%>
+<!--                         </div> <span class="text-success"><small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16"> -->
+<!--                         <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> -->
+<!--                         <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/> -->
+<%--                       </svg> <%=sid %>(정회원)님 </small></span> <% }else { %> --%>
+<!--    </div> <span class="text-success"><small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16"> -->
+<!--   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> -->
+<!--   <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/> -->
+<%-- </svg> <%=sid %>(준회원)님 </small></span> --%>
+<%--               <% } %> --%>
+<!--   </nav> -->
+
 <link rel="shortcut icon" href="../images/favicon.ico">
   <link rel="icon" href="../images/favicon.ico">
   
@@ -95,13 +170,15 @@
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4">Study Time</span>
+        <span class="fs-4">Simple header</span>
       </a>
 
       <ul class="nav nav-pills">
-<!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">내 글쓰기</a></li> -->
-        <li class="nav-item"><a href="#" class="nav-link">내 글쓰기</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
       </ul>
     </header>
   </div>
