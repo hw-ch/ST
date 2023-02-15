@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class UserDAO { 
+public class CategoryDAO { 
 	
 	
 	

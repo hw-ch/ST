@@ -20,6 +20,11 @@ public class StudyDAO {
 	public StudyDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
+	//테스트
+	public void test(){
+		
+	}
+	
 	
 	//스터디목록(지원)
 	public List<StudyDTO> studyList() {	
