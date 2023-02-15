@@ -5,9 +5,9 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class replyDTO {
+public class NoticeDTO {
 	
-	private String rNo, bNo, content, nickName, userId, regDate;
+	private String nNo, title, content, regDate, uptDate, hit;
 
 
 	

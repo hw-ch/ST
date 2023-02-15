@@ -13,7 +13,7 @@
 	String phone = request.getParameter("phone");
 	String image = "";
 	
-	boolean result = userDAO.join(id, pw, name, nickname, gender, phone, image);
+	boolean result = UserDAO.join(id, pw, name, nickname, gender, phone, image);
 	
 	if(result == true){
 		SendMail.sending(id, name);	//메일 보내기

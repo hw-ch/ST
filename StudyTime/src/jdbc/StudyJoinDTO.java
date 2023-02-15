@@ -5,11 +5,9 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class categoryDTO {
+public class StudyJoinDTO {
 	
-	private String cNo, category1, category2;
+	private String sjNo, userId, sNo, approve, regDate;
 
-	
 
-	
 }
