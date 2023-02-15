@@ -24,14 +24,6 @@ public class StudyDAO {
 	public StudyDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
-	//등록,수정시 사용할 카테고리 select (지원)
-	/*
-	 * 
-	 * 	method{
-	 * 
-	 * }
-	 * 
-	 */
 	
 	//스터디목록(지원)
 	public List<StudyDTO> studyList() {	
