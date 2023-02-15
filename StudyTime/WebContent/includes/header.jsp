@@ -101,17 +101,33 @@
   <link rel="icon" href="../images/favicon.ico">
   
          <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
         <span class="fs-4">Study Time</span>
       </a>
-
-      <ul class="nav nav-pills">
+      
+                          <%if(sid == null) { %>
+    <ul class="nav nav-pills">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
         <li class="nav-item"><a href="../user/" class="nav-link">내 글쓰기</a></li>
         <li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
       </ul>
+            <% }else if(sid != null && sid.equals("admin")){ %>
+             <ul class="nav nav-pills">
+<!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
+        <li class="nav-item"><a href="../user/" class="nav-link">관리자목록</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">로그아웃</a></li>
+      </ul>
+                        <% }else{ %>
+                                    <ul class="nav nav-pills">
+<!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
+        <li class="nav-item"><a href="../user/" class="nav-link">회원목록</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">로그아웃</a></li>
+      </ul>
+              <% } %>
+
+     
     </header>
   </div>
        
