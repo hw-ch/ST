@@ -2,5 +2,5 @@ package jdbc;
 
 public class boardDAO {
 	
-	public class boardinsert()
+	public class boardinsert();
 }
