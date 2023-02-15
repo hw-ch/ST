@@ -25,6 +25,8 @@ public class StudyDAO {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
 	
+	//등록,수정할떄 사용할 category select 메소드 만들기(지원)
+	
 	//스터디목록(지원)
 	public List<StudyDTO> studyList() {	
 		sql = "SELECT * FROM study ORDER BY regDate DESC";
