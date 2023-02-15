@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class noticeDTO {
+public class NoticeDTO {
 	
 	private String nNo, title, content, regDate, uptDate, hit;
 

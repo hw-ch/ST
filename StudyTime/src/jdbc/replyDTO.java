@@ -1,14 +1,5 @@
 package jdbc;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public class ReplyDTO {
 
-@AllArgsConstructor
-@Data
-public class replyDTO {
-	
-	private String rNo, bNo, content, nickName, userId, regDate;
-
-
-	
 }
