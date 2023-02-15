@@ -1,3 +1,4 @@
+<%@page import="smtp.SendMail"%>
 <%@page import="jdbc.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,7 +13,10 @@
 	String phone = request.getParameter("phone");
 	String image = "";
 	
-	if(userDAO.join(id, pw, name, nickname, gender, phone, image) == true){
+	boolean result = userDAO.join(id, pw, name, nickname, gender, phone, image);
+	
+	if(result == true){
+		SendMail.sending(id, name);	//메일 보내기
 		out.print("회원가입 성공");
 	}	else{
 		out.print("회원가입 실패");
