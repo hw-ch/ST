@@ -101,18 +101,19 @@ public class userDAO {
 	
 	
 	//스터디 탈퇴
-	public static int studyDelete(String sNo) 
+	public static int studyDelete(String userId, String sNo) 
 			throws NamingException, SQLException {
 				
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				
 				try {
-					String sql = "DELETE FROM study WHERE sNo = ? ";
+					String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
 					
 					conn = ConnectionPool.get();
 					pstmt = conn.prepareStatement(sql);
-						pstmt.setString(1, sNo);
+						pstmt.setString(1, userId);
+						pstmt.setString(2, sNo);
 						
 					int result = pstmt.executeUpdate();
 					
@@ -125,7 +126,7 @@ public class userDAO {
 			}
 	
 	//내 정보
-		public static String myInfo(String userid) 
+		public static String myInfo(String userId) 
 				throws NamingException, SQLException {
 			
 			
@@ -134,11 +135,11 @@ public class userDAO {
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM user WHERE userid = ? ORDER BY ts DESC";
+				String sql = "SELECT * FROM user WHERE userId = ? ORDER BY ts DESC";
 				
 				conn = ConnectionPool.get();
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, userid);
+				pstmt.setString(1, userId);
 
 				rs = pstmt.executeQuery();
 				
@@ -146,8 +147,8 @@ public class userDAO {
 				
 				while(rs.next()) {
 					JSONObject obj = new JSONObject();
-					obj.put("userid", rs.getString(1));
-					obj.put("nickname", rs.getString(2));
+					obj.put("userId", rs.getString(1));
+					obj.put("nickName", rs.getString(2));
 					obj.put("name", rs.getString(3));
 					obj.put("gender", rs.getString(4));
 					obj.put("phone", rs.getString(5));
@@ -167,21 +168,21 @@ public class userDAO {
 		
 	
 	//본인 정보 수정
-	public static int edit(String userid, String password, String nickname, String image, String phone) throws NamingException, SQLException {
+	public static int edit(String userId, String password, String nickName, String image, String phone) throws NamingException, SQLException {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-		String sql = "UPDATE user SET password = ?, nickname = ?, image=?, phone=? WHERE userid = ?";
+		String sql = "UPDATE user SET password = ?, nickName = ?, image=?, phone=? WHERE userId = ?";
 		
 		conn = ConnectionPool.get();
 		pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, password);
-			pstmt.setString(2, nickname);
+			pstmt.setString(2, nickName);
 			pstmt.setString(3, phone);
 			pstmt.setString(4, image);
-			pstmt.setString(5, userid);
+			pstmt.setString(5, userId);
 			 
 		return pstmt.executeUpdate(); //성공 1, 실패 0을 가지고 나간다.
 		} finally {
@@ -194,18 +195,18 @@ public class userDAO {
 	
 	
 	//회원 탈퇴
-	public static int delete(String userid) 
+	public static int delete(String userId) 
 			throws NamingException, SQLException {
 				
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				
 				try {
-					String sql = "DELETE FROM user WHERE userid = ? ";
+					String sql = "DELETE FROM user WHERE userId = ? ";
 					
 					conn = ConnectionPool.get();
 					pstmt = conn.prepareStatement(sql);
-						pstmt.setString(1, userid);
+						pstmt.setString(1, userId);
 						
 					int result = pstmt.executeUpdate();
 					
