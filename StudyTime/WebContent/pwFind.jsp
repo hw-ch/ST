@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스타 : 비밀번호 찾기</title>
 </head>
 <body>
-hhh
+
 </body>
 </html>
