@@ -5,10 +5,12 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class noticeDTO {
+public class UserDTO {
 	
-	private String nNo, title, content, regDate, uptDate, hit;
+	private String userId, password, name, nickName, ts, gender, image, phone;
 
+
+	
 
 	
 }

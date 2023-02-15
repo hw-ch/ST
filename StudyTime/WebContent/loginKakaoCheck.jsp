@@ -1,4 +1,4 @@
-<%@page import="jdbc.userDAO"%>
+<%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,11 +21,12 @@
 	// DB에 존재하면 --> (0) 세션 처리 (로그인 상태)
 	// DB에 존재하지 않으면 회원 가입 페이지로 이동 가입 유도
 
-	 int result = userDAO.kakaoLogin(userId);
+	 int result = UserDAO.kakaoLogin(userId);
 
 	if (result == 0) {
 		out.print("로그인 성공");
-	} else {%>
+	} else {
+%>
 	<script>alert('카카오 로그인을 위해 회원가입 부탁드립니다.')</script>
 <% 		
 //		response.sendRedirect("join.jsp?nickname=" + java.net.URLEncoder.encode(nickname) + "&userId=" + userId + "&gender=" + gender);

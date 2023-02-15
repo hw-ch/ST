@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 
 import util.*;
 
-public class userDAO {
+public class UserDAO {
 	
 	//회원가입 (완료)
 	public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image) throws NamingException, SQLException{

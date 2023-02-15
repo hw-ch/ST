@@ -3,12 +3,12 @@
 <%@ page import="jdbc.*" %>
 
 <%
-    String userId = request.getParameter("userId");
+	String userId = request.getParameter("userId");
     String password = request.getParameter("password");
     	
     	
     	
-    int result = userDAO.login(userId, password);
+    int result = UserDAO.login(userId, password);
     	
     if(result ==0){		// 로그인 성공 -> 세션 생성 후 메인으로 이동
     	out.print("로그인 성공");
@@ -21,5 +21,4 @@
     	/* response.sendRedirect("login.jsp"); */
     	out.print("비밀번호 다름");
     }
-    	
 %>
