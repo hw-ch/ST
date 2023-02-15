@@ -12,6 +12,12 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
+//최초작성자 : 정소영
+//최초작성일 : 2023/02/15
+//
+//버전  기록 : 0.1(시작 23/02/15) 
+
+
 public class userDAO {
 
 	//My Study
@@ -52,10 +58,6 @@ public class userDAO {
 		}
 		
 	}
-	
-	
-	
-	
 	
 	//스터디 조회
 	public static String myView(String sWriter) 
@@ -191,9 +193,6 @@ public class userDAO {
 		}
 	}
 	
-	
-	
-	
 	//회원 탈퇴
 	public static int delete(String userId) 
 			throws NamingException, SQLException {
@@ -217,8 +216,5 @@ public class userDAO {
 					if(conn != null) conn.close();
 				}
 			}
-	
-	
-	
 	
 }
