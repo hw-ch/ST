@@ -5,7 +5,11 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class StudyDTO {
-	//test
-	String id;
+public class studyDTO {
+	
+	private String sNo, sTitle, sWriter, cNo, category1, category2, address, recruitCnt, joinCnt, regDate, expDate, startDate, sContent, apply, process;
+
+
+
+	
 }
