@@ -58,5 +58,75 @@ public class StudyJoinDAO {
 		return userList.toJSONString();
 	}
 	
+	// 스터디 가입 승인
+	public static boolean approve(String sNo, String userId) {
+		
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		
+		try {
+			String sql = "UPDATE studyJoin SET approve = 2 WHERE sNo = ? and userid = ?";
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, sNo);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.execute();
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
+	// 스터디 가입 거절
+	public static boolean reject(String sNo, String userId) {
+		
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		
+		try {
+			String sql = "UPDATE studyJoin SET approve = 1 WHERE sNo = ? and userid = ?";
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, sNo);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.execute();
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
 
 }

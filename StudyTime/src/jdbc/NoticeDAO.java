@@ -139,10 +139,8 @@ public class NoticeDAO {
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, bno);
+			pstmt.setString(1, bno);
 			result = pstmt.executeUpdate();
-				
-			return result;
 				
 		} catch (Exception e) {
 			e.printStackTrace();
