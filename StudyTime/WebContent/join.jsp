@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import=""%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +8,12 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<form action="joinCheck.jsp">
+<form action="joinCheck.jsp" encType="multipart/form-data">
 <fieldset>
 	<legend>회원가입</legend>
 	아이디 <input type="email" name="id" size =30 placeholder="이메일을 입력하세요 ex)aa@naver.com" required> <br>
-	비밀번호 <input type="password" name = "password" id="pw" required> <br>
-	비밀번호 확인 <input type="password" id="pwChk" required> <br>
+	비밀번호 <input type="password" name = "password" id="pw" maxlength="15" required> <br>
+	비밀번호 확인 <input type="password" id="pwChk" maxlength="15" required> <br>
 	이름 <input type="text" name = "name" required> <br>
 	닉네임 <input type="text" name = "nickname" required> <br>
 	전화번호 <input type="text" name = "phone" size=30 placeholder="010-0000-0000" required> <br>

@@ -1,9 +1,11 @@
 <%@page import="smtp.SendMail"%>
 <%@page import="jdbc.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.oreilly.servlet.MultipartRequest,
+	com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
 
 	String id = request.getParameter("id");
 	String pw = request.getParameter("password");
@@ -11,7 +13,7 @@
 	String nickname = request.getParameter("nickname");
 	String gender = request.getParameter("gender");
 	String phone = request.getParameter("phone");
-	String image = "";
+	String image = request.getParameter("image");
 	
 	boolean result = UserDAO.join(id, pw, name, nickname, gender, phone, image);
 	
