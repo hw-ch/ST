@@ -19,7 +19,7 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 <body class="text-center bg-info">
-  <%@ include file="header.jsp"%>
+  <%@ include file="/includes/header.jsp"%>
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
   
 
