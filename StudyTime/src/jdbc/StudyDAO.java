@@ -19,6 +19,7 @@ public class StudyDAO {
 	StudyDTO sdto;
 	private static Connection conn;
 		
+//	스터디 전체 목록 메서드
 	public static ArrayList<StudyDTO> getAllList() throws SQLException, NamingException{
 			
 		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
@@ -67,6 +68,7 @@ public class StudyDAO {
 	
 		}
 	
+//	스터디 승인 메서드
 	public static boolean apply(String sNo) throws NamingException, SQLException {
 		
 		try {

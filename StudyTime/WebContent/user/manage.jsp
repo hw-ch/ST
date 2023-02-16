@@ -14,14 +14,13 @@
 
 <%@page import="jdbc.*"%>
 <%@page import="java.util.*"%>
-<%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원목록</title>
+<title>StudyTime</title>
 </head>
  <body class="text-center">
  <%@ include file="../includes/header.jsp"%>
@@ -30,13 +29,13 @@
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
   </div>
   <div class="w3-display-middle w3-center">
-    <span class="w3-text-white text-light" style="font-size:90px">DaDaMall</span>
+    <span class="w3-text-white text-light" style="font-size:90px">StudyTime</span>
   </div>
   <div class="w3-display-bottomright w3-center w3-padding-large">
   </div>
 </header>
     <div class="col-md-6 px-0">
-      <h1 class="display-4 fst-italic" style="padding-right: 220px;">회원목록</h1>
+      <h1 class="display-4 fst-italic" style="padding-right: 220px;">그룹원목록</h1>
      </div>
 		    <hr class="featurette-divider">
 		    	<br>
@@ -98,9 +97,6 @@
 </main>
     
     
- 
-
-<%@ include file="../includes/footer.jsp"%>
 </body>
   <script>
   
@@ -126,7 +122,7 @@
   
   
   window.onload = function() {
-	searchFunction();
+// 	searchFunction();
 }
   
   $(document).on('click', '.regBtn', function(event) {

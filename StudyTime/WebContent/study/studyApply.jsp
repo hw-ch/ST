@@ -7,19 +7,18 @@
 
 <%@page import="jdbc.*"%>
 <%@page import="java.util.*"%>
-<%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원목록</title>
+<title>StudyTime</title>
 </head>
  <body class="text-center">
  <%@ include file="../includes/header.jsp"%>
   <header class="bgimg w3-display-container w3-grayscale-min" style="height: 80%" id="home">
- <img src="../images/스포츠이미지.jpg"  width="100%" height="90%"> 
+<!--  <img src="../images/스포츠이미지.jpg"  width="100%" height="90%">  -->
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
   </div>
   <div class="w3-display-middle w3-center">
@@ -29,7 +28,7 @@
   </div>
 </header>
     <div class="col-md-6 px-0">
-      <h1 class="display-4 fst-italic" style="padding-right: 220px;">회원목록</h1>
+      <h1 class="display-4 fst-italic" style="padding-right: 220px;">스터디목록</h1>
      </div>
 		    <hr class="featurette-divider">
 		    	<br>
@@ -92,8 +91,6 @@
     
     
  
-
-<%@ include file="../includes/footer.jsp"%>
 </body>
   <script>
   
@@ -119,7 +116,7 @@
   
   
   window.onload = function() {
-	searchFunction();
+// 	searchFunction();
 }
   
   $(document).on('click', '.regBtn', function(event) {

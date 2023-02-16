@@ -13,12 +13,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메모 작성</title>
+<title>StudyTime</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
-<body class="text-center bg-info">
+<body class="text-center">
   <%@ include file="/includes/header.jsp"%>
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
   
@@ -32,8 +32,8 @@
 <div class="py-5 text-center">
       
       <h2>　</h2>
-      <img class="d-block mx-auto mb-4" src="apple.png" alt="" width="100" height="100">
-           <h1>My MEMO</h1>
+      <img class="d-block mx-auto mb-4" src="/images/study3.png" alt="" width="100" height="100">
+           <h1>StudyTime</h1>
          </div>
 
 
@@ -55,7 +55,6 @@
       
 </form>
 </main>
-      <%@ include file="/includes/footer.jsp"%>
 
 </body>
     <script>

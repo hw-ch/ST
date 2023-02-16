@@ -16,10 +16,11 @@ import util.ConnectionPool;
 public class StudyJoinDAO {
 
 	StudyDTO sdto;
-	private String sql;
-	private PreparedStatement pstmt;
-	private Connection conn;
-	private ResultSet rs;
+	private static String sql;
+	private static PreparedStatement pstmt;
+	private static Connection conn;
+	private static ResultSet rs;
+	
 	public StudyJoinDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
@@ -82,7 +83,6 @@ public class StudyJoinDAO {
 				if(pstmt!= null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -90,8 +90,8 @@ public class StudyJoinDAO {
 	}
 	
 		
-	
-	public boolean delete(String userId, String sNo) throws NamingException, SQLException {
+//	스터디 그룹원 추방 메서드
+	public static boolean delete(String userId, String sNo) throws NamingException, SQLException {
 		
 	try {
 		

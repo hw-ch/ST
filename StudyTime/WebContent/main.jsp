@@ -13,7 +13,7 @@
     <%@ page import="java.util.*, java.security.*, java.io.*, java.net.*" %>
     <%@ page errorPage = "page_error_page.jsp" %>
     
-<%-- <%@page import="jdbc.*"%> --%>
+<%@page import="jdbc.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,21 +29,21 @@
 
 <main>
 
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
      </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-<img src="images/study1.png"  width="100%" height="400px"> 
+<img src="images/study1.png"  width="100%" height="100%"> 
         <div class="container">
           <div class="carousel-caption text-start">
                        </div>
         </div>
       </div>
       <div class="carousel-item">
-      <img src="images/study2.png"  width="100%" height="400px"> 
+      <img src="images/study2.png"  width="100%" height="100%"> 
               <div class="container">
           <div class="carousel-caption text-warning">
                      </div>
@@ -62,15 +62,15 @@
     
     
     
-   <div class="row featurette">
+   <div class="row featurette" style="padding-top: 300px;">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1"><span class="text-muted">헬스용품 이벤트 </span></h2>
-        <p class="lead">특가할인</p>
-        <p><a class="btn btn-lg btn-primary" href="../product/productList.jsp">더보기</a></p>
+        <h2 class="featurette-heading fw-normal lh-1"><span class="text-muted">영어 중국어 일본어 운동/스포츠 IT </span></h2>
+      
+              <hr class="featurette-divider">
+        <p><a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEIC</a> <a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEFL</a> <a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEIC</a></p>
 
       </div>
       <div class="col-md-5">
-       <img src="images/턱걸이밴드.png"  width="100%" height="100%"> 
       </div>
     </div>
     
