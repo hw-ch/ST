@@ -16,7 +16,11 @@ public class NoticeDAO {
 	
 	// 공지사항 리스트 모두 가져오기
 	public static String getList(){
+<<<<<<< Updated upstream
 		String SQL = "SELECT bno, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice ORDER BY bNo DESC";
+=======
+		String SQL = "SELECT * FROM notice ORDER BY bNo DESC";
+>>>>>>> Stashed changes
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -33,7 +37,12 @@ public class NoticeDAO {
 				obj.put("title", rs.getString(2));
 				obj.put("content", rs.getString(3));
 				obj.put("regDate", rs.getString(4));
+<<<<<<< Updated upstream
 				obj.put("hit", rs.getString(5));
+=======
+				obj.put("uptDate", rs.getString(5));
+				obj.put("hit", rs.getString(6));
+>>>>>>> Stashed changes
 			
 				noticeList.add(obj);
 				
@@ -191,8 +200,12 @@ public class NoticeDAO {
 			return result;
 		}
 	
+<<<<<<< Updated upstream
 }
 
 
 
 
+=======
+}
+>>>>>>> Stashed changes

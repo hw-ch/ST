@@ -129,4 +129,8 @@ public class StudyJoinDAO {
 	}
 	
 
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

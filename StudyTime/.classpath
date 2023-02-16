@@ -14,6 +14,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< Updated upstream
 	<classpathentry kind="lib" path="/Users/hyewonchoi/Downloads/lombok.jar"/>
+=======
+	<classpathentry kind="lib" path="/Applications/eGovFrameDev-3.10.0-Mac-64bit.app/Contents/Eclipse/lombok.jar"/>
+>>>>>>> Stashed changes
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
