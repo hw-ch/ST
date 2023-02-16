@@ -8,6 +8,7 @@
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<form action="updateAction.jsp">
 	<div class="communityView">
 		<section class="communityView_Postheader">
    		<div class="community_title" >
@@ -24,12 +25,10 @@
    		</div>
    		<hr>
    		</section>
-   		<form action="updateAction.jsp">
    		<div class=community_content_wrap>
    		<textarea class="community_content" name="content"></textarea>
    		</div>
    		<div class="community_delete"><button>수정</button></div>
-   		</form>
    		<hr>
    		<section class="community_commentView">
    			<div class="community_comment">
@@ -42,6 +41,7 @@
    			</div>
    		</section>
 	</div>
+	</form>
 </body>
 </html>
 

@@ -8,8 +8,8 @@
 <%
 	request.setCharacterEncoding("utf-8"); //한글 처리
 
-	String subject = "테스트";
-	String content = "테스트";
+	String subject = request.getParameter("subject");
+	String content = request.getParameter("content");
 	int bno = 1;
 	
 	BoardDAO.Boardupdate(bno, subject, content);
