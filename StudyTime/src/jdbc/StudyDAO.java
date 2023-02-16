@@ -1,7 +1,7 @@
 package jdbc;
 
 
-=======
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,5 +72,4 @@ public class StudyDAO {
 			
 			return result;
 		}
->>>>>>> 356cbfb6312a14e9fba50dc32b101103840fa8c6
 }
