@@ -7,5 +7,5 @@
 
 	String id = UserDAO.idFind(name, phone);
 %>
-<%= id %>
+회원가입때 등록했던 아이디는 <%= id %> 입니다.
 	
