@@ -6,8 +6,8 @@
 <!-- -------------------------------------------------------- -->
 
 <%@page import="java.lang.ProcessBuilder.Redirect"%>
-<%@page import="market.vo.ProductVO"%>
-<%@page import="market.dao.ProductDAO"%>
+<%@page import="jdbc.UserDTO"%>
+<%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"%>
@@ -27,7 +27,7 @@
 
 %>
 	
-	<jsp:useBean id="mdao" class="market.dao.MemberDAO"/>
+	<jsp:useBean id="mdao" class="jdbc.UserDAO"/>
 
 	<sql:setDataSource 
 			var="dataSource"

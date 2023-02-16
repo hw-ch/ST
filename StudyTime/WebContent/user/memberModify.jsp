@@ -6,7 +6,7 @@
 <!-- -------------------------------------------------------- -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="market.vo.*, java.util.*"%>
+	pageEncoding="UTF-8" import="jdbc.*, java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +40,7 @@
 			<%
 // 			String id = (String)session.getAttribute("sid");
 // 			MemberVO mvo = mdao.selectMember(id);
-			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
+//			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
 			%>
 
 	<c:if test="${!empty mvo }">

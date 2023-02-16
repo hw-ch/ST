@@ -174,10 +174,11 @@ public class StudyDAO {
 		return false;		
 	}
 	//스터디 수정(미완성)지원
-	public static boolean studyUpdate(String sTitle, String sWriter, int cNo, String category1,
+	public static int studyUpdate(String sTitle, String sWriter, int cNo, String category1,
 			String category2,String address, int recruitCnt, int joinCnt, String expDate,
 			String startDate, String scontent,String process) {
 			
+			int result = 0;
 			
 			try {
 				String sql = "UPDATE study SET sTitle = ?, sContent = ? WHERE sNo = ? ";
@@ -188,7 +189,7 @@ public class StudyDAO {
 				pstmt.setString(1, sTitle);
 				
 				
-				result = pstmt.execute();
+				result = pstmt.executeUpdate();
 							
 			}catch (Exception e) {
 				e.printStackTrace();
