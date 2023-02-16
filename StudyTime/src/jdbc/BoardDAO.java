@@ -4,73 +4,56 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.NamingException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
 public class BoardDAO {
-	
-	
-	public static int Boarddelete(String bno) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			String sql = "DELETE FROM Board WHERE bno = ?";
-			
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, bno);
-			result = pstmt.executeUpdate();
-				
-			return result;
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt!= null) pstmt.close();
-				if(conn!=null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
-	
-	public static boolean Boardupdate(String bno,String subject, String content) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean result = false;
-		
-		try {
-			String sql = "UPDATE board SET subject= ?, content = ? WHERE bno = ?";
-			
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, subject);
-			pstmt.setString(2, content);
-			pstmt.setString(3, bno);
 
-			result = pstmt.execute();
-								
-		} catch (Exception e) {
-			e.printStackTrace();
+	private static PreparedStatement pstmt;
+	private static String sql;
+	private static ResultSet rs;
+	BoardDTO bdto;
+	private static Connection conn;
+	
+	public static boolean insert(String subject, String content, String nickName, String userId) throws SQLException, NamingException {
 			
-		} finally {
 			try {
-				if(pstmt!= null) pstmt.close();
-				if(conn!=null) conn.close();
+				sql = " INSERT INTO board (subject, content, nickName, userId) "
+						+ " VALUES(?, ?, ?, ?) ";
+	
+				conn = ConnectionPool.get();
+				
+				pstmt = conn.prepareStatement(sql);
+	
+				pstmt.setString(1, subject);
+				pstmt.setString(2, content);
+				pstmt.setString(3, nickName);
+				pstmt.setString(4, userId);
+	
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					return true;
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				if(pstmt != null)
+				pstmt.close();
+				if(conn != null)
+				conn.close();
 			}
+	
+			return false;
 		}
 		
-		return result;
-	}
+
+	
+
+
 }
