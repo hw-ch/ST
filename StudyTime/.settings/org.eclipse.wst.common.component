@@ -2,6 +2,7 @@
     <wb-module deploy-name="StudyTime">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
         <property name="context-root" value="StudyTime"/>
         <property name="java-output-path" value="/StudyTime/build/classes"/>
     </wb-module>
