@@ -121,29 +121,31 @@ public class UserDAO {
 	}
 	
 	//비밀번호 찾기(완료)
-		public static int pwFind(String id, String userName) throws NamingException, SQLException {
+	public static String pwFind(String userid, String name) throws NamingException, SQLException {
+		
+		String sql = "SELECT password FROM user WHERE userId=? and name=? ";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String password = null;
+		
+		try {
+			conn = ConnectionPool.get();	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, name);
 			
-			String sql = "SELECT password FROM user WHERE userId=? and name=? ";
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String password = null;
+			rs = pstmt.executeQuery();
 			
-			try {
-				conn = ConnectionPool.get();	
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.setString(2, userName);
-				
-				rs = pstmt.executeQuery();
-				
-				if(!id.equals(rs.getString("userId"))) return 1;	//입력한 아이디가 없는 경우
-				
-			}	finally {
-				if(rs != null) rs.close();
-				if(pstmt!= null) pstmt.close();
-				if(conn != null) conn.close();
+			if(rs.next()) {
+				password = rs.getString("password");
 			}
+		}	finally {
+			if(rs != null) rs.close();
+			if(pstmt!= null) pstmt.close();
+			if(conn != null) conn.close();
 		}
+		return password;
+	}
 	
 }
