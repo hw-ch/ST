@@ -22,13 +22,17 @@ public class BoardDAO {
 	private static Connection conn;
 	
 //	커뮤니티 게시물 등록 메서드
-	public static boolean insert(String subject, String content, String nickName, String userId) throws SQLException, NamingException {
+	public static boolean insert(String subject, String content, String nickName, String userId){
 			
 			try {
 				sql = " INSERT INTO board (subject, content, nickName, userId) "
 						+ " VALUES(?, ?, ?, ?) ";
 	
-				conn = ConnectionPool.get();
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
 				
 				pstmt = conn.prepareStatement(sql);
 	
@@ -44,11 +48,16 @@ public class BoardDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
-				if(pstmt != null)
-				pstmt.close();
-				if(conn != null)
-				conn.close();
-			}
+				try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+				if(rs != null) rs.close();
+					
+					
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+				}
 	
 			return false;
 		}

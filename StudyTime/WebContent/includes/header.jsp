@@ -99,10 +99,10 @@
   <link rel="icon" href="../images/favicon.ico">
   
          <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 h3">
+    <header class="d-flex flex-wrap justify-content-center py-3 h3 ">
       <a href="/main.jsp" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 <!--         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
-        <span class="fs-4"><img class="box" style="width: 25px; height: 25px;" src="/images/study3.png"> STUDY TIME</span>
+        <span class="fs-4"><img class="box" style="width: 80px; height: 80px;" src="/images/study3.png"> STUDY TIME</span>
       </a>
       
                           <%if(sid == null) { %>
