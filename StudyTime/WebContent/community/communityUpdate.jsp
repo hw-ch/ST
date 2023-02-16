@@ -7,12 +7,12 @@
 <title>communityView</title>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-<%@ include file="/includes/header.jsp" %>
 	<div class="communityView">
 		<section class="communityView_Postheader">
-   		<div class="community_title">커뮤니티 타이틀</div>
+   		<div class="community_title" >
+   		<input name="subject" type="text">
+   		</div>
    		<div class ="writer_wrap">
    		<div class="Writer">작성자</div>
    		<div class="community_update"><button>수정</button></div>
@@ -24,10 +24,12 @@
    		</div>
    		<hr>
    		</section>
-   		
+   		<form action="updateAction.jsp">
    		<div class=community_content_wrap>
-   		<textarea class="community_content">내용</textarea>
+   		<textarea class="community_content" name="content"></textarea>
    		</div>
+   		<div class="community_delete"><button>수정</button></div>
+   		</form>
    		<hr>
    		<section class="community_commentView">
    			<div class="community_comment">
@@ -42,3 +44,4 @@
 	</div>
 </body>
 </html>
+

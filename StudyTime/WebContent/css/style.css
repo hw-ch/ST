@@ -6,10 +6,14 @@
     font-weight: 700;
     font-style: normal;
 }
+.communityView
+{
+	min-width: 50%;
+}
 
 .community_title{
     font-family: 'KIMM_Bold';
-    font-size : 5em;
+    font-size : 5em;    
 }
 
 .communityView
@@ -17,4 +21,45 @@
 	text-align:left;
 	margin-left:300px;
 	margin-right:300px;
+}
+
+.writer_wrap
+{
+    margin: 10px auto;
+	display:flex;
+}
+
+.community_update
+{
+	margin-left: auto;
+	float: right;
+}
+
+.community_delete
+{
+	margin-right:10px;
+	float: right;
+}
+
+.DateAndViews
+{
+    margin: 10px auto;
+	display:flex;
+}
+
+.Date
+{
+}
+
+.hits
+{
+    margin-left: 10px;
+}
+
+.community_content
+{
+	width:100%;
+    font-family: 'KIMM_Bold';
+    font-style: normal;
+    font-size : 1em;    
 }

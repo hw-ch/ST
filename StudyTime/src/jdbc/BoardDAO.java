@@ -40,12 +40,10 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public static boolean Boardupdate(String bno,String subject, String content) {
+	public static int Boardupdate(int bno, String subject, String content) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean result = false;
 		
 		try {
 			String sql = "UPDATE board SET subject= ?, content = ? WHERE bno = ?";
@@ -55,13 +53,11 @@ public class BoardDAO {
 			
 			pstmt.setString(1, subject);
 			pstmt.setString(2, content);
-			pstmt.setString(3, bno);
+			pstmt.setInt(3, bno);
 
-			result = pstmt.execute();
-								
+			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 		} finally {
 			try {
 				if(pstmt!= null) pstmt.close();
@@ -70,7 +66,6 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+		return -1;
 	}
 }
