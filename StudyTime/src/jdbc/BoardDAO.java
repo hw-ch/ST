@@ -21,6 +21,7 @@ public class BoardDAO {
 	BoardDTO bdto;
 	private static Connection conn;
 	
+//	커뮤니티 게시물 등록 메서드
 	public static boolean insert(String subject, String content, String nickName, String userId) throws SQLException, NamingException {
 			
 			try {

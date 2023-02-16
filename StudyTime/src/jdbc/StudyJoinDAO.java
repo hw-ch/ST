@@ -21,7 +21,7 @@ public class StudyJoinDAO {
 	StudyDTO sdto;
 	private static Connection conn;
 		
-	
+//	스터디 그룹원 추방 메서드
 	public static boolean delete(String userId, String sNo) throws NamingException, SQLException {
 		
 	try {

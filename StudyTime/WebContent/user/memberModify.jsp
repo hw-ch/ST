@@ -6,14 +6,14 @@
 <!-- -------------------------------------------------------- -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="market.vo.*, java.util.*"%>
+	pageEncoding="UTF-8" import="java.util.*"%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<title>memberModify.jsp</title>
+<title>StudyTime</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -40,7 +40,7 @@
 			<%
 // 			String id = (String)session.getAttribute("sid");
 // 			MemberVO mvo = mdao.selectMember(id);
-			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
+// 			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
 			%>
 
 	<c:if test="${!empty mvo }">
@@ -159,7 +159,6 @@
 	<br>
 </c:if>
 	<!-- 화면 하단 footer --------------------------------------- -->
-<%@ include file="../includes/footer.jsp"%>
 
 	<script>
 	

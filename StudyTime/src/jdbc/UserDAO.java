@@ -18,7 +18,7 @@ public class UserDAO {
 	UserDTO udto;
 	private static Connection conn;
 	
-	
+//	회원정보 수정 메서드
 	public static boolean update(String userId, String nickName, String name, String gender, String image, String phone) throws NamingException, SQLException {
 		
 		try {
@@ -52,6 +52,7 @@ public class UserDAO {
 
 	}
 	
+//	회원정보 삭제 메서드
 	public static boolean delete(String userId) throws NamingException, SQLException {
 	
 	try {
