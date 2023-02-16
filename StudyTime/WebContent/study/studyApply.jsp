@@ -16,7 +16,7 @@
 <title>StudyTime</title>
 </head>
  <body class="text-center">
- <%@ include file="../includes/header.jsp"%>
+ <%@ include file="/includes/header.jsp"%>
   <header class="bgimg w3-display-container w3-grayscale-min" style="height: 80%" id="home">
 <!--  <img src="../images/스포츠이미지.jpg"  width="100%" height="90%">  -->
   <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
