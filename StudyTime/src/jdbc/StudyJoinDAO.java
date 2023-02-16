@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.naming.NamingException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +14,35 @@ import org.json.simple.JSONObject;
 import util.ConnectionPool;
 
 public class StudyJoinDAO {
+
+	StudyDTO sdto;
+	private static String sql;
+	private static PreparedStatement pstmt;
+	private static Connection conn;
+	private static ResultSet rs;
+	
+	public StudyJoinDAO() {
+		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
+	}
+		//스터디참여(지원)
+		public boolean studyJoin(String userId, String sNo, String approve){
+			sql = "INSERT INTO studyjoin(userid,sNo,approve) VALUES(?,?,?)";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				pstmt.setString(2, sNo);
+				pstmt.setString(3, approve);
+				if(pstmt.executeUpdate()==1) return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				 if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+		         if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			return false;		
+		}
+		
+		
 	
 	// 특정 스터디 가입 신청 목록 보기
 	public static String getList(String sNo){
@@ -51,81 +83,42 @@ public class StudyJoinDAO {
 				if(pstmt!= null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return userList.toJSONString();
 	}
 	
-	// 스터디 가입 승인
-	public static boolean approve(String sNo, String userId) {
 		
+//	스터디 그룹원 추방 메서드
+	public static boolean delete(String userId, String sNo) throws NamingException, SQLException {
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean result = false;
+	try {
 		
-		try {
-			String sql = "UPDATE studyJoin SET approve = 2 WHERE sNo = ? and userid = ?";
-			
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
+		sql = "DELETE from studyjoin where userid=? AND sNo=? ";
 
-			pstmt.setString(1, sNo);
-			pstmt.setString(2, userId);
-			
-			result = pstmt.execute();
-						
-		}catch (Exception e) {
-			e.printStackTrace();
+		conn = ConnectionPool.get();
 		
-		}finally {
-			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+		pstmt.setString(2, sNo);
+
+		int result = pstmt.executeUpdate();
+		if (result == 1) {
+			return true;
 		}
-		
-		return result;
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(pstmt != null)
+		pstmt.close();
+		if(conn != null)
+		conn.close();
 	}
-	
-	// 스터디 가입 거절
-	public static boolean reject(String sNo, String userId) {
-		
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean result = false;
-		
-		try {
-			String sql = "UPDATE studyJoin SET approve = 1 WHERE sNo = ? and userid = ?";
-			
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, sNo);
-			pstmt.setString(2, userId);
-			
-			result = pstmt.execute();
-						
-		}catch (Exception e) {
-			e.printStackTrace();
-		
-		}finally {
-			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
+	return false;
+
 	}
 	
 

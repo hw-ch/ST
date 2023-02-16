@@ -6,5 +6,5 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class ReplyDTO {
-	private String rNo, bNo, content, nickname, userid, regDate;
+	private String rNo, bNo, content, nickName, userId, regDate;
 }
