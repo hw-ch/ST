@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyTime</title>
+<title>STUDY TIME</title>
 <link href="carousel.css" rel="stylesheet">
 
 </head>
