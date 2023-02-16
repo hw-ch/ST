@@ -67,11 +67,6 @@ public class UserDAO {
 	public static String myView(String sWriter) 
 			throws NamingException, SQLException {
 		
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
 		try {
 			String sql = "SELECT sTitle, sWriter, joinCnt, startDate, process, expDate, cNo  FROM study WHERE sWriter = ? ORDER BY ts DESC";
 			
@@ -99,8 +94,10 @@ public class UserDAO {
 			return study.toJSONString();
 			
 		}finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			  if (pstmt != null) try { pstmt.close(); } 
+			  	catch(Exception e) {e.printStackTrace();}
+			  if (conn != null) try { conn.close(); } 
+	            catch(Exception e) {e.printStackTrace();}
 		}
 		
 	}
@@ -109,9 +106,6 @@ public class UserDAO {
 	//스터디 탈퇴
 	public static int studyDelete(String userId, String sNo) 
 			throws NamingException, SQLException {
-				
-				Connection conn = null;
-				PreparedStatement pstmt = null;
 				
 				try {
 					String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
@@ -126,19 +120,16 @@ public class UserDAO {
 					return result;
 					
 				}finally {
-					if(pstmt != null) pstmt.close();
-					if(conn != null) conn.close();
+					  if (pstmt != null) try { pstmt.close(); } 
+					  	catch(Exception e) {e.printStackTrace();}
+					  if (conn != null) try { conn.close(); } 
+			            catch(Exception e) {e.printStackTrace();}
 				}
 			}
 	
 	//내 정보
 		public static String myInfo(String userId) 
 				throws NamingException, SQLException {
-			
-			
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
 			
 			try {
 				String sql = "SELECT * FROM user WHERE userId = ? ORDER BY ts DESC";
@@ -166,8 +157,10 @@ public class UserDAO {
 				return study.toJSONString();
 				
 			}finally {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				if (pstmt != null) try { pstmt.close(); } 
+			  	catch(Exception e) {e.printStackTrace();}
+			  if (conn != null) try { conn.close(); } 
+	            catch(Exception e) {e.printStackTrace();}
 			}
 			
 		}
@@ -175,9 +168,6 @@ public class UserDAO {
 	
 	//본인 정보 수정
 	public static int edit(String userId, String password, String nickName, String image, String phone) throws NamingException, SQLException {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		
 		try {
 		String sql = "UPDATE user SET password = ?, nickName = ?, image=?, phone=? WHERE userId = ?";
@@ -192,17 +182,16 @@ public class UserDAO {
 			 
 		return pstmt.executeUpdate(); //성공 1, 실패 0을 가지고 나간다.
 		} finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if (pstmt != null) try { pstmt.close(); } 
+		  	catch(Exception e) {e.printStackTrace();}
+		  if (conn != null) try { conn.close(); } 
+            catch(Exception e) {e.printStackTrace();}
 		}
 	}
 	
 	//회원 탈퇴
 	public static int delete(String userId) 
 			throws NamingException, SQLException {
-				
-				Connection conn = null;
-				PreparedStatement pstmt = null;
 				
 				try {
 					String sql = "DELETE FROM user WHERE userId = ? ";
@@ -216,8 +205,10 @@ public class UserDAO {
 					return result;
 					
 				}finally {
-					if(pstmt != null) pstmt.close();
-					if(conn != null) conn.close();
+					if (pstmt != null) try { pstmt.close(); } 
+				  	catch(Exception e) {e.printStackTrace();}
+				  if (conn != null) try { conn.close(); } 
+		            catch(Exception e) {e.printStackTrace();}
 				}
 			}
 	
