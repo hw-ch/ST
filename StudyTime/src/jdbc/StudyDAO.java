@@ -153,7 +153,7 @@ public class StudyDAO {
 			return false;
 		}
 		
-	public static boolean apply(String sNo) throws NamingException, SQLException {
+	public static boolean apply(String sNo){
 		
 		try {
 			sql = "UPDATE study SET apply=? WHERE sNo=?";

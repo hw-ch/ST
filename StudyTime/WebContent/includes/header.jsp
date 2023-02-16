@@ -23,17 +23,15 @@
     
     #STATICMENU { margin: 0pt; padding: 0pt; position: absolute; z-index: 1; right: 0px; top: 0px;}
     
-    @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-	}
+    @font-face{
+  font-family:'bitbit';
+  src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+}
 
 	html,
 	body {
 	  height: 100%;
-	  font-family: 'GmarketSansMedium';
+	  font-family: 'bitbit';
 	}
 	
     .box {
@@ -101,17 +99,17 @@
   <link rel="icon" href="../images/favicon.ico">
   
          <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4">Study Time</span>
+    <header class="d-flex flex-wrap justify-content-center py-3 h3 ">
+      <a href="/main.jsp" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+<!--         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
+        <span class="fs-4"><img class="box" style="width: 80px; height: 80px;" src="/images/study3.png"> STUDY TIME</span>
       </a>
       
                           <%if(sid == null) { %>
     <ul class="nav nav-pills">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item"><a href="../user/" class="nav-link">내 글쓰기</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">로그인</a></li>
+        <li class="nav-item"><a href="../user/" class="nav-link text-dark">내 글쓰기</a></li>
+        <li class="nav-item"><a href="/login.jsp" class="nav-link text-dark">로그인</a></li>
       </ul>
             <% }else if(sid != null && sid.equals("admin")){ %>
              <ul class="nav nav-pills">
