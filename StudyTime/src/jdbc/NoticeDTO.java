@@ -5,11 +5,10 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class categoryDTO {
+public class NoticeDTO {
 	
-	private String cNo, category1, category2;
+	private String nNo, title, content, regDate, uptDate, hit;
 
-	
 
 	
 }

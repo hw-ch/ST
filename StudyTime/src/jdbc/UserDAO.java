@@ -10,12 +10,12 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class userDAO {
+public class UserDAO {
 
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	userDTO udto;
+	UserDTO udto;
 	private static Connection conn;
 	
 	

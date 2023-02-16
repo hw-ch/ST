@@ -13,12 +13,12 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class studyJoinDAO {
+public class StudyJoinDAO {
 
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	studyDTO sdto;
+	StudyDTO sdto;
 	private static Connection conn;
 		
 	

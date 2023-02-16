@@ -13,17 +13,17 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class studyDAO {
+public class StudyDAO {
 
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	studyDTO sdto;
+	StudyDTO sdto;
 	private static Connection conn;
 		
-	public static ArrayList<studyDTO> getAllList() throws SQLException, NamingException{
+	public static ArrayList<StudyDTO> getAllList() throws SQLException, NamingException{
 			
-		ArrayList<studyDTO> studys = new ArrayList<studyDTO>();
+		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
 		
 		try {
 			sql = " SELECT * FROM study ORDER BY sNo DESC ";
@@ -37,7 +37,7 @@ public class studyDAO {
 			
 			
 			while(rs.next()) {		
-				studys.add(new studyDTO(rs.getString(1),
+				studys.add(new StudyDTO(rs.getString(1),
 									rs.getString(2),
 									rs.getString(3),
 									rs.getString(4),

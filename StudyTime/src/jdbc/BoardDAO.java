@@ -13,12 +13,12 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class boardDAO {
+public class BoardDAO {
 
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	boardDTO bdto;
+	BoardDTO bdto;
 	private static Connection conn;
 	
 	public static boolean insert(String subject, String content, String nickName, String userId) throws SQLException, NamingException {
