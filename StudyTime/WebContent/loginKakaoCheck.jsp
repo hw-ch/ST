@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-성공!!<br>
+<br>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -27,9 +27,19 @@
 		out.print("로그인 성공");
 	} else {
 %>
-	<script>alert('카카오 로그인을 위해 회원가입 부탁드립니다.')</script>
+	<script>
+	alert('카카오 로그인을 위해 카카오 로그인을 위해 회원가입 부탁드립니다.')
+	
+//  	if(!check){
+//  		return false;
+//  	}
+	
+		</script>
+	<script>
+	location.href = 'joinkakao.jsp?nickname=' + '<%=nickname %>' + '&userId=' + '<%=userId %>' + '&gender=' + '<%=gender %>';
+	</script>
 <% 		
-//		response.sendRedirect("join.jsp?nickname=" + java.net.URLEncoder.encode(nickname) + "&userId=" + userId + "&gender=" + gender);
+//	response.sendRedirect("joinkakao.jsp?nickname=" + java.net.URLEncoder.encode(nickname) + "&userId=" + userId + "&gender=" + gender);
 		//java.net.URLEncoder.encode(mname) -- > mname을 한글로 인식
 	}
 %>
