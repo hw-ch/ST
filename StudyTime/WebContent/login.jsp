@@ -7,6 +7,8 @@
 <title>스타 : 로그인</title>
 </head>
 <body>
+<%@ include file="/includes/header.jsp" %>
+
 <form action="loginCheck.jsp">
 <input type="text" name="userId" placeholder="아이디">
 <input type="password" name="password" placeholder="비밀번호">

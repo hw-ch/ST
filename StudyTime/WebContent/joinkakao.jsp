@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>스타 : 회원 가입</title>
+<body>
+<%@ include file="/includes/header.jsp" %>
 
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 <%
 
