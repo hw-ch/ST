@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Study time!</title>
 </head>
 <body>
-
+	<%@ include file = "/includes/header.jsp" %>
+	hi
 </body>
 </html>
