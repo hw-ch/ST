@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 	<Resource name="jdbc/studytime"
@@ -6,23 +5,9 @@
 	type="javax.sql.DataSource"
 	driverClassName="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/StudyTime?serverTimezoneUTC"
-	username="root"
+	username="studytime"
 	password="0000"
 	maxTotal="16"
 	maxIdle="4"
 	maxWaitMillis="-1"/>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<Context>
-    <Resource name="jdbc/studytime"
-    auth="Container"
-    type="javax.sql.DataSource"
-    driverClassName="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost:3306/studytime?serverTimezoneUTC"
-    username="studyname"
-    password="0000"
-    maxTotal="16"
-    maxIdle="4"
-    maxWaitMillis="-1"/>
->>>>>>> Stashed changes
 </Context>
