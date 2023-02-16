@@ -8,13 +8,19 @@ import util.*;
 
 public class UserDAO {
 	
+	private static PreparedStatement pstmt;
+	private static String sql;
+	private static ResultSet rs;
+	private static Connection con;
+	
+	
 	//회원가입 (완료)
 	public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image) throws NamingException, SQLException{
-		String sql = "INSERT INTO user(userId, password, name, nickname, "
+		sql = "INSERT INTO user(userId, password, name, nickname, "
 				+ " gender, phone, image) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		pstmt = null;
 		try {
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
@@ -40,10 +46,10 @@ public class UserDAO {
 	//로그인 (완료)
 	public static int login(String id, String userPass) throws NamingException, SQLException {
 		
-		String sql = "SELECT userId, password FROM user WHERE userId=? ";
+		sql = "SELECT userId, password FROM user WHERE userId=? ";
 		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		pstmt = null;
+		rs = null;
 		
 		try {
 			conn = ConnectionPool.get(); //커넥션 풀 사용
@@ -66,11 +72,11 @@ public class UserDAO {
 	//카카오 로그인(완료)
 	public static int kakaoLogin(String id) throws NamingException, SQLException {
 		
-		String sql = "SELECT userId FROM user WHERE userId=?";
+		sql = "SELECT userId FROM user WHERE userId=?";
 		
 		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		pstmt = null;
+		rs = null;
 		
 		try {
 			conn = ConnectionPool.get();	
@@ -94,10 +100,10 @@ public class UserDAO {
 	//아이디 찾기(완료)
 	public static String idFind(String name, String phone) throws NamingException, SQLException {
 		
-		String sql = "SELECT userid FROM user WHERE name=? and phone=?";
+		sql = "SELECT userid FROM user WHERE name=? and phone=?";
 		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		pstmt = null;
+		rs = null;
 		
 		String id = null; // DB에 있는 아이디 찾기
 		
