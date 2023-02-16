@@ -20,25 +20,23 @@ import util.ConnectionPool;
 
 public class UserDAO {
 
+	private static PreparedStatement pstmt;
+	private static Connection conn;
+	private static ResultSet rs;
+	
 	//My Study
-	public static String myList(String sWriter) 
-			throws NamingException, SQLException {
-		
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
+	public static String myList(String sWriter)  {
+		JSONArray study = new JSONArray();
 		try {
 			String sql = "SELECT sTitle, sWriter, joinCnt, startDate FROM study WHERE sWriter = ? ORDER BY ts DESC";
 			
-			conn = ConnectionPool.get();
+			try {
+				conn = ConnectionPool.get();
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sWriter);
 
 			rs = pstmt.executeQuery();
-			
-			JSONArray study = new JSONArray();
 			
 			while(rs.next()) {
 				JSONObject obj = new JSONObject();
@@ -49,14 +47,20 @@ public class UserDAO {
 			
 				study.add(obj);
 			}
-				
-			return study.toJSONString();
 			
+			} catch (NamingException | SQLException e) {
+				e.printStackTrace();
+			}
 		}finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			  if (pstmt != null) try { pstmt.close(); } 
+			  	catch(Exception e) {e.printStackTrace();}
+			  if (conn != null) try { conn.close(); } 
+	            catch(Exception e) {e.printStackTrace();}
+	          if (rs != null) try { rs.close(); } 
+	            catch (SQLException e) {e.printStackTrace();}
+	        
 		}
-		
+		return study.toJSONString();  
 	}
 	
 	//스터디 조회
