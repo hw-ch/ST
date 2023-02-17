@@ -2,6 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,19 @@
 </head>
 <body>
 <%@ include file="/includes/header.jsp" %>
-
+ <%-- <jsp:useBean id="pdao" class="ST.dao.ProductDAO"/>
+<%
+	String pid = request.getParameter("pid");
+	ProductVO pvo = pdao.selectProduct(pid); 	%>
+	<div class="row">
+		<div class="col-md-4">
+			<img src="../resources/imgs/<%=pvo.getPimage() %>"
+				 style="width:100%"></div>
+		
+		<div class="col-md-8">
+	<form action="productModifyProc.jsp" method="post" 
+			id="prodRegFrm" class="form-horizontal"
+			  enctype="multipart/form-data"> --%>
 
 <div class="d-grid gap-2 col-6 mx-auto">
 
@@ -24,8 +38,8 @@
       
       	<p><span class="font-weight-bold">닉네임 : </span>
 		   <span class="badge badge-danger"> 닉네임 받아오기 </span></p>
-		   <a class="btn btn-secondary disabled" role="button" aria-disabled="true" style="position: absolute; right: 10px; bottom: 10px;">사진 편집</a>
-	      
+		<div class="col-sm-5" style="position: absolute; right: 0px; bottom: 10px;">사진편집
+	      <input type="file" name="image" class="form-control"></div>
       </div>
     </div>
   </div>
@@ -80,9 +94,22 @@
  		<hr class="my-4">
 			
 			<div class="d-grid gap-2 col-6 mx-auto">
-			  <button class="btn btn-secondary" type="button">수정 완료</button>
+			  <button class="btn btn-secondary" onclick="myInfoModify.jsp" type="button">수정 완료</button>
 			</div>
       </div>
+      
+      
+      
+
+	<%-- <div class="form-group row">	
+		<div class="col-sm-offset-2 col-sm-10"><!-- 이전으로 | 수정 -->
+		<input type="button" class="btn btn-secondary backBtn" 
+				value="이전으로">
+		<input type="button" class="btn btn-info"
+				onclick="checkProduct()" value="수정"></div></div>
+		<input type="hidden" name="pidBefore" value="<%=pvo.getPid() %>">		
+	</form><!-- paroRegFrm -->
+</div>	</div>		</div> --%>
       
 </body>
 </html>
