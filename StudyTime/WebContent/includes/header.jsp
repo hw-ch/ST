@@ -188,22 +188,14 @@ if(sid != null) {
 			class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
 		</div>
 		<div class="w3-display-middle w3-center">
-			<span class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">STUDY TIME</span>
+			<span class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
 		</div>
 		<div class="w3-display-bottomright w3-center w3-padding-large">
 		</div>
 	</header>
 
 
-<!-- 	<div class="col-md-6 px-0" style="padding-bottom:  100px;"> -->
-<!-- 		<h1 class="display-4 fst-italic" style="padding-right: 220px;">상품목록</h1> -->
-<!-- 	</div> -->
-<!-- 	<hr class="featurette-divider"> -->
-<!-- 	<div class="text-end"> -->
-<!-- 	</div> -->
-<!-- 	<br> -->
-<!-- 	<br> -->
-<!-- 	<br> -->
+
      </fieldset>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
