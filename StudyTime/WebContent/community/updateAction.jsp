@@ -1,6 +1,3 @@
-<!-- 2023-02-17 김남훈 보드 업데이트 액션 -->
-
-
 <%@page import="java.awt.print.Printable"%>
 <%@page import="javax.security.auth.Subject"%>
 <%@page import="jdbc.BoardDAO"%>

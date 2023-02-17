@@ -1,5 +1,3 @@
-<!-- 2023-02-17 김남훈 보드뷰 생성 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +15,8 @@
    		<div class="community_title">커뮤니티 타이틀</div>
    		<div class ="writer_wrap">
    		<div class="Writer">작성자</div>
-   		<div class="community_update"><button onclick="location.href='boardupdate.jsp'">수정</button></div>
-   		<div class="community_delete"><button onclick="location.href='deleteaction.jsp'">삭제</button></div>
+   		<div class="community_update"><button>수정</button></div>
+   		<div class="community_delete"><button>삭제</button></div>
    		</div>
    		<div class="DateAndViews">
    			<div class="Date">날짜</div>
@@ -27,7 +25,6 @@
    		<hr>
    		</section>
    		
-   		<form action="replyinsert.jsp">
    		<div class=community_content_wrap>
    		<textarea class="community_content">내용</textarea>
    		</div>
@@ -35,25 +32,13 @@
    		<section class="community_commentView">
    			<div class="community_comment">
    			<h1 class="comment_count">댓글 수 </h1>
-  			<textarea class="commentinput" name="content"></textarea>
+  			<textarea class="commentinput"></textarea>
 	  			<div class="commentinput_button_wrap">
-	  			<button>댓글 등록</button>
+	  			<button class="commentinput_button">댓글 등록</button>
 	  			</div>
-   			<ul class="comment_list">
-   			<%
-				 ArrayList<BoardDTO> replys = ReplyDAO.ReplygetList();
-				 
-				 for(BoardDTO reply : replys) {
-				%>
-				
-					
-				<%
-				}
-				%>
-   			</ul>
+   			<ul class="comment_list"></ul>
    			</div>
    		</section>
-   		</form>
 	</div>
 </body>
 </html>

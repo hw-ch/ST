@@ -1,5 +1,3 @@
-//2023-02-17 김남훈 보드 삭제 및 수정  메소드 추가
-
 package jdbc;
 
 import java.sql.Connection;
@@ -12,18 +10,21 @@ import util.ConnectionPool;
 public class BoardDAO {
 	
 	
-	public static int Boarddelete(int bno) {
+	public static int Boarddelete(String bno) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		int result = 0;
 		
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, bno);
-			return pstmt.executeUpdate();
+				pstmt.setString(1, bno);
+			result = pstmt.executeUpdate();
+				
+			return result;
 				
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +37,7 @@ public class BoardDAO {
 			}
 		}
 		
-		return -1;
+		return result;
 	}
 	
 	public static int Boardupdate(int bno, String subject, String content) {

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,37 +13,46 @@ import util.ConnectionPool;
 public class ReplyDAO {
 	
 	// 댓글 리스트 모두 가져오기
-	public static ArrayList<ReplyDTO> ReplygetList(int bno){
-		String SQL = "SELECT * FROM Reply WHERE bno = ? ORDER BY rNo DESC";
-		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();
-
+	public static String ReplygetList(){
+		String SQL = "SELECT * FROM Reply ORDER BY rNo DESC";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		JSONArray noticeList = new JSONArray();
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, bno);
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				ReplyDTO reply = new ReplyDTO();
-				reply.setBNo(rs.getString(1));;
-				reply.setCommentID(rs.getInt(2));
-				reply.setBbsID(rs.getInt(3));
-				reply.setUserID(rs.getString(4));
-				reply.setCommentDate(rs.getString(5));
-				reply.setCommentText(rs.getString(6));
-				reply.setCommentAvilable(rs.getInt(7));
-				list.add(reply);
+			
+			while(rs.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("rNo", rs.getString(1));
+				obj.put("content", rs.getString(2));
+				obj.put("nickname", rs.getString(3));
+				obj.put("userid", rs.getString(4));
+				obj.put("regDate", rs.getString(5));
+			
+				noticeList.add(obj);
+				
 			}
-		}catch(Exception e) {
+			
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return list; //데이터베이스 오류
+		return noticeList.toJSONString();
 	}
 	
-	public static boolean Replyinsert(String content, String nickname, String userid, int bno) {
+	public static boolean Replyinsert(ReplyDTO reply) {
 		
 		
 		Connection conn = null;
@@ -53,16 +61,15 @@ public class ReplyDAO {
 		boolean result = false;
 		
 		try {
-			String sql = "INSERT INTO reply (content, nickname, userid, bno) values(?, ?, ?, ?)";
+			String sql = "INSERT INTO reply (content, nickname, userid, bNo) values(?,?,?,?)";
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, content);
-			pstmt.setString(2, nickname);
-			pstmt.setString(3, userid);
-			pstmt.setInt(4, bno);
 
+			pstmt.setString(1, reply.getContent());
+			pstmt.setString(2, reply.getNickname());
+			pstmt.setString(3, reply.getUserid());
+			pstmt.setString(4, reply.getBNo());
 			
 			result = pstmt.execute();
 						
@@ -81,7 +88,6 @@ public class ReplyDAO {
 		return result;
 	}
 	
-
 	// 댓글 삭제
 	public static int Replydelete(String rno) {
 		
