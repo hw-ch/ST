@@ -4,6 +4,7 @@
 최초작성일 : 2023/02/15
 
 버전 기록 : ver1(시작 23/02/15)
+		  ver2(23/02/16)
 --------------------------------------------------------
 */
 
@@ -66,9 +67,10 @@ public class NoticeDAO {
 	}
 	
 	//공지사항 등록(혜원)
-	public static boolean insert(String title, String content) {
+	public static int Noticeinsert(String title, String content) {
 		
-		boolean result = false;
+		int result = 0;
+		
 		
 		try {
 			String sql = "INSERT INTO notice (title, content, hit) values(?,?, 0)";
@@ -84,7 +86,8 @@ public class NoticeDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			
-			result = pstmt.execute();
+			result = pstmt.executeUpdate();
+			System.out.println(result);
 						
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -99,7 +102,7 @@ public class NoticeDAO {
 	
 	//공지사항 상세보기(혜원)
 	public static String getNotice(int bNo){
-		sql = "SELECT * FROM notice WHERE bNo = ?";
+		sql = "SELECT bno, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice WHERE bNo = ?";
 		JSONObject obj = new JSONObject();
 		
 		try {
@@ -109,17 +112,16 @@ public class NoticeDAO {
 				e.printStackTrace();
 			}
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(bNo, 1);
+			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
 			
-			rs.next();
-			
-			obj.put("bNo", rs.getString(1));
-			obj.put("title", rs.getString(2));
-			obj.put("content", rs.getString(3));
-			obj.put("regDate", rs.getString(4));
-			obj.put("uptDate", rs.getString(5));
-			obj.put("hit", rs.getString(6));
+			if(rs.next()) {
+				obj.put("bNo", rs.getString(1));
+				obj.put("title", rs.getString(2));
+				obj.put("content", rs.getString(3));
+				obj.put("regDate", rs.getString(4));
+				obj.put("hit", rs.getString(5));
+			}
 			
 			
 		} catch(Exception e) {
@@ -162,8 +164,8 @@ public class NoticeDAO {
 	}
 	
 	//공지사항 수정(혜원)
-		public static boolean update(String bno, String title, String content) {
-			boolean result = false;
+		public static int update(String bno, String title, String content) {
+			int result = 0;
 			
 			try {
 				String sql = "UPDATE notice SET title = ?, content = ? WHERE bno = ? ";
@@ -179,7 +181,7 @@ public class NoticeDAO {
 				pstmt.setString(2, content);
 				pstmt.setString(3, bno);
 				
-				result = pstmt.execute();
+				result = pstmt.executeUpdate();
 							
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -191,6 +193,9 @@ public class NoticeDAO {
 			
 			return result;
 		}
+		
+		
+		//조회수 추가(혜원)
 	
 }
 
