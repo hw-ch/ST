@@ -70,36 +70,27 @@ public class StudyDAO {
 	
 		}
 	
-//	스터디 승인 메서드
+	//	스터디 승인 메서드	
 	public static boolean apply(String sNo){
-		
-		try {
 			
-			sql = "UPDATE study SET apply=? "
-					+ " WHERE sNo=? ";
-
-			conn = ConnectionPool.get();
-			
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, "승인");
-			pstmt.setString(2, sNo);
-
-			int result = pstmt.executeUpdate();
-			if (result == 1) {
-				return true;
+			try {
+				sql = "UPDATE study SET apply=? WHERE sNo=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "승인");
+				pstmt.setString(2, sNo);
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+				if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
-			
-		}
-
-		return false;
-
+			return false;
 	
+		}
 	
 	
 	//스터디목록(지원)
@@ -231,26 +222,6 @@ public class StudyDAO {
 			return false;
 		}
 		
-	public static boolean apply(String sNo){
-		
-		try {
-			sql = "UPDATE study SET apply=? WHERE sNo=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "승인");
-			pstmt.setString(2, sNo);
-			int result = pstmt.executeUpdate();
-			if (result == 1) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
-			if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
-		}
-		return false;
-
-	}
+	
 
 }

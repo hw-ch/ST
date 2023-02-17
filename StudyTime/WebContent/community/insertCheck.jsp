@@ -1,6 +1,4 @@
 <%@page import="jdbc.BoardDAO"%>
-<%@page import="jdbc.feedDAO"%>
-<%@page import="jdbc.feedDTO"%>
 <%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,8 +16,6 @@
 	String content = request.getParameter("content");
 	String nickName = request.getParameter("nickName");
 	String userId = request.getParameter("userId");
-	
-
 	
 	if(BoardDAO.insert(subject, content, nickName, userId)) {
 %>
