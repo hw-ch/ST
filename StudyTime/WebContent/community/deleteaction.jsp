@@ -7,16 +7,14 @@
 <%@page import="smtp.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%
 	request.setCharacterEncoding("utf-8"); //한글 처리
 
-	int bno = 1;
+	int result = BoardDAO.Boarddelete(bno);
 	
-	BoardDAO.Boarddelete(bno);
+	if(result == 0){
+		BoardDAO.Boarddelete(bno);
 
 	out.print("삭제 성공");
 		%>
-
-
-

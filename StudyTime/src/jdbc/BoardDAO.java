@@ -20,11 +20,38 @@ public class BoardDAO {
 	private static ResultSet rs;
 	private static Connection conn;
 	
+//	게시물 보기(남훈)
+	public static BoardDTO getboard(int bNo){
+		String sql = "SELECT subject, content, nickname, userid, hit, good, bad, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate, replyNum from board WHERE bNo = ?";
+		try {
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setSubject(rs.getString(1));
+				board.setContent(rs.getString(2));
+				board.setNickName(rs.getString(3));
+				board.setUserId(rs.getString(4));
+				board.setHit(rs.getString(5));
+				board.setGood(rs.getString(6));
+				board.setBad(rs.getString(7));
+				board.setRegDate(rs.getString(8));
+				board.setReplyNum(rs.getString(9));
+				return board;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 //	게시물 삭제(남훈)
 	public static int Boarddelete(String bno) {
 		int result = 0;
 
-		
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
 			
