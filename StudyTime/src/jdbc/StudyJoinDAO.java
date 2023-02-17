@@ -14,6 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.*;
+
+
+import javax.naming.NamingException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -29,8 +33,11 @@ public class StudyJoinDAO {
 	public StudyJoinDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
+	
+	
+	
 		//스터디참여(지원)
-		public boolean studyJoin(String userId, String sNo, String approve){
+		public static boolean studyJoin(String userId, String sNo, String approve){
 			sql = "INSERT INTO studyjoin(userid,sNo,approve) VALUES(?,?,?)";
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -49,7 +56,7 @@ public class StudyJoinDAO {
 
 
 
-	// 특정 스터디 가입 신청 목록 보기
+	// 특정 스터디 가입 신청 목록 보기(혜원)
 	public static String getList(String sNo){
 		String SQL = "SELECT sj.sNo u.userid, u.nickname, u.name, u.gender FROM studyJoin sj " +
 				"JOIN user u ON sj.userid = u.userid " +
@@ -88,29 +95,18 @@ public class StudyJoinDAO {
 				if(pstmt!= null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return userList.toJSONString();
 	}
 
-	// 스터디 가입 승인
-	public static boolean approve(String sNo, String userId) {
-
 //	스터디 그룹원 추방 메서드(도영)
 	public static boolean delete(String userId, String sNo){
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		boolean result = false;
-
-		try {
-			String sql = "UPDATE studyJoin SET approve = 2 WHERE sNo = ? and userid = ?";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
+		
+	try {
+		
+		sql = "DELETE from studyjoin where userid=? AND sNo=? ";
 
 		try {
 			conn = ConnectionPool.get();
@@ -118,18 +114,19 @@ public class StudyJoinDAO {
 			e.printStackTrace();
 		}
 		
-		}finally {
-			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+		pstmt.setString(2, sNo);
+
+		int result = pstmt.executeUpdate();
+		if (result == 1) {
+			return true;
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
-
+		
 		try {
 			if(pstmt != null)	pstmt.close();
 			if(conn != null)	conn.close();
@@ -140,7 +137,11 @@ public class StudyJoinDAO {
 
 	}
 
-	// 스터디 가입 거절
+	return false;
+
+}
+
+	// 스터디 가입 거절(혜원)
 	public static boolean reject(String sNo, String userId) {
 
 

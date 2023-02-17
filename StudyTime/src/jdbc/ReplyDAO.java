@@ -13,7 +13,7 @@ import util.ConnectionPool;
 
 public class ReplyDAO {
 	
-	// 댓글 리스트 모두 가져오기
+	// 댓글 리스트 모두 가져오기(남훈)
 	public static ArrayList<ReplyDTO> ReplygetList(int bno){
 		String SQL = "SELECT * FROM Reply WHERE bno = ? ORDER BY rNo DESC";
 		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();
@@ -82,7 +82,7 @@ public class ReplyDAO {
 	}
 	
 
-	// 댓글 삭제
+	// 댓글 삭제(남훈)
 	public static int Replydelete(String rno) {
 		
 		Connection conn = null;
@@ -113,7 +113,7 @@ public class ReplyDAO {
 		return result;
 	}
 	
-	// 댓글 수정
+	// 댓글 수정(남훈)
 	public static boolean replyupdate(String rno, String content) {
 		
 		Connection conn = null;

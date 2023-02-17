@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.naming.NamingException;
 
@@ -15,12 +15,15 @@ import util.ConnectionPool;
 
 public class BoardDAO {
 	
+	private static PreparedStatement pstmt;
+	private static String sql;
+	private static ResultSet rs;
+	private static Connection conn;
 	
+//	게시물 삭제(남훈)
 	public static int Boarddelete(String bno) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		int result = 0;
+
 		
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
@@ -28,7 +31,7 @@ public class BoardDAO {
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, bno);
-			result = pstmt.executeUpdate();
+			 result = pstmt.executeUpdate();
 				
 			return result;
 				
@@ -46,10 +49,8 @@ public class BoardDAO {
 		return result;
 	}
 	
+//	게시물 수정(남훈)	
 	public static int Boardupdate(int bno, String subject, String content) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 		
 		try {
 			String sql = "UPDATE board SET subject= ?, content = ? WHERE bno = ?";
@@ -65,14 +66,19 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-
-	private static PreparedStatement pstmt;
-	private static String sql;
-	private static ResultSet rs;
-	BoardDTO bdto;
-	private static Connection conn;
-	
-//	커뮤니티 게시물 등록 메서드
+			try {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+			if(rs != null) rs.close();
+				
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return -1;
+	}
+//	커뮤니티 게시물 등록 메서드(도영)
 	public static boolean insert(String subject, String content, String nickName, String userId){
 			
 			try {
@@ -112,9 +118,7 @@ public class BoardDAO {
 	
 			return false;
 		}
-		return -1;
-	}
-}
+
 		
 
 	

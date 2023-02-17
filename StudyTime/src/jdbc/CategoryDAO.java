@@ -18,12 +18,12 @@ public class CategoryDAO {
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	StudyDTO sdto;
 	private static Connection conn;
-
+	
 	public CategoryDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
+	
 	//카테고리 드롭다운 목록(지원)
 			public static List<CategoryDTO> categoryList(){	
 				sql = "SELECT * FROM category ORDER BY cNo";

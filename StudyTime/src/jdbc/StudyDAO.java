@@ -4,24 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+
+
+import javax.naming.NamingException;
 
 import util.ConnectionPool;
 
 public class StudyDAO {
-	//스터디 수정
-		public static boolean update(String sNo, String sTitle, String sContent) {
-				Connection conn = null;
-				PreparedStatement pstmt = null;
-				ResultSet rs = null;
-				boolean result = false;
-
-				try {
-					String sql = "UPDATE study SET sTitle = ?, sContent = ? WHERE sNo = ? ";
-
-					conn = ConnectionPool.get();
-					pstmt = conn.prepareStatement(sql);
-
-
 	private static Connection conn;
 	private static PreparedStatement pstmt;
 	private static String sql;
@@ -29,6 +19,8 @@ public class StudyDAO {
 	public StudyDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
+
+	
 
 
 //	스터디 전체 목록 메서드(도영)
@@ -94,7 +86,7 @@ public class StudyDAO {
 					+ " WHERE sNo=? ";
 
 			try {
-				conn = ConnectionPool.get();
+				
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -119,13 +111,7 @@ public class StudyDAO {
 
 		return false;
 	}
-
-
-
-
-
-
-
+	
 	//스터디목록(지원)
 	public static List<StudyDTO> studyList(){
 		sql = "SELECT * FROM study ORDER BY regDate DESC";
@@ -204,55 +190,56 @@ public class StudyDAO {
 
 
 	//스터디 수정 (지원)
-	public static boolean studyUpdate(String sTitle, String sWriter, int cNo, String category1,
-			String category2,String address, int recruitCnt, int joinCnt, String expDate,
-			String startDate, String scontent,String process,String sNo) {
+	 public static boolean studyUpdate(String sTitle, String sWriter, int cNo, String category1,
+	            String category2,String address, int recruitCnt, int joinCnt, String expDate,
+	            String startDate, String scontent,String process,String sNo) {
 
-			sql = "UPDATE study A INNER JOIN category B ON A.cno = B.cno SET A.sTitle=?,A.sWriter=?,B.cNo=?,B.category1=?,B.category2=?,"
-					+ "A.address=?,A.recruitCnt=?,A.joinCnt=?,A.expDate=?,A.startDate=?,A.scontent=?,A.process=? where A.sNo = ?";
-			try {
+	            sql = "UPDATE study A INNER JOIN category B ON A.cno = B.cno SET A.sTitle=?,A.sWriter=?,B.cNo=?,B.category1=?,B.category2=?,"
+	                    + "A.address=?,A.recruitCnt=?,A.joinCnt=?,A.expDate=?,A.startDate=?,A.scontent=?,A.process=? where A.sNo = ?";
+	            try {
 
-				}catch (Exception e) {
-					e.printStackTrace();
+	                pstmt = conn.prepareStatement(sql);
+	                pstmt.setString(1, sTitle);
+	                pstmt.setString(2, sWriter);
+	                pstmt.setInt(3, cNo);
+	                pstmt.setString(4, category1);
+	                pstmt.setString(5, category2);
+	                pstmt.setString(6, address);
+	                pstmt.setInt(7, recruitCnt);
+	                pstmt.setInt(8, joinCnt);
+	                pstmt.setString(9, expDate);
+	                pstmt.setString(10, startDate);
+	                pstmt.setString(11, scontent);
+	                pstmt.setString(12, process);
+	                pstmt.setString(13, sNo);
 
-				}finally {
-					try {
-						if(pstmt != null) pstmt.close();
-						if(conn != null) conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
+	                if(pstmt.executeUpdate()==1) return true;
 
-				return result;
-			}
+	            }catch (Exception e) {
+	                e.printStackTrace();
+	            }finally {
+	                 if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	                 if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+	            }
+
+	            return false;
+	        }
 
 	// 스터디 삭제
-		public static int delete(String sNo) {
+	   public static boolean studyDelete(String sNo) {
+           sql = "DELETE FROM study WHERE sNo = ?";
+           try {
+               pstmt = conn.prepareStatement(sql);
+               pstmt.setString(1, sNo);
+               if(pstmt.executeUpdate()==1) return true;;
 
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			int result = 0;
+           } catch (Exception e) {
+               e.printStackTrace();
+           }finally {
+                if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+                if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+           }
+           return false;
+       }
 
-			try {
-				String sql = "DELETE FROM study WHERE sNo = ?";
-
-				conn = ConnectionPool.get();
-				pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, sNo);
-				result = pstmt.executeUpdate();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if(pstmt!= null) pstmt.close();
-					if(conn!=null) conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			return result;
-		}
 }
