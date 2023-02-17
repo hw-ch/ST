@@ -18,10 +18,9 @@ public class BoardDAO {
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	BoardDTO bdto;
 	private static Connection conn;
 	
-//	커뮤니티 게시물 등록 메서드
+//	커뮤니티 게시물 등록 메서드(도영)
 	public static boolean insert(String subject, String content, String nickName, String userId){
 			
 			try {
@@ -49,15 +48,13 @@ public class BoardDAO {
 				e.printStackTrace();
 			} finally {
 				try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-				if(rs != null) rs.close();
-					
-					
-				} catch (Exception e2) {
-					e2.printStackTrace();
+					if(pstmt != null)	pstmt.close();
+					if(conn != null)	conn.close();
+					if(rs != null)	rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				}
+			}
 	
 			return false;
 		}

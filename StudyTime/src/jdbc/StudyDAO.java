@@ -23,15 +23,19 @@ public class StudyDAO {
 	}
 	
 		
-//	스터디 전체 목록 메서드
-	public static ArrayList<StudyDTO> getAllList() throws SQLException, NamingException{
+//	스터디 전체 목록 메서드(도영)
+	public static ArrayList<StudyDTO> getAllList(){
 			
 		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
 		
 		try {
 			sql = " SELECT * FROM study ORDER BY sNo DESC ";
 	
-			conn = ConnectionPool.get();
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 			
 			pstmt = conn.prepareStatement(sql);
 	
@@ -62,15 +66,20 @@ public class StudyDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	
 		return studys;
 	
 		}
 	
-//	스터디 승인 메서드
+//	스터디 승인 메서드(도영)
 	public static boolean apply(String sNo){
 		
 		try {
@@ -78,7 +87,11 @@ public class StudyDAO {
 			sql = "UPDATE study SET apply=? "
 					+ " WHERE sNo=? ";
 
-			conn = ConnectionPool.get();
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 			
 			pstmt = conn.prepareStatement(sql);
 
@@ -92,9 +105,13 @@ public class StudyDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
-			
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
