@@ -6,16 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import util.ConnectionPool;
 
 public class ReplyDAO {
 	
 	// 댓글 리스트 모두 가져오기
 	public static ArrayList<ReplyDTO> ReplygetList(int bno){
-		String SQL = "SELECT * FROM Reply WHERE bno = ? ORDER BY rNo DESC";
+		String sql = "SELECT * FROM Reply WHERE bno = ? ORDER BY rNo DESC";
 		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();
 
 		Connection conn = null;
@@ -29,13 +26,10 @@ public class ReplyDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ReplyDTO reply = new ReplyDTO();
-				reply.setBNo(rs.getString(1));;
-				reply.setCommentID(rs.getInt(2));
-				reply.setBbsID(rs.getInt(3));
-				reply.setUserID(rs.getString(4));
-				reply.setCommentDate(rs.getString(5));
-				reply.setCommentText(rs.getString(6));
-				reply.setCommentAvilable(rs.getInt(7));
+				reply.setContent(rs.getString(1));
+				reply.setNickname(rs.getString(2));
+				reply.setUserid(rs.getString(3));
+				reply.setRegDate(rs.getString(4));
 				list.add(reply);
 			}
 		}catch(Exception e) {
