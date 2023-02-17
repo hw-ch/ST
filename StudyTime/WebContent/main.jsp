@@ -162,7 +162,7 @@
 </main>
      
      <script type="text/javascript">
-     $("#STATICMENU").hide();
+     $("#headerImage").hide();
      </script>
   </body>
 </html>
