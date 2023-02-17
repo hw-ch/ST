@@ -86,7 +86,7 @@ public class StudyDAO {
 					+ " WHERE sNo=? ";
 
 			try {
-				conn = ConnectionPool.get();
+				
 			
 			pstmt = conn.prepareStatement(sql);
 

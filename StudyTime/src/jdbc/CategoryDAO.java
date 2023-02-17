@@ -20,6 +20,7 @@ public class CategoryDAO {
 	private static ResultSet rs;
 	StudyDTO sdto;
 	private static Connection conn;
+
 	public CategoryDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
@@ -43,8 +44,55 @@ public class CategoryDAO {
 				return categoryList;
 			}	
 	
+
+
+
+	
+//	카테고리 분류 메서드(도영)
+	public static CategoryDTO select(String category1){
+			
+		CategoryDTO category = null;
+		try {
+			sql = "SELECT from category where category1=? ";
+	
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+	
+			pstmt.setString(1, category1);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				category = new CategoryDTO(rs.getString("cNo"),
+						rs.getString("category1"),
+						rs.getString("category2"));
+			}
+			
+			return category;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return category;
+	
+	}
+		
+
+	
 }
-
-
 
 
