@@ -11,13 +11,11 @@
 <%
 	request.setCharacterEncoding("utf-8"); //한글 처리
 
-	String subject = request.getParameter("subject");
-	String content = request.getParameter("content");
 	int bno = 1;
 	
-	BoardDAO.Boardupdate(bno, subject, content);
+	BoardDAO.Boarddelete(bno);
 
-	out.print("수정 성공");
+	out.print("삭제 성공");
 		%>
 
 
