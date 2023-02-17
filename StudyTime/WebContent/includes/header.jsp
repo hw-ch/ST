@@ -22,7 +22,7 @@
 <head>
  <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16">
 </head>
-<% String sid = (String) session.getAttribute("id");
+<% String sid = (String) session.getAttribute("sid");
 UserDTO user = new UserDTO("","","","","","","","");
 if(sid != null) {
 	user = UserDAO.getOneList(sid);
@@ -123,7 +123,7 @@ if(sid != null) {
             <% }else if(sid != null && sid.equals("admin")){ %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item" style="padding-right: 50px;"><a href="/notice/notice.jsp" class="nav-link text-dark">공지사항</a></li>
+        <li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
      	
       </ul>
@@ -133,8 +133,8 @@ if(sid != null) {
   <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-				<li><a class="dropdown-item h5" href="/user/userInfo.jsp">내 정보</a></li>
-				<li><a class="dropdown-item h5" href="/admin/userAll.jsp">회원관리</a></li>
+				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
+				<li><a class="dropdown-item h5" href="/user/manage.jsp">회원관리</a></li>
 				<li><a class="dropdown-item h5" href="/study/studyApply.jsp">스터디관리</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item h5" href="/user/logout.jsp">로그아웃</a></li>
@@ -145,9 +145,9 @@ if(sid != null) {
                         %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyinsert.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
-        <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyinsert.jsp" class="nav-link text-dark">자유게시판</a></li>
-     	
+        <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
+        <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
+     	<li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
       </ul>
       
        <div class="dropdown" style="padding-right: 200px; ">
@@ -155,14 +155,14 @@ if(sid != null) {
    <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-				<li><a class="dropdown-item h5" href="/user/userInfo.jsp">내 정보</a></li>
+				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
 				 
 				if(StudyJoinDAO.checkManager(sid)) { %>
 				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
 				<%}else{ %>
-				<li><a class="dropdown-item h5" href="/study/studyInsert.jsp">스터디등록</a></li>
+				
 				<%} %>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item h5" href="/user/logout.jsp">로그아웃</a></li>

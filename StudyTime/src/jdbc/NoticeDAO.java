@@ -32,7 +32,7 @@ public class NoticeDAO {
 
 	// 공지사항 리스트 모두 가져오기(혜원)
 	public static String getList(){
-		sql = "SELECT bno, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice ORDER BY bNo DESC";
+		sql = "SELECT bNo, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice ORDER BY bNo DESC";
 		JSONArray noticeList = new JSONArray();
 
 		try {
@@ -87,7 +87,7 @@ public class NoticeDAO {
 			pstmt.setString(2, content);
 
 			result = pstmt.executeUpdate();
-			System.out.println(result);
+			return result;
 
 		}catch (Exception e) {
 			e.printStackTrace();
