@@ -27,6 +27,7 @@
    		</div>
    		<hr>
    		</section>
+   		<form action="updateAction.jsp">
    		<div class=community_content_wrap>
    		<textarea class="community_content" name="content"></textarea>
    		</div>
