@@ -16,14 +16,12 @@ public class UserDAO {
 	
 	//회원가입 (완료)
 	public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image) throws NamingException, SQLException{
-		sql = "INSERT INTO user(userId, password, name, nickname, "
+		sql = "INSERT INTO user(userid, password, name, nickname, "
 				+ " gender, phone, image) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
-		Connection conn = null;
-		pstmt = null;
 		try {
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
+			con = ConnectionPool.get();
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, password);
 			pstmt.setString(3, name);
@@ -38,7 +36,7 @@ public class UserDAO {
 			}
 		} finally {
 			if(pstmt!= null) pstmt.close();
-			if(conn != null) conn.close();
+			if(con != null) con.close();
 		}
 		return false;
 	}
@@ -47,13 +45,11 @@ public class UserDAO {
 	public static int login(String id, String userPass) throws NamingException, SQLException {
 		
 		sql = "SELECT userId, password FROM user WHERE userId=? ";
-		Connection conn = null;
-		pstmt = null;
-		rs = null;
+		
 		
 		try {
-			conn = ConnectionPool.get(); //커넥션 풀 사용
-			pstmt = conn.prepareStatement(sql);
+			con = ConnectionPool.get(); //커넥션 풀 사용
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
@@ -64,7 +60,7 @@ public class UserDAO {
 		}	finally {
 			if(rs != null) rs.close();
 			if(pstmt!= null) pstmt.close();
-			if(conn != null) conn.close();
+			if(con != null) con.close();
 		}
 		
 	}
@@ -74,13 +70,9 @@ public class UserDAO {
 		
 		sql = "SELECT userId FROM user WHERE userId=?";
 		
-		Connection conn = null;
-		pstmt = null;
-		rs = null;
-		
 		try {
-			conn = ConnectionPool.get();	
-			pstmt = conn.prepareStatement(sql);
+			con = ConnectionPool.get();	
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
@@ -92,66 +84,80 @@ public class UserDAO {
 		}	finally {
 			if(rs != null) rs.close();
 			if(pstmt!= null) pstmt.close();
-			if(conn != null) conn.close();
+			if(con != null) con.close();
 		}
 		
 	}
 	
 	//아이디 찾기(완료)
-	public static String idFind(String name, String phone) throws NamingException, SQLException {
+	public static String idFind(String userName, String userPhone) throws NamingException, SQLException {
 		
 		sql = "SELECT userid FROM user WHERE name=? and phone=?";
-		Connection conn = null;
-		pstmt = null;
-		rs = null;
 		
 		String id = null; // DB에 있는 아이디 찾기
 		
 		try {
-			conn = ConnectionPool.get();	
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, phone);
+			con = ConnectionPool.get();	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userPhone);
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				id = rs.getString("userId");	//아이디 반환 !
 			}
+			
 		}	finally {
 			if(rs != null) rs.close();
 			if(pstmt!= null) pstmt.close();
-			if(conn != null) conn.close();
+			if(con != null) con.close();
 		}
 		return id;
 	}
 	
 	//비밀번호 찾기(완료)
-	public static String pwFind(String userid, String name) throws NamingException, SQLException {
+	public static String pwFind(String userid, String name, String userPhone) throws NamingException, SQLException {
 		
-		String sql = "SELECT password FROM user WHERE userId=? and name=? ";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		sql = "SELECT password FROM user WHERE userId=? and phone=? ";
 		String password = null;
 		
 		try {
-			conn = ConnectionPool.get();	
-			pstmt = conn.prepareStatement(sql);
+			con = ConnectionPool.get();	
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
-			pstmt.setString(2, name);
+			pstmt.setString(2, userPhone);
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				password = rs.getString("password");
 			}
 		}	finally {
 			if(rs != null) rs.close();
 			if(pstmt!= null) pstmt.close();
-			if(conn != null) conn.close();
+			if(con != null) con.close();
 		}
 		return password;
 	}
+	
+	//비밀번호 찾기를 누른 후 임시비밀번호로 변경되는 메서드
+	public static String updatePw(String id, String pw) throws NamingException, SQLException {
+		
+		sql = "UPDATE user set password=? WHERE userId=?";
+		
+	try {
+		con = ConnectionPool.get();	
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, pw);
+		
+		int result = pstmt.executeUpdate();
+		return rs.getString("password");
+	}	finally {
+		if(pstmt!= null) pstmt.close();
+		if(con != null) con.close();
+	}
+}
 	
 }

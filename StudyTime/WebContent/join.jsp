@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import=""%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +8,10 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<form action="joinCheck.jsp" encType="multipart/form-data">
+<form action="joinCheck.jsp" method="post">
 <fieldset>
 	<legend>회원가입</legend>
-	아이디 <input type="email" name="id" size =30 placeholder="이메일을 입력하세요 ex)aa@naver.com" required> <br>
+	아이디 <input type="email" name="userId" size =30 placeholder="이메일을 입력하세요 ex)aa@naver.com" required> <br>
 	비밀번호 <input type="password" name = "password" id="pw" maxlength="15" required> <br>
 	비밀번호 확인 <input type="password" id="pwChk" maxlength="15" required> <br>
 	이름 <input type="text" name = "name" required> <br>
@@ -22,12 +22,14 @@
 		<option value="female">여성</option>
 		</select><br>
 	이미지 <input type="file" name="image"><hr>
-	<button>회원 가입</button>
+	<button class="joinBtn">회원 가입</button>
 </fieldset>	
 </form>
 
 
 <script>
+
+	//비밀번호 유효성 검사
 var password = document.getElementById("pw")
 ,confirm_password = document.getElementById("pwChk");
 
@@ -45,6 +47,8 @@ else { // 만일 두 인풋 필드값이 같을 경우
 
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
+// End 비밀번호 유효성 검사
+
 </script>
 
 </body>

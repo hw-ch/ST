@@ -45,7 +45,7 @@ public class GoogleSMTP {
 	Session session = Session.getInstance(serverInfo, auth);
 	session.setDebug(true);
 	
-	//2 메세지 작성 (emailCheck.jsp 에서 만든 객체)
+	//2 메세지 작성 
 	
 	MimeMessage msg = new MimeMessage(session);
 	msg.setFrom(new InternetAddress(mailInfo.get("from"))); //보내는 사람

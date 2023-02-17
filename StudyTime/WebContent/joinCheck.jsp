@@ -5,13 +5,14 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String id = request.getParameter("id");
+	String id = request.getParameter("userId");
 	String pw = request.getParameter("password");
 	String name = request.getParameter("name");
 	String nickname = request.getParameter("nickname");
 	String gender = request.getParameter("gender");
 	String phone = request.getParameter("phone");
-	String image = "";
+	String image = request.getParameter("image"); 
+	
 	
 	boolean result = UserDAO.join(id, pw, name, nickname, gender, phone, image);
 	
