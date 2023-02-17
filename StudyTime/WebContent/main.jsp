@@ -70,8 +70,8 @@
         <div style="padding-right: 1550px;">
         
         <%
-        String category1 = 
-         CategoryDTO category = CategoryDAO.select(category1); %>
+        //String category1 = 
+         //CategoryDTO category = CategoryDAO.select(category1); %>
         <a class="btn btn-lg  border-warning text-primary rounded-5" href="../product/productList.jsp">TOEIC</a>
          <a class="btn btn-lg border-warning text-primary rounded-5" href="../product/productList.jsp">TOEFL</a>
           <a class="btn btn-lg border-warning text-primary rounded-5" href="../product/productList.jsp">TOEIC</a></div>
