@@ -20,7 +20,7 @@ public class StudyDAO {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
 
-	
+
 
 
 //	스터디 전체 목록 메서드(도영)
@@ -86,7 +86,7 @@ public class StudyDAO {
 					+ " WHERE sNo=? ";
 
 			try {
-				
+
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -111,7 +111,7 @@ public class StudyDAO {
 
 		return false;
 	}
-	
+
 	//스터디목록(지원)
 	public static List<StudyDTO> studyList(){
 		sql = "SELECT * FROM study ORDER BY regDate DESC";

@@ -27,21 +27,19 @@
    		</div>
    		<hr>
    		</section>
-   		<div class=community_content_wrap>
-   		<textarea class="community_content" name="content"></textarea>
-   		</div>
-   		<div class="community_delete"><button>수정</button></div>
    		<hr>
+		<div class=community_content_wrap>
    		<section class="community_commentView">
    			<div class="community_comment">
    			<h1 class="comment_count">댓글 수 </h1>
-  			<textarea class="commentinput"></textarea>
+		<textarea class="community_content" name="content"></textarea>
 	  			<div class="commentinput_button_wrap">
 	  			<button class="commentinput_button">댓글 등록</button>
 	  			</div>
    			<ul class="comment_list"></ul>
    			</div>
    		</section>
+   		</div>
 	</div>
 	</form>
 </body>
