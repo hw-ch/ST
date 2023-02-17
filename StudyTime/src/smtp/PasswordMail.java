@@ -2,6 +2,8 @@ package smtp;
 
 import java.util.*;
 
+import jdbc.UserDAO;
+
 
 public class PasswordMail {
 	
@@ -17,6 +19,7 @@ public class PasswordMail {
 				br.append((char)((int)(Math.random()*26)+65));	// 아스키 코드 65 ~ 90은 대문자 
 			}
 		}
+		String br1 = br.toString();	//Stringbuffer를 String으로 바꾸기
 		
 		
 		Map<String, String> emailInfo = new HashMap<String, String>();
@@ -29,7 +32,8 @@ public class PasswordMail {
 
 		emailInfo.put("format", "text/plain;charset=UTF-8");// 메일의 형식을 설정 일단 text 로 고정
 
-
+		UserDAO.updatePw(id, br1);	//임시비밀번호로 변경.
+		
 		try {
 			GoogleSMTP smtpServer = new GoogleSMTP(); //메일 전송 객체 생성
 			smtpServer.emailSending(emailInfo);

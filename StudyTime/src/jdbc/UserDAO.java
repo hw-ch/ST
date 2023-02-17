@@ -183,8 +183,8 @@ public class UserDAO {
 	try {
 		conn = ConnectionPool.get();	
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id);
-		pstmt.setString(2, pw);
+		pstmt.setString(1, pw);
+		pstmt.setString(2, id);
 		
 		int result = pstmt.executeUpdate();
 		if(result == 1) {

@@ -9,7 +9,7 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<form action="loginCheck.jsp">
+<form action="loginCheck.jsp" method="post">
 <input type="text" name="userId" placeholder="아이디">
 <input type="password" name="password" placeholder="비밀번호">
 <button>로그인</button>

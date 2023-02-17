@@ -20,6 +20,6 @@
 		SendMail.sending(id, name);	//메일 보내기
 		out.print("회원가입 성공");
 	}	else{
-		out.print("회원가입 실패");
+		out.print("중복된 아이디입니다.");
 	}
 %>	

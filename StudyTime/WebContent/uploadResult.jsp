@@ -4,7 +4,7 @@
 			com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 			<!--파일 이름이 중복되지 않게 renamepolicy를 임포트  -->
 <%
-	String uploadPath = application.getInitParameter("uploadPath");// 파일 업로드 폴더명 
+	String uploadPath = application.getInitParameter("upload");// 파일 업로드 폴더명 
 	String savePath = application.getRealPath(uploadPath);// 실제 업로드 폴더 경로
 	int maxSize = 1024 * 1024 * 5;	// 최대 업로드 크기 5MB
 	String encType = "UTF-8";
@@ -35,7 +35,7 @@
 	첨부 파일 : <%=userFileName %><br>
 	원본 파일 : <%=multiReq.getOriginalFileName("userfile") %><br>
 	파일 크기 : <%=multiReq.getFile("userfile").length()/1024 %>KB<br>
-	<img src = "../upload/<%=userFileName %>">
+	<img src = "upload/<%=userFileName %>">
 <% 	}	else{ %>
 		파일 업로드 실패
 <% }	%>
