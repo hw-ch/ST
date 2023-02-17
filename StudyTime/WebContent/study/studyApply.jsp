@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>STUDY TIME</title>
+<title>StudyTime</title>
 </head>
  <body class="text-center">
  <%@ include file="/includes/header.jsp"%>
