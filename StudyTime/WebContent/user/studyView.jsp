@@ -1,5 +1,3 @@
-<!-- 스터디 조회 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,8 +27,7 @@
               <li>예상기간 : </li>
               <li>스터디 과목 : </li>
             </ul>
-             <hr class="my-4">
-            <button type="button" class="w-100 btn btn-lg btn-secondary">스터디 입장</button>
+            <button type="button" class="w-100 btn btn-lg btn-secondary">스터디 입장하기</button>
           </div>
         </div>
       </div>

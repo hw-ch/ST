@@ -22,19 +22,19 @@ import org.json.simple.JSONObject;
 
 import util.ConnectionPool;
 
-public class NoticeDAO { 
-	
+public class NoticeDAO {
+
 	private static PreparedStatement pstmt;
     private static String sql;
     private static ResultSet rs;
     private static Connection conn;
-	
-	
+
+
 	// 공지사항 리스트 모두 가져오기(혜원)
 	public static String getList(){
 		sql = "SELECT bno, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice ORDER BY bNo DESC";
 		JSONArray noticeList = new JSONArray();
-		
+
 		try {
 			try {
 				conn = ConnectionPool.get();
@@ -43,7 +43,7 @@ public class NoticeDAO {
 			}
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				JSONObject obj = new JSONObject();
 				obj.put("bNo", rs.getString(1));
@@ -51,11 +51,11 @@ public class NoticeDAO {
 				obj.put("content", rs.getString(3));
 				obj.put("regDate", rs.getString(4));
 				obj.put("hit", rs.getString(5));
-			
+
 				noticeList.add(obj);
-				
+
 			}
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -65,46 +65,46 @@ public class NoticeDAO {
 		}
 		return noticeList.toJSONString();
 	}
-	
+
 	//공지사항 등록(혜원)
 	public static int Noticeinsert(String title, String content) {
-		
+
 		int result = 0;
-		
-		
+
+
 		try {
 			String sql = "INSERT INTO notice (title, content, hit) values(?,?, 0)";
-			
+
 			try {
 				conn = ConnectionPool.get();
 			} catch (NamingException | SQLException e){
 				e.printStackTrace();
 			}
-			
+
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
-			
+
 			result = pstmt.executeUpdate();
 			System.out.println(result);
-						
+
 		}catch (Exception e) {
 			e.printStackTrace();
-		
+
 		}finally {
 			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
             if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 		}
-		
+
 		return result;
 	}
-	
+
 	//공지사항 상세보기(혜원)
 	public static String getNotice(int bNo){
 		sql = "SELECT bno, title, content, DATE_FORMAT(regDate, '%y-%m-%d') AS regDate, hit FROM notice WHERE bNo = ?";
 		JSONObject obj = new JSONObject();
-		
+
 		try {
 			try {
 				conn = ConnectionPool.get();
@@ -114,7 +114,7 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()) {
 				obj.put("bNo", rs.getString(1));
 				obj.put("title", rs.getString(2));
@@ -122,8 +122,8 @@ public class NoticeDAO {
 				obj.put("regDate", rs.getString(4));
 				obj.put("hit", rs.getString(5));
 			}
-			
-			
+
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -133,43 +133,41 @@ public class NoticeDAO {
         }
 		return obj.toJSONString();
 	}
-	
+
 	// 공지사항 삭제(혜원)
 	public static int delete(String bno) {
-		
+
 		int result = 0;
-		
+
 		try {
 			String sql = "DELETE FROM notice WHERE bno = ?";
-			
+
 			try {
 				conn = ConnectionPool.get();
 			} catch (NamingException | SQLException e){
 				e.printStackTrace();
 			}
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, bno);
+			pstmt.setString(1, bno);
 			result = pstmt.executeUpdate();
-				
-			return result;
-				
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
             if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 		}
-		
+
 		return result;
 	}
-	
+
 	//공지사항 수정(혜원)
 		public static int update(String bno, String title, String content) {
 			int result = 0;
-			
+
 			try {
 				String sql = "UPDATE notice SET title = ?, content = ? WHERE bno = ? ";
-				
+
 				try {
 					conn = ConnectionPool.get();
 				} catch (NamingException | SQLException e){
@@ -180,24 +178,21 @@ public class NoticeDAO {
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
 				pstmt.setString(3, bno);
-				
+
 				result = pstmt.executeUpdate();
-							
+
 			}catch (Exception e) {
 				e.printStackTrace();
-			
+
 			}finally {
 	            if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
 	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 			}
-			
+
 			return result;
 		}
-		
-		
+
+
 		//조회수 추가(혜원)
-	
+
 }
-
-
-
