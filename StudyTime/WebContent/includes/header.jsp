@@ -29,9 +29,17 @@ if(sid != null) {
 }
 %>
     <style>
-
+    
     #STATICMENU { margin: 0pt; padding: 0pt; position: absolute; z-index: 1; right: 0px; top: 0px;}
-
+    
+    
+    @font-face {
+    font-family: 'PyeongChangPeace-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+    
     @font-face{
   font-family:'bitbit';
   src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
@@ -41,14 +49,14 @@ if(sid != null) {
 	  height: 100%;
 	  font-family: 'bitbit';
 	}
-
+	
     .box {
     width: 150px;
-    height: 150px;
+    height: 150px; 
     border-radius: 70%;
     overflow: hidden;
 }
-
+    
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -97,30 +105,29 @@ if(sid != null) {
 
 
 
-<link rel="shortcut icon" href="../images/favicon.ico">
-  <link rel="icon" href="../images/favicon.ico">
 
-         <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 h3 ">
+  
+         <div class="container-fluid">
+    <header class="d-flex flex-wrap justify-content-center py-3 h2">
+    
       <a href="/main.jsp" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-<!--         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
-        <span class="fs-4"><img class="box" style="width: 80px; height: 80px;" src="/images/study3.png"> STUDY TIME</span>
+        <span class="fs-2 h2" style="padding-top: 10px; padding-left: 100px;"><img class="box" style="width: 60px; height: 60px;" src="/images/study3.png"> STUDY TIME</span>
       </a>
-
-                          <%if(sid == null) { %>
-    <ul class="nav nav-pills">
-<!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item"><a href="../user/" class="nav-link text-dark">내 글쓰기</a></li>
-        <li class="nav-item"><a href="/login.jsp" class="nav-link text-dark">로그인</a></li>
+                        
+ <%if(sid == null) { %>
+    <ul class="nav nav-pills" style="padding-top: 10px; padding-right: 100px;">
+        <li class="nav-item" style="padding-right: 50px;"><a href="/user/login.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
+        <li class="nav-item"><a href="/user/login.jsp" class="nav-link text-dark">로그인</a></li>
+     	 <li class="nav-item"><a href="/user/join.jsp" class="nav-link text-dark">회원가입</a></li>
       </ul>
             <% }else if(sid != null && sid.equals("admin")){ %>
-             <ul class="nav nav-pills">
+    <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
         <li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
-
+     	
       </ul>
-
+      
        <div class="dropdown" style="padding-right: 200px; ">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
   <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
@@ -142,7 +149,7 @@ if(sid != null) {
         <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
      	<li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
       </ul>
-
+      
        <div class="dropdown" style="padding-right: 200px; ">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
    <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
@@ -151,77 +158,40 @@ if(sid != null) {
 				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
-
+				 
 				if(StudyJoinDAO.checkManager(sid)) { %>
 				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
 				<%}else{ %>
-
+				
 				<%} %>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item h5" href="/user/logout.jsp">로그아웃</a></li>
 			</ul>
         </div>
               <% } %>
-
-
+     
     </header>
   </div>
+      
+      <fieldset id="headerImage">
+	<header class="bgimg w3-display-container w3-grayscale-min"
+		style="height: 80%;" id="home">
+		<img src="../images/starImage.png" width="100%" height="500px;">
+		<div
+			class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+		</div>
+		<div class="w3-display-middle w3-center">
+			<span class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
+		</div>
+		<div class="w3-display-bottomright w3-center w3-padding-large">
+		</div>
+	</header>
 
 
-<div class="card mb-4 rounded-4 shadow-sm bg-dark" id="STATICMENU" style="width: 80px; height: 300px; border: solid 1px black;">
 
-    <ul class="nav text-centercard rounded-4" style="width: 80px;">
-      <li>
-        <a href="../main.jsp" class="nav-link py-3 border-bottom border-dark rounded-0" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-<img class="box" style="width: 50px; height: 50px; border: solid 1px black;" src="../images/DA.png">
-      </a>
-      </li>
-      <li onclick="window.history.back()" class="bg-light"  style="width: 78px;">
-        <a href="#" class="nav-link py-3 border-bottom border-dark rounded-0" title="뒤로가기" data-bs-toggle="tooltip" data-bs-placement="right">
-<i class="w3-xlarge fa fa-arrow-left"></i>
-     </a>
-      </li>
-      <li class="bg-light" onclick="window.location.reload()"  style="width: 78px;">
-        <a href="#" class="nav-link py-3 border-bottom border-dark rounded-0" title="새로고침" data-bs-toggle="tooltip" data-bs-placement="right">
-     <i class="w3-xlarge fa fa-refresh"></i>
-     </a>
-      </li>
-      <li onclick="window.history.forward()" class="bg-light"  style="width: 78px;">
-        <a href="#" class="nav-link py-3 border-bottom border-dark rounded-0" title="앞으로 가기" data-bs-toggle="tooltip" data-bs-placement="right">
-     <i class="w3-xlarge fa fa-arrow-right"></i>
-      </a>
-      </li>
-    </ul>
-  </div>
-
-
+     </fieldset>
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var stmnLEFT = 10; // 오른쪽 여백
-var stmnGAP1 = 0; // 위쪽 여백
-var stmnGAP2 = 150; // 스크롤시 브라우저 위쪽과 떨어지는 거리
-var stmnBASE = 150; // 스크롤 시작위치
-var stmnActivateSpeed = 10; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
-var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)var stmnTimer;
-
-function RefreshStaticMenu() {
-var stmnStartPoint, stmnEndPoint;
-stmnStartPoint = parseInt(document.getElementById('STATICMENU').style.top, 10);
-stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2;
-if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1;
-if (stmnStartPoint != stmnEndPoint) {
-stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 );
-document.getElementById('STATICMENU').style.top = parseInt(document.getElementById('STATICMENU').style.top, 10) + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount ) + 'px';
-stmnRefreshTimer = stmnScrollSpeed;
-}
-stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
-}
-function InitializeStaticMenu() {
-document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
-document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px';
-RefreshStaticMenu();
-}
-
-
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -231,8 +201,5 @@ s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
-
-
-
 </script>
 <!--End of Tawk.to Script-->

@@ -12,10 +12,6 @@
 
 <body>
 <%@ include file="/includes/header.jsp" %>
-<%
-int bno =1;
-%>
-
 	<div class="communityView">
 		<section class="communityView_Postheader">
    		<div class="community_title">커뮤니티 타이틀</div>
@@ -30,35 +26,34 @@ int bno =1;
    		</div>
    		<hr>
    		</section>
-
+   		
+   		<form action="replyinsert.jsp">
+   		<div class=community_content_wrap>
+   		<textarea class="community_content">내용</textarea>
+   		</div>
    		<hr>
    		<section class="community_commentView">
    			<div class="community_comment">
    			<h1 class="comment_count">댓글 수 </h1>
-  			<textarea class="community_content" name="content"></textarea>
-	  			<div class="replyinsert_wrap">
-	  			<button onclick="location.href='replyinsert.jsp'">댓글 등록</button>
+  			<textarea class="commentinput" name="content"></textarea>
+	  			<div class="commentinput_button_wrap">
+	  			<button>댓글 등록</button>
 	  			</div>
-	  		</div>
-<%
-			ArrayList<ReplyDTO> list = ReplyDAO.ReplygetList(bno);
-			for(int i=0; i<list.size(); i++){
-%>
-	  		<div class ="reply_wrap">
-		   		<div class="Writer">작성자</div>
-	   			<div class="Date">날짜</div>
-		   		<div class="community_update"><button>수정</button></div>
-		   		<div class="community_delete"><button>삭제</button></div>
-	<%-- 	   		<div><textarea class="con></textarea> --%>
-		   		</div>
-		   		<div class="DateAndViews">
-		   		</div>
-			</div>
-	   		
-<%
+   			<ul class="comment_list">
+   			<%
+				 ArrayList<BoardDTO> replys = ReplyDAO.ReplygetList();
+				 
+				 for(BoardDTO reply : replys) {
+				%>
+				
+					
+				<%
 				}
-%>
-   		</section>	
+				%>
+   			</ul>
+   			</div>
+   		</section>
+   		</form>
 	</div>
 </body>
 </html>
