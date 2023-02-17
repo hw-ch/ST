@@ -130,7 +130,7 @@ if(sid != null) {
             <% }else if(sid != null && sid.equals("admin")){ %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item" style="padding-right: 50px;"><a href="/notice/notice.jsp" class="nav-link text-dark">공지사항</a></li>
+        <li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
      	
       </ul>
