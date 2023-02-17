@@ -225,7 +225,7 @@ public class UserDAO {
 		
 	
 	//본인 정보 수정
-	public static int edit(String userId, String password, String nickName, String image, String phone) throws NamingException, SQLException {
+	public static int myEdit(String userId, String password, String nickName, String image, String phone) throws NamingException, SQLException {
 		
 		try {
 		String sql = "UPDATE user SET password = ?, nickName = ?, image=?, phone=? WHERE userId = ?";
@@ -380,7 +380,7 @@ public class UserDAO {
 	
 
 	//회원 탈퇴
-	public static int delete(String userId) 
+	public static int withdrawal(String userId) 
 			throws NamingException, SQLException {
 				
 				try {
@@ -476,4 +476,45 @@ public class UserDAO {
 	return false;
 }
 	
+		//회원 로그인
+			public static int login(String userId, String password) throws SQLException{
+				
+				String sql = "SELECT * FROM user WHERE userId=?";
+				try {
+					
+				int result;
+				
+				Connection conn = ConnectionPool.get();
+				
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, userId);
+				
+				ResultSet rs = pstmt.executeQuery();
+				
+
+				
+				if(!rs.next()) {
+					result = 1; //아이디가 존재하지 않는 경우
+				}else if (!password.equals(rs.getString("password"))) { //아이디는 존재하지만 비번이 일치하지 않는 경우
+					result = 2;
+				}else {
+					result = 0; //로그인 성공
+				}
+				
+				return result;
+				
+				
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if(pstmt != null)
+					pstmt.close();
+					if(conn != null)
+					conn.close();
+				}
+				
+				return 3;
+	
+}
 }
