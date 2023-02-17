@@ -119,14 +119,15 @@ public class UserDAO {
 	//비밀번호 찾기(완료)
 	public static String pwFind(String userid, String name, String userPhone) throws NamingException, SQLException {
 		
-		sql = "SELECT password FROM user WHERE userId=? and phone=? ";
+		sql = "SELECT password FROM user WHERE userId=? and name=? and phone=? ";
 		String password = null;
 		
 		try {
 			con = ConnectionPool.get();	
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
-			pstmt.setString(2, userPhone);
+			pstmt.setString(2, name);
+			pstmt.setString(3, userPhone);
 			
 			rs = pstmt.executeQuery();
 			
@@ -142,7 +143,7 @@ public class UserDAO {
 	}
 	
 	//비밀번호 찾기를 누른 후 임시비밀번호로 변경되는 메서드
-	public static String updatePw(String id, String pw) throws NamingException, SQLException {
+	public static boolean updatePw(String id, String pw) throws NamingException, SQLException {
 		
 		sql = "UPDATE user set password=? WHERE userId=?";
 		
@@ -153,11 +154,14 @@ public class UserDAO {
 		pstmt.setString(2, pw);
 		
 		int result = pstmt.executeUpdate();
-		return rs.getString("password");
+		if(result == 1) {
+			return true;
+		}
 	}	finally {
 		if(pstmt!= null) pstmt.close();
 		if(con != null) con.close();
 	}
+	return false;
 }
 	
 }

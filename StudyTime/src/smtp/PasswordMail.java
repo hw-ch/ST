@@ -2,7 +2,6 @@ package smtp;
 
 import java.util.*;
 
-import jdbc.UserDAO;
 
 public class PasswordMail {
 	

@@ -12,8 +12,7 @@
 	if(password != null){	
 		PasswordMail.sending(userId, name, phone); 
 		out.print("이메일을 확인해주세요.");
-		
  	}	else {
-	out.print("아이디와 핸드폰 번호가 일치하지 않습니다.");
+	out.print("회원 정보가 일치하지 않습니다. 다시 확인해주세요.");
  }
 %>
