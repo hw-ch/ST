@@ -10,11 +10,12 @@
     
 <%
 	request.setCharacterEncoding("utf-8"); //한글 처리
-
-	int result = BoardDAO.Boarddelete(bno);
 	
-	if(result == 0){
-		BoardDAO.Boarddelete(bno);
-
-	out.print("삭제 성공");
-		%>
+	int bNo = 0;
+	if(request.getParameter("bNo") != null){
+	int bno = Integer.parseInt(request.getParameter("bNo"));
+	if(BoardDAO.Boarddelete(bno) == 1){
+		 response.sendRedirect("boardview.jsp");
+	}
+	}
+%>

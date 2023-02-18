@@ -14,32 +14,22 @@
 
 <body>
 <%@ include file="/includes/header.jsp" %>
-<%
-	// sid 확인
+<% 
+// 	sid = (String) session.getAttribute("sid");
 	sid = "abc";
-	if(session.getAttribute("sid") != null){
-		sid = (String)session.getAttribute("sid");
-	}
-
 	int bNo = 1;
-	if(request.getParameter("bNo") != null){
-	bNo = Integer.parseInt((String)request.getParameter("bNo"));	
-}
-	if(bNo == 0){
-	}
-	
 	BoardDTO board = new BoardDAO().getboard(bNo);
 %>
 	<form>
-	<div class="communityView">
+	<div class="communityView"> 
 		<section class="communityView_Postheader">
-   		<div class="community_title"><%= board.getSubject() %></div>
+   		<div class="community_title"><%=board.getSubject() %></div>
    		<div class ="writer_wrap">
    		<div class="Writer"><%= board.getNickName() %></div>
    		<% if(sid != null && sid.equals(board.getUserId())){
 		%>   
-   		<div class="community_update"><button onclick="location.href='boardupdate.jsp'">수정</button></div>
-   		<div class="community_delete"><button onclick="location.href='deleteaction.jsp'">삭제</button></div>
+   		<div class="community_update"><button onclick="location.href='boardUpdate.jsp?bNo=<%= bNo %>'">수정</button></div>
+   		<div class="community_delete"><button type="button" onclick="boradDelete()">삭제</button></div>
    		<%
    		}
    		%>
@@ -68,6 +58,25 @@
 		</table>	
 	</div>
 	</form>
+	
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">삭제</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+				정말로 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		        <button onclick="location.href='deleteAction.jsp'" class="btn btn-secondary">예</button>
+   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 <script>
  	function searchFunction(){
  		$.ajax({
@@ -91,7 +100,11 @@
 
  		});
  	}
-
+	
+ 	function boradDelete(){
+		$("#deleteModal").modal("show");
+ 	}
+ 	
 	function replyUpdate(){
 		
 	}
