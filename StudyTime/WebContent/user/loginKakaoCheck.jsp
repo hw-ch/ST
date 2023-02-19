@@ -20,6 +20,7 @@
 	// DB에 존재하지 않으면 회원 가입 페이지로 이동 가입 유도
 	 int result = UserDAO.kakaoLogin(userId);
 	if (result == 0) {
+		session.setAttribute("sid", userId);
 		out.print("로그인 성공");
 	} else {
 %>
