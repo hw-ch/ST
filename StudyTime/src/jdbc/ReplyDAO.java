@@ -31,7 +31,7 @@ public class ReplyDAO {
     private static ResultSet rs;
     private static Connection conn;
 
-	// 댓글 리스트 모두 가져오기
+	// 댓글 리스트 모두 가져오기(남훈)
 	public static String getList(){
 		sql = "SELECT rNo, bNo, content, nickname, userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i') AS regDate FROM reply ORDER BY rNo DESC";
 		JSONArray Replylist = new JSONArray();
@@ -69,26 +69,26 @@ public class ReplyDAO {
 		return Replylist.toJSONString();
 	}
 	
-	public static boolean Replyinsert(String content, String nickname, String userid, int bno) {
+	//댓글 추가 (남훈)
+	public static int Replyinsert(String content, String nickname, String userid, int bno) {
 
-		boolean result = false;
+		int result = 0;
 
 		try {
 			String sql = "INSERT INTO reply (content, nickname, userid, bno) values(?, ?, ?, ?)";
 
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, content);
 			pstmt.setString(2, nickname);
 			pstmt.setString(3, userid);
 			pstmt.setInt(4, bno);
 
-			result = pstmt.execute();
-
+			result = pstmt.executeUpdate();
+			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			
 		} finally {
 			try {
 				if (pstmt != null)
@@ -99,7 +99,6 @@ public class ReplyDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return result;
 	}
 

@@ -1,3 +1,12 @@
+/*
+--------------------------------------------------------
+최초작성자 : 김남훈
+최초작성일 : 2023/02/15
+
+버전 기록 : ver1(시작 23/02/15)
+		  ver2(23/02/18) 게시글 내 댓글 삭제 메소드 추가
+--------------------------------------------------------
+*/
 package jdbc;
 
 import java.sql.Connection;
@@ -41,6 +50,7 @@ public class BoardDAO {
 				board.setBad(rs.getString(8));
 				board.setRegDate(rs.getString(9));
 				board.setReplyNum(rs.getString(10));
+
 				return board;
 			}
 		} catch(Exception e) {
@@ -49,18 +59,18 @@ public class BoardDAO {
 		return null;
 	}
 	
+	
 //	게시물 삭제(남훈)
-	public static int Boarddelete(int bno) {
-		int result = 0;
-
+	public static void Boarddelete(int bno) {
+		
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, bno);
-			 result = pstmt.executeUpdate();
-				
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -71,7 +81,32 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		return result;
+	}
+	
+	//게시글 안에 댓글 삭제(남훈)
+	public static void Replydelete(int bno) {
+
+		try {
+			String sql = "DELETE FROM Reply WHERE bno = ?";
+
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 //	게시물 수정(남훈)	
