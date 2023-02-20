@@ -23,6 +23,56 @@ public class UserDAO {
 	private static ResultSet rs;
 	private static Connection conn;
 
+	
+//	회원 목록 메서드(도영)
+	public static ArrayList<UserDTO> getAllList(){
+
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+
+		try {
+			sql = " SELECT * FROM user ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				users.add(new UserDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5),
+									rs.getString(6),
+									rs.getString(7),
+									rs.getString(8)));
+			}
+
+				return users;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return users;
+
+		}
+	
 //	회원정보 수정 메서드(도영)
 	public static boolean update(String userId, String nickName, String name, String gender, String image,
 			String phone) {
@@ -557,8 +607,8 @@ public class UserDAO {
 		try {
 			conn = ConnectionPool.get();	
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {

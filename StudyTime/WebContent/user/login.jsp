@@ -14,6 +14,9 @@
 <input type="password" name="password" placeholder="비밀번호">
 <button>로그인</button>
 </form>
+<br>
+<a href="/user/idFind.jsp">아이디 찾기</a>
+<a href="/user/pwFind.jsp">비밀번호 찾기</a>
 
 
 <a id="custom-login-btn" href="javascript:kakaoLogin()">
