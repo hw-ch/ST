@@ -27,7 +27,7 @@
 	</div>
 	<div class="row p-2">
 		<div class="col">
-			<input type="textarea" rows="8" id="summernote">
+			<textarea id="summernote"></textarea>
 		</div>
 	</div>
 	<div class="row p-2">
