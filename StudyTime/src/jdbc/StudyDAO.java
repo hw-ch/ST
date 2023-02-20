@@ -441,7 +441,7 @@ public class StudyDAO {
 	            return false;
 	        }
 
-	// 스터디 삭제(소영)
+		// 스터디 삭제(소영)
 	   public static boolean studyDelete(String sNo) {
            sql = "DELETE FROM study WHERE sNo = ?";
            try {
@@ -449,14 +449,14 @@ public class StudyDAO {
                pstmt.setString(1, sNo);
                if(pstmt.executeUpdate()==1) return true;
 
-           } catch (Exception e) {
-               e.printStackTrace();
-           }finally {
-                if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-                if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
-           }
-           return false;
-       }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }finally {
+              if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+              if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+         }
+         return false;
+     }
 	   
 	// 스터디 조회(소영)
 		public static String myView(String sNo) {
@@ -548,5 +548,4 @@ public class StudyDAO {
 			}
 			return study;
 		}
-
 }

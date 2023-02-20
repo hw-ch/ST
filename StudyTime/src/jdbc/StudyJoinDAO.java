@@ -424,47 +424,68 @@ public class StudyJoinDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-			if(pstmt != null)	pstmt.close();
-			if(conn != null)	conn.close();
-			if(rs != null)	rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-	
-	// 스터디 탈퇴(소영)
-		public static boolean studyDelete(String userId, String sNo) {
-
-			try {
-				String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
+				conn = ConnectionPool.get();
+				rs = pstmt.executeQuery();
 				
-				try {
-					conn = ConnectionPool.get();
-				} catch (NamingException e) {
-					e.printStackTrace();
-				}
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, userId);
-					pstmt.setString(2, sNo);
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
 
-				int result = pstmt.executeUpdate();
-				if (result == 1) {
-					return true;
+				ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
+				while (rs.next()) {
+					studyJoins.add(new StudyJoinDTO(rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getString(5)));
+					
+					return studyJoins;
 				}
-			} catch (SQLException e) {
+			} catch (NamingException | SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					if(pstmt!= null) pstmt.close();
-					if(conn!=null) conn.close();
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
-			return false;
+			return null;
 		}
+		
+		// 스터디 탈퇴(소영)
+			public static boolean studyDelete(String userId, String sNo) {
+
+				try {
+					String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
+					
+					try {
+						conn = ConnectionPool.get();
+					} catch (NamingException e) {
+						e.printStackTrace();
+					}
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, userId);
+						pstmt.setString(2, sNo);
+
+					int result = pstmt.executeUpdate();
+					if (result == 1) {
+						return true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if(pstmt!= null) pstmt.close();
+						if(conn!=null) conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				return false;
+			}
+
 
 
 }
