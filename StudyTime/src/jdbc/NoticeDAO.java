@@ -87,8 +87,7 @@ public class NoticeDAO {
 			pstmt.setString(2, content);
 
 			result = pstmt.executeUpdate();
-			return result;
-
+						
 		}catch (Exception e) {
 			e.printStackTrace();
 
@@ -162,7 +161,7 @@ public class NoticeDAO {
 	}
 
 	//공지사항 수정(혜원)
-		public static int update(String bno, String title, String content) {
+		public static int update(int bno, String title, String content) {
 			int result = 0;
 
 			try {
@@ -177,8 +176,8 @@ public class NoticeDAO {
 
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
-				pstmt.setString(3, bno);
-
+				pstmt.setInt(3, bno);
+				
 				result = pstmt.executeUpdate();
 
 			}catch (Exception e) {
@@ -194,5 +193,100 @@ public class NoticeDAO {
 
 
 		//조회수 추가(혜원)
+		public static int updateHit(int bno) {
+			int result = 0;
+			
+			try {
+				String sql = "UPDATE notice SET hit = hit+1 where bno = ?";
+				
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException | SQLException e){
+					e.printStackTrace();
+				}
+				pstmt = conn.prepareStatement(sql);
 
+				pstmt.setInt(1, bno);
+				
+				result = pstmt.executeUpdate();
+							
+			}catch (Exception e) {
+				e.printStackTrace();
+			
+			}finally {
+	            if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			
+			return result;
+		}
+		
+		// 공지사항 리스트 page(혜원)
+		public static String getListPage(int pageNum){
+			sql = "select a.* " + 
+					"from (select @rownum := @rownum + 1 rownum, t.* from notice t where(@rownum := 0) = 0 order by bno desc) as a " + 
+					"where rownum between (?-1)*10+1 and (?*10);";
+			JSONArray noticeList = new JSONArray();
+			
+			try {
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException | SQLException e){
+					e.printStackTrace();
+				}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pageNum);
+				pstmt.setInt(2, pageNum);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					JSONObject obj = new JSONObject();
+					obj.put("bNo", rs.getString(1));
+					obj.put("title", rs.getString(2));
+					obj.put("content", rs.getString(3));
+					obj.put("regDate", rs.getString(4));
+					obj.put("hit", rs.getString(5));
+				
+					noticeList.add(obj);
+					
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	            if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			return noticeList.toJSONString();
+		}
+		
+		//전체 게시물 개수 확인
+		public static int count(){
+			sql = "select count(*) as total from notice";
+			int total = 0;
+			
+			try {
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException | SQLException e){
+					e.printStackTrace();
+				}
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					total = rs.getInt(1);
+					
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	            if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			return total;
+		}
 }

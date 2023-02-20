@@ -100,13 +100,147 @@ public class StudyJoinDAO {
 		}
 		return userList.toJSONString();
 	}
+	
+//	스터디 그룹원 목록 메서드(도영)
+	public static ArrayList<StudyJoinDTO> getAllList(String sNo){
+
+		ArrayList<StudyJoinDTO> StudyJoins = new ArrayList<StudyJoinDTO>();
+
+		try {
+			sql = " SELECT * FROM studyjoin WHERE sNo=? AND approve='승인' ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sNo);
+			
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				StudyJoins.add(new StudyJoinDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5)));
+			}
+
+				return StudyJoins;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return StudyJoins;
+
+		}
+	
+//	스터디 그룹원 목록 메서드(도영)
+	public static ArrayList<StudyJoinDTO> getAllList2(String sNo){
+
+		ArrayList<StudyJoinDTO> StudyJoins = new ArrayList<StudyJoinDTO>();
+
+		try {
+			sql = " SELECT * FROM studyjoin WHERE sNo=? AND approve='거절' ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sNo);
+			
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				StudyJoins.add(new StudyJoinDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5)));
+			}
+
+				return StudyJoins;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return StudyJoins;
+
+		}
 
 //	스터디 그룹원 추방 메서드(도영)
 	public static boolean delete(String userId, String sNo){
 		
 	try {
+		sql = "UPDATE studyjoin SET approve='거절' where userid=? AND sNo=? ";
+
+		try {
+			conn = ConnectionPool.get();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 		
-		sql = "DELETE from studyjoin where userid=? AND sNo=? ";
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+		pstmt.setString(2, sNo);
+
+		int result = pstmt.executeUpdate();
+		if (result == 1) {
+			return true;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		
+		try {
+			if(pstmt != null)	pstmt.close();
+			if(conn != null)	conn.close();
+			if(rs != null)	rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	return false;
+
+}
+	
+//	스터디 그룹원 재가입 메서드(도영)
+	public static boolean reRegister(String userId, String sNo){
+		
+	try {
+		sql = "UPDATE studyjoin SET approve='승인' where userid=? AND sNo=? ";
 
 		try {
 			conn = ConnectionPool.get();

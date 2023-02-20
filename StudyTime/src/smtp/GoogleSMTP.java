@@ -31,7 +31,7 @@ public class GoogleSMTP {
         auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("secure3141@gmail.com", "ashjgznhknslqtce");
+                return new PasswordAuthentication("secure3141@gmail.com", "");
             }
         };
     }

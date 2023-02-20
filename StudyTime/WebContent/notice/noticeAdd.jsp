@@ -27,7 +27,7 @@
 	</div>
 	<div class="row p-2">
 		<div class="col">
-			<input type="textarea" rows="8" id="summernote">
+			<textarea id="summernote"></textarea>
 		</div>
 	</div>
 	<div class="row p-2">
@@ -85,9 +85,9 @@
     	  			success:function(data) {
     	  				$('.modal-body').html('');
     	  				if(data==1){
-    	  					$('.modal-body').html('<p>등록 완료되었습니다.</p>');
+    	  					$('.modal-body').html(data + '<p>등록 완료되었습니다.</p>');
     	  				} else {
-    	  					$('.modal-body').html('<p>등록 실패하였습니다.<br>다시 시도해주세요.</p>');
+    	  					$('.modal-body').html(data + '<p>등록 실패하였습니다.<br>다시 시도해주세요.</p>');
     	  				}
     	  				$('.modal').show()
     	  			}

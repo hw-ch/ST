@@ -51,8 +51,8 @@ if(sid != null) {
 	}
 	
     .box {
-    width: 150px;
-    height: 150px; 
+    width: 80px;
+    height: 80px; 
     border-radius: 70%;
     overflow: hidden;
 }
@@ -181,7 +181,7 @@ if(sid != null) {
 			class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
 		</div>
 		<div class="w3-display-middle w3-center">
-			<span class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
+			<span id="pageTitle" class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
 		</div>
 		<div class="w3-display-bottomright w3-center w3-padding-large">
 		</div>
@@ -190,6 +190,11 @@ if(sid != null) {
 
 
      </fieldset>
+     
+     
+     
+     
+     
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

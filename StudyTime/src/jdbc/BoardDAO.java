@@ -1,3 +1,12 @@
+/*
+--------------------------------------------------------
+최초작성자 : 김남훈
+최초작성일 : 2023/02/15
+
+버전 기록 : ver1(시작 23/02/15)
+		  ver2(23/02/18) 게시글 내 댓글 삭제 메소드 추가
+--------------------------------------------------------
+*/
 package jdbc;
 
 import java.sql.Connection;
@@ -20,21 +29,48 @@ public class BoardDAO {
 	private static ResultSet rs;
 	private static Connection conn;
 	
-//	게시물 삭제(남훈)
-	public static int Boarddelete(String bno) {
-		int result = 0;
+//	게시물 보기(남훈)
+	public static BoardDTO getboard(int bNo){
+		String sql = "SELECT bNo, subject, content, nickname, userid, hit, good, bad, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate, replyNum from board WHERE bNo = ?";
+		try {
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBNo(rs.getString(1));
+				board.setSubject(rs.getString(2));
+				board.setContent(rs.getString(3));
+				board.setNickName(rs.getString(4));
+				board.setUserId(rs.getString(5));
+				board.setHit(rs.getString(6));
+				board.setGood(rs.getString(7));
+				board.setBad(rs.getString(8));
+				board.setRegDate(rs.getString(9));
+				board.setReplyNum(rs.getString(10));
 
+				return board;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+//	게시물 삭제(남훈)
+	public static void Boarddelete(int bno) {
 		
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, bno);
-			 result = pstmt.executeUpdate();
-				
-			return result;
-				
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -45,8 +81,32 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+	}
+	
+	//게시글 안에 댓글 삭제(남훈)
+	public static void Replydelete(int bno) {
+
+		try {
+			String sql = "DELETE FROM Reply WHERE bno = ?";
+
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 //	게시물 수정(남훈)	
