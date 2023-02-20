@@ -21,16 +21,14 @@
 <%@ include file="/includes/header.jsp" %>
 <% 
 // 	sid = (String) session.getAttribute("sid");
-	sid = "abc";
 	UserDTO userid = new UserDAO().getOneList(sid);
-	int bNo = 1;
-	if(request.getParameter("bNo") != null){
-		bNo = Integer.parseInt((String)request.getParameter("bNo"));	
-	}
-	BoardDTO board = new BoardDAO().getboard(bNo);
+	
+	int bno = Integer.parseInt(request.getParameter("bno"));
+	BoardDTO board = new BoardDAO().getboard(bno);
 %>
+
 	<form>
-		<input type="hidden" id="sid" value="<%= userid.getUserId() %>">
+<%-- 		<input type="hidden" id="sid" value="<%= userid.getUserId() %>"> --%>
 	<div class="communityView">
 		<section class="communityView_Postheader">
    		<div class="community_title"><%=board.getSubject() %></div>
@@ -39,7 +37,7 @@
    		<% if(sid != null && sid.equals(board.getUserId()))
    		{
 		%>   
-   		<div class="community_update"><button onclick="location.href='boardUpdate.jsp?bNo=<%= bNo %>'">수정</button></div>
+   		<div class="community_update"><button onclick="location.href='boardUpdate.jsp?bNo=<%= bno %>'">수정</button></div>
    		<div class="community_delete"><button type="button" onclick="boradDelete()">삭제</button></div>
 		<%
    		}
@@ -80,7 +78,7 @@
 	      <textarea></textarea>
 	      </div>
 	      <div class="modal-footer">
-	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bNo %>'" class="btn btn-secondary">수정</button>
+	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bno %>'" class="btn btn-secondary">수정</button>
   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	      </div>
 	    </div>
@@ -98,7 +96,7 @@
 			정말로 삭제하시겠습니까?
 	      </div>
 	      <div class="modal-footer">
-	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bNo %>'" class="btn btn-secondary">예</button>
+	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bno %>'" class="btn btn-secondary">예</button>
   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
 	      </div>
 	    </div>
@@ -131,15 +129,14 @@
  				var str="";
  				for(var i=0; i < replies.length; i++){
  					str += "<form>"
- 					str += "<input type='hidden' id='rno' value="+ replies[i].rNo + ">"
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>수정</button></div>"
- 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
+ 	 					str += "<div class='community_update'><button id='replyupdateBtn' type='button' onclick='replyUpdateBtn("+ replies[i].rNo + ")'>수정</button></div>"
+ 						str += "<div class='community_delete'><button id='replydelteBtn' type='button' onclick='replyDelete()'>삭제</button></div>"
  					}
  					str += "</div>"
- 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
+ 					str += "<div><p id='"+ replies[i].rNo +"'>" + replies[i].content + "</p></div><hr>"
  					str += "</form>"
  				}
  				$('#replylist').html(str);
@@ -151,40 +148,52 @@
 		$("#deleteModal").modal("show");
  	}
  	
-
- 	$(document).on('click',"#replyUpdateBtn", function(){
- 		
- 		$.ajax({
- 			type:"POST",
- 			url:"/community/replyUpdateProc.jsp",
- 			data:{ 
-					
- 			},	
-  			dataType:"text",
-
-  			success:function(data){
-  				console.log(data);
- 				var replies = JSON.parse(data.trim());
- 				var str="";
- 				for(var i=0; i < replies.length; i++){
- 					str += "<form>"
- 					str += "<input type='hidden' id='rno' value="+ replies[i].rNo + ">"
- 					str += "<div class ='writer_wrap'>"
- 					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
- 					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>"+ replies[i].rNo + "</button></div>"
- 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
- 					}
- 					str += "</div>"
- 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
- 					str += "</form>"
- 				}
- 				$('#replylist').html(str);
- 			}
- 		});
- 		
- 	});
+ 	function replyUpdateBtn(rno){
+		const element =
+			document.getElementById(rno);
+		
+ 	}
  	
+ 	function replyDelete(){
+		$("#deleteModal").modal("show");
+ 	}
+
+//  	$(document).on('click',"#replyUpdateBtn", function(){
+//  		searchFunction();
+
+//  		console.log(data-rno);
+//  		$.ajax({
+//  			type:"POST",
+//  			url:"/community/replyUpdateProc.jsp",
+//  			data: {
+//  				rno:($("#rno").val())
+//  			},
+//   			dataType:"text",
+
+ 		
+//  		success:function(data){
+//  			console.log(data);
+// 				var replies = JSON.parse(data.trim());
+// 				var str="";
+// 				for(var i=0; i < replies.length; i++){
+// 					str += "<form>"
+// 					str += "<input type='hidden' id='"+ i +"' value='"+ replies[i].rNo + "'>"
+// 					str += "<div class ='writer_wrap'>"
+// 					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
+// 					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
+// 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>수정</button></div>"
+// 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
+// 					}
+// 					str += "</div>"
+// 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
+// 					str += "</form>"
+// 				}
+// 				$('#replylist').html(str);
+// 			}
+//  		}
+//  		});
+//  	});
+
 
 	 	
  	window.onload = function(){

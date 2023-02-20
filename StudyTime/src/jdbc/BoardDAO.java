@@ -29,6 +29,61 @@ public class BoardDAO {
 	private static ResultSet rs;
 	private static Connection conn;
 	
+	//게시글 수 가져오기 (남훈)
+	public int getBoardCount(){
+		int count = 0;
+
+		try {
+			sql = "select count(*) from board";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				count = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return count;
+	}
+	
+	//게시물 목록가져오기(남훈)
+	public static ArrayList<BoardDTO> getallList(int startRow, int pageSize) {
+		ArrayList<BoardDTO> boards = new ArrayList<BoardDTO>();
+
+		try {
+			sql = "SELECT * FROM board ORDER BY bno DESC limit ?,?";
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, pageSize);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				boards.add(new BoardDTO(rs.getString(1),
+										rs.getString(2),
+										rs.getString(3),
+										rs.getString(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getString(7),
+										rs.getString(8),
+										rs.getString(9),
+										rs.getString(10),
+										rs.getString(11)));
+			}
+			return boards;
+	
+	}catch(Exception e) {
+		e.printStackTrace();
+	} 
+		return boards;
+	}
+	
 //	게시물 보기(남훈)
 	public static BoardDTO getboard(int bNo){
 		String sql = "SELECT bNo, subject, content, nickname, userid, hit, good, bad, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate, replyNum from board WHERE bNo = ?";
@@ -138,6 +193,7 @@ public class BoardDAO {
 		}
 		return -1;
 	}
+	
 //	커뮤니티 게시물 등록 메서드(도영)
 	public static boolean insert(String subject, String content, String nickName, String userId){
 			
