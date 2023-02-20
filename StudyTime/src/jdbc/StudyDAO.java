@@ -23,13 +23,13 @@ public class StudyDAO {
 	
 
 
-//	스터디 전체 목록 메서드(도영)
+//	승인된 스터디 전체 목록 메서드(도영)
 	public static ArrayList<StudyDTO> getAllList(){
 
 		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
 
 		try {
-			sql = " SELECT * FROM study ORDER BY sNo DESC ";
+			sql = " SELECT * FROM study WHERE apply='승인' ORDER BY sNo DESC ";
 
 			try {
 				conn = ConnectionPool.get();
@@ -78,20 +78,233 @@ public class StudyDAO {
 		return studys;
 
 		}
+	
+//	신청중인 스터디 전체 목록 메서드(도영)
+	public static ArrayList<StudyDTO> gettempList(){
 
-//	스터디 승인 메서드(도영)
-	public static boolean apply(String sNo){
+		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
 
-			sql = "UPDATE study SET apply=? "
-					+ " WHERE sNo=? ";
+		try {
+			sql = " SELECT * FROM study WHERE apply='신청중' ORDER BY sNo DESC ";
 
 			try {
-				
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, "승인");
-			pstmt.setString(2, sNo);
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				studys.add(new StudyDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5),
+									rs.getString(6),
+									rs.getString(7),
+									rs.getString(8),
+									rs.getString(9),
+									rs.getString(10),
+									rs.getString(11),
+									rs.getString(12),
+									rs.getString(13),
+									rs.getString(14),
+									rs.getString(15)));
+			}
+
+				return studys;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return studys;
+
+		}
+	
+//	승인된 스터디 카테고리 목록 메서드(도영)
+	public static ArrayList<StudyDTO> getAllList(String category1){
+
+		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
+
+		try {
+			sql = " SELECT * FROM study where category1=? AND apply='승인' ORDER BY sNo DESC ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, category1);
+
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				studys.add(new StudyDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5),
+									rs.getString(6),
+									rs.getString(7),
+									rs.getString(8),
+									rs.getString(9),
+									rs.getString(10),
+									rs.getString(11),
+									rs.getString(12),
+									rs.getString(13),
+									rs.getString(14),
+									rs.getString(15)));
+			}
+
+				return studys;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return studys;
+
+		}
+	
+//	승인된 스터디 카테고리2 목록 메서드(도영)
+	public static ArrayList<StudyDTO> getAllCategoryList(String category2){
+
+		ArrayList<StudyDTO> studys = new ArrayList<StudyDTO>();
+
+		try {
+			sql = " SELECT * FROM study where category2=? AND apply='승인' ORDER BY sNo DESC ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, category2);
+
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				studys.add(new StudyDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5),
+									rs.getString(6),
+									rs.getString(7),
+									rs.getString(8),
+									rs.getString(9),
+									rs.getString(10),
+									rs.getString(11),
+									rs.getString(12),
+									rs.getString(13),
+									rs.getString(14),
+									rs.getString(15)));
+			}
+
+				return studys;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return studys;
+
+		}
+
+//	스터디 승인 메서드(도영)
+	public static boolean apply(String tempTitle){
+
+			sql = "UPDATE study SET apply='승인' "
+					+ " WHERE sTitle=? ";
+
+			try {
+			
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, tempTitle);
+
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return false;
+	}
+	
+//	스터디 거절 메서드(도영)
+	public static boolean deny(String tempTitle){
+
+			sql = "UPDATE study SET apply='거절' "
+					+ " WHERE sTitle=? ";
+
+			try {
+				
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, tempTitle);
 
 			int result = pstmt.executeUpdate();
 			if (result == 1) {

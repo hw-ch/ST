@@ -49,12 +49,17 @@ public class CategoryDAO {
 
 	
 //	카테고리 분류 메서드(도영)
-	public static CategoryDTO select(String category1){
+	public static ArrayList<CategoryDTO> select(String category1){
 			
-		CategoryDTO category = null;
+		ArrayList<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		try {
-			sql = "SELECT from category where category1=? ";
-	
+			
+			if(category1.equals("all")) {
+			sql = "SELECT * from category ";
+			}else {
+			sql = "SELECT * from category where category1=? ";
+			}
+			
 			try {
 				conn = ConnectionPool.get();
 			} catch (NamingException e) {
@@ -62,15 +67,15 @@ public class CategoryDAO {
 			}
 			
 			pstmt = conn.prepareStatement(sql);
-	
-			pstmt.setString(1, category1);
-			
+			if(!category1.equals("all")) {
+				pstmt.setString(1, category1);
+			}
 			rs = pstmt.executeQuery();
 			
-			if (rs.next()) {
-				category = new CategoryDTO(rs.getString("cNo"),
-						rs.getString("category1"),
-						rs.getString("category2"));
+			while(rs.next()) {
+				category.add(new CategoryDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3)));
 			}
 			
 			return category;
@@ -86,11 +91,13 @@ public class CategoryDAO {
 				e.printStackTrace();
 			}
 		}
-	
+
 		return category;
-	
-	}
+
+		}
 		
+
+
 
 	
 }
