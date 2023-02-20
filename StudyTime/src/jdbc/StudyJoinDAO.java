@@ -395,10 +395,7 @@ public class StudyJoinDAO {
 	        return null;
 	    }
 	  
-	//approve 식별 메소드(지원)
-	public static StudyJoinDTO selectApprove(String sid){	
-		sql = "SELECT * FROM studyjoin where userid = ?";
-		StudyJoinDTO sjdto = null;
+	
 	//스터디참여 식별 메소드(지원)
 	public static List<StudyJoinDTO> selectJoinTable(String sNo){	
 		sql = "SELECT * FROM studyjoin where sNo = ?";
