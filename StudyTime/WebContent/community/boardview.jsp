@@ -135,7 +135,7 @@
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>"+ replies[i].rNo + "</button></div>"
+ 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>수정</button></div>"
  						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
  					}
  					str += "</div>"
@@ -157,11 +157,13 @@
  		$.ajax({
  			type:"POST",
  			url:"/community/replyUpdateProc.jsp",
- 			data: {rno:$("#rno").val()
- 			},
+ 			data:{ 
+					
+ 			},	
   			dataType:"text",
 
- 			success:function(data){
+  			success:function(data){
+  				console.log(data);
  				var replies = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < replies.length; i++){

@@ -77,7 +77,6 @@ public class ReplyDAO {
 		String sql = "SELECT content FROM reply WHERE rno = ?";
 
 	try {
-				
 				conn = ConnectionPool.get();
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, rno);
