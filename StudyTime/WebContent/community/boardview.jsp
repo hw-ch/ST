@@ -69,39 +69,54 @@
 	</div>
 	</form>
 	
-		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">삭제</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-				정말로 삭제하시겠습니까?
-		      </div>
-		      <div class="modal-footer">
-		        <button onclick="location.href='deleteAction.jsp?bNo=<%= bNo %>'" class="btn btn-secondary">예</button>
-   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">수정</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      <textarea></textarea>
+	      </div>
+	      <div class="modal-footer">
+	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bNo %>'" class="btn btn-secondary">수정</button>
+  		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">삭제</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+			정말로 삭제하시겠습니까?
+	      </div>
+	      <div class="modal-footer">
+	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bNo %>'" class="btn btn-secondary">예</button>
+  		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 		
-		<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-<!--       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div> -->
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="modal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 <script>
  	function searchFunction(){
  		$.ajax({
@@ -119,7 +134,7 @@
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 					str += "<div class='community_update'><button onclick='replyUpdate()'>수정</button></div>"
+ 					str += "<div class='community_update'><button type='button' onclick='replyUpdate()'>수정</button></div>"
  					str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
  					}
  					str += "</div>"
@@ -138,7 +153,7 @@
  	
 
 	function replyUpdate(){
-		
+		$("#updateModal").modal("show");
 	}
 
  	window.onload = function(){
