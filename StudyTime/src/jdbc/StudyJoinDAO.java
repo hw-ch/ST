@@ -368,7 +368,6 @@ public class StudyJoinDAO {
 	        try {
 	            conn = ConnectionPool.get();
 	            rs = pstmt.executeQuery();
-
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, userId);
 
@@ -400,12 +399,16 @@ public class StudyJoinDAO {
 	public static StudyJoinDTO selectApprove(String sid){	
 		sql = "SELECT * FROM studyjoin where userid = ?";
 		StudyJoinDTO sjdto = null;
+	//스터디참여 식별 메소드(지원)
+	public static List<StudyJoinDTO> selectJoinTable(String sNo){	
+		sql = "SELECT * FROM studyjoin where sNo = ?";
+		List<StudyJoinDTO> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, sid);
+			pstmt.setString(1, sNo);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				return new StudyJoinDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+			while(rs.next()) {
+				list.add(new StudyJoinDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -414,7 +417,7 @@ public class StudyJoinDAO {
 			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 			if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
 		}
-		return sjdto;
+		return list;
 	}	
 	
 	

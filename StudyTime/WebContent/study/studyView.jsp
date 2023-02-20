@@ -5,6 +5,7 @@
 <!-- 버전 기록 : ver1(시작 23/02/20) -->
 <!-- -------------------------------------------------------- -->
 
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +20,10 @@
 		String sNo = request.getParameter("sNo");
 		StudyDTO sdto = new StudyDAO().studyView(sNo);
 		
-		UserDTO udto = UserDAO.getOneList(sid);
+		UserDTO udto = UserDAO.getOneList(sdto.getSWriter());
+		List<StudyJoinDTO> sjlist = new StudyJoinDAO().selectJoinTable(sNo);
+		
+		
 	%>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
 		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
@@ -59,16 +63,23 @@
 		    </div>
 		  	
 		</main>
+		
+		<% 
+			int cnt=0;
+			for(StudyJoinDTO list : sjlist) { 
+				if(list.getUserId()==null){
+					cnt++;
+				}
+			}
+		%>
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
 		      <a href="javascript:history.back();" class="btn btn-danger btn-lg px-4 text text-white">이전으로</a>
-		   <%
-   			if(sid!=null && !sdto.getSWriter().equals(sid)) { %>
+		   <%if(sid!=null && cnt!=0) { %>
    				<a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">참여하기</a>
-   			<%} %>
-		      <%
-		      StudyJoinDTO sjdto = new StudyJoinDAO().selectApprove(sid);
-		  	if(sid!=null && (sid.equals("admin") || sjdto.getApprove().equals("그룹장"))){ %>
+   			<%}%>
+		      
+		  	<%if(sid!=null && (sid.equals("admin") || sdto.getSWriter().equals(sid))){ %>
 	      		 <a href="/study/studyModify.jsp?sNo=<%=sNo %>" class="btn btn-primary btn-lg px-4 text text-white">수정</a>
 		     	 <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 	      	<%}%>
