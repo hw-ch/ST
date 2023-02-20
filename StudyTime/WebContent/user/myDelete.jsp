@@ -1,4 +1,10 @@
 <!-- 회원 탈퇴 -->
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 정소영(jungsoyy@gmail.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- -------------------------------------------------------- -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,9 +19,10 @@
 
 <div class="container">
 
-<%-- <% 
-	sid = (String) session.getAttribute("userId");
-	if (sid == null){
+<% 
+	sid = (String) session.getAttribute("userid");
+%>
+	<%-- if (sid == null){
 %>		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal1"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -43,16 +50,14 @@
 			});
 		</script>		
 		
-<%} else {
-	session.setAttribute("userId", sid);
-}
-%>		 --%>
+<%} else { --%>
+<%
+	session.setAttribute("userid", sid);
+
+%>		
 
 <br>
-<%
- String userId = "aaa@aaa.com";
- String password = "1111";
-%>
+
 <main class="form-signin w-100 m-auto">
 <form action="myDeleteCheck.jsp" method="post">
     <img class="mb-4" src="/images/bg3.jpg" alt="" width="100" height="100">
@@ -73,7 +78,7 @@
     	<input type="submit" class="w-100 btn btn-lg btn-secondary" value="회원 탈퇴">
     </div>
     </div>
-    </form>
+  </form>
 </main>
 </body>
 </html>

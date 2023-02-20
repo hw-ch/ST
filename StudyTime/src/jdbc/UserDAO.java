@@ -69,35 +69,52 @@ public class UserDAO {
 
 	// 내 정보(소영)
 	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
-		UserDTO user = null;
+		
+		UserDTO users = null;
 		try {
-			String sql = "SELECT * FROM user WHERE userId = ? ORDER BY ts DESC";
-
-			conn = ConnectionPool.get();
+			sql = "SELECT * from user where userid=? ";
+	
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+	
 			pstmt = conn.prepareStatement(sql);
+	
 			pstmt.setString(1, userId);
-
+	
 			rs = pstmt.executeQuery();
-
-			ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+	
 			if (rs.next()) {
-				users.add(new UserDTO(rs.getString("userId"), 
+				users = new UserDTO(rs.getString("userId"),
 						rs.getString("password"), 
 						rs.getString("nickname"),
 						rs.getString("name"), 
 						rs.getString("ts"), 
 						rs.getString("gender"),
 						rs.getString("image"),
-						rs.getString("phone")));
+						rs.getString("phone"));
 			}
-			return user;
+	
+			return users;
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
+			try {
 				if(rs!=null) rs.close();
 				if(pstmt!= null) pstmt.close();
 				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
+	
+		return users;
+	
 	}
+
 
 	// 본인 정보 수정(소영)
 	public static int myEdit(String userId, String password, String nickName, String image, String phone)

@@ -1,10 +1,15 @@
 <!-- 본인 정보 보기 -->
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 정소영(jungsoyy@gmail.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- -------------------------------------------------------- -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="jdbc.UserDAO.*"%>
 <%@page import="jdbc.UserDTO.*"%>
-<%@page import="java.util.ArrayList"%>   
 <%@page import="java.util.*"%>
  
     
@@ -19,9 +24,10 @@
 <% 
 	
 
-	sid = (String) session.getAttribute("userId"); 
-	if (sid == null){
-%>		
+	sid = (String) session.getAttribute("userid"); 
+%>
+<%-- 	if (sid == null){
+		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal2"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -48,10 +54,11 @@
 			});
 		</script>		
 		
-<%} else {
-	session.setAttribute("userId", sid);
-}
-	UserDTO user = UserDAO.myInfo(sid);
+<%} else { --%>
+<%
+	session.setAttribute("userid", sid);
+
+	UserDTO users = UserDAO.myInfo(sid);
 
 %>		
   
@@ -125,14 +132,11 @@
   </div>
 </div>
 
-<% 
-	}
-%>
  <hr class="my-4">
 			
 			<div class="d-grid gap-2 col-6 mx-auto">
-			  <button class="btn btn-secondary" type="button">내 정보 수정</button>
-			  <button class="btn btn-secondary" type="button">회원 탈퇴</button>
+			  <button class="btn btn-secondary" onclick="location.href='/user/myInfoModify.jsp' " type="submit">내 정보 수정</button>
+			  <button class="btn btn-secondary" onclick="location.href='/user/myDelete.jsp' " type="submit">회원 탈퇴</button>
 			</div>
     
       </div>

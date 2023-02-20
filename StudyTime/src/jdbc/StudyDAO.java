@@ -228,7 +228,7 @@ public class StudyDAO {
 	            return false;
 	        }
 
-	// 스터디 삭제
+	// 스터디 삭제(소영)
 	   public static boolean studyDelete(String sNo) {
            sql = "DELETE FROM study WHERE sNo = ?";
            try {
@@ -245,26 +245,31 @@ public class StudyDAO {
            return false;
        }
 	   
-	// My Study(소영)
-		public static String myList(String sWriter) {
+	// 스터디 조회(소영)
+		public static String myView(String sNo) {
 			JSONArray study = new JSONArray();
 			try {
-				String sql = "SELECT sTitle, sWriter, joinCnt, startDate FROM study WHERE sWriter = ? ORDER BY ts DESC";
+				String sql = "SELECT sTitle, sWriter, cNo, category1, category2 startDate, expDate, process FROM study WHERE sNo = ? ORDER BY ts DESC";
 
 				try {
 					conn = ConnectionPool.get();
 
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, sWriter);
+					pstmt.setString(1, sNo);
 
 					rs = pstmt.executeQuery();
 
 					while (rs.next()) {
 						JSONObject obj = new JSONObject();
-						obj.put("sTitle", rs.getString(1));
-						obj.put("sWriter", rs.getString(2));
-						obj.put("joinCnt", rs.getString(3));
-						obj.put("startDate", rs.getString(4));
+						obj.put("sNo", rs.getString(1));
+						obj.put("sTitle", rs.getString(2));
+						obj.put("sWriter", rs.getString(3));
+						obj.put("cNo", rs.getString(4));
+						obj.put("category1", rs.getString(5));
+						obj.put("category2", rs.getString(6));
+						obj.put("startDate", rs.getString(7));
+						obj.put("expDate", rs.getString(8));
+						obj.put("process", rs.getString(9));
 
 						study.add(obj);
 					}
@@ -284,14 +289,12 @@ public class StudyDAO {
 			return study.toJSONString();
 		}
 
-		// 스터디 조회(소영)
-		public static String myView(String sNo) {
+		// My Study(소영)
+		public static StudyDTO myStudy(String sNo) {
 
-			JSONArray studyList = new JSONArray();
-			String sql =  "SELECT s.sTitle, s.sWriter, s.joinCnt, s.startDate, s.process, s.expDate, s.cNo  FROM studyJoin sj " +
-					"JOIN study s ON sj.sNo = s.sNo " +
-					"WHERE sj.sNo = ? " +
-					"ORDER BY sj.regDate DESC";
+			StudyDTO study = null;
+			String sql =  "SELECT * FROM study WHERE sNo=? ";
+			
 			try {
 				conn = ConnectionPool.get();
 				rs = pstmt.executeQuery();
@@ -300,17 +303,25 @@ public class StudyDAO {
 				pstmt.setString(1, sNo);
 
 				while (rs.next()) {
-					JSONObject obj = new JSONObject();
-					obj.put("sTitle", rs.getString(1));
-					obj.put("sWriter", rs.getString(2));
-					obj.put("joinCnt", rs.getString(3));
-					obj.put("startDate", rs.getString(4));
-					obj.put("process", rs.getString(5));
-					obj.put("expDate", rs.getString(6));
-					obj.put("cNo", rs.getString(7));
-
-					studyList.add(obj);
+					study = new StudyDTO(rs.getString("sNo"),
+							rs.getString("sTitle"), 
+							rs.getString("sWriter"), 
+							rs.getString("cNo"),
+							rs.getString("category1"),
+							rs.getString("category2"), 
+							rs.getString("address"),
+							rs.getString("recruitCnt"),
+							rs.getString("joinCnt"), 
+							rs.getString("regDate"),
+							rs.getString("expDate"),
+							rs.getString("startDate"), 
+							rs.getString("sContent"),
+							rs.getString("apply"),
+							rs.getString("process"));
 				}
+					
+					return study;
+				
 			} catch (NamingException | SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -322,7 +333,7 @@ public class StudyDAO {
 					e.printStackTrace();
 				}
 			}
-			return studyList.toJSONString();
+			return study;
 		}
 
 }
