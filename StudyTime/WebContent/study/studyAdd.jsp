@@ -1,3 +1,10 @@
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 박지원 -->
+<!-- 최초작성일 : 2023/02/20 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/20) -->
+<!-- -------------------------------------------------------- -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -89,7 +96,7 @@
 			             <select class="form-select" name = "cNo" id="category2" required>
 			               <option value="" selected disabled>선택2</option>
 			                <%	
-								List<CategoryDTO> category2List = new CategoryDAO().category2List(); 
+			                	List<CategoryDTO> category2List = new CategoryDAO().category2List(); 
 			           			for(CategoryDTO category2 : category2List){
 		           				%>
 			           				<option value = "<%=category2.getCNo()%>"><%=category2.getCategory2()%></option>
@@ -104,7 +111,7 @@
 		         	 </div>
 		         	 <div class="col-sm-6">
 			           	 <label for="address" class="form-label">위치</label>
-			             <input type = "text" placeholder="오프라인 스터디만 입력해주세요." class = "form-control" name = "address" id = "address" required>
+			             <input type = "text" placeholder="오프라인 스터디만 입력해주세요." class = "form-control" name = "address" id = "address">
 		         	 </div>
 				</div>
 			</div>

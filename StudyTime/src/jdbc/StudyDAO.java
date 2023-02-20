@@ -231,7 +231,7 @@ public class StudyDAO {
            try {
                pstmt = conn.prepareStatement(sql);
                pstmt.setString(1, sNo);
-               if(pstmt.executeUpdate()==1) return true;;
+               if(pstmt.executeUpdate()==1) return true;
 
            } catch (Exception e) {
                e.printStackTrace();
