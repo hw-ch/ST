@@ -181,7 +181,7 @@ if(sid != null) {
 			class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
 		</div>
 		<div class="w3-display-middle w3-center">
-			<span class="w3-text-white text-light" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
+			<span class="w3-text-white text-light" id="pageTitle" style="font-size: 90px; font-family: 'PyeongChangPeace-Bold';">페이지 이름</span>
 		</div>
 		<div class="w3-display-bottomright w3-center w3-padding-large">
 		</div>
