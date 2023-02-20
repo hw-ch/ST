@@ -43,25 +43,20 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    
+    #msg {color : red;}
   </style>
 </head>
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<!-- <form action="idFindChk.jsp">
-<input type="text" name="name" placeholder="이름" required>
-<input type="text" name="phone" placeholder="휴대폰번호" required>
-<button>아이디 찾기</button>
-</form> -->
-
 <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-6 mx-auto">
-        <form class="validation-form" action="/user/idFindChk.jsp" method="post" novalidate>
 
           <div class="mb-3">
             <label for="name">이름</label>
-            <input type="text" class="form-control" name="name" required>
+            <input type="text" class="form-control" id="name" name="name" required>
             <div class="invalid-feedback">
               이름을 입력해주세요.
             </div>
@@ -69,16 +64,15 @@
           
           <div class="mb-3">
             <label for="phone">휴대폰 번호</label>
-            <input type="text" class="form-control" name="phone" required>
+            <input type="text" class="form-control" id="phone" name="phone" required>
             <div class="invalid-feedback">
-              휴대폰 번호를 입력해주세요.
+              전화번호를 입력해주세요.
             </div>
           </div>
           
           <hr class="mb-4">
           
-          <button class="btn btn-primary btn-lg btn-block" type="submit">아이디 찾기</button>
-        </form>
+          <button class="btn btn-primary btn-lg btn-block" id="findBtn" type="submit">아이디 찾기</button>
       </div>
     </div>
     
@@ -88,12 +82,27 @@
   </div>
 
 
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+<!--       <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> -->
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
 <script>
   
-  $('#home').hide()
+	$('#home').hide();
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
@@ -109,6 +118,30 @@
         }, false);
       });
     }, false);
+  
+//  아이디 찾기 ajax
+$('#findBtn').on('click', function(){
+	$.ajax({
+		type : "post",
+		url : "idFindChk.jsp",
+		data : {name:$('#name').val(),
+			    phone:$('#phone').val()
+		},
+		dataType:"text",
+		success : function(result){
+			var result = result.trim();
+			if(result != null){
+				$('.modal-body').html('회원님의 아이디는<span id="msg">' + result + '</span>입니다.');
+			}	else{
+				$('.modal-body').html('이름과 전화번호가 일치하지 않습니다.');
+			}
+			$('.modal').show()
+		}
+		
+	});
+});
+  
+  
 </script>
 
 </body>

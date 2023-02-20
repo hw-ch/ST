@@ -57,7 +57,7 @@
 
           <div class="mb-3">
             <label for="email">아이디</label>
-            <input type="email" class="form-control" name="userId" placeholder="you@example.com" required>
+            <input type="text" class="form-control" name="userId" placeholder="you@example.com" required>
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
