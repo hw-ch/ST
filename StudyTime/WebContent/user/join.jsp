@@ -8,7 +8,7 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<form action="joinCheck.jsp" method="post">
+<form action="joinCheck.jsp" method="post" enctype="multipart/form-data">
 <fieldset>
 	<legend>회원가입</legend>
 	아이디 <input type="email" name="userId" size =30 placeholder="이메일을 입력하세요 ex)aa@naver.com" required> <br>
@@ -21,7 +21,7 @@
 		<option value="male">남성</option>
 		<option value="female">여성</option>
 		</select><br>
-	이미지 <input type="file" name="image"><hr>
+	이미지 <input type="file" name="image"	><hr>
 	<button class="joinBtn">회원 가입</button>
 </fieldset>	
 </form>
