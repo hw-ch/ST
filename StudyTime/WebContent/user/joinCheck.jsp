@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.oreilly.servlet.MultipartRequest,
 			com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ include file="/includes/header.jsp" %>
 <%
 	String uploadPath = application.getInitParameter("uploadPath");// 파일 업로드 폴더명 
 	String savePath = application.getRealPath(uploadPath);// 실제 업로드 폴더 경로

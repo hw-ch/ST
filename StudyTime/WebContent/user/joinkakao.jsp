@@ -17,8 +17,8 @@ String gender = request.getParameter("gender");
 %>
 
 
-<form action="joinCheck.jsp">
-아이디 <input type="email" name = "id" value=<%= userId %> readonly> <br>
+<form action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data">
+아이디 <input type="email" name = "userId" value=<%= userId %> readonly> <br>
 비밀번호 <input type="password" name = "password"> <br>
 비밀번호 확인 <input type="password" name = "pwChk"> <br>
 이름 <input type="text" name = "name"> <br>
