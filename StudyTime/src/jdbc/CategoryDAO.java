@@ -18,11 +18,12 @@ public class CategoryDAO {
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
-	StudyDTO sdto;
 	private static Connection conn;
+	
 	public CategoryDAO() {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
+	
 	//카테고리 드롭다운 목록(지원)
 			public static List<CategoryDTO> categoryList(){	
 				sql = "SELECT * FROM category ORDER BY cNo";
@@ -43,8 +44,62 @@ public class CategoryDAO {
 				return categoryList;
 			}	
 	
+
+
+
+	
+//	카테고리 분류 메서드(도영)
+	public static ArrayList<CategoryDTO> select(String category1){
+			
+		ArrayList<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		try {
+			
+			if(category1.equals("all")) {
+			sql = "SELECT * from category ";
+			}else {
+			sql = "SELECT * from category where category1=? ";
+			}
+			
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			if(!category1.equals("all")) {
+				pstmt.setString(1, category1);
+			}
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				category.add(new CategoryDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3)));
+			}
+			
+			return category;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return category;
+
+		}
+		
+
+
+
+	
 }
-
-
 
 

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-asdasd
+삭제 성공
 </body>
 </html>

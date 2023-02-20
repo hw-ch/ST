@@ -16,6 +16,5 @@
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	
-	out.print(new NoticeDAO().Noticeinsert(title, content));
-	
+	out.print(NoticeDAO.Noticeinsert(title, content));
 %>

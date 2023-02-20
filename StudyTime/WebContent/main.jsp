@@ -20,8 +20,29 @@
 <meta charset="UTF-8">
 <title>STUDY TIME</title>
 <link href="carousel.css" rel="stylesheet">
-
 </head>
+
+<style>
+#floatdiv {
+position:fixed; _position:absolute; _z-index:-1;
+width:170px;
+overflow:hidden;
+right:-30px;
+bottom:15px;
+background-color: transparent;
+margin:0;
+padding:0;
+}
+
+#floatdiv ul { list-style: none; }
+#floatdiv li { margin-bottom: 2px; text-align: center; }
+#floatdiv a { color: #5D5D5D; border: 0; text-decoration: none; display: block; }
+#floatdiv .menu { background-color: #5D5D5D; color: #fff; }
+#floatdiv .menu, #floatdiv .last { margin-bottom: 0px; }
+
+</style>
+
+
   <body class="text-center">
 
   <%@ include file="/includes/header.jsp"%>
@@ -62,107 +83,189 @@
     
     
     
-   <div class="row featurette" style="padding-top: 300px;">
-      <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1"><span class="text-muted">영어 중국어 일본어 운동/스포츠 IT </span></h2>
-      
+   <div class="row featurette" style="padding-top: 100px;">
+      <div class="col-md-7" style="padding-bottom: 10px;">
+				<span class="h2 all"
+					style="padding-right: 100px; padding-left: 50px; cursor: pointer;">전체
+				</span><span class="h2 english"
+					style="padding-right: 100px; cursor: pointer;">영어 </span><span
+					class="h2 china" style="padding-right: 100px; cursor: pointer;">중국어
+				</span><span class="h2 japan"
+					style="padding-right: 100px; cursor: pointer;">일본어 </span><span
+					class="h2 sport" style="padding-right: 100px; cursor: pointer;">운동/스포츠
+				</span><span class="h2 IT"
+					style="padding-right: 100px; cursor: pointer;"> IT </span>
+			</div>
               <hr class="featurette-divider">
-        <p><a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEIC</a> <a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEFL</a> <a class="btn btn-lg btn-primary" href="../product/productList.jsp">TOEIC</a></p>
-
+        <div id="category2" class="text-start" style="padding-left: 50px; width: 50%;">
+        
+</div>
       </div>
       <div class="col-md-5">
-      </div>
+
     </div>
     
     
     
-  <div class="row" data-masonry='{"percentPosition": true }' style="padding-top: 600px;">
+  <div class="row" data-masonry='{"percentPosition": true }' style="padding-top: 200px;">
       <hr class="featurette-divider">
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-        <div class="card-body">
-          <h5 class="card-title">Card title that wraps to a new line</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
+    <div class="col mb-4" style="height: 500px;">
+       <div id="study" class="row row-cols-1 row-cols-md-3 mb-3 text-center"  style="height: 500px;">
+
     </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card p-3">
-        <figure class="p-3 mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-muted">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card text-bg-primary text-center p-3">
-        <figure class="mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-white">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has a regular title and short paragraph of text below it.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card">
-        <svg class="bd-placeholder-img card-img" width="100%" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Card image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Card image</text></svg>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card p-3 text-end">
-        <figure class="mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-muted">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
     </div>
   </div>
  
+ 
+<div id="floatdiv">
+ <a href="#"><img src="/images/top.png" class="box" style="border:3px solid black;"></a>
+</div>
+
+
+
 
 </main>
      
      <script type="text/javascript">
      $("#headerImage").hide();
+     
+     function searchFunction() {
+   	
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=all',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+   	  
+   }
+
+     $(document).on('click', '.all', function(event) {
+      	  $.ajax({
+         		type:'post',
+         		url:'studyCheckAJAX.jsp?category1=all',
+         		datatype : 'json',
+         		success:function(result){
+      			var str = result.split("__CATEGORY__");
+      			$("#study").html(str[0]);
+      			$("#category2").html(str[1]);
+         			
+         			
+         		}
+         	  
+         	  });
+   	});     
+     
+     $(document).on('click', '.english', function(event) {
+      	  $.ajax({
+         		type:'post',
+         		url:'studyCheckAJAX.jsp?category1=영어',
+         		datatype : 'json',
+         		success:function(result){
+      			var str = result.split("__CATEGORY__");
+      			$("#study").html(str[0]);
+      			$("#category2").html(str[1]);
+         			
+         			
+         		}
+         	  
+         	  });
+   	});
+     
+     $(document).on('click', '.japan', function(event) {
+   	  $.ajax({
+     		type:'post',
+     		url:'studyCheckAJAX.jsp?category1=일본어',
+     		datatype : 'json',
+     		success:function(result){
+  			var str = result.split("__CATEGORY__");
+  			$("#study").html(str[0]);
+  			$("#category2").html(str[1]);
+     			
+     			
+     		}
+     	  
+     	  });
+   	}); 
+     
+  $(document).on('click', '.china', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=중국어',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+  
+  $(document).on('click', '.sport', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=운동/스포츠',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+     
+  $(document).on('click', '.IT', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=IT',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+        
+  $(document).on('click', '#category3', function(event) {
+	  console.log(this)
+   	  $.ajax({
+   		type:'post',
+   		url:'categoryCheckAJAX.jsp?category3=' + this.text,
+   		datatype : 'json',
+   		success:function(result){
+			var str = result;
+			$("#study").html(str);
+			// ajax 중복 방지					
+			if( window.ajaxCheck == 1 ) return false;
+   			
+   		}
+   	  
+   	  });
+	});
+  
+     window.onload = function() {
+   	searchFunction();
+   }
+     
+     
+
      </script>
   </body>
 </html>

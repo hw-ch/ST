@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyTime</title>
+<title>Study Time</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -26,42 +26,65 @@
 
 
   
-  <main class="form-signin w-100 m-auto">
-  <form action="feedCheck.jsp" method="post">
-
-<div class="py-5 text-center">
-      
-      <h2>　</h2>
-      <img class="d-block mx-auto mb-4" src="/images/study3.png" alt="" width="100" height="100">
-           <h1>StudyTime</h1>
-         </div>
-
-
-<input type="hidden" name="id" value="<%=sid%>">
+  <main class="form-signin w-100 m-auto" style="padding-top: 100px; padding-bottom: 100px; padding-left: 400px;">
+  <form action="boardInsertCheck.jsp" method="post">
 
       
-      <div class="container">
-      <div class="col">
+<%
+
+UserDTO userInfo = UserDAO.getOneList(sid);
+
+
+%>
+
+<input type="hidden" name="userId" value="<%=sid%>">
+
+
+				<div class="form-group row pb-3">
+				<label class="col-sm-2 h3">작성자</label>
+				<div class="col-sm-3">
+					<input type="text" value="<%=user.getNickName() %>" readonly="readonly" name="nickName" id="ide"
+						class="form-control" required>
+				</div>
+				<span style="color: red;" id="idChk"></span>
+
+			</div>
+					<div class="form-group row pb-3">
+				<label class="col-sm-2 h3">제목</label>
+				<div class="col-sm-3">
+					<input type="text" name="subject" class="form-control" required>
+				</div>
+			</div>
+      
+      					<div class="form-group row pb-3">
+				<label class="col-sm-2 h3">내용</label>
+				<div class="col-sm-3">
+			      <div class="col">
       <textarea id="summernote" name="content" class="mtop-10"></textarea>
-      </div>
-      <br>
-      <div class="col">
- <button class="w-100 btn btn-lg btn-primary" type="submit">업로드</button>
- </div>
- 
- <div class="py-5 text-center">
- </div>
-      </div>
-      
-</form>
+      </div>				</div>
+			</div>
+			<div class="form-group row" style="padding-right: 200px; padding-top: 100px;">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="button" onclick="history.back()" value="이전으로"
+						class="btn btn-lg btn-secondary backBtn" style="margin-right: 10px;"> 
+						 <input type="submit" value="등록" class="btn btn-lg btn-info regBtn">
+				</div>
+			</div>
+		</form>
 </main>
 
 </body>
     <script>
-      $('#summernote').summernote({
+    
+	$('#pageTitle').text("글쓰기")
+	
+
+    
+	$('#summernote').summernote({
     	maximumImageFileSize: '1048576',
-        placeholder: 'My MEMO',
+        placeholder: '내용',
         tabsize: 2,
+        width: 600,
         height: 300,
         toolbar: [
           ['style', ['style']],
@@ -73,5 +96,7 @@
           ['view', ['fullscreen', 'codeview', 'help']]
         ]
       });
+	
+	$('#summernote').summernote('justifyLeft');
     </script>
 </html>
