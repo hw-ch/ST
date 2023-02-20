@@ -8,6 +8,6 @@ import lombok.Data;
 public class StudyJoinDTO {
 	
 	private String sjNo, userId, sNo, approve, regDate;
-	
+
 
 }

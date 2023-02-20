@@ -1,4 +1,4 @@
-<!-- 
+<!--
 --------------------------------------------------------
 최초작성자 : 최혜원(wone8115@uos.ac.kr)
 최초작성일 : 2023/02/15
@@ -12,7 +12,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/includes/header.jsp" %>
-<% 
+<%
 	// sid 확인
 	if(session.getAttribute("sid") != null){
 		sid = (String)session.getAttribute("sid");
@@ -69,16 +69,16 @@
  				}
  				$('#notice').html(str);
  			}
- 			
+
  		});
  	}
- 	
- 	
- 	
+
+
+
  	window.onload = function(){
  		searchFunction();
  	}
- 	
+
  </script>
 </body>
 </html>

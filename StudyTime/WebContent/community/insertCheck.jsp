@@ -11,12 +11,12 @@
 <!DOCTYPE html>
 <%
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String subject = request.getParameter("subject");
 	String content = request.getParameter("content");
 	String nickName = request.getParameter("nickName");
 	String userId = request.getParameter("userId");
-	
+
 	if(BoardDAO.insert(subject, content, nickName, userId)) {
 %>
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,7 +41,7 @@
 				$("#exampleModal1").modal("show");
 			});
 		</script><%
-		
+
 	}else{
 		%>
 		<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,6 +66,6 @@
 			});
 		</script><%
 	}
-	
-	
+
+
 %>

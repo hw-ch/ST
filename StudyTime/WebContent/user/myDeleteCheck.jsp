@@ -1,3 +1,11 @@
+<!-- 회원탈퇴 Check -->
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 정소영(jungsoyy@gmail.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- -------------------------------------------------------- -->
+
 <%@page import="jdbc.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,13 +19,12 @@
 <%@ include file="/includes/header.jsp" %>
 
 <%
-	String userId = request.getParameter("userId");
-	String password = request.getParameter("password");
 
+	String userId = request.getParameter("userid");  
+	String password = request.getParameter("password"); 
 	int result = UserDAO.login(userId, password);
-
 	if(result == 0){
-		UserDAO.withdrawal(userId);
+		UserDAO.unregister(userId);
 %>
 <!-- Modal -->
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,7 +65,7 @@
 		       아이디 또는 비밀번호를 다시 확인해주세요.
 		      </div>
 		      <div class="modal-footer">
-		        <button onclick="location.href='/signout.jsp'" class="btn btn-primary">다시 회원 탈퇴</button>
+		        <button onclick="location.href='/user/myDelete.jsp'" class="btn btn-primary">다시 회원 탈퇴</button>
 		      </div>
 		    </div>
 		  </div>
