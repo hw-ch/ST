@@ -19,7 +19,7 @@
 	String sid = (String)session.getAttribute("sid");
 	String sNo = request.getParameter("sNo");
 	
-	if(new StudyJoinDAO().studyJoin(sid, sNo, "신청")){
+	if(new StudyJoinDAO().studyJoin(sid, sNo, "신청중")){
 		%>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

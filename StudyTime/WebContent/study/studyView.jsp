@@ -18,11 +18,13 @@
 	<%
 		String sNo = request.getParameter("sNo");
 		StudyDTO sdto = new StudyDAO().studyView(sNo);
+		
+		UserDTO udto = UserDAO.getOneList(sid);
 	%>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
 		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
 	    	<img src="/images/favicon.ico" width="40" height="32" class="me-2"></img>
-	    	<span class="fs-4"><%=session.getAttribute("sid")%></span>
+	    	<span class="fs-4"><%=udto.getNickName()%></span>
 		</header>
 		<main>
 			<div>
@@ -60,14 +62,16 @@
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
 		      <a href="javascript:history.back();" class="btn btn-danger btn-lg px-4 text text-white">이전으로</a>
-		      <a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">참여하기</a>
+		   <%
+   			if(sid!=null && !sdto.getSWriter().equals(sid)) { %>
+   				<a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">참여하기</a>
+   			<%} %>
 		      <%
 		      StudyJoinDTO sjdto = new StudyJoinDAO().selectApprove(sid);
 		  	if(sid!=null && (sid.equals("admin") || sjdto.getApprove().equals("그룹장"))){ %>
 	      		 <a href="/study/studyModify.jsp?sNo=<%=sNo %>" class="btn btn-primary btn-lg px-4 text text-white">수정</a>
 		     	 <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 	      	<%}%>
-		       <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 		     
 		     
 	  		</div>

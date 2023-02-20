@@ -163,7 +163,7 @@ public class StudyDAO {
 			String category2,String address, String recruitCnt, String joinCnt, String expDate,
 			String startDate, String sContent,String process){
 		sql = "INSERT INTO study(stitle,swriter,cNo,category1,category2,address,recruitCnt,joinCnt,expDate,"
-				+ "startDate,scontent,apply,process) VALUES(?,?,?,?,?,?,?,?,?,?,?,'신청',?)";
+				+ "startDate,scontent,apply,process) VALUES(?,?,?,?,?,?,?,?,?,?,?,'신청중',?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sTitle);
@@ -189,7 +189,7 @@ public class StudyDAO {
 	}
 
 
-	//스터디 수정 (지원)
+	//스터디 수정 (지원) 수정필요 조인안해도 될듯
 	 public static boolean studyUpdate(String sTitle, String sWriter, int cNo, String category1,
 	            String category2,String address, int recruitCnt, int joinCnt, String expDate,
 	            String startDate, String scontent,String process,String sNo) {
@@ -225,7 +225,7 @@ public class StudyDAO {
 	            return false;
 	        }
 
-	// 스터디 삭제
+	// 스터디 삭제(지원)
 	   public static boolean studyDelete(String sNo) {
            sql = "DELETE FROM study WHERE sNo = ?";
            try {
