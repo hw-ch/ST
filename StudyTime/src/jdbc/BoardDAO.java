@@ -30,7 +30,7 @@ public class BoardDAO {
 	private static Connection conn;
 	
 	//게시글 수 가져오기 (남훈)
-	public int getBoardCount(){
+	public static int getBoardCount(){
 		int count = 0;
 
 		try {
@@ -54,14 +54,13 @@ public class BoardDAO {
 		ArrayList<BoardDTO> boards = new ArrayList<BoardDTO>();
 
 		try {
-			sql = "SELECT * FROM board ORDER BY bno DESC limit ?,?";
+			String sql = "SELECT * FROM board ORDER BY bno DESC limit ?,?";
 			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow-1);
 			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
-			
 			
 			while(rs.next()) {
 				boards.add(new BoardDTO(rs.getString(1),

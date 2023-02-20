@@ -39,18 +39,20 @@
 	int startRow = (currentPage-1)*pageSize + 1;
 	
 	ArrayList<BoardDTO> boards = BoardDAO.getallList(startRow, pageSize);
+	for( BoardDTO board: boards) {
 %>
-<!--  <tr><td colspan=2><hr></td></tr> -->
-<%--  <tr><td><%=board.getBNo() %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td> --%>
-<%-- 	<td><a href="boardview.jsp?bno=<%=board.getBNo() %>"><%=board.getSubject() %></a></td> --%>
-<!-- 	</tr>	 -->
+ <tr><td colspan=2><hr></td></tr>
+ <tr><td><%=board.getBNo() %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+	<td><a href="boardview.jsp?bno=<%=board.getBNo() %>"><%=board.getSubject() %></a></td>
+	</tr>	
 <%
-
+	}
 %>
 <div id="page_control">
 <H1><%=cnt %></H1>
 <h1><%=startRow %></h1>
 <H1><%=pageSize %></H1>
+
 <%-- 	<%	 --%>
 			
 					
