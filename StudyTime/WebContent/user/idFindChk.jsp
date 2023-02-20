@@ -10,9 +10,9 @@
 	String id = UserDAO.idFind(name, phone);
 	
 	if(id != null){	%>
-	 <%= id %>
+	 회원님의 아이디는<span style="color:red"> <%= id %></span>입니다.
 	<% 	}	else {%>
-	<p>이름과 전화번호가 일치하지 않습니다.</p>
+	이름과 전화번호가 일치하지 않습니다.
 <% }
 %>	
 

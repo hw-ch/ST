@@ -82,17 +82,17 @@
   </div>
 
 
-<div class="modal" tabindex="-1">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-<!--       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <div class="modal-header">
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">아이디 찾기</h1> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div> -->
+      </div>  
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+       <button onclick="location.href='/user/login.jsp'" class="btn btn-primary">로그인</button>
       </div>
     </div>
   </div>
@@ -131,11 +131,11 @@ $('#findBtn').on('click', function(){
 		success : function(result){
 			var result = result.trim();
 			if(result != null){
-				$('.modal-body').html('회원님의 아이디는<span id="msg">' + result + '</span>입니다.');
-			}	else{
-				$('.modal-body').html('이름과 전화번호가 일치하지 않습니다.');
-			}
-			$('.modal').show()
+				$('.modal-body').html(result);
+				$('#name').val('');
+				$('#phone').val(''); 
+			}	
+			$("#exampleModal").modal("show");
 		}
 		
 	});

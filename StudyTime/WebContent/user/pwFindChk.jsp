@@ -52,7 +52,7 @@ $(function(){
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" onclick="history.back()">이전으로</button>
-       <button onclick="location.href='pwFind.jsp'" class="btn btn-primary">비밀번호 찾기</button>
+       <button onclick="location.href='/user/login.jsp'" class="btn btn-warning">로그인</button>
       </div>
     </div>
   </div>
@@ -63,8 +63,8 @@ $(function(){
 	$("#exampleModal").modal("show");
 	
 });
+
+$('#home').hide()
 </script>	
 <% }%>
-<script>
-$('#home').hide()
-</script>
+
