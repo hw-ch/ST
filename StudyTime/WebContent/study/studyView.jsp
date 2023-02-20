@@ -8,10 +8,13 @@
 </head>
 <body>
 	<%@ include file = "/includes/header.jsp" %>
+	<%
+		
+	%>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
 		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
 	    	<img src="/images/favicon.ico" width="40" height="32" class="me-2"></img>
-		    <span class="fs-4">박지원(그룹장)</span>
+		    <span class="fs-4"><%=session.getAttribute("sid")%></span>
 		</header>
 		<main>
 			<div>
