@@ -13,38 +13,20 @@
 
 <head>
 <meta charset="UTF-8">
-<title>StudyTime</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<!-- <script src="../survey/jquery-3.6.1.js"></script> -->
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<title>Study Time</title>
 </head>
 <body>
 	<!-- 화면 상단 header -------------------------------------------- -->
 	<%@ include file="/includes/header.jsp"%>
 
-	<!-- 메인 타이틀 ----------------------------------------- -->
-	<div class="jumbotron">
-		<div class="container">
-			<h3 class="display-4">회원 정보</h3>
-		</div>
-	</div>
-
-	<!-- 메인 ------------------------------------------------- -->
-<%-- <jsp:useBean id="mdao" class="market.dao.MemberDAO" /> --%>
 
 
 			<%
-// 			String id = (String)session.getAttribute("sid");
-// 			MemberVO mvo = mdao.selectMember(id);
-//			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
+// 			MemberVO mvo = mdao.selectMember(sid);
+// 			MemberVO mvo = (MemberVO)request.getAttribute("mvo");
 			%>
 
-	<c:if test="${!empty mvo }">
-	<div class="container">
+	<div class="container" style="padding-top: 200px;">
 
 		<div class="row" align="center">
 
@@ -53,8 +35,8 @@
 			<div class="col-md-4">
 
 			
-				<img src="../resources/imgs/${mvo.photo }"
-					style="width: 100%;">
+				<img src="/images/profile.png"
+					style="width: 200px; height: 300px;">
 			</div>
 
 
@@ -161,6 +143,7 @@
 	<!-- 화면 하단 footer --------------------------------------- -->
 
 	<script>
+	$('#pageTitle').text("회원정보")
 	
 	//아이디와 비밀번호 확인 여부
 	idChk = pwChk = false;
@@ -314,7 +297,7 @@
 	
 			 <c:if test="${!empty msg || msg != null }">
 		 <script>
-		 	alert("${msg}");
+// 		 	alert("${msg}");
 		 </script>
 		 </c:if>
 		 <%session.removeAttribute("msg"); %>
