@@ -4,6 +4,7 @@
 최초작성일 : 2023/02/16
 
 버전 기록 : ver1(시작 23/02/16)
+		ver2(23/02/20)
 --------------------------------------------------------
   -->
 
@@ -13,19 +14,17 @@
 <%@ page import="jdbc.*" %>
 <%
 	int bNo = 0;
-	if(request.getParameter("bNo") != null){
-		bNo = Integer.parseInt((String)request.getParameter("bNo"));	
+	try{
+		bNo = Integer.parseInt((String)request.getParameter("bNo"));
+	} catch(Exception e){
+		e.printStackTrace();
 	}
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<div class="container">
-		<div class="card">
+		<div class="card p-2">
 		  <div class="card-header" id="title">
 		  </div>
 		  <div class="card-body">
@@ -37,18 +36,42 @@
 		  	<div><p class="card-text" id="content"></p></div>
 		  </div>
 		</div>
-		<div>
-			<button class="btn btn-sm btn-warning" onclick="location.href='/notice/noticeModify.jsp?bNo=<%=bNo%>'">수정</button>
-			<button class="btn btn-sm btn-warning" onclick="location.href='/notice/noticeDelete.jsp?bNo=<%=bNo%>'">삭제</button>
-			<button class="btn btn-sm btn-warning" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
+		<div class="row p-2">
+		<div class="col">
+			<div style="float:right;">
+				<button class="btn btn-warning" onclick="location.href='/notice/noticeModify.jsp?bNo=<%=bNo%>'">수정</button>
+				<button class="btn btn-warning" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+				<button class="btn btn-right" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
+			</div>
 		</div>
-	</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+<!--       <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> -->
+      <div class="modal-body">
+      	<p>정말 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeDeleteProc.jsp?bNo=<%=bNo%>'">확인</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script>
+
+
+	
 	function searchFunction(){
 		$.ajax({
 			type:"POST",
-			url:"/notice/noticeDetailProc.jsp?bNo=" + <%=bNo%>,
+			url:"/notice/noticeDetailProc.jsp",
+			data : {bNo : <%=bNo%>
+				},		
 			success:function(data){
 				var notice = JSON.parse(data.trim());
 				$('#title').html(notice.title);
@@ -56,15 +79,25 @@
 				$('#regDate').html("작성일 : " + notice.regDate);
 				$('#hit').html("조회수 : " + notice.hit);
 				console.log(data);
+				
 			}
 			
 		});
 	}
 	
+	$('#deleteBtn').on('click', function(){
+		$('.modal-body').html('');
+		$('.modal-body').html('<p>정말 삭제하시겠습니까?</p>');
+		$('.modal').show();
+	});
 	
-	
+
 	window.onload = function(){
 		searchFunction();
+
 	}
+	
+	
+	
 </script>
 </html>

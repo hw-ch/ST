@@ -21,19 +21,19 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col">
-			<input type="text" class="form-control" id="title" placeholder="제목을 입력하세요.">
+		<div class="col p-2">
+			<input type="text" class="form-control" id="title">
 		</div>
 	</div>
 	<div class="row">
-		<div class="col">
-			<input type="textarea" rows="8" id="summernote">
+		<div class="col p-2">
+			<textarea id="summernote"></textarea>
 		</div>
 	</div>
 	<div class="row justify-content-end">
-		<div class="col">
+		<div class="col p-2">
 			<div style="float:right;">
-				<button class="btn btn-light" onclick="location.href='/notice/noticeView.jsp'">취소</button>
+				<button class="btn btn-light" onclick="history.back()">취소</button>
 				<button class="btn btn-warning" id="modifyBtn">수정</button>
 			</div>
 		</div>
@@ -58,7 +58,6 @@
 
 <script>
       $('#summernote').summernote({
-        placeholder: '내용을 입력하세요.',
         tabsize: 5,
         height: 180,
         toolbar: [
@@ -72,11 +71,13 @@
         ]
       });
       
-      $('#insertBtn').on('click', function(){
+      $('#modifyBtn').on('click', function(){
     	    	 $.ajax({
     	  			type:"post",
-    	  			url: "/notice/noticeAddProc.jsp",
-    	  			data : {title:$('#title').val(),
+    	  			url: "/notice/noticeModifyProc.jsp",
+    	  			data : {bno : <%=request.getParameter("bNo")%>,
+    	  					modify : 1,
+    	  					title:$('#title').val(),
     	  				    content:$('#summernote').val()
     	  				},
     	           
@@ -85,14 +86,31 @@
     	  			success:function(data) {
     	  				$('.modal-body').html('');
     	  				if(data==1){
-    	  					$('.modal-body').html('<p>등록 완료되었습니다.</p>');
+    	  					$('.modal-body').html('<p>수정 완료되었습니다.</p>');
     	  				} else {
-    	  					$('.modal-body').html('<p>등록 실패하였습니다.<br>다시 시도해주세요.</p>');
+    	  					$('.modal-body').html('<p>수정 실패하였습니다.<br>다시 시도해주세요.</p>');
     	  				}
     	  				$('.modal').show()
     	  			}
     	  		});
       });
+      
+      $(document).ready(function(){
+    	  $.ajax({
+     			type:"POST",
+     			url:"/notice/noticeModifyProc.jsp",
+     			data : {bno : <%=request.getParameter("bNo")%>,
+  					modify : 2
+  				},
+  			dataType:"text",
+     			success:function(data){
+     				var notice = JSON.parse(data.trim());
+     				$('#title').val(notice.title);
+     				$('.note-editable').html(notice.content);
+     			}
+     			
+     		});  
+      })
 </script>
 </body>
 </html>
