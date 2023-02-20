@@ -16,8 +16,7 @@
 <body>
 	<%@ include file = "/includes/header.jsp" %>
 	<%
-		//String sNo = request.getParameter("sNo");
-		String sNo = "2";
+		String sNo = request.getParameter("sNo");
 		StudyDTO sdto = new StudyDAO().studyView(sNo);
 	%>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
@@ -68,7 +67,7 @@
 	      		 <a href="/study/studyModify.jsp?sNo=<%=sNo %>" class="btn btn-primary btn-lg px-4 text text-white">수정</a>
 		     	 <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 	      	<%}%>
-		      
+		       <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 		     
 		     
 	  		</div>

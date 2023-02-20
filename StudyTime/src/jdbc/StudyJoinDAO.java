@@ -230,7 +230,7 @@ public class StudyJoinDAO {
 
 	//approve 식별 메소드(지원)
 	public static StudyJoinDTO selectApprove(String sid){	
-		sql = "SELECT * FROM studyjoin where sid = ?";
+		sql = "SELECT * FROM studyjoin where userid = ?";
 		StudyJoinDTO sjdto = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -253,7 +253,7 @@ public class StudyJoinDAO {
 		sql = "DELETE from studyjoin where sNo=? ";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(2, sNo);
+			pstmt.setString(1, sNo);
 			if (pstmt.executeUpdate() == 1) {
 				return true;
 			}
