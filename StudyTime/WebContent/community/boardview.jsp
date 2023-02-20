@@ -130,20 +130,20 @@
  				var replies = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < replies.length; i++){
- 					str += "<div>"
+ 					str += "<form>"
+ 					str += "<input type='hidden' id='rno' value="+ replies[i].rNo + ">"
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 					str += "<div class='community_update'><button type='button' onclick='replyUpdate()'>수정</button></div>"
- 					str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
+ 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>"+ replies[i].rNo + "</button></div>"
+ 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
  					}
  					str += "</div>"
- 					str += "<div><p>" + replies[i].content + "</p></div>"
- 					str += "</div>"
+ 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
+ 					str += "</form>"
  				}
  				$('#replylist').html(str);
  			}
-
  		});
  	}
 	
@@ -152,10 +152,39 @@
  	}
  	
 
-	function replyUpdate(){
-		$("#updateModal").modal("show");
-	}
+ 	$(document).on('click',"#replyUpdateBtn", function(){
+ 		
+ 		$.ajax({
+ 			type:"POST",
+ 			url:"/community/replyUpdateProc.jsp",
+ 			data: {rno:$("#rno").val()
+ 			},
+  			dataType:"text",
 
+ 			success:function(data){
+ 				var replies = JSON.parse(data.trim());
+ 				var str="";
+ 				for(var i=0; i < replies.length; i++){
+ 					str += "<form>"
+ 					str += "<input type='hidden' id='rno' value="+ replies[i].rNo + ">"
+ 					str += "<div class ='writer_wrap'>"
+ 					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
+ 					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
+ 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>"+ replies[i].rNo + "</button></div>"
+ 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
+ 					}
+ 					str += "</div>"
+ 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
+ 					str += "</form>"
+ 				}
+ 				$('#replylist').html(str);
+ 			}
+ 		});
+ 		
+ 	});
+ 	
+
+	 	
  	window.onload = function(){
  		searchFunction();
  	}
