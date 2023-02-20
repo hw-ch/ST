@@ -22,6 +22,9 @@ import javax.naming.NamingException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.mysql.cj.xdevapi.JsonString;
+
+import lombok.ToString;
 import util.ConnectionPool;
 
 public class ReplyDAO {
@@ -69,6 +72,28 @@ public class ReplyDAO {
 		return Replylist.toJSONString();
 	}
 	
+	// 수정할 댓글 내용 가져오기(남훈)
+	public static ReplyDTO getUpdateReply(int rno){
+		String sql = "SELECT content FROM reply WHERE rno = ?";
+
+	try {
+				
+				conn = ConnectionPool.get();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rno);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					ReplyDTO reply = new ReplyDTO();
+					reply.setContent(rs.getString(1));
+
+					return reply;
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 	//댓글 추가 (남훈)
 	public static int Replyinsert(String content, String nickname, String userid, int bno) {
 
