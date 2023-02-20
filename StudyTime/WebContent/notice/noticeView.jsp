@@ -62,21 +62,25 @@
   <tbody id="notice">
   </tbody>
 </table>
-<ul class="pagination justify-content-center">
-	    <li class="page-item disabled prev">
-	      <a class="page-link" id="test">&laquo; Previous</a>
-	    </li>
-	    <li class="page-item next">
-	      <a class="page-link" href="#">Next &raquo;</a>
-	    </li>
+<ul class="pagination justify-content-center">	   
 </ul>
 </div>
 
 <script>
 	var total = <%=total%>;
+	console.log("total : " + total);
+	var totalPage = Math.ceil(total / 10);
+	console.log("totalPage : " + totalPage);
 	var currentPage = <%=request.getParameter("page")%>
-	
-	
+	console.log("currentPage : " + currentPage);
+	var pageGroup = Math.ceil(currentPage / 10);
+	console.log("pageGroup : " + pageGroup);
+	var last = pageGroup * 10;
+	console.log("last : " + last);
+	if (last > totalPage) last = totalPage;
+	var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
+	var previous = first > 1;
+	var next = last < totalPage;
 	
 
  	function searchFunction(){
@@ -102,66 +106,24 @@
  	window.onload = function(){
  		searchFunction();
  		pagination();
+ 		
+
  	}
  	
  	function pagination(){
- 		var pageNum = Math.ceil(total / 10);
+ 		if (total <= 10) return;
  		var str = '';
- 		for(i=0; i<pageNum; i++){
- 			str += ("<li class='page-item'><a class='page-link' id='" + i +"' href='/notice/noticeView.jsp?page=" + (i+1) + "'>" + (i+1) +"</a></li>")
+ 		if (previous) {
+ 	 		  str += "<li class='page-item prev'><a class='page-link'>&laquo; Previous</a></li>";
+ 	 		}
+ 		if (next) {
+	 		  str += "<li class='page-item next'><a class='page-link'>Next &raquo;</a></li>"
+	 		}
+ 		for(i=first; i<=last; i++){
+ 				str += ("<li class='page-item" +(i==pageNum?'active':'') + "'><a class='page-link' id='" + i +"' href='/notice/noticeView.jsp?page=" + i + "'>" + i +"</a></li>")
  		}
- 		$('.prev').after(str);
-
- 		$('.page-link').forEach(function(pageLink) {
- 		    console.log(pageLink)
- 		});
+ 		$('.pagination').html(str);
  	}
- 	
- 	function pagination(currentPage) {
- 		// 현재 게시물의 전체 개수가 10개 이하면 pagination을 숨김.
- 		if (total <= 10) return; 
-
- 		var totalPage = Math.ceil(total / 10);
- 		var pageGroup = Math.ceil(currentPage / 10);
- 		
- 		var last = pageGroup * 10;
- 		if (last > totalPage) last = totalPage;
- 		var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
-
- 		const fragmentPage = document.createDocumentFragment();
- 	  if (prev > 0) {
- 		  var allpreli = document.createElement('li');
- 		  allpreli.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='allprev'>&lt;&lt;</a>`);
- 		
- 		  var preli = document.createElement('li');
- 		  preli.insertAdjacentHTML("beforeend", `<a href='#js-ottom' id='prev'>&lt;</a>`);
- 		
- 		  fragmentPage.appendChild(allpreli);
- 		  fragmentPage.appendChild(preli);
- 		}
-
- 	  for (var i = first; i <= last; i++) {
- 		  const li = document.createElement("li");
- 		  li.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='page-${i}' data-num='${i}'>${i}</a>`);
- 		  fragmentPage.appendChild(li);
- 	  }
-
- 	  if (last < totalPage) {
- 		  var allendli = document.createElement('li');
- 		  allendli.insertAdjacentHTML("beforeend", `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`);
- 		
- 		  var endli = document.createElement('li');
- 		  endli.insertAdjacentHTML("beforeend", `<a  href='#js-bottom'  id='next'>&gt;</a>`);
- 		
- 		  fragmentPage.appendChild(endli);
- 		  fragmentPage.appendChild(allendli);
- 	  }
-
- 	    document.getElementById('js-pagination').appendChild(fragmentPage);
- 			// 페이지 목록 생성
- 	}
- 	
- 	
  	
  </script>
 </body>
