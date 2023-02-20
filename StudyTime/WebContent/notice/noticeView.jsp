@@ -14,8 +14,9 @@
 <%@ include file="/includes/header.jsp" %>
 <%
 	// sid 확인
+	sid = "";
 	if(session.getAttribute("sid") != null){
-		sid = (String)session.getAttribute("sid");
+		sid = (String)session.getAttribute("sid");	
 	}
 
 	int total = NoticeDAO.count();
@@ -51,13 +52,19 @@
 </style>
 <body>
 <div class="container">
-	<div class="row p-2">
+	<% if(sid.equals("admin")){
+		%>
+		<div class="row p-2">
 		<div class="col">
 			<div style="float:right;">
 				<button class="col btn btn-warning" onclick="location.href='noticeAdd.jsp'">글작성</button>
 			</div>
 		</div>
 	</div>
+	<%
+	}
+	%>
+	
   <table class="table table-hover">
   <tbody id="notice">
   </tbody>
@@ -87,9 +94,10 @@
  				var notices = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < notices.length; i++){
- 					str += "<tr><small><td>" + notices[i].bNo + "</small></td>";
- 					str += "<td class=\"w-75\"><a href='/notice/noticeDetail.jsp?bNo="+notices[i].bNo+ "'>" + notices[i].title + "</a></td>";
- 					str += "<td>" + notices[i].regDate +"</td></tr>";
+ 					str += "<tr><td><small>" + notices[i].bNo + "</small></td>";
+ 					str += "<td class='w-75'><a href='/notice/noticeDetail.jsp?bNo="+notices[i].bNo+"'><div width='100%'>" + notices[i].title + "</div></a></td>";
+ 					str += "<td><small>" + notices[i].regDate +"</small></td></tr>";
+ 					console.log(str);
 
  				}
  				$('#notice').html(str);

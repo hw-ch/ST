@@ -19,18 +19,22 @@
 	} catch(Exception e){
 		e.printStackTrace();
 	}
+	
+	NoticeDAO.updateHit(bNo);
+	
+	sid = "";
 %>
 <!DOCTYPE html>
 <html>
 <body>
 	<div class="container">
-		<div class="card p-2">
+		<div class="card p-2 h-50">
 		  <div class="card-header" id="title">
 		  </div>
 		  <div class="card-body">
-		  	<div class="row">
-		  		<span id="regDate"></span>
-		  		<span id="hit"></span>
+		  	<div class="row justify-content-between">
+		  		<div class="col-3"><span class="small" id="regDate"></span></div>
+		  		<div class="col-1"><span class="small" id="hit"></span></div>
 		  	</div>
 		  	<hr>
 		  	<div><p class="card-text" id="content"></p></div>
@@ -39,11 +43,17 @@
 		<div class="row p-2">
 		<div class="col">
 			<div style="float:right;">
+			<% if(sid.equals("admin")){
+			%>
 				<button class="btn btn-warning" onclick="location.href='/notice/noticeModify.jsp?bNo=<%=bNo%>'">수정</button>
 				<button class="btn btn-warning" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-				<button class="btn btn-right" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
+			<%
+			}
+			%>
+				<button class="btn btn btn-outline-dark" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
 			</div>
 		</div>
+	</div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -76,8 +86,8 @@
 				var notice = JSON.parse(data.trim());
 				$('#title').html(notice.title);
 				$('#content').html(notice.content);
-				$('#regDate').html("작성일 : " + notice.regDate);
-				$('#hit').html("조회수 : " + notice.hit);
+				$('#regDate').html(notice.regDate);
+				$('#hit').html("hit : " + notice.hit);
 				console.log(data);
 				
 			}

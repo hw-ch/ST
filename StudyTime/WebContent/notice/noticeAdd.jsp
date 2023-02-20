@@ -60,7 +60,7 @@
       $('#summernote').summernote({
         placeholder: '내용을 입력하세요.',
         tabsize: 5,
-        height: 180,
+        height: 400,
         toolbar: [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
