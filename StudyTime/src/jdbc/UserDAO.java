@@ -577,6 +577,35 @@ public class UserDAO {
 		}
 		return false;
 	}
+		
+	// 회원가입시 아이디가 이미 존재하는지 여부 확인(두현)
+	public static boolean exist(String id) {
+		
+		sql = "SELECT userId FROM user WHERE userId=?";
+		
+		try {
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			return rs.next(); // 조회한 아이디가 DB에 존재하면 true, 없으면 false
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		finally {
+			try {
+				if(rs!= null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+		
+	}
 
 	
 	
