@@ -228,7 +228,37 @@ public class StudyJoinDAO {
 
 	}
 
+	// 스터디 탈퇴(소영)
+		public static boolean studyDelete(String userId, String sNo) {
 
+			try {
+				String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
+				
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, userId);
+					pstmt.setString(2, sNo);
+
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt!= null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return false;
+		}
 
 
 }

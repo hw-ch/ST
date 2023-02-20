@@ -2,6 +2,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="jdbc.UserDAO.*"%>
+<%@page import="jdbc.UserDTO.*"%>
+<%@page import="java.util.ArrayList"%>   
+<%@page import="java.util.*"%>
+ 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +17,9 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 <% 
-	sid = (String) session.getAttribute("userId");
+	
+
+	sid = (String) session.getAttribute("userId"); 
 	if (sid == null){
 %>		
 		<!-- Modal -->
@@ -43,87 +51,17 @@
 <%} else {
 	session.setAttribute("userId", sid);
 }
+	UserDTO user = UserDAO.myInfo(sid);
+
 %>		
   
- <script>
- 	function addItem() {
- 		$.ajax({
- 			type:"post",
- 			url: "/feed/feedadd.jsp",
- 			data : {id:document.getElementById('id').value,
- 				    content:$("#summernote").summernote("code")
- 				},
-          
- 			dataType:"text",
- 			
- 			success:function(data) {
- 				var summernote = document.getElementById('summernote');
- 				summernote.value="";
- 				searchFunction();
- 				$("#summernote").summernote("reset");
-
- 			}
- 		});
- 	}
- 	
-	function delItem(no) {
- 		$.ajax({
- 			type:"post",
- 			url: "/feed/feeddel.jsp",
- 			data : {no:no
- 				},
-          
- 			dataType:"text",
- 			
- 			success:function(data) {
- 				searchFunction();
-
- 			}
- 		});
- 	}
-	
- 	
-  	function searchFunction(userId) {
- 		
- 		$.ajax({
- 			type:'post',
- 			url:'/feed/feedall.jsp',
- 			success:function(data){
- 				var feeds = JSON.parse(data.trim());
- 				
- 				var str = "";
- 				for(var i = 0; i < feeds.length; i++){
- 					
-
- 					str += "<tr><td>" + feeds[i].id + "</td>";
- 					str += "<td><small>&nbsp;(" + feeds[i].ts + ")</small></td></tr>";		
- 					str += "<tr><td colspan=2>" + feeds[i].content + "</td></tr>";
-					str += "<tr><td colspan=2>";
-					
-					if ("<%=sid %>" == feeds[i].id){
-						str += "<div onclick='delItem(\"" + feeds[i].no + "\")'><span class='text-danger bg-dark'>Delete</span></div>";
-					}	// 함수 호출 시 값을 포함하여 던지는 방법 :  \뒤의 " 없는셈 
-					
-					str += "</td></tr>";
- 					str += "<tr><td colspan=2 height=40><hr></td></tr>"
- 				} $("#ajaxTable").html(str);
- 			}
- 		});
- 	}
-
- 	window.onload = function() {
- 		searchFunction();
- 	}
-
  
- </script>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img class="img-fluid rounded-start" src="bg3.jpg" alt="이미지">
+      <img src="../images/<%=user.getImage()%>" alt="이미지" class="img-fluid rounded-start" style="width:100%"></div>
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -132,46 +70,53 @@
           <div class="row g-3">
    			 <div class="col-12">
               <label for="email" class="form-label">아이디</label>
-              <input type="email" class="form-control" id="userId">
+              <span type="email" class="form-control" id="userId"><%=user.getUserId() %></span>
+              <div class="invalid-feedback">
+              </div>
+            </div>
+            
+            <div class="col-12">
+              <label for="nickName" class="form-label">비밀번호</label>
+              <span type="text" class="form-control" id="password"><%=user.getPassword() %></span>
               <div class="invalid-feedback">
               </div>
             </div>
             
             <div class="col-12">
               <label for="nickName" class="form-label">닉네임</label>
-              <input type="text" class="form-control" id="nickName">
+              <span type="text" class="form-control" id="nickName"><%=user.getNickName() %></span>
               <div class="invalid-feedback">
               </div>
             </div>
 
             <div class="col-12">
               <label for="name" class="form-label">이름</label>
-                <input type="text" class="form-control" id="name">
+                <span type="text" class="form-control" id="name"><%=user.getName() %></span>
               <div class="invalid-feedback">
                 </div>
             </div>
 
+            <div class="col-sm-12">
+              <label for="ts" class="form-label">가입일자</label>
+              <span type="text" class="form-control" id="ts"><%=user.getTs() %></span>
+              <div class="invalid-feedback">
+              </div>
+            </div>
 
             <div class="col-12">
               <label for="gender" class="form-label">성별</label>
-              <input type="text" class="form-control" id="gender">
+              <span type="text" class="form-control" id="gender"><%=user.getGender() %></span>
               <div class="invalid-feedback">
               </div>
             </div>
 
             <div class="col-12">
               <label for="phone" class="form-label">전화번호</label>
-              <input type="text" class="form-control" id="phone">
+              <span type="text" class="form-control" id="phone"><%=user.getPhone() %></span>
                <div class="invalid-feedback">
               </div>
             </div>
             
-            <div class="col-sm-12">
-              <label for="ts" class="form-label">가입일자</label>
-              <input type="text" class="form-control" id="ts">
-              <div class="invalid-feedback">
-              </div>
-            </div>
           </div>
          </form>
          
@@ -180,6 +125,9 @@
   </div>
 </div>
 
+<% 
+	}
+%>
  <hr class="my-4">
 			
 			<div class="d-grid gap-2 col-6 mx-auto">

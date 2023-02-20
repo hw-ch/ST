@@ -13,7 +13,7 @@
 
 <div class="container">
 
-<% 
+<%-- <% 
 	sid = (String) session.getAttribute("userId");
 	if (sid == null){
 %>		
@@ -46,13 +46,16 @@
 <%} else {
 	session.setAttribute("userId", sid);
 }
-%>		
+%>		 --%>
 
 <br>
-
+<%
+ String userId = "aaa@aaa.com";
+ String password = "1111";
+%>
 <main class="form-signin w-100 m-auto">
-<form action="myDeleteCheck.jsp">
-    <img class="mb-4" src="/bg3.jpg" alt="" width="100" height="100">
+<form action="myDeleteCheck.jsp" method="post">
+    <img class="mb-4" src="/images/bg3.jpg" alt="" width="100" height="100">
     <h1 class="h3 mb-3 fw-normal">회원 탈퇴</h1>
 
     <div class="form-floating">
@@ -63,13 +66,14 @@
       <input type="password" class="form-control" id="password" placeholder="Password">
       <label for="password">Password</label>
     </div>
-  </form>
-</main>
+
 
   <hr class="featurette-divider">
 	<div class="d-grid gap-2 col-6 mx-auto">
-    	<button class="w-100 btn btn-lg btn-secondary" type="submit">회원 탈퇴</button>
+    	<input type="submit" class="w-100 btn btn-lg btn-secondary" value="회원 탈퇴">
     </div>
     </div>
+    </form>
+</main>
 </body>
 </html>

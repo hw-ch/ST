@@ -67,137 +67,9 @@ public class UserDAO {
 
 	}
 
-	// My Study(소영)
-	public static String myList(String sWriter) {
-		JSONArray study = new JSONArray();
-		try {
-			String sql = "SELECT sTitle, sWriter, joinCnt, startDate FROM study WHERE sWriter = ? ORDER BY ts DESC";
-
-			try {
-				conn = ConnectionPool.get();
-
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, sWriter);
-
-				rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-					JSONObject obj = new JSONObject();
-					obj.put("sTitle", rs.getString(1));
-					obj.put("sWriter", rs.getString(2));
-					obj.put("joinCnt", rs.getString(3));
-					obj.put("startDate", rs.getString(4));
-
-					study.add(obj);
-				}
-
-			} catch (NamingException | SQLException e) {
-				e.printStackTrace();
-			}
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-		}
-		return study.toJSONString();
-	}
-
-	// 스터디 조회(소영)
-	public static String myView(String sWriter) throws NamingException, SQLException {
-
-		try {
-			String sql = "SELECT sTitle, sWriter, joinCnt, startDate, process, expDate, cNo  FROM study WHERE sWriter = ? ORDER BY ts DESC";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, sWriter);
-
-			rs = pstmt.executeQuery();
-
-			JSONArray study = new JSONArray();
-
-			while (rs.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("sTitle", rs.getString(1));
-				obj.put("sWriter", rs.getString(2));
-				obj.put("joinCnt", rs.getString(3));
-				obj.put("startDate", rs.getString(4));
-				obj.put("process", rs.getString(5));
-				obj.put("expDate", rs.getString(6));
-				obj.put("cNo", rs.getString(7));
-
-				study.add(obj);
-			}
-
-			return study.toJSONString();
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-
-	}
-
-	// 스터디 탈퇴(소영)
-	public static int studyDelete(String userId, String sNo) throws NamingException, SQLException {
-
-		try {
-			String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, sNo);
-
-			int result = pstmt.executeUpdate();
-
-			return result;
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-	}
-
 	// 내 정보(소영)
-	public static String myInfo(String userId) throws NamingException, SQLException {
-
+	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
+		UserDTO user = null;
 		try {
 			String sql = "SELECT * FROM user WHERE userId = ? ORDER BY ts DESC";
 
@@ -207,37 +79,24 @@ public class UserDAO {
 
 			rs = pstmt.executeQuery();
 
-			JSONArray study = new JSONArray();
-
-			while (rs.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("userId", rs.getString(1));
-				obj.put("nickName", rs.getString(2));
-				obj.put("name", rs.getString(3));
-				obj.put("gender", rs.getString(4));
-				obj.put("phone", rs.getString(5));
-				obj.put("ts", rs.getString(6));
-
-				study.add(obj);
+			ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+			if (rs.next()) {
+				users.add(new UserDTO(rs.getString("userId"), 
+						rs.getString("password"), 
+						rs.getString("nickname"),
+						rs.getString("name"), 
+						rs.getString("ts"), 
+						rs.getString("gender"),
+						rs.getString("image"),
+						rs.getString("phone")));
 			}
-
-			return study.toJSONString();
-
+			return user;
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				if(rs!=null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn!=null) conn.close();
 		}
-
+		
 	}
 
 	// 본인 정보 수정(소영)
@@ -257,16 +116,11 @@ public class UserDAO {
 
 			return pstmt.executeUpdate(); // 성공 1, 실패 0을 가지고 나간다.
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
+			try {
+				if(pstmt != null)pstmt.close();
+				if(conn != null)conn.close();
+				if(rs != null)rs.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 		}
@@ -359,33 +213,36 @@ public class UserDAO {
 	}
 
 	// 회원 탈퇴(소영)
-	public static int withdrawal(String userId) throws NamingException, SQLException {
+	public static boolean unregister(String userId) {
 
 		try {
-			String sql = "DELETE FROM user WHERE userId = ? ";
 
-			conn = ConnectionPool.get();
+			String sql = "DELETE from user where userId=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 
 			int result = pstmt.executeUpdate();
-
-			return result;
-
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			try {
+				if(pstmt!= null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		return false;
 	}
 
 	//회원가입 (두현)

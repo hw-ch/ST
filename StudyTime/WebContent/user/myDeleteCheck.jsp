@@ -11,11 +11,14 @@
 <%@ include file="/includes/header.jsp" %>
 
 <%
-	String userId = request.getParameter("userId");
-	String password = request.getParameter("password");
+
+	String userId = request.getParameter("userId");  
+	String password = request.getParameter("password"); 
+	/* String userId = "aaa@aaa.com";
+	String password="1111"; */
 	int result = UserDAO.login(userId, password);
 	if(result == 0){
-		UserDAO.withdrawal(userId);
+		UserDAO.unregister(userId);
 %>
 <!-- Modal -->
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +59,7 @@
 		       아이디 또는 비밀번호를 다시 확인해주세요.
 		      </div>
 		      <div class="modal-footer">
-		        <button onclick="location.href='/signout.jsp'" class="btn btn-primary">다시 회원 탈퇴</button>
+		        <button onclick="location.href='/user/myDelete.jsp'" class="btn btn-primary">다시 회원 탈퇴</button>
 		      </div>
 		    </div>
 		  </div>

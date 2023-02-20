@@ -9,6 +9,9 @@ import java.util.*;
 
 import javax.naming.NamingException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import util.ConnectionPool;
 
 public class StudyDAO {
@@ -241,5 +244,85 @@ public class StudyDAO {
            }
            return false;
        }
+	   
+	// My Study(소영)
+		public static String myList(String sWriter) {
+			JSONArray study = new JSONArray();
+			try {
+				String sql = "SELECT sTitle, sWriter, joinCnt, startDate FROM study WHERE sWriter = ? ORDER BY ts DESC";
+
+				try {
+					conn = ConnectionPool.get();
+
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, sWriter);
+
+					rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+						JSONObject obj = new JSONObject();
+						obj.put("sTitle", rs.getString(1));
+						obj.put("sWriter", rs.getString(2));
+						obj.put("joinCnt", rs.getString(3));
+						obj.put("startDate", rs.getString(4));
+
+						study.add(obj);
+					}
+
+				} catch (NamingException | SQLException e) {
+					e.printStackTrace();
+				}
+			} finally {
+				try {
+					if(pstmt != null)pstmt.close();
+					if(conn != null)conn.close();
+					if(rs != null)rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			}
+			return study.toJSONString();
+		}
+
+		// 스터디 조회(소영)
+		public static String myView(String sNo) {
+
+			JSONArray studyList = new JSONArray();
+			String sql =  "SELECT s.sTitle, s.sWriter, s.joinCnt, s.startDate, s.process, s.expDate, s.cNo  FROM studyJoin sj " +
+					"JOIN study s ON sj.sNo = s.sNo " +
+					"WHERE sj.sNo = ? " +
+					"ORDER BY sj.regDate DESC";
+			try {
+				conn = ConnectionPool.get();
+				rs = pstmt.executeQuery();
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, sNo);
+
+				while (rs.next()) {
+					JSONObject obj = new JSONObject();
+					obj.put("sTitle", rs.getString(1));
+					obj.put("sWriter", rs.getString(2));
+					obj.put("joinCnt", rs.getString(3));
+					obj.put("startDate", rs.getString(4));
+					obj.put("process", rs.getString(5));
+					obj.put("expDate", rs.getString(6));
+					obj.put("cNo", rs.getString(7));
+
+					studyList.add(obj);
+				}
+			} catch (NamingException | SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return studyList.toJSONString();
+		}
 
 }
