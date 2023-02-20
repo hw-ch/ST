@@ -15,32 +15,22 @@
 <!DOCTYPE html>
 <%
 	request.setCharacterEncoding("utf-8");
-
-	String sTitle = request.getParameter("sTitle");
-	String sWriter = (String)session.getAttribute("sid");
-	String cNo = request.getParameter("cNo");
-	CategoryDTO cdto = new CategoryDAO().category(cNo);
-	String category1 = cdto.getCategory1();
-	String category2 = cdto.getCategory2();
-	String address = request.getParameter("address");
-	String recruitCnt = request.getParameter("recruitCnt");
-	String joinCnt = "1";
-	String expDate = request.getParameter("expDate");
-	String startDate = request.getParameter("startDate");
-	String sContent = request.getParameter("sContent");
-	String process = request.getParameter("process");
-	if(new StudyDAO().studyCreate(sTitle, sWriter, cNo, category1, category2, address, recruitCnt, joinCnt, expDate, startDate, sContent, process)){
+	
+	String sid = (String)session.getAttribute("sid");
+	String sNo = request.getParameter("sNo");
+	
+	if(new StudyJoinDAO().studyJoin(sid, sNo, "신청")){
 		%>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header">
-		    <h1 class="modal-title fs-5" id="exampleModalLabel">스터디 등록</h1>
+		    <h1 class="modal-title fs-5" id="exampleModalLabel">스터디 참여</h1>
 		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
-		    	등록이 완료되었습니다.
+		    	참여신청이 완료되었습니다.
 		  </div>
 		  <div class="modal-footer">
 		    <button onclick = "location.href = '/main.jsp'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인

@@ -375,24 +375,24 @@ public class StudyDAO {
 	}
 
 	//스터디생성(등록) 지원
-	public static boolean studyCreate(String sTitle, String sWriter, int cNo, String category1,
-			String category2,String address, int recruitCnt, int joinCnt, String expDate,
-			String startDate, String scontent,String process){
+	public static boolean studyCreate(String sTitle, String sWriter, String cNo, String category1,
+			String category2,String address, String recruitCnt, String joinCnt, String expDate,
+			String startDate, String sContent,String process){
 		sql = "INSERT INTO study(stitle,swriter,cNo,category1,category2,address,recruitCnt,joinCnt,expDate,"
-				+ "startDate,scontent,process) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "startDate,scontent,apply,process) VALUES(?,?,?,?,?,?,?,?,?,?,?,'신청',?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sTitle);
 			pstmt.setString(2, sWriter);
-			pstmt.setInt(3, cNo);
+			pstmt.setString(3, cNo);
 			pstmt.setString(4, category1);
 			pstmt.setString(5, category2);
 			pstmt.setString(6, address);
-			pstmt.setInt(7, recruitCnt);
-			pstmt.setInt(8, joinCnt);
+			pstmt.setString(7, recruitCnt);
+			pstmt.setString(8, joinCnt);
 			pstmt.setString(9, expDate);
 			pstmt.setString(10, startDate);
-			pstmt.setString(11, scontent);
+			pstmt.setString(11, sContent);
 			pstmt.setString(12, process);
 			if(pstmt.executeUpdate()==1) return true;
 		} catch (SQLException e) {
@@ -447,7 +447,7 @@ public class StudyDAO {
            try {
                pstmt = conn.prepareStatement(sql);
                pstmt.setString(1, sNo);
-               if(pstmt.executeUpdate()==1) return true;;
+               if(pstmt.executeUpdate()==1) return true;
 
            } catch (Exception e) {
                e.printStackTrace();
