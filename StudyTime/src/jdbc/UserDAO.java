@@ -64,6 +64,55 @@ public class UserDAO {
 
   }
 
+//	회원 목록 메서드(도영)
+	public static ArrayList<UserDTO> getAllList(){
+
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+
+		try {
+			sql = " SELECT * FROM user ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+
+
+			while(rs.next()) {
+				users.add(new UserDTO(rs.getString(1),
+									rs.getString(2),
+									rs.getString(3),
+									rs.getString(4),
+									rs.getString(5),
+									rs.getString(6),
+									rs.getString(7),
+									rs.getString(8)));
+			}
+
+				return users;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return users;
+
+		}
+  
 //내 정보(소영)
 	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
 		
@@ -172,66 +221,10 @@ public class UserDAO {
 			}
 			return false;
 		}
-
-	
-	
-	
-	//회원가입 (완료)
-	public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image) throws NamingException, SQLException{
-		sql = "INSERT INTO user(userid, password, name, nickname, "
-				+ " gender, phone, image) VALUES(?, ?, ?, ?, ?, ?, ?)";
-		
-		try {
-			con = ConnectionPool.get();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, password);
-			pstmt.setString(3, name);
-			pstmt.setString(4, nickname);
-			pstmt.setString(5, gender);
-			pstmt.setString(6, phone);
-			pstmt.setString(7, image);
-			
-			JSONArray study = new JSONArray();
-			
-			while(rs.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("sTitle", rs.getString(1));
-				obj.put("sWriter", rs.getString(2));
-				obj.put("joinCnt", rs.getString(3));
-				obj.put("startDate", rs.getString(4));
-				obj.put("process", rs.getString(5));
-				obj.put("expDate", rs.getString(6));
-				obj.put("cNo", rs.getString(7));
-			
-				study.add(obj);
-			}
-				
-			return study.toJSONString();
-			
-		}finally {
-			  if (pstmt != null) try { pstmt.close(); } 
-			  	catch(Exception e) {e.printStackTrace();}
-			  if (conn != null) try { conn.close(); } 
-	            catch(Exception e) {e.printStackTrace();}
-		}
-		
-	}
 	
 	
 	
 	
-//	회원정보 삭제 메서드(도영)
-	public static boolean dropout(String userId){
-	
-	try {
-	//로그인 (완료)
-	public static int login(String id, String userPass) throws NamingException, SQLException {
-		
-		sql = "SELECT userId, password FROM user WHERE userId=? ";
-		
-		
-		sql = "DELETE from user where userid=? ";
 
 	
 //	회원정보 삭제 메서드(도영)

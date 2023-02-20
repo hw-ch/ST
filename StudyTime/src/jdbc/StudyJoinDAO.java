@@ -361,16 +361,41 @@ public class StudyJoinDAO {
 		return false;
 
 	}
-
+	
 	//myStudy(소영)
-	public static ArrayList<StudyJoinDTO>  myStudyOne(String userId) {
-		String sql =  "SELECT * FROM studyJoin WHERE userid=? ";
-		try {
-			conn = ConnectionPool.get();
-			rs = pstmt.executeQuery();
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
+	  public static ArrayList<StudyJoinDTO>  myStudyOne(String userId) {
+	        String sql =  "SELECT * FROM studyJoin WHERE userid=? ";
+	        try {
+	            conn = ConnectionPool.get();
+	            rs = pstmt.executeQuery();
+
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+
+	            ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
+	            while (rs.next()) {
+	                studyJoins.add(new StudyJoinDTO(rs.getString(1),
+	                        rs.getString(2),
+	                        rs.getString(3),
+	                        rs.getString(4),
+	                        rs.getString(5)));
+
+	                return studyJoins;
+	            }
+	        } catch (NamingException | SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	            if(pstmt != null)    pstmt.close();
+	            if(conn != null)    conn.close();
+	            if(rs != null)    rs.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        return null;
+	    }
+	  
 	//approve 식별 메소드(지원)
 	public static StudyJoinDTO selectApprove(String sid){	
 		sql = "SELECT * FROM studyjoin where sid = ?";
@@ -391,6 +416,9 @@ public class StudyJoinDAO {
 		}
 		return sjdto;
 	}	
+	
+	
+	
 //	스터디 그룹원 전원 추방(스터디없애기전에 먼저 실행)(지원)
 	public static boolean deleteAllMember(String sNo){
 		sql = "DELETE from studyjoin where sNo=? ";
@@ -409,50 +437,8 @@ public class StudyJoinDAO {
 		}
 		return false;
 }
+	
 
-			ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
-			while (rs.next()) {
-				studyJoins.add(new StudyJoinDTO(rs.getString(1),
-						rs.getString(2),
-						rs.getString(3),
-						rs.getString(4),
-						rs.getString(5)));
-				
-				return studyJoins;
-			}
-		} catch (NamingException | SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				conn = ConnectionPool.get();
-				rs = pstmt.executeQuery();
-				
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, userId);
-
-				ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
-				while (rs.next()) {
-					studyJoins.add(new StudyJoinDTO(rs.getString(1),
-							rs.getString(2),
-							rs.getString(3),
-							rs.getString(4),
-							rs.getString(5)));
-					
-					return studyJoins;
-				}
-			} catch (NamingException | SQLException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-				if(pstmt != null)	pstmt.close();
-				if(conn != null)	conn.close();
-				if(rs != null)	rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			return null;
-		}
 		
 		// 스터디 탈퇴(소영)
 			public static boolean studyDelete(String userId, String sNo) {
