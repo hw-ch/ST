@@ -21,7 +21,7 @@
 	<%@ include file="/includes/header.jsp"%>
 
 <script>
-$('#Home').hide();
+$('#home').hide();
 </script>
 <%
 String uploadPath = application.getInitParameter("uploadPath"); //파일 업로드 폴더명
@@ -50,8 +50,7 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 
 
 	if( UserDAO.update(userId, nickName, name, gender, image, phone, sid) == true ) {
-		
-		%>
+		%>		
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -82,7 +81,7 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        <button type="button" class="btn-close" onclick="history.back()" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
 		   정확한 정보를 입력해주세요.
@@ -100,7 +99,6 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 			});
 		</script><% } %>	
 
- %>
 
 
 
