@@ -56,7 +56,7 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        <button type="button" class="btn-close" onclick="location.href = '/admin/memberInfo.jsp'" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
 		   회원정보 수정완료.

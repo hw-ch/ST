@@ -18,13 +18,19 @@
 <body>
 	<!-- 화면 상단 header -------------------------------------------- -->
 	<%@ include file="/includes/header.jsp"%>
+	
+	
+	
+<%
 
-
-
-			<%
-UserDTO userInfo = UserDAO.getOneList(sid);
-
-			%>
+String userId = request.getParameter("userId");
+UserDTO userInfo;
+if(sid.equals("admin")){
+userInfo = UserDAO.getOneList(userId);
+}else{
+userInfo = UserDAO.getOneList(sid);
+}
+%>
 
 	<div class="container h4" style="padding-top: 200px; padding-left: 200px;">
 
@@ -100,7 +106,11 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 							<input type="button" onclick="history.back()" value="이전으로"
 								class="btn btn-lg btn-secondary backBtn"> 
 								<input type="button" onclick="location.href='/admin/memberModify.jsp'" value="수정" class="btn btn-lg btn-info regBtn">
+<%if(sid.equals("admin")){ %>
+<a href="/admin/signoutCheck.jsp" class="btn btn-lg btn-danger removeBtn">회원삭제</a>
+<%}else{%>
 <a href="/admin/signout.jsp" class="btn btn-lg btn-danger removeBtn">회원탈퇴</a>
+<%} %>
 						</div>
 					</div>
 
