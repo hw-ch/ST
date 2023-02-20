@@ -112,6 +112,28 @@ COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
 
+CREATE TABLE studyboard (
+    bNo INT(10) NOT NULL AUTO_INCREMENT,
+    subject VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+    content VARCHAR(2000) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+    nickname VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+    userid VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
+    hit INT(10) NULL DEFAULT NULL,
+    good INT(10) NULL DEFAULT NULL,
+    bad INT(10) NULL DEFAULT NULL,
+    regDate TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    uptDate TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    replyNum INT(10) NULL DEFAULT NULL,
+    sNo INT(10) NULL DEFAULT NULL,
+    PRIMARY KEY (bNo) USING BTREE,
+    INDEX FK_studyboard_study (sNo) USING BTREE,
+    CONSTRAINT FK_studyboard_study FOREIGN KEY (sNo) REFERENCES study (sNo) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4
+;
+
 -- 테이블 데이터 studytime.category:~22 rows (대략적) 내보내기
 INSERT INTO `category` (`category1`, `category2`) VALUES
 	('영어', 'TOEIC'),

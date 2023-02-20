@@ -13,7 +13,7 @@
 
 <head>
 <meta charset="UTF-8">	
-<title>Study Time</title>
+<title>STUDY TIME</title>
 </head>
 <body>
 	<!-- 화면 상단 header -------------------------------------------- -->
@@ -49,7 +49,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 					<div class="form-group row pb-3">
 				<label class="col-sm-2 pt-2">아이디</label>
 				<div class="col-sm-4">
-					<input type="email" value="<%=userInfo.getUserId() %>" name="userid" id="ide"
+					<input type="email" value="<%=userInfo.getUserId() %>" name="userId" id="ide"
 						class="form-control" required>
 				</div>
 				<span style="color: red;" id="idChk"></span>
@@ -58,7 +58,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 					<div class="form-group row pb-3">
 				<label class="col-sm-2 pt-2">닉네임</label>
 				<div class="col-sm-4">
-					<input type="text" name="nickN	ame" value="<%=userInfo.getNickName() %>" class="form-control" required>
+					<input type="text" name="nickName" value="<%=userInfo.getNickName() %>" class="form-control" required>
 				</div>
 			</div>
 					<div class="form-group row pb-3">
@@ -109,7 +109,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 									<div class="form-group row">
 				<label class="col-sm-2  pt-4">사진</label>
 				<div class="col-sm-4  pt-3">
-					<input type="file" name="photo" class="form-control">
+					<input type="file" name="image" class="form-control">
 				</div>
 			</div>
 

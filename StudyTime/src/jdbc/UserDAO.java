@@ -75,7 +75,7 @@ public class UserDAO {
 	
 //	회원정보 수정 메서드(도영)
 	public static boolean update(String userId, String nickName, String name, String gender, String image,
-			String phone) {
+			String phone, String originId) {
 
 		try {
 			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? " + " WHERE userId=? ";
@@ -94,6 +94,7 @@ public class UserDAO {
 			pstmt.setString(4, gender);
 			pstmt.setString(5, image);
 			pstmt.setString(6, phone);
+			pstmt.setString(7, originId);
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
 				return true;
