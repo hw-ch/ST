@@ -38,7 +38,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">이미 존재하는 회원입니다.</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" onclick="location.href='/user/join.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         다른 아이디를 사용하여 가입해주세요.
@@ -69,13 +69,12 @@ $(function(){
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">회원가입 성공</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= name %>님 환영합니다.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button onclick="location.href='/user/login.jsp'" class="btn btn-primary">로그인 페이지</button>
       </div>
     </div>

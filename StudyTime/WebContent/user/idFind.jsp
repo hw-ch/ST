@@ -44,7 +44,13 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
     
-    #msg {color : red;}
+    #im {
+    margin: auto;
+    display: block;
+    }
+    
+    #st{ font-size : 20px;}
+
   </style>
 </head>
 <body>
@@ -53,7 +59,8 @@
 <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-6 mx-auto">
-
+			<img id="im" class="mb-4" src="/images/study3.png" alt="" width="100" height="100">
+      <div style="text-align: center"><p id="st">STUDY TIME</p></div>
           <div class="mb-3">
             <label for="name">이름</label>
             <input type="text" class="form-control" id="name" name="name" required>
@@ -63,10 +70,10 @@
           </div>
           
           <div class="mb-3">
-            <label for="phone">휴대폰 번호</label>
-            <input type="text" class="form-control" id="phone" name="phone" required>
+            <label for="phone">휴대전화번호</label>
+            <input type="text" class="form-control" id="phone" name="phone" oninput="autoHyphen(this)" required>
             <div class="invalid-feedback">
-              전화번호를 입력해주세요.
+              휴대전화번호를 입력해주세요.
             </div>
           </div>
           
@@ -79,7 +86,7 @@
     <footer class="my-3 text-center text-small">
       <p class="mb-1">&copy; STUDY TIME</p>
     </footer>
-  </div>
+</div>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,6 +108,13 @@
 
 
 <script>
+  
+  //전화번호 자동 하이픈 넣기
+const autoHyphen = (target) => {
+	  target.value = target.value
+	    .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	 }
   
 	$('#home').hide();
   

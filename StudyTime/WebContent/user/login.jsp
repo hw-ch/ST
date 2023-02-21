@@ -43,6 +43,13 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    #im {
+    margin: auto;
+    display: block;
+    }
+    
+    #st{ font-size : 20px;}
+    
   </style>
 </head>
 
@@ -52,6 +59,8 @@
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-6 mx-auto">
+      <img id="im" class="mb-4" src="/images/study3.png" alt="" width="100" height="100">
+      <div style="text-align: center"><p id="st">STUDY TIME</p></div>
         <form class="validation-form" action="/user/loginCheck.jsp" method="post" novalidate>
          
 
@@ -74,13 +83,16 @@
           
           <hr class="mb-4">
           
-          
-          <button class="btn btn-primary btn-lg btn-block" type="submit">로그인</button>
+          <div style="text-align: center";>
+          <button class="btn btn-primary btn-lg" type="submit">로그인</button>
           <a id="custom-login-btn" href="javascript:kakaoLogin()">
-		  <img src="/images/kakao.png">
-		  </a><br>
+		  <img src="/images/kakao1.png" width="200" height="45">
+		  </a><br><br>
+		  </div>
+		  <div style="text-align: right";>
           <a href="/user/idFind.jsp">아이디 찾기</a>
 		  <a href="/user/pwFind.jsp">비밀번호 찾기</a>
+		  </div>
         </form>
       </div>
     </div>
@@ -94,8 +106,8 @@
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   
   <script>
+  $('#home').hide();
   
-  $('#home').hide()
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
