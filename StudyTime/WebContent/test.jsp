@@ -65,9 +65,7 @@
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" name="name" autofocus required>
-              <div class="invalid-feedback">
-                이름을 입력해주세요.
-              </div>
+              <div class="invalid-feedback">이름을 입력해주세요.</div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="nickname">닉네임</label>
@@ -161,20 +159,6 @@
 	 }
   
   
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-			
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
     
   
 //비밀번호 유효성 검사
