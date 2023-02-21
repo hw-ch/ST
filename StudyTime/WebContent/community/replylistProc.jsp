@@ -2,5 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	out.print(ReplyDAO.getList());
+	int bno = Integer.parseInt(request.getParameter("bno"));
+	out.print(ReplyDAO.getList(bno));
+	
 %>

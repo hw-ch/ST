@@ -6,15 +6,15 @@
 <%
 	request.setCharacterEncoding("utf-8");
 
-	String userId= "abc";
-	
-	UserDTO user = new UserDAO().getOneList(userId);
-	
+	String sid = request.getParameter("sid");
+	int bNo = Integer.parseInt(request.getParameter("bno"));
 	String content = request.getParameter("content");
-	String nickname = request.getParameter("nickname");
-	String userid = request.getParameter("userid");
-	int bNo = 1;
+
+	UserDTO user = new UserDAO().getOneList(sid);
 	
+	String nickname = user.getNickName();
+	String userid = user.getUserId();
 	out.print(ReplyDAO.Replyinsert(content, nickname, userid, bNo));
+	ReplyDAO.replyCount(bNo);
 
 %>	

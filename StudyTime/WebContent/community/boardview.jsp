@@ -22,7 +22,7 @@
 <% 
 // 	sid = (String) session.getAttribute("sid");
 	UserDTO userid = new UserDAO().getOneList(sid);
-	
+	sid = "aaa";
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);
 %>
@@ -103,24 +103,26 @@
 	  </div>
 	</div>
 		
-	<div class="modal" tabindex="-1">
+	<div class="modal fade" id="replyModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+	        <button type="button" class="btn btn-info" data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
+
+
 <script>
  	function searchFunction(){
  		$.ajax({
  			type:"POST",
- 			url:"/community/replylistProc.jsp",
- 			data: {
+ 			url:"/community/replylistProc.jsp?bno=<%=bno%>",
+ 			data: { 
  			},
   			dataType:"text",
 
@@ -129,14 +131,15 @@
  				var str="";
  				for(var i=0; i < replies.length; i++){
  					str += "<form>"
+//  					str +="<input type='hidden' id='"+ replies[i].rNo "'+ value='"+ replies[i].rNo +"'>"
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
- 					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
- 	 					str += "<div class='community_update'><button id='replyupdateBtn' type='button' onclick='replyUpdateBtn("+ replies[i].rNo + ")'>수정</button></div>"
- 						str += "<div class='community_delete'><button id='replydelteBtn' type='button' onclick='replyDelete()'>삭제</button></div>"
+ 					if("<%= sid %>" != null && "<%= sid %>"  == replies[i].userid){
+ 	 					str += "<div class='community_update'><button id='replyModifyBtn' type='button' onclick='replyModify("+ replies[i].rNo +")'>수정</button></div>"
+ 						str += "<div class='community_delete'><button id='replydelteBtn' type='button' onclick='replyDel()'>삭제</button></div>"
  					}
  					str += "</div>"
- 					str += "<div><p id='"+ replies[i].rNo +"'>" + replies[i].content + "</p></div><hr>"
+ 					str += "<div><p id='replycontent="+ replies[i].rNo +"'>" + replies[i].content + "</p></div><hr>"
  					str += "</form>"
  				}
  				$('#replylist').html(str);
@@ -148,52 +151,17 @@
 		$("#deleteModal").modal("show");
  	}
  	
- 	function replyUpdateBtn(rno){
-		const element =
-			document.getElementById(rno);
+ 	function replyModify(rno){
+ 		var element = document.getElementById("replycontent=" +rno);
+ 		$( element ).contents().unwrap().wrap( '<textarea>' );
+ 		$("#replydelteBtn").remove();
+//  		$("#replyModifyBtn").attr("id","replyUpdateBtn");
 		
  	}
  	
- 	function replyDelete(){
+ 	function replyDel(){
 		$("#deleteModal").modal("show");
  	}
-
-//  	$(document).on('click',"#replyUpdateBtn", function(){
-//  		searchFunction();
-
-//  		console.log(data-rno);
-//  		$.ajax({
-//  			type:"POST",
-//  			url:"/community/replyUpdateProc.jsp",
-//  			data: {
-//  				rno:($("#rno").val())
-//  			},
-//   			dataType:"text",
-
- 		
-//  		success:function(data){
-//  			console.log(data);
-// 				var replies = JSON.parse(data.trim());
-// 				var str="";
-// 				for(var i=0; i < replies.length; i++){
-// 					str += "<form>"
-// 					str += "<input type='hidden' id='"+ i +"' value='"+ replies[i].rNo + "'>"
-// 					str += "<div class ='writer_wrap'>"
-// 					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
-// 					if($('#sid').val() != null && $('#sid').val() === replies[i].userid){
-// 	 					str += "<div class='community_update'><button type='button' id='replyUpdateBtn'>수정</button></div>"
-// 						str += "<div class='community_delete'><button onclick='replyDelete()'>삭제</button></div>"
-// 					}
-// 					str += "</div>"
-// 					str += "<div><p>" + replies[i].content + "</p></div><hr>"
-// 					str += "</form>"
-// 				}
-// 				$('#replylist').html(str);
-// 			}
-//  		}
-//  		});
-//  	});
-
 
 	 	
  	window.onload = function(){
@@ -204,26 +172,53 @@
 
     	 $.ajax({
   			type:"post",
-  			url: "/community/replyInsert.jsp",
+  			url: "/community/replyInsert.jsp?sid=<%=sid%>&bno=<%=bno%>",
   			data : {
-  					title:$('#replycontent').val(),
-  					nickname:$('.Writer').val()
+  					content:$('#replycontent').val()
   				},
   			dataType:"text",
 
   			success:function(data) {
   				$('.modal-body').html('');
   				if(data==1){
-  					$('.modal-body').html(data +"등록성공");
+  					$('.modal-body').html("댓글 등록성공");
   				} else {
-  					$('.modal-body').html(data + "등록실패");
+  					$('.modal-body').html("댓글등록실패");
   				}
-  				$('.modal').show()
+  				$('#replyModal').modal("show");
   			}
   		});
 });
  	
+//  	 $('#replyUpdateBtn').on('click', function(){
+
+//     	 $.ajax({
+//   			type:"post",
+//   			url: "/community/replyUpdateProc.jsp",
+//   			data : {
+//   					rno:$('#rno').val(),
+//   					content:$('#replycontent="+$(\'#rno\').val()+"').val()
+//   				},
+//   			dataType:"text",
+
+//   			success:function(data) {
+//   				$('.modal-body').html('');
+//   				if(data==1){
+//   					$('.modal-body').html("댓글 수정성공");
+//   				} else {
+//   					$('.modal-body').html("댓글 수정실패");
+//   				}
+//   				$('#replyModal').modal("show");
+//   			}
+//   		});
+// });
  	 
+ 	$(document).ready(function(){       
+ 	    $('.modal').on('hidden.bs.modal', function () {
+		window.location.reload();
+    	});
+ 	 
+ 	});
  </script>
 </body>
 </html>

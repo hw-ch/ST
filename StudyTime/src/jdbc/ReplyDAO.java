@@ -35,8 +35,8 @@ public class ReplyDAO {
     private static Connection conn;
 
 	// 댓글 리스트 모두 가져오기(남훈)
-	public static String getList(){
-		sql = "SELECT rNo, bNo, content, nickname, userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i') AS regDate FROM reply ORDER BY rNo DESC";
+	public static String getList(int bno){
+		sql = "SELECT rNo, bNo, content, nickname, userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i') AS regDate FROM reply WHERE bno = ? ORDER BY rNo DESC";
 		JSONArray Replylist = new JSONArray();
 
 		try {
@@ -46,6 +46,7 @@ public class ReplyDAO {
 				e.printStackTrace();
 			}
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
@@ -72,7 +73,7 @@ public class ReplyDAO {
 		return Replylist.toJSONString();
 	}
 	
-	// 수정할 댓글 내용 가져오기(남훈)
+	// 수정할 댓글 내용 가져오기(남훈) * 임시
 	public static ReplyDTO getUpdateReply(int rno){
 		String sql = "SELECT content FROM reply WHERE rno = ?";
 
@@ -92,7 +93,37 @@ public class ReplyDAO {
 			}
 			return null;
 		}
-		
+	//댓글 개수(남훈)
+	public static int replyCount(int bno) {
+
+		int result = 0;
+
+		try {
+			String sql = "UPDATE board SET replyNum =(SELECT COUNT(*) FROM reply WHERE bno = ? ) WHERE bno = ?;";
+
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, bno);
+
+			result = pstmt.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	//댓글 추가 (남훈)
 	public static int Replyinsert(String content, String nickname, String userid, int bno) {
 
@@ -160,7 +191,7 @@ public class ReplyDAO {
 	
 	
 	// 댓글 수정(남훈)
-	public static boolean replyupdate(String rno, String content) {
+	public static boolean replyupdate(String content, int rno) {
 
 		boolean result = false;
 
@@ -171,7 +202,7 @@ public class ReplyDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, content);
-			pstmt.setString(2, rno);
+			pstmt.setInt(2, rno);
 
 			result = pstmt.execute();
 

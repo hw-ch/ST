@@ -18,12 +18,6 @@
 		sid = (String)session.getAttribute("sid");
 	}
 %>
-<style>
-	a {
-  text-decoration: none;
-  color:black;
-	}
-</style>
 <body>
 <div class="container">
 	<div class="row p-2">
