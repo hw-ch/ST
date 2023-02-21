@@ -111,10 +111,10 @@ public class UserDAO {
 
 		return users;
 
-		}
-  
-//내 정보(소영)
-	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
+	}
+
+	// 내 정보(소영)
+	public static UserDTO myInfo(String userId) {
 		
 		UserDTO users = null;
 

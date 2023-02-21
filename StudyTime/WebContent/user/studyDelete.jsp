@@ -20,17 +20,19 @@
 <%@ include file="/includes/header.jsp" %>
 
 <% 
-	sid = (String) session.getAttribute("userid");
-	session.setAttribute("userid", sid);
-	ArrayList<StudyJoinDTO> studyJoins = StudyJoinDAO.myStudyOne(sid);
+/* sid = (String) session.getAttribute("sid"); */
+/* 		session.setAttribute("userid", sid); */
+		
+		
 	
 %>	
 
 <main>
+<hr class="featurette-divider">
 <%
-for(StudyJoinDTO studyJoin : studyJoins){
-	
-	StudyDTO studyinfo = StudyDAO.myStudy(studyJoin.getSNo());
+ArrayList<StudyDTO> study = StudyDAO.myStudy(sid);
+for(StudyDTO studyinfo : study){
+
 %>	
 <form action="studyDeleteCheck.jsp" method="post">
 <div class="container">
@@ -42,7 +44,13 @@ for(StudyJoinDTO studyJoin : studyJoins){
     <p class="card-text">스터디 장 : <%=studyinfo.getSWriter() %></p>
     <p class="card-text">회원수 : <%=studyinfo.getCNo() %></p>
     <p class="card-text">시작일시 : <%=studyinfo.getStartDate() %></p>
+    <input type="hidden" name="sno" value="<%=studyinfo.getSNo() %>">
+    
+    
     <input type="submit" class="btn btn-secondary" value="스터디 탈퇴">
+   	<a href="myStudy.jsp" class="btn btn-secondary">My Study</a>
+    
+    
   </div>
 </div>
 </div></li>

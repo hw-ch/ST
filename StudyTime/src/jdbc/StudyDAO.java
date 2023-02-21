@@ -777,12 +777,49 @@ public class StudyDAO {
          }
          return false;
      }
+	// 스터디 삭제(소영)
+	   public static boolean studyDelete(String userid, String sNo) {
+           try {
+        	   String sql = "DELETE FROM studyjoin WHERE userid = ? AND sNo = ? ";
+        	   
+       		try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userid);
+			pstmt.setString(2, sNo);
+
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+           return false;
+	   }
+
 	   
 	// 스터디 조회(소영)
-		public static String myView(String sNo) {
-			JSONArray study = new JSONArray();
+		public static StudyDTO myView(String sNo) {
+			StudyDTO study = null;
 			try {
-				String sql = "SELECT sTitle, sWriter, cNo, category1, category2 startDate, expDate, process FROM study WHERE sNo = ? ORDER BY ts DESC";
+				String sql = "SELECT * FROM study WHERE sNo = ? ";
 
 				try {
 					conn = ConnectionPool.get();
@@ -793,19 +830,24 @@ public class StudyDAO {
 					rs = pstmt.executeQuery();
 
 					while (rs.next()) {
-						JSONObject obj = new JSONObject();
-						obj.put("sNo", rs.getString(1));
-						obj.put("sTitle", rs.getString(2));
-						obj.put("sWriter", rs.getString(3));
-						obj.put("cNo", rs.getString(4));
-						obj.put("category1", rs.getString(5));
-						obj.put("category2", rs.getString(6));
-						obj.put("startDate", rs.getString(7));
-						obj.put("expDate", rs.getString(8));
-						obj.put("process", rs.getString(9));
-
-						study.add(obj);
+						study = new StudyDTO(rs.getString("sNo"),
+								rs.getString("sTitle"), 
+								rs.getString("sWriter"), 
+								rs.getString("cNo"),
+								rs.getString("category1"),
+								rs.getString("category2"), 
+								rs.getString("address"),
+								rs.getString("recruitCnt"),
+								rs.getString("joinCnt"), 
+								rs.getString("regDate"),
+								rs.getString("expDate"),
+								rs.getString("startDate"), 
+								rs.getString("sContent"),
+								rs.getString("apply"),
+								rs.getString("process"));
 					}
+						
+						return study;
 
 				} catch (NamingException | SQLException e) {
 					e.printStackTrace();
@@ -819,43 +861,48 @@ public class StudyDAO {
 						e.printStackTrace();
 					}
 			}
-			return study.toJSONString();
+			return study;
 		}
 
-		// My Study(소영)
-		public static StudyDTO myStudy(String sNo) {
+		// myStudy(소영)
+		public static ArrayList<StudyDTO> myStudy(String userid) {
 
-			StudyDTO study = null;
-			String sql =  "SELECT * FROM study WHERE sNo=? ";
+			ArrayList<StudyDTO> study = new ArrayList<StudyDTO>();
 			
 			try {
-				conn = ConnectionPool.get();
-				rs = pstmt.executeQuery();
+				String sql = "SELECT study.* FROM study WHERE sNo IN (SELECT sNo FROM studyjoin WHERE userid=?) ";
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
 				
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, sNo);
+				pstmt.setString(1, userid);
 
-				while (rs.next()) {
-					study = new StudyDTO(rs.getString("sNo"),
-							rs.getString("sTitle"), 
-							rs.getString("sWriter"), 
-							rs.getString("cNo"),
-							rs.getString("category1"),
-							rs.getString("category2"), 
-							rs.getString("address"),
-							rs.getString("recruitCnt"),
-							rs.getString("joinCnt"), 
-							rs.getString("regDate"),
-							rs.getString("expDate"),
-							rs.getString("startDate"), 
-							rs.getString("sContent"),
-							rs.getString("apply"),
-							rs.getString("process"));
+				rs = pstmt.executeQuery();
+
+				while(rs.next()) {
+					study.add(new StudyDTO(rs.getString(1),
+										rs.getString(2),
+										rs.getString(3),
+										rs.getString(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getString(7),
+										rs.getString(8),
+										rs.getString(9),
+										rs.getString(10),
+										rs.getString(11),
+										rs.getString(12),
+										rs.getString(13),
+										rs.getString(14),
+										rs.getString(15)));
 				}
-					
+
 					return study;
-				
-			} catch (NamingException | SQLException e) {
+
+			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {

@@ -25,21 +25,21 @@
 
 
  <% 
-	sid = (String) session.getAttribute("userid");
-	session.setAttribute("userid", sid);
-	ArrayList<StudyJoinDTO> studyJoins = StudyJoinDAO.myStudyOne(sid);
-	
+		sid = (String) session.getAttribute("sid");
+/* 		session.setAttribute("userid", sid); */
+		String sNo = request.getParameter("sNo");
+		
 %>		
   
 <main>
 <hr class="featurette-divider">
 <%
-for(StudyJoinDTO studyJoin : studyJoins){
+	ArrayList<StudyDTO> study = StudyDAO.myStudy(sid);
+	for(StudyDTO studyinfo : study){
 	
-	StudyDTO studyinfo = StudyDAO.myStudy(studyJoin.getSNo());
 %>	
 	<div class="container"> 
-	<div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3">
+	<div class="row row-cols-1 row-cols-sm-3 row-cols-md-2 g-1">
 	<div class="card border-dark mb-3" style="max-width: 18rem;">
 
 	  <h5 class="card-header"><%=studyinfo.getSTitle() %></h5>
@@ -48,12 +48,15 @@ for(StudyJoinDTO studyJoin : studyJoins){
 	    <p class="card-text">회원수 : <%=studyinfo.getCNo() %>명</p>
 	    <p class="card-text">시작일시 : <%=studyinfo.getStartDate() %></p>
 	     <hr class="my-4">
-	    <a href="studyView.jsp?sNo=<%=studyinfo.getSNo() %>" class="btn btn-secondary">스터디 상세보기</a>
+	     <div class="d-grid gap-2 col-6 mx-auto">
+			  <a href="studyView.jsp?sNo=<%=studyinfo.getSNo() %>" class="btn btn-secondary">스터디 상세보기</a>
+			  <button class="btn btn-secondary" onclick="location.href='/user/studyDeleteCheck.jsp?sNo=<%=studyinfo.getSNo() %>' " type="submit">스터디 탈퇴하기</button>
+			</div>
+			
 	  </div>
 	</div>
 <%
 }
-
 %>
 
 

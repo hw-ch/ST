@@ -395,13 +395,71 @@ public class StudyJoinDAO {
 
 	}
 
+
+
+
+	//myStudy(소영)
+	public static ArrayList<StudyJoinDTO> myStudyOne(String userId) {
+
+		ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
+		
+		try {
+			String sql =  "SELECT * FROM studyjoin WHERE userid=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				studyJoins.add(new StudyJoinDTO(rs.getString(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5)));
+			}
+
+			return studyJoins;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return studyJoins;
+
+	}
 //	스터디 그룹장 등록 메서드(도영)
+public static boolean insertManager(String userId, String sNo){
+			
+	try {
+		sql = " INSERT INTO studyjoin (userid, sNo, approve) "
+				+ " VALUES(?, ?, '그룹장') ";
+
+
+	//	스터디 그룹장 등록 메서드(도영)
 	public static boolean insertManager(String userId, String sNo){
 			
-			try {
-				sql = " INSERT INTO studyjoin (userid, sNo, approve) "
-						+ " VALUES(?, ?, '그룹장') ";
-	
+		try {
+			sql = " INSERT INTO studyjoin (userid, sNo, approve) "
+					+ " VALUES(?, ?, '그룹장') ";
+
 				try {
 					conn = ConnectionPool.get();
 				} catch (NamingException e) {

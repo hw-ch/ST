@@ -21,7 +21,7 @@
 <%
 
 	String userId = request.getParameter("userid");  
-	String password = request.getParameter("password"); 
+	String password = request.getParameter("userPass"); 
 	int result = UserDAO.login(userId, password);
 	if(result == 0){
 		UserDAO.unregister(userId);
