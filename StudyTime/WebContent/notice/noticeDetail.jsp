@@ -11,7 +11,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/includes/header.jsp" %>
-<%@ page import="jdbc.*" %>
 <%
 	int bNo = 0;
 	try{
@@ -53,7 +52,8 @@
 				<button class="btn btn btn-outline-dark" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
 			</div>
 		</div>
-	</div>
+		</div>
+</div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
