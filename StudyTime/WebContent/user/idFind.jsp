@@ -70,10 +70,10 @@
           </div>
           
           <div class="mb-3">
-            <label for="phone">휴대폰 번호</label>
-            <input type="text" class="form-control" id="phone" name="phone" required>
+            <label for="phone">휴대전화번호</label>
+            <input type="text" class="form-control" id="phone" name="phone" oninput="autoHyphen(this)" required>
             <div class="invalid-feedback">
-              전화번호를 입력해주세요.
+              휴대전화번호를 입력해주세요.
             </div>
           </div>
           
@@ -108,6 +108,13 @@
 
 
 <script>
+  
+  //전화번호 자동 하이픈 넣기
+const autoHyphen = (target) => {
+	  target.value = target.value
+	    .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	 }
   
 	$('#home').hide();
   

@@ -64,7 +64,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" name="name" placeholder="" value="" required>
+              <input type="text" class="form-control" name="name" autofocus required>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
@@ -104,10 +104,10 @@
 
           <div class="row">
           <div class="col-md-6 mb-3">
-              <label for="phone">휴대폰 번호</label>
-              <input type="text" class="form-control" name="phone" placeholder="010-0000-0000" required>
+              <label for="phone">휴대전화번호</label>
+              <input type="text" class="form-control" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13" required>
               <div class="invalid-feedback">
-                휴대폰 번호를 입력해주세요.
+                휴대전화번호를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -150,6 +150,12 @@
   
   <script>
   
+  //전화번호에 자동 하이픈 넣기
+  const autoHyphen = (target) => {
+	  target.value = target.value
+	    .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	 }
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
