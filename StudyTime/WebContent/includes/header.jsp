@@ -158,8 +158,11 @@ if(sid != null) {
 				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
-				 
-				if(StudyJoinDAO.checkManager(sid)) { %>
+				StudyJoinDTO check = StudyJoinDAO.checkManager(sid);
+				
+				
+				
+				if(check.getApprove().equals("그룹장")) { %>
 				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
 				<%}else{ %>
 				

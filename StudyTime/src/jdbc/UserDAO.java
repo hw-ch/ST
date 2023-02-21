@@ -230,11 +230,11 @@ public class UserDAO {
 	}
 
 	// 회원 탈퇴(소영)
-	public static boolean unregister(String userId) {
+	public static boolean unregister(String userId, String password) {
 
 		try {
 
-			String sql = "DELETE from user where userId=? ";
+			String sql = "DELETE from user where userId=? AND password = ?";
 
 			try {
 				conn = ConnectionPool.get();
@@ -244,6 +244,7 @@ public class UserDAO {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+			pstmt.setString(1, password);
 
 			int result = pstmt.executeUpdate();
 			if (result == 1) {

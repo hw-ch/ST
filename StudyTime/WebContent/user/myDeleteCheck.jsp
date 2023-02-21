@@ -20,11 +20,11 @@
 
 <%
 
-	String userId = request.getParameter("userid");  
+	String userid = request.getParameter("userid");  
 	String password = request.getParameter("userPass"); 
-	int result = UserDAO.login(userId, password);
+	int result = UserDAO.login(userid, password);
 	if(result == 0){
-		UserDAO.unregister(userId);
+		UserDAO.unregister(userid, password);
 %>
 <!-- Modal -->
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
