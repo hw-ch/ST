@@ -246,10 +246,10 @@ public class StudyDAO {
        }
 	   
 	// 스터디 조회(소영)
-		public static String myView(String sNo) {
-			JSONArray study = new JSONArray();
+		public static StudyDTO myView(String sNo) {
+			StudyDTO study = null;
 			try {
-				String sql = "SELECT sTitle, sWriter, cNo, category1, category2 startDate, expDate, process FROM study WHERE sNo = ? ORDER BY ts DESC";
+				String sql = "SELECT * FROM study WHERE sNo = ? ORDER BY ts DESC";
 
 				try {
 					conn = ConnectionPool.get();
@@ -260,19 +260,24 @@ public class StudyDAO {
 					rs = pstmt.executeQuery();
 
 					while (rs.next()) {
-						JSONObject obj = new JSONObject();
-						obj.put("sNo", rs.getString(1));
-						obj.put("sTitle", rs.getString(2));
-						obj.put("sWriter", rs.getString(3));
-						obj.put("cNo", rs.getString(4));
-						obj.put("category1", rs.getString(5));
-						obj.put("category2", rs.getString(6));
-						obj.put("startDate", rs.getString(7));
-						obj.put("expDate", rs.getString(8));
-						obj.put("process", rs.getString(9));
-
-						study.add(obj);
+						study = new StudyDTO(rs.getString("sNo"),
+								rs.getString("sTitle"), 
+								rs.getString("sWriter"), 
+								rs.getString("cNo"),
+								rs.getString("category1"),
+								rs.getString("category2"), 
+								rs.getString("address"),
+								rs.getString("recruitCnt"),
+								rs.getString("joinCnt"), 
+								rs.getString("regDate"),
+								rs.getString("expDate"),
+								rs.getString("startDate"), 
+								rs.getString("sContent"),
+								rs.getString("apply"),
+								rs.getString("process"));
 					}
+						
+						return study;
 
 				} catch (NamingException | SQLException e) {
 					e.printStackTrace();
@@ -286,22 +291,26 @@ public class StudyDAO {
 						e.printStackTrace();
 					}
 			}
-			return study.toJSONString();
+			return study;
 		}
 
-		// My Study(소영)
+		// myStudy(소영)
 		public static StudyDTO myStudy(String sNo) {
 
 			StudyDTO study = null;
-			String sql =  "SELECT * FROM study WHERE sNo=? ";
 			
 			try {
-				conn = ConnectionPool.get();
-				rs = pstmt.executeQuery();
+				String sql =  "SELECT * FROM study WHERE sNo=? ";
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, sNo);
 
+				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					study = new StudyDTO(rs.getString("sNo"),
 							rs.getString("sTitle"), 
@@ -322,7 +331,7 @@ public class StudyDAO {
 					
 					return study;
 				
-			} catch (NamingException | SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {

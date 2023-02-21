@@ -230,36 +230,50 @@ public class StudyJoinDAO {
 
 	//myStudy(소영)
 	public static ArrayList<StudyJoinDTO>  myStudyOne(String userId) {
-		String sql =  "SELECT * FROM studyJoin WHERE userid=? ";
+
+		ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
+		
 		try {
-			conn = ConnectionPool.get();
-			rs = pstmt.executeQuery();
+			String sql =  "SELECT * FROM studyjoin WHERE userid=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-
-			ArrayList<StudyJoinDTO> studyJoins = new ArrayList<StudyJoinDTO>();
+			
+			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				studyJoins.add(new StudyJoinDTO(rs.getString(1),
 						rs.getString(2),
 						rs.getString(3),
 						rs.getString(4),
 						rs.getString(5)));
-				
-				return studyJoins;
 			}
-		} catch (NamingException | SQLException e) {
+
+			return studyJoins;
+		
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-			if(pstmt != null)	pstmt.close();
-			if(conn != null)	conn.close();
-			if(rs != null)	rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+
+		return studyJoins;
+
 	}
 	
 	// 스터디 탈퇴(소영)

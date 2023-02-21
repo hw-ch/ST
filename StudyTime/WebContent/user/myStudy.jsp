@@ -25,18 +25,17 @@
 
 
  <% 
-	sid = (String) session.getAttribute("userid");
-	session.setAttribute("userid", sid);
-	ArrayList<StudyJoinDTO> studyJoins = StudyJoinDAO.myStudyOne(sid);
-	
+		sid = (String) session.getAttribute("userid");
+		session.setAttribute("userid", sid);
 %>		
   
 <main>
 <hr class="featurette-divider">
 <%
-for(StudyJoinDTO studyJoin : studyJoins){
-	
+	ArrayList<StudyJoinDTO> studyJoins = StudyJoinDAO.myStudyOne(sid);
+	for(StudyJoinDTO studyJoin : studyJoins){
 	StudyDTO studyinfo = StudyDAO.myStudy(studyJoin.getSNo());
+	out.print(StudyDAO.myStudy(studyJoin.getSNo()));
 %>	
 	<div class="container"> 
 	<div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3">
@@ -53,7 +52,6 @@ for(StudyJoinDTO studyJoin : studyJoins){
 	</div>
 <%
 }
-
 %>
 
 
