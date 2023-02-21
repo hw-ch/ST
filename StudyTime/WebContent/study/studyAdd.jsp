@@ -30,7 +30,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
-	<form action = "/study/studyAddProc.jsp" method = "post">
+	<form action = "/study/studyAddProc.jsp" method = "post" name = "form">
 		<main>
 			<div class = "pb-3 mb-5">	
 			    <h4 class="pb-3 mb-3 border-bottom">스터디 기본 정보를 입력해주세요.</h4>	     
@@ -109,11 +109,22 @@
 			             </select>
 			             
 		         	 </div>
-		         	 <div class="col-sm-6">
-			           	 <label for="address" class="form-label">위치</label>
-			             <input type = "text" placeholder="오프라인 스터디만 입력해주세요." class = "form-control" name = "address" id = "address">
-		         	 </div>
-				</div>
+		         	 <div class = "col-sm-6">
+						<label for="addr1" class="form-label">도로명 주소</label>
+							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "button" class = "form-control btn btn-outline-secondary" value = "검색"
+							onclick="goPopup()"> 
+					</div>
+					 <div class = "col-sm-6">
+						<label for="addr2" class="form-label">상세 주소</label>
+							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr2" name = "addr2">
+					</div>
+					<input type = "hidden" name = "address" id = "address">
+			</div>
+					
+					
+				
 			</div>
 		    <div>
 			    <h4 class="pb-3 mb-3 border-bottom">스터디를 소개해주세요.</h4>
@@ -133,7 +144,7 @@
 			<footer class="pt-5 my-5 text-muted border-top">
 		  		<div class="mb-5">
 			      <a href="javascript:void(0);" onclick = "confirmBack();" class="btn btn-danger btn-lg px-4 text text-white">취소</a>
-			      <button class="btn btn-warning btn-lg px-4 text text-white" type="submit">글 등록</button>
+			      <button class="btn btn-warning btn-lg px-4 text text-white addBtn" type="submit">글 등록</button>
 		  		</div>
 			</footer>
 		</form>  	
@@ -176,6 +187,21 @@
    		 // 추가한 폰트사이즈
    		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
       });
+      
+  	$('.addBtn').click(function(){
+		$('#address').val($('#addr1').val() + " " + 
+						$('#addr2').val() + " " +
+						$('#addr3').val());
+	})  
+  	function goPopup(){
+  		var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+  	}
+  	function jusoCallBack(roadAddrPart1,addrDetail,roadAddrPart2){
+  		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+  		document.form.addr1.value = roadAddrPart1;
+		document.form.addr2.value = addrDetail;
+		document.form.addr3.value = roadAddrPart2;
+  }
     </script>
 </body>
 </html>
