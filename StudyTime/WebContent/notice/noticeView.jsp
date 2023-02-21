@@ -4,6 +4,7 @@
 최초작성일 : 2023/02/15
 
 버전 기록 : ver1(시작 23/02/15)
+		ver2(23/02/21 페이징 추가)
 
 - sid 관리자 처리 필요
 --------------------------------------------------------
@@ -11,6 +12,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="jdbc.*" %>
 <%@ include file="/includes/header.jsp" %>
 <% 
 	// sid 확인
@@ -67,19 +69,16 @@
 </div>
 
 <script>
-	var total = <%=total%>;
-	console.log("total : " + total);
-	var totalPage = Math.ceil(total / 10);
-	console.log("totalPage : " + totalPage);
+	var pageSize = 2;
 	var currentPage = <%=request.getParameter("page")%>
-	console.log("currentPage : " + currentPage);
+	if(currentPage == null){currentPage = 1;}
+	var total = <%=total%>;
+	var totalPage = Math.ceil(total / pageSize);
 	var pageGroup = Math.ceil(currentPage / 10);
-	console.log("pageGroup : " + pageGroup);
 	var last = pageGroup * 10;
-	console.log("last : " + last);
-	if (last > totalPage) last = totalPage;
-	var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
-	var previous = first > 1;
+	var start = last - (10 - 1);
+	if (last > totalPage){last = totalPage};
+	var previous = start > 1;
 	var next = last < totalPage;
 	
 
@@ -87,12 +86,16 @@
  		$.ajax({
  			type:"POST",
  			url:"/notice/noticeViewProc.jsp",
+ 			data : {pageSize : pageSize,
+ 					currentPage : currentPage
+				
+			},	
  			success:function(data){
  				var notices = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < notices.length; i++){
  					str += "<tr><small><td>" + notices[i].bNo + "</small></td>";
- 					str += "<td class=\"w-75\"><a href='/notice/noticeDetail.jsp?bNo="+notices[i].bNo+ "'>" + notices[i].title + "</a></td>";
+ 					str += "<td class='w-75'><a href='/notice/noticeDetail.jsp?bNo="+notices[i].bNo+"'><div width='100%'>" + notices[i].title + "</div></a></td>";
  					str += "<td>" + notices[i].regDate +"</td></tr>";
 
  				}
@@ -106,22 +109,23 @@
  	window.onload = function(){
  		searchFunction();
  		pagination();
- 		
-
  	}
  	
  	function pagination(){
- 		if (total <= 10) return;
+ 		if (total <= pageSize) return;
  		var str = '';
  		if (previous) {
- 	 		  str += "<li class='page-item prev'><a class='page-link'>&laquo; Previous</a></li>";
+ 	 		  str += "<li class='page-item prev'><a class='page-link'><a href='/notice/noticeView.jsp?page="+ (start - 10) +"'>&laquo; Previous</a></li>";
  	 		}
+ 		for(i=start; i<=last; i++){
+				str += "<li class='page-item "+ (i==currentPage?'active':'') +"'><a class='page-link' href='/notice/noticeView.jsp?page=" + i +"'>"+ i +"</a></li>"
+		}
  		if (next) {
-	 		  str += "<li class='page-item next'><a class='page-link'>Next &raquo;</a></li>"
+	 		  str += "<li class='page-item next'><a class='page-link' href='/notice/noticeView.jsp?page="+ (start + 10) +"'>Next &raquo;</a></li>"
 	 		}
- 		for(i=first; i<=last; i++){
- 				str += ("<li class='page-item" +(i==pageNum?'active':'') + "'><a class='page-link' id='" + i +"' href='/notice/noticeView.jsp?page=" + i + "'>" + i +"</a></li>")
- 		}
+
+ 		
+ 	
  		$('.pagination').html(str);
  	}
  	

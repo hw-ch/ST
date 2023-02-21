@@ -224,10 +224,10 @@ public class NoticeDAO {
 		}
 		
 		// 공지사항 리스트 page(혜원)
-		public static String getListPage(int pageNum){
+		public static String getListPage(int pageNum, int pageSize){
 			sql = "select a.* " + 
-					"from (select @rownum := @rownum + 1 rownum, t.* from notice t where(@rownum := 0) = 0 order by bno desc) as a " + 
-					"where rownum between (?-1)*10+1 and (?*10);";
+					"from (select @rownum := @rownum + 1 rownum, t.bNo, t.title, t.content, DATE_FORMAT(t.regDate, '%y-%m-%d') AS regDate, t.hit from notice t where(@rownum := 0) = 0 order by bno desc) as a " + 
+					"where rownum between (?-1)*?+1 and (?*?)";
 			JSONArray noticeList = new JSONArray();
 			
 			try {
@@ -238,16 +238,19 @@ public class NoticeDAO {
 				}
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, pageNum);
-				pstmt.setInt(2, pageNum);
+				pstmt.setInt(2, pageSize);
+				pstmt.setInt(3, pageNum);
+				pstmt.setInt(4, pageSize);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
 					JSONObject obj = new JSONObject();
-					obj.put("bNo", rs.getString(1));
-					obj.put("title", rs.getString(2));
-					obj.put("content", rs.getString(3));
-					obj.put("regDate", rs.getString(4));
-					obj.put("hit", rs.getString(5));
+					obj.put("rowNum", rs.getString(1));
+					obj.put("bNo", rs.getString(2));
+					obj.put("title", rs.getString(3));
+					obj.put("content", rs.getString(4));
+					obj.put("regDate", rs.getString(5));
+					obj.put("hit", rs.getString(6));
 				
 					noticeList.add(obj);
 					
