@@ -27,7 +27,6 @@
 	BoardDTO board = new BoardDAO().getboard(bno);
 %>
 
-	<form>
 <%-- 		<input type="hidden" id="sid" value="<%= userid.getUserId() %>"> --%>
 	<div class="communityView">
 		<section class="communityView_Postheader">
@@ -65,7 +64,6 @@
  			 </tbody>
 		</table>	
 	</div>
-	</form>
 	
 	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -130,20 +128,20 @@
  				var replies = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < replies.length; i++){
- 					str += "<form id='update'>"
-//  					str +="<input type='hidden' id='"+ replies[i].rNo "'+ value='"+ replies[i].rNo +"'>"
- 					str += "<div class ='writer_wrap'>"
+ 					str += "<hr>"
+ 					str += "<div><div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if("<%= sid %>" != null && "<%= sid %>"  == replies[i].userid){
- 	 					str += "<div class='community_update'><button id='replyModifyBtn' type='button' onclick='replyModify("+ replies[i].rNo +")'>수정</button></div>"
- 						str += "<div class='community_delete'><button id='replydelteBtn' type='button' onclick='replyDel()'>삭제</button></div>"
+ 	 					str += "<div class='community_update'>"
+ 	 					str += "<button style='display:none' id='replyUpdateBtn="+ replies[i].rNo +"' onclick='replyUpdate("+ replies[i].rNo +")'>수정하기</button>"
+ 	 					str += "<button id='replyModifyBtn="+ replies[i].rNo +"' type='button' onclick='replyModify("+ replies[i].rNo +")'>"+ replies[i].rNo +"</button></div>"
+ 						str += "<div class='community_delete'><button id='replydelteBtn="+ replies[i].rNo +"' type='button' onclick='replyDel()'>삭제</button></div>"
  					}
  					str += "</div>"
- 					str += "<div><p id='replycontent="+ replies[i].rNo +"'>" + replies[i].content + "</p></div><hr>"
- 					str += "</form>"
+ 					str += "<div><p id='replycontent="+ replies[i].rNo +"'>" + replies[i].content + "</p></div></div>"
  				}
  				$('#replylist').html(str);
- 			}
+ 			} 
  		});
  	}
 	
@@ -153,11 +151,22 @@
  	
  	function replyModify(rno){
  		var element = document.getElementById("replycontent=" +rno);
- 		$( element ).contents().unwrap().wrap( '<textarea>' );
- 		$("#replydelteBtn").remove();
- 		$("#replyModifyBtn").attr("id","replyUpdateBtn");
-		
- 	}
+ 		$( element ).contents().unwrap().wrap( "<textarea name='replycontent="+ rno +"'>'" );
+ 		const btn1 = document.getElementById('replydelteBtn='+rno);
+ 		const btn2 = document.getElementById('replyModifyBtn='+rno);
+ 		const btn3 = document.getElementById('replyUpdateBtn='+rno);
+ 		btn1.style.display='none';
+ 		btn2.style.display='none';
+ 		btn3.style.display='block';
+ 		}
+ 	
+ 	
+ 	function replyUpdate(rno){
+ 		var testName = "replycontent="+ rno;
+ 		var content =$("textarea[name='"+testName+"']").val();
+ 		location.href="replyUpdateProc.jsp?rno="+rno+"&content=" +content;
+ 		}
+
  	
  	function replyDel(){
 		$("#deleteModal").modal("show");

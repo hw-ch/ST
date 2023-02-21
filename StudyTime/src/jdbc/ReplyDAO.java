@@ -191,9 +191,9 @@ public class ReplyDAO {
 	
 	
 	// 댓글 수정(남훈)
-	public static boolean replyupdate(String content, int rno) {
+	public static int replyupdate(String content, int rno) {
 
-		boolean result = false;
+		int result = 0;
 
 		try {
 			String sql = "UPDATE reply SET content = ? WHERE rno = ?";
@@ -204,8 +204,7 @@ public class ReplyDAO {
 			pstmt.setString(1, content);
 			pstmt.setInt(2, rno);
 
-			result = pstmt.execute();
-
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -221,5 +220,6 @@ public class ReplyDAO {
 		}
 
 		return result;
+		
 	}
 }

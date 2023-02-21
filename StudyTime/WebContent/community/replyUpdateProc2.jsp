@@ -5,10 +5,5 @@
 <%	
 	int rno = Integer.parseInt(request.getParameter("rno"));
 	String content = request.getParameter("content");
-	String referer = request.getHeader("referer");
-	if(ReplyDAO.replyupdate(content, rno) == 1) {
-		 response.sendRedirect(referer);
-	} else{
-		 response.sendRedirect(referer);
-	}
+	out.print(ReplyDAO.replyupdate(content, rno));
 %>
