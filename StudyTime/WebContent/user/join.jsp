@@ -44,6 +44,7 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    
   </style>
 </head>
 
@@ -52,7 +53,7 @@
 
   <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
+      <div class="input-form col-md-10 mx-auto">
         <form class="validation-form" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -139,13 +140,14 @@
       <p class="mb-1">&copy; STUDY TIME</p>
     </footer>
   </div>
+  
+  
   <script>
-  $('#home').hide();
-  $('#pageTitle').text("회원가입")
+  
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
+			
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
           if (form.checkValidity() === false) {
@@ -157,27 +159,33 @@
         }, false);
       });
     }, false);
-  
+    
   
 //비밀번호 유효성 검사
   var password = document.getElementById("pw")
   ,confirm_password = document.getElementById("pwChk");
 
   function validatePassword(){
-  if(password.value != confirm_password.value) { // 만일 두 인풋 필드값이 같지 않을 경우
-    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-    confirm_password.setCustomValidity("비밀번호와 일치하지 않습니다."); 
-  } 
-  else { // 만일 두 인풋 필드값이 같을 경우
-    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
-    // 따라서 빈값을 주어 submit 처리되게 한다
-    confirm_password.setCustomValidity(''); 
-  }
+			if(password.value != confirm_password.value) { // 만일 두 인풋 필드값이 같지 않을 경우
+			    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
+			    confirm_password.setCustomValidity("비밀번호와 일치하지 않습니다."); 
+			  } 
+			  else { // 만일 두 인풋 필드값이 같을 경우
+			    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
+			    // 따라서 빈값을 주어 submit 처리되게 한다
+			    confirm_password.setCustomValidity(''); 
+			  }
   }
 
   password.onchange = validatePassword;
   confirm_password.onkeyup = validatePassword;
-  // End 비밀번호 유효성 검사
+// End 비밀번호 유효성 검사
+  
+  
+  </script>
+  
+  <script>
+  $('#home').hide();
   </script>
 </body>
 </html>

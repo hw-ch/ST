@@ -58,7 +58,7 @@ String gender = request.getParameter("gender");
 
 <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
+      <div class="input-form col-md-10 mx-auto">
         <form class="validation-form" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
