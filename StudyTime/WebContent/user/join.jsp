@@ -150,6 +150,8 @@
   
   <script>
   
+  $('#home').hide();
+  
   //전화번호에 자동 하이픈 넣기
   const autoHyphen = (target) => {
 	  target.value = target.value
@@ -193,11 +195,8 @@
   confirm_password.onkeyup = validatePassword;
 // End 비밀번호 유효성 검사
   
-  
   </script>
   
-  <script>
-  $('#home').hide();
-  </script>
+  
 </body>
 </html>
