@@ -53,32 +53,32 @@
 <h1><%=startRow %></h1>
 <H1><%=pageSize %></H1>
 
-<%-- 	<%	 --%>
+<%
 			
 					
-// 			int pageCount = boards.size() / pageSize + (boards.size() % pageSize == 0?0:1);
+			int pageCount = boards.size() / pageSize + (boards.size() % pageSize == 0?0:1);
 			
-// 			int pageBlock = 5;
+			int pageBlock = 5;
 			
-// 			int startPage = ((currentPage -1)/pageBlock)*pageBlock+1;
+			int startPage = ((currentPage -1)/pageBlock)*pageBlock+1;
 			
-// 			int endPage = startPage + pageBlock-1;
-// 			if(endPage > pageCount){
-// 				endPage = pageCount;
-// 			}
-<%-- 	%> --%>
+			int endPage = startPage + pageBlock-1;
+			if(endPage > pageCount){
+				endPage = pageCount;
+			}
+%>
 	
-<%-- 	<%		if(startPage>pageBlock){ %> --%>
-<%-- 			<a href="boardlist.jsp?pageNum=<%= startPage-pageBlock %>">Prev</a> --%>
-<%-- 	<% } %> --%>
+	<%		if(startPage>pageBlock){ %>
+			<a href="boardlist.jsp?pageNum=<%= startPage-pageBlock %>">Prev</a>
+	<% } %>
 	
-<%-- 	<% for(int i=startPage; i<=endPage; i++) { %> --%>
-<%-- 			<a href="boardlist.jsp?pageNum=<%= i %>"><%=i %></a> --%>
-<%-- 	<% } %> --%>
+	<% for(int i=startPage; i<=endPage; i++) { %>
+			<a href="boardlist.jsp?pageNum=<%= i %>"><%=i %></a>
+	<% } %>
 	
-<%-- 		<%		if(endPage<pageCount){ %> --%>
-<%-- 			<a href="boardlist.jsp?pageNum=<%= startPage+pageBlock %>">Next</a> --%>
-<%-- 	<% } %> --%>
+		<%		if(endPage<pageCount){ %>
+			<a href="boardlist.jsp?pageNum=<%= startPage+pageBlock %>">Next</a>
+	<% } %>
 
 	
 </div>

@@ -55,7 +55,6 @@ public class BoardDAO {
 
 		try {
 			String sql = "SELECT * FROM board ORDER BY bno DESC limit ?,?";
-			
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow-1);
