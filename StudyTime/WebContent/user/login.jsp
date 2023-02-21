@@ -50,7 +50,6 @@
     
     #st{ font-size : 20px;}
     
-}
   </style>
 </head>
 
@@ -85,10 +84,10 @@
           <hr class="mb-4">
           
           <div style="text-align: center";>
-          <button class="btn btn-primary btn-lg " type="submit">로그인</button>
+          <button class="btn btn-primary btn-lg" type="submit">로그인</button>
           <a id="custom-login-btn" href="javascript:kakaoLogin()">
 		  <img src="/images/kakao1.png" width="200" height="45">
-		  </a><br>
+		  </a><br><br>
 		  </div>
 		  <div style="text-align: right";>
           <a href="/user/idFind.jsp">아이디 찾기</a>

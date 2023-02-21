@@ -44,6 +44,12 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    #im {
+    margin: auto;
+    display: block;
+    }
+    
+    #st{ font-size : 30px;}
     
   </style>
 </head>
@@ -53,7 +59,7 @@
 
   <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-10 mx-auto">
+      <div class="input-form col-md-9 mx-auto">
         <form class="validation-form" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">

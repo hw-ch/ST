@@ -47,7 +47,10 @@
     #im {
     margin: auto;
     display: block;
-}
+    }
+    
+    #st{ font-size : 20px;}
+
   </style>
 </head>
 <body>
@@ -55,8 +58,9 @@
 
 <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-8 mx-auto">
+      <div class="input-form col-md-6 mx-auto">
 			<img id="im" class="mb-4" src="/images/study3.png" alt="" width="100" height="100">
+      <div style="text-align: center"><p id="st">STUDY TIME</p></div>
           <div class="mb-3">
             <label for="name">이름</label>
             <input type="text" class="form-control" id="name" name="name" required>

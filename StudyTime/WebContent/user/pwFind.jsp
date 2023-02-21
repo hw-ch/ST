@@ -48,6 +48,8 @@
     margin: auto;
     display: block;
 }
+
+	#st{ font-size : 20px;}
   </style>
 </head>
 <body>
@@ -62,8 +64,9 @@
 
 <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-8 mx-auto">
+      <div class="input-form col-md-6 mx-auto">
       <img id="im" class="mb-4" src="/images/study3.png" alt="" width="100" height="100">
+      <div style="text-align: center"><p id="st">STUDY TIME</p></div>
         <form class="validation-form" action="/user/pwFindChk.jsp" method="post" novalidate>
 
           <div class="mb-3">
