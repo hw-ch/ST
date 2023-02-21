@@ -93,6 +93,7 @@ public class ReplyDAO {
 			}
 			return null;
 		}
+	
 	//댓글 개수(남훈)
 	public static int replyCount(int bno) {
 
@@ -158,7 +159,7 @@ public class ReplyDAO {
 	}
 
 	// 댓글 삭제(남훈)
-	public static int Replydelete(String rno) {
+	public static int Replydelete(int rno) {
 
 		int result = 0;
 
@@ -167,7 +168,7 @@ public class ReplyDAO {
 
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, rno);
+			pstmt.setInt(1, rno);
 			result = pstmt.executeUpdate();
 
 			return result;
