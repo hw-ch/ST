@@ -130,7 +130,7 @@
  				var replies = JSON.parse(data.trim());
  				var str="";
  				for(var i=0; i < replies.length; i++){
- 					str += "<form>"
+ 					str += "<form id='update'>"
 //  					str +="<input type='hidden' id='"+ replies[i].rNo "'+ value='"+ replies[i].rNo +"'>"
  					str += "<div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
@@ -155,7 +155,7 @@
  		var element = document.getElementById("replycontent=" +rno);
  		$( element ).contents().unwrap().wrap( '<textarea>' );
  		$("#replydelteBtn").remove();
-//  		$("#replyModifyBtn").attr("id","replyUpdateBtn");
+ 		$("#replyModifyBtn").attr("id","replyUpdateBtn");
 		
  	}
  	
@@ -189,30 +189,7 @@
   			}
   		});
 });
- 	
-//  	 $('#replyUpdateBtn').on('click', function(){
-
-//     	 $.ajax({
-//   			type:"post",
-//   			url: "/community/replyUpdateProc.jsp",
-//   			data : {
-//   					rno:$('#rno').val(),
-//   					content:$('#replycontent="+$(\'#rno\').val()+"').val()
-//   				},
-//   			dataType:"text",
-
-//   			success:function(data) {
-//   				$('.modal-body').html('');
-//   				if(data==1){
-//   					$('.modal-body').html("댓글 수정성공");
-//   				} else {
-//   					$('.modal-body').html("댓글 수정실패");
-//   				}
-//   				$('#replyModal').modal("show");
-//   			}
-//   		});
-// });
- 	 
+  	 
  	$(document).ready(function(){       
  	    $('.modal').on('hidden.bs.modal', function () {
 		window.location.reload();
