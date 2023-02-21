@@ -32,8 +32,8 @@ for(StudyDTO study : studys) {
           </div>
           <div class="card-body" style="height: 350px;">
           	<div style="padding-right: 350px; padding-top: 10px;">
-          	<a class="btn btn-lg btn-light border-dark rounded-5" href="../product/productList.jsp"><%=study.getCategory1() %></a> 
-          	 <a class="btn btn-lg btn-light border-dark rounded-5" href="../product/productList.jsp"><%=study.getCategory2() %></a>
+          	<a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory1() %></a> 
+          	 <a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory2() %></a>
           	</div>
               <div style="padding-top: 50px;" class="card-title pricing-card-title h3"><%=study.getSContent() %></div>
               <div style="padding-top: 50px; padding-right: 450px;" class="card-title pricing-card-title h5">모집인원 : <%=study.getRecruitCnt() %> </div>

@@ -9,8 +9,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<StudyDTO> studys = StudyDAO.getAllList();
-ArrayList<StudyDTO> temps = StudyDAO.gettempList();
+	ArrayList<StudyDTO> studys = StudyDAO.getAllList2();
+ArrayList<StudyDTO> temps = StudyDAO.gettempList2();
 
 
 for(StudyDTO study : studys) {

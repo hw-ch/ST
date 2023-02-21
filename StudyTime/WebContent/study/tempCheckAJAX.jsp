@@ -16,6 +16,8 @@ String tempTitle = request.getParameter("tempTitle");
 if(check.equals("승인")){
 
 StudyDAO.apply(tempTitle);
+StudyDTO study = StudyDAO.getOneList(tempTitle);
+StudyJoinDAO.insertManager(study.getSWriter(), study.getSNo());
 
 }else{
 

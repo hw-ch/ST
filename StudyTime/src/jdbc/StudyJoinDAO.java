@@ -311,12 +311,12 @@ public class StudyJoinDAO {
 	}
 
 //	그룹장확인 메서드(도영)
-	public static boolean checkManager(String userId){
+	public static StudyJoinDTO checkManager(String userId){
 
 
 		StudyJoinDTO studyjoin = null;
 		try {
-			sql = "SELECT from studyjoin where userid=? ";
+			sql = "SELECT * from studyjoin where userid=? ";
 
 			try {
 				conn = ConnectionPool.get();
@@ -336,13 +336,10 @@ public class StudyJoinDAO {
 						rs.getString("sNo"),
 						rs.getString("approve"),
 						rs.getString("regDate"));
+				
 			}
 
-			if(studyjoin.getApprove().equals("3")) {
-				return true;
-			}else {
-				return false;
-			}
+				return studyjoin;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -358,11 +355,130 @@ public class StudyJoinDAO {
 
 		}
 
+		return studyjoin;
+
+	}
+
+//	스터디 그룹장 등록 메서드(도영)
+	public static boolean insertManager(String userId, String sNo){
+			
+			try {
+				sql = " INSERT INTO studyjoin (userid, sNo, approve) "
+						+ " VALUES(?, ?, '그룹장') ";
+	
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
+				
+				pstmt = conn.prepareStatement(sql);
+	
+				pstmt.setString(1, userId);
+				pstmt.setString(2, sNo);
+	
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+				if(rs != null) rs.close();
+					
+					
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+				}
+	
+			return false;
+		}
+
+//	스터디 그룹원 삭제 메서드(도영)
+	public static boolean dropoutUser(String userId) {
+
+		try {
+
+			sql = "DELETE from studyjoin where userid=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return false;
 
 	}
 
+//	가입한 스터디 번호 목록 메서드(도영)
+	public static ArrayList<String> getAllsNo(String userId){
+
+		ArrayList<String> sNos = new ArrayList<String>();
+
+		try {
+			sql = " SELECT sNo FROM studyjoin WHERE userId=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
 
 
 
+			while(rs.next()) {
+				sNos.add(rs.getString(1));
+			}
+
+				return sNos;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)	pstmt.close();
+				if(conn != null)	conn.close();
+				if(rs != null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+		
+	}
 }
