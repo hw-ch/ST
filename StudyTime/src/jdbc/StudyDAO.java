@@ -229,27 +229,48 @@ public class StudyDAO {
 	        }
 
 	// 스터디 삭제(소영)
-	   public static boolean studyDelete(String sNo) {
-           sql = "DELETE FROM study WHERE sNo = ?";
+	   public static boolean studyDelete(String userid, String sNo) {
            try {
-               pstmt = conn.prepareStatement(sql);
-               pstmt.setString(1, sNo);
-               if(pstmt.executeUpdate()==1) return true;;
+        	   String sql = "DELETE FROM studyjoin WHERE userid = ? AND sNo = ? ";
+        	   
+       		try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 
-           } catch (Exception e) {
-               e.printStackTrace();
-           }finally {
-                if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-                if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
-           }
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userid);
+			pstmt.setString(2, sNo);
+
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
            return false;
-       }
+	   }
+
 	   
 	// 스터디 조회(소영)
 		public static StudyDTO myView(String sNo) {
 			StudyDTO study = null;
 			try {
-				String sql = "SELECT * FROM study WHERE sNo = ? ORDER BY ts DESC";
+				String sql = "SELECT * FROM study WHERE sNo = ? ";
 
 				try {
 					conn = ConnectionPool.get();
@@ -295,12 +316,12 @@ public class StudyDAO {
 		}
 
 		// myStudy(소영)
-		public static StudyDTO myStudy(String sNo) {
+		public static ArrayList<StudyDTO> myStudy(String userid) {
 
-			StudyDTO study = null;
+			ArrayList<StudyDTO> study = new ArrayList<StudyDTO>();
 			
 			try {
-				String sql =  "SELECT * FROM study WHERE sNo=? ";
+				String sql = "SELECT study.* FROM study WHERE sNo IN (SELECT sNo FROM studyjoin WHERE userid=?) ";
 				try {
 					conn = ConnectionPool.get();
 				} catch (NamingException e) {
@@ -308,29 +329,30 @@ public class StudyDAO {
 				}
 				
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, sNo);
+				pstmt.setString(1, userid);
 
 				rs = pstmt.executeQuery();
-				while (rs.next()) {
-					study = new StudyDTO(rs.getString("sNo"),
-							rs.getString("sTitle"), 
-							rs.getString("sWriter"), 
-							rs.getString("cNo"),
-							rs.getString("category1"),
-							rs.getString("category2"), 
-							rs.getString("address"),
-							rs.getString("recruitCnt"),
-							rs.getString("joinCnt"), 
-							rs.getString("regDate"),
-							rs.getString("expDate"),
-							rs.getString("startDate"), 
-							rs.getString("sContent"),
-							rs.getString("apply"),
-							rs.getString("process"));
+
+				while(rs.next()) {
+					study.add(new StudyDTO(rs.getString(1),
+										rs.getString(2),
+										rs.getString(3),
+										rs.getString(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getString(7),
+										rs.getString(8),
+										rs.getString(9),
+										rs.getString(10),
+										rs.getString(11),
+										rs.getString(12),
+										rs.getString(13),
+										rs.getString(14),
+										rs.getString(15)));
 				}
-					
+
 					return study;
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

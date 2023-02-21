@@ -24,7 +24,7 @@
 <% 
 	
 
-	sid = (String) session.getAttribute("userid"); 
+	sid = (String) session.getAttribute("sid"); 
 %>
 <%-- 	if (sid == null){
 		
@@ -56,20 +56,18 @@
 		
 <%} else { --%>
 <%
-	session.setAttribute("userid", sid);
+	/* session.setAttribute("userid", sid); */
 
 	UserDTO users = UserDAO.myInfo(sid);
 
 %>		
-  
- 
 
 <div class="d-grid gap-2 col-6 mx-auto">
 
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0" >
     <div class="col-md-4">
-      <img class="img-fluid rounded-start" src="/images/<%=user.getImage()%>" alt="이미지">
+      <img class="img-fluid rounded-start" src="/images/<%=users.getImage()%>" alt="이미지">
     </div>
     <div class="col-md-8">
       <div class="card-body">

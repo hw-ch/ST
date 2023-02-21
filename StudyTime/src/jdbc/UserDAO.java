@@ -68,7 +68,7 @@ public class UserDAO {
 	}
 
 	// 내 정보(소영)
-	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
+	public static UserDTO myInfo(String userId) {
 		
 		UserDTO users = null;
 		try {
