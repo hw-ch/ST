@@ -18,13 +18,19 @@
 <body>
 	<!-- 화면 상단 header -------------------------------------------- -->
 	<%@ include file="/includes/header.jsp"%>
+	
+	
+	
+<%
 
-
-
-			<%
-UserDTO userInfo = UserDAO.getOneList(sid);
-
-			%>
+String userId = request.getParameter("userId");
+UserDTO userInfo;
+if(sid.equals("admin")){
+userInfo = UserDAO.getOneList(userId);
+}else{
+userInfo = UserDAO.getOneList(sid);
+}
+%>
 
 	<div class="container h4" style="padding-top: 200px; padding-left: 200px;">
 
@@ -38,7 +44,6 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 				<img src="/images/profile.png"
 					style="width: 200px; height: 300px;">
 			</div>
-
 
 
 			<div class="col-md-8" align="left">
@@ -100,11 +105,18 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 							<input type="button" onclick="history.back()" value="이전으로"
 								class="btn btn-lg btn-secondary backBtn"> 
 								<input type="button" onclick="location.href='/admin/memberModify.jsp'" value="수정" class="btn btn-lg btn-info regBtn">
-<a href="/admin/signout.jsp" class="btn btn-lg btn-danger removeBtn">회원탈퇴</a>
+<%if(sid.equals("admin")){ %>
+<a class="btn btn-lg btn-danger removeBtn">회원삭제</a>
+<%}else{%>
+<a href="/admin/signout.jsp" class="btn btn-lg btn-danger">회원탈퇴</a>
+<%} %>
 						</div>
 					</div>
 
 				</form>
+				<form action="signoutCheck.jsp" method="post" id="delForm">
+<input type="hidden" name="userId" value="<%=userId%>">
+</form>
 			</div>
 
 
@@ -195,6 +207,28 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 
 		
 
+	</script>
+		 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		   정말 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		     <button type="button" class="btn btn-secondary" onclick="$('#delForm').submit()" data-bs-dismiss="modal">확인</button>		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+	<script>
+	$('.removeBtn').click(function() {
+		$("#exampleModal2").modal("show");
+	});
 	</script>
 		 
 </body>

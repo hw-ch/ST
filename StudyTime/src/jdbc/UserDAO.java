@@ -117,6 +117,7 @@ public class UserDAO {
 	public static UserDTO myInfo(String userId) throws NamingException, SQLException {
 		
 		UserDTO users = null;
+
 		try {
 			sql = "SELECT * from user where userid=? ";
 	
@@ -129,38 +130,78 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(sql);
 	
 			pstmt.setString(1, userId);
+			
+		rs = pstmt.executeQuery();
 	
-			rs = pstmt.executeQuery();
+		if (rs.next()) {
+			users = new UserDTO(rs.getString("userId"),
+					rs.getString("password"), 
+					rs.getString("nickname"),
+					rs.getString("name"), 
+					rs.getString("ts"), 
+					rs.getString("gender"),
+					rs.getString("image"),
+					rs.getString("phone"));	
+										}
+							
+						return users;
+
+						} catch (SQLException e) {
+						e.printStackTrace();
+						} finally {
+						try {
+							if(rs!=null) rs.close();
+							if(pstmt!= null) pstmt.close();
+							if(conn!=null) conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						}
+
+						return users;
+
+						}
 	
-			if (rs.next()) {
-				users = new UserDTO(rs.getString("userId"),
-						rs.getString("password"), 
-						rs.getString("nickname"),
-						rs.getString("name"), 
-						rs.getString("ts"), 
-						rs.getString("gender"),
-						rs.getString("image"),
-						rs.getString("phone"));
-			}
-	
-			return users;
-	
+//  회원정보 수정 메서드(도영)
+public static boolean update(String userId, String nickName, String name, String gender, String image, String phone){
+
+	try {
+		sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? "
+				+ " WHERE userId=? ";
+
+		try {
+			conn = ConnectionPool.get();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, userId);
+		pstmt.setString(2, nickName);
+		pstmt.setString(3, name);
+		pstmt.setString(4, gender);
+		pstmt.setString(5, image);
+		pstmt.setString(6, phone);
+		int result = pstmt.executeUpdate();
+		if (result == 1) {
+			return true;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(pstmt != null)    pstmt.close();
+			if(conn != null)    conn.close();
+			if(rs != null)    rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstmt!= null) pstmt.close();
-				if(conn!=null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-	
-		return users;
-	
 	}
 
+	return false;
+
+}
 
 	// 본인 정보 수정(소영)
 	public static int myEdit(String userId, String password, String nickName, String image, String phone)

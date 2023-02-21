@@ -20,7 +20,9 @@
 	<!-- 화면 상단 header -------------------------------------------- -->
 	<%@ include file="/includes/header.jsp"%>
 
-
+<script>
+$('#home').hide();
+</script>
 <%
 String uploadPath = application.getInitParameter("uploadPath"); //파일 업로드 폴더명
 String savePath = application.getRealPath(uploadPath); //실제 업로드 폴더 경로
@@ -44,26 +46,23 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 	String image = multiReq.getFilesystemName("image");
 	
 	
-%>
-	
-	<jsp:useBean id="udao" class="jdbc.UserDAO"/>
 
-<%
-	if( udao.update(userId, nickName, name, gender, image, phone) == true ) {
-		
-		%>
+
+
+	if( UserDAO.update(userId, nickName, name, gender, image, phone, sid) == true ) {
+		%>		
 		<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">DaDaMall</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
+		        <button type="button" class="btn-close" onclick="location.href = '/admin/memberInfo.jsp'" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		   상품등록 성공.
+		   회원정보 수정완료.
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" onclick="location.href = '../product/productList.jsp'" data-bs-dismiss="modal">상품목록 보기</button>
+		        <button type="button" class="btn btn-secondary" onclick="location.href = '/admin/memberInfo.jsp'" data-bs-dismiss="modal">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -81,11 +80,11 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">DaDaMall</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
+		        <button type="button" class="btn-close" onclick="history.back()" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		   이미 존재하는 상품명 입니다.
+		   정확한 정보를 입력해주세요.
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" onclick="history.back()" data-bs-dismiss="modal">이전으로</button>
@@ -100,7 +99,6 @@ MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, enc
 			});
 		</script><% } %>	
 
- %>
 
 
 

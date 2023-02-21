@@ -13,7 +13,7 @@
 
 <head>
 <meta charset="UTF-8">	
-<title>Study Time</title>
+<title>STUDY TIME</title>
 </head>
 <body>
 	<!-- 화면 상단 header -------------------------------------------- -->
@@ -49,7 +49,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 					<div class="form-group row pb-3">
 				<label class="col-sm-2 pt-2">아이디</label>
 				<div class="col-sm-4">
-					<input type="email" value="<%=userInfo.getUserId() %>" name="userid" id="ide"
+					<input type="email" value="<%=userInfo.getUserId() %>" name="userId" id="ide" readonly="readonly"
 						class="form-control" required>
 				</div>
 				<span style="color: red;" id="idChk"></span>
@@ -58,7 +58,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 					<div class="form-group row pb-3">
 				<label class="col-sm-2 pt-2">닉네임</label>
 				<div class="col-sm-4">
-					<input type="text" name="nickN	ame" value="<%=userInfo.getNickName() %>" class="form-control" required>
+					<input type="text" name="nickName" value="<%=userInfo.getNickName() %>" class="form-control" required>
 				</div>
 			</div>
 					<div class="form-group row pb-3">
@@ -80,7 +80,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 					<select name="phone1" id="phone1" class="form-control" required>
 						<option>선택</option>
 						<option
-						<% if(phone[0].equals("010")){ %>selected="selected"<%} %>
+						<% if(phone[0].equals("010")){ %>selected="selected"<%}else{} %>
 						 >010</option>
 						<option>02</option>
 						<option>031</option>
@@ -99,17 +99,17 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 				<label class="col-sm-2 pt-3">성별</label>
 				<div class="col-sm-3  pt-3">
 
-							<label><input type="radio" name="gender" value="m"
-							<%if(userInfo.getGender().equals("male")){%>checked<%} %>
-							>남성</label> <label><input
-								type="radio" name="gender" value="w"
-								<%if(userInfo.getGender().equals("female")){%>checked<%} %>>여성</label>
+							<label><input type="radio" name="gender" value="male"
+							<%if(userInfo.getGender().equals("male")){%>checked<%}else{} %>
+							>남성</label> <label>
+							<input type="radio" name="gender" value="female"
+								<%if(userInfo.getGender().equals("female")){%>checked<%}else{} %>>여성</label>
 						</div>
 			</div>
 									<div class="form-group row">
 				<label class="col-sm-2  pt-4">사진</label>
 				<div class="col-sm-4  pt-3">
-					<input type="file" name="photo" class="form-control">
+					<input type="file" name="image" class="form-control">
 				</div>
 			</div>
 
@@ -157,12 +157,12 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 	$('#pageTitle').text("회원정보")
 	
 	
-	$('.delRegBtn').click(function() {
+	$('.regBtn').click(function() {
 	var phone1 = $('#phone1').val().trim();
 	var phone2 = $('#phone2').val().trim();
 	var phone3 = $('#phone3').val().trim();
 	$('#phone').val(phone1 + "-" + phone2 + "-" + phone3);
-})
+});
 	
 	//아이디와 비밀번호 확인 여부
 	idChk = pwChk = false;
