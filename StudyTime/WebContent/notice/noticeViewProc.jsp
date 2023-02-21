@@ -11,5 +11,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	out.print(NoticeDAO.getList());
+	int pageSize = Integer.parseInt((String)request.getParameter("pageSize"));
+	int pageNum = Integer.parseInt((String)request.getParameter("currentPage"));
+	out.print(NoticeDAO.getListPage(pageNum, pageSize));
+	/* out.print(NoticeDAO.getList()); */
 %>

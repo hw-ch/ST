@@ -1,9 +1,10 @@
-<!--
+<!-- 
 --------------------------------------------------------
 최초작성자 : 최혜원(wone8115@uos.ac.kr)
 최초작성일 : 2023/02/15
 
 버전 기록 : ver1(시작 23/02/15)
+		ver2(23/02/21 페이징 추가)
 
 - sid 관리자 처리 필요
 --------------------------------------------------------
@@ -11,8 +12,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="jdbc.*" %>
 <%@ include file="/includes/header.jsp" %>
-<%
+<% 
 	// sid 확인
 	sid = "";
 	if(session.getAttribute("sid") != null){
@@ -69,27 +71,32 @@
   <tbody id="notice">
   </tbody>
 </table>
-<ul class="pagination justify-content-center">
-	    <li class="page-item disabled prev">
-	      <a class="page-link" id="test">&laquo; Previous</a>
-	    </li>
-	    <li class="page-item next">
-	      <a class="page-link" href="#">Next &raquo;</a>
-	    </li>
+<ul class="pagination justify-content-center">	   
 </ul>
 </div>
 
 <script>
-	var total = <%=total%>;
+	var pageSize = 2;
 	var currentPage = <%=request.getParameter("page")%>
-	
-	
+	if(currentPage == null){currentPage = 1;}
+	var total = <%=total%>;
+	var totalPage = Math.ceil(total / pageSize);
+	var pageGroup = Math.ceil(currentPage / 10);
+	var last = pageGroup * 10;
+	var start = last - (10 - 1);
+	if (last > totalPage){last = totalPage};
+	var previous = start > 1;
+	var next = last < totalPage;
 	
 
  	function searchFunction(){
  		$.ajax({
  			type:"POST",
  			url:"/notice/noticeViewProc.jsp",
+ 			data : {pageSize : pageSize,
+ 					currentPage : currentPage
+				
+			},	
  			success:function(data){
  				var notices = JSON.parse(data.trim());
  				var str="";
@@ -102,7 +109,7 @@
  				}
  				$('#notice').html(str);
  			}
-
+ 			
  		});
  	}
  	
@@ -113,63 +120,22 @@
  	}
  	
  	function pagination(){
- 		var pageNum = Math.ceil(total / 10);
+ 		if (total <= pageSize) return;
  		var str = '';
- 		for(i=0; i<pageNum; i++){
- 			str += ("<li class='page-item'><a class='page-link' id='" + i +"' href='/notice/noticeView.jsp?page=" + (i+1) + "'>" + (i+1) +"</a></li>")
- 		}
- 		$('.prev').after(str);
+ 		if (previous) {
+ 	 		  str += "<li class='page-item prev'><a class='page-link'><a href='/notice/noticeView.jsp?page="+ (start - 10) +"'>&laquo; Previous</a></li>";
+ 	 		}
+ 		for(i=start; i<=last; i++){
+				str += "<li class='page-item "+ (i==currentPage?'active':'') +"'><a class='page-link' href='/notice/noticeView.jsp?page=" + i +"'>"+ i +"</a></li>"
+		}
+ 		if (next) {
+	 		  str += "<li class='page-item next'><a class='page-link' href='/notice/noticeView.jsp?page="+ (start + 10) +"'>Next &raquo;</a></li>"
+	 		}
 
- 		$('.page-link').forEach(function(pageLink) {
- 		    console.log(pageLink)
- 		});
+ 		
+ 	
+ 		$('.pagination').html(str);
  	}
- 	
- 	function pagination(currentPage) {
- 		// 현재 게시물의 전체 개수가 10개 이하면 pagination을 숨김.
- 		if (total <= 10) return; 
-
- 		var totalPage = Math.ceil(total / 10);
- 		var pageGroup = Math.ceil(currentPage / 10);
- 		
- 		var last = pageGroup * 10;
- 		if (last > totalPage) last = totalPage;
- 		var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
-
- 		const fragmentPage = document.createDocumentFragment();
- 	  if (prev > 0) {
- 		  var allpreli = document.createElement('li');
- 		  allpreli.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='allprev'>&lt;&lt;</a>`);
- 		
- 		  var preli = document.createElement('li');
- 		  preli.insertAdjacentHTML("beforeend", `<a href='#js-ottom' id='prev'>&lt;</a>`);
- 		
- 		  fragmentPage.appendChild(allpreli);
- 		  fragmentPage.appendChild(preli);
- 		}
-
- 	  for (var i = first; i <= last; i++) {
- 		  const li = document.createElement("li");
- 		  li.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='page-${i}' data-num='${i}'>${i}</a>`);
- 		  fragmentPage.appendChild(li);
- 	  }
-
- 	  if (last < totalPage) {
- 		  var allendli = document.createElement('li');
- 		  allendli.insertAdjacentHTML("beforeend", `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`);
- 		
- 		  var endli = document.createElement('li');
- 		  endli.insertAdjacentHTML("beforeend", `<a  href='#js-bottom'  id='next'>&gt;</a>`);
- 		
- 		  fragmentPage.appendChild(endli);
- 		  fragmentPage.appendChild(allendli);
- 	  }
-
- 	    document.getElementById('js-pagination').appendChild(fragmentPage);
- 			// 페이지 목록 생성
- 	}
- 	
- 	
  	
  </script>
 </body>
