@@ -88,7 +88,7 @@
 
           <div class="mb-3">
             <label for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="pw" required>
+            <input type="password" class="form-control" name="password" id="pw" maxlength="15" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
             </div>
@@ -152,12 +152,14 @@
   
   $('#home').hide();
   
+  
   //전화번호에 자동 하이픈 넣기
   const autoHyphen = (target) => {
 	  target.value = target.value
 	    .replace(/[^0-9]/g, '')
 	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 	 }
+  
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
@@ -194,7 +196,8 @@
   password.onchange = validatePassword;
   confirm_password.onkeyup = validatePassword;
 // End 비밀번호 유효성 검사
-  
+
+
   </script>
   
   
