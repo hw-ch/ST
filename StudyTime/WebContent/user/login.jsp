@@ -94,8 +94,8 @@
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   
   <script>
+  $('#home').hide();
   
-  $('#home').hide()
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');

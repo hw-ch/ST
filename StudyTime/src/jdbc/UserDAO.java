@@ -454,7 +454,7 @@ public class UserDAO {
 		//카카오 로그인(두현)
 		public static int kakaoLogin(String id) {
 			
-			sql = "SELECT userId FROM user WHERE userId=?";
+			sql = "SELECT userId FROM user WHERE userId=? ";
 			
 			try {
 				conn = ConnectionPool.get();	
