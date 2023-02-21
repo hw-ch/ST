@@ -21,8 +21,15 @@
 		StudyDTO sdto = new StudyDAO().studyView(sNo);
 		
 		UserDTO udto = UserDAO.getOneList(sdto.getSWriter());
-		List<StudyJoinDTO> list = new StudyJoinDAO().selectJoinTable(sNo);
+		List<StudyJoinDTO> slist = new StudyJoinDAO().selectJoinTable(sNo);
 		
+		int cnt = 0;
+		
+		for(StudyJoinDTO list : slist){
+			if(list.getUserId().equals(sid)){
+				cnt++;
+			}
+		}
 		
 	%>
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
@@ -78,7 +85,7 @@
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
 		      <a href="javascript:history.back();" class="btn btn-danger btn-lg px-4 text text-white">이전으로</a>
-		   <%if(sid!=null && list == null) { %>
+		   <%if(sid!=null && cnt == 0) { %>
    				<a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">참여하기</a>
    			<%}%>
 		      
