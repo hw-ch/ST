@@ -25,7 +25,6 @@
   <body class="text-center">
 
   <%@ include file="/includes/header.jsp"%>
-  <%= sid%>
 <main>
 
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="">
