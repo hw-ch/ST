@@ -151,6 +151,8 @@ String gender = request.getParameter("gender");
   </div>
   <script>
   
+  $('#home').hide();
+  
   $('#pageTitle').text("회원가입")
   
     window.addEventListener('load', () => {
