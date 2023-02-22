@@ -225,7 +225,7 @@ public class ReplyDAO {
 		
 	}
 	
-	
+	//댓글 페이징 처리(남훈)
 	public static String getListPage(int pageNum, int pageSize, int bno){
 		sql = "select a.* FROM (select @rownum := @rownum + 1 rownum, r.rNo, r.bNo, r.content, r.nickname, r.userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i')"
 			+  "AS regDate from reply r where(@rownum := 0) = 0 and bno = ? order by rno DESC ) as a where rownum BETWEEN (?-1)*?+1 and (?*?)";
