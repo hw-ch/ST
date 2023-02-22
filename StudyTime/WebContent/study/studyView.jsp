@@ -36,6 +36,8 @@
 			     <div class = "pb-3 mb-5" >	
 		     	 	<table class="table table-borderless fs-5"> 
 					    <tr>
+					      <td>스터디 장</td>
+					      <td><%=sdto.getSWriter() %></td>
 					      <td>진행방식</td>
 					      <td><%=sdto.getProcess() %></td>
 					      <td>총인원</td>
