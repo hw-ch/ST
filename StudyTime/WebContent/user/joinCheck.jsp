@@ -89,3 +89,6 @@ $(function(){
 </script>	
 <% 	}}	
 %>	
+<script>
+$('#home').hide();
+</script>
