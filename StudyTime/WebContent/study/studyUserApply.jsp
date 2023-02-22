@@ -34,7 +34,14 @@
   		</div>
   <ul class="list-group list-group-flush">
   </ul>
-</div>
+	</div>
+	<div class="row p-2">
+		<div class="col">
+			<div style="float:right;">
+				<button class="btn btn-secondary" onclick="location.href='/study/studyLeaderList.jsp'">이전으로</button>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

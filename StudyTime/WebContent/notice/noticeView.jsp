@@ -66,7 +66,6 @@
 	<%
 	}
 	%>
-	
   <table class="table table-hover">
   <tbody id="notice">
   </tbody>
