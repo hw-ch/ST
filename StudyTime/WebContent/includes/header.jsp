@@ -108,7 +108,7 @@ if(sid != null) {
 
   
          <div class="container-fluid">
-    <header class="d-flex flex-wrap justify-content-center py-3 h2">
+    <header class="d-flex flex-wrap justify-content-center py-3 h4">
     
       <a href="/main.jsp" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-2 h2" style="padding-top: 10px; padding-left: 100px;"><img class="box" style="width: 60px; height: 60px;" src="/images/study3.png"> STUDY TIME</span>
@@ -123,15 +123,15 @@ if(sid != null) {
             <% }else if(sid != null && sid.equals("admin")){ %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-                <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
-        <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
-         <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
-        <li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
+                <li class="nav-item" style="padding-right: 10px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
+        <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
+         <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
+        <li class="nav-item" style="padding-right: 10px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
      	
       </ul>
       
-       <div class="dropdown" style="padding-right: 200px; ">
+       <div class="dropdown" style="padding-right: 100px; ">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
   <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>
@@ -148,13 +148,13 @@ if(sid != null) {
                         %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
-        <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
-        <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
-                 <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
-     	<li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
+        <li class="nav-item" style="padding-right: 10px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
+        <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
+                 <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
+     	<li class="nav-item" style="padding-right: 10px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
       </ul>
       
-       <div class="dropdown" style="padding-right: 200px; ">
+       <div class="dropdown" style="padding-right: 100px; ">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
    <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>

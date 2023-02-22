@@ -26,7 +26,7 @@
 <html>
 <body>
 	<div class="container">
-		<div class="card p-2 h-50">
+		<div class="card p-2">
 		  <div class="card-header" id="title">
 		  </div>
 		  <div class="card-body">
@@ -72,6 +72,7 @@
 </div>
 </body>
 <script>
+	$('#pageTitle').text("공지사항");
 
 
 	

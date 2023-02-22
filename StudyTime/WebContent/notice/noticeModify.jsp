@@ -57,6 +57,7 @@
 </div>
 
 <script>
+		$('#pageTitle').text("공지사항");
       $('#summernote').summernote({
         tabsize: 5,
         height: 180,

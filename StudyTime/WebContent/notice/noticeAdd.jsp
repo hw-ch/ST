@@ -57,6 +57,7 @@
 </div>
 
 <script>
+		$('#pageTitle').text("공지사항");
       $('#summernote').summernote({
         placeholder: '내용을 입력하세요.',
         tabsize: 5,

@@ -33,12 +33,12 @@ __TEMP__
 	String userid = temp.getSWriter();
 	UserDTO user = UserDAO.getOneList(userid);
 %>
- <tr><td onclick="location.href='/study/studyView.jsp?sNo=<%=temp.getSNo()%>'" style="cursor : pointer;" class="h5" id="tempTitle"> <%=temp.getSTitle() %> </td>
+ <tr><td onclick="location.href='/study/studyView.jsp?sNo=<%=temp.getSNo()%>'" style="cursor : pointer;" class="h5"> <%=temp.getSTitle() %> </td>
 <td onclick="location.href='/study/studyView.jsp?sNo=<%=temp.getSNo()%>'" style="cursor : pointer;" class="h5"> <%=temp.getCategory1() %> </td>
 <td onclick="location.href='/study/studyView.jsp?sNo=<%=temp.getSNo()%>'" style="cursor : pointer;" class="h5"> <%=user.getNickName()%> </td>
 <td class="h5"> <h5 class="badge bg-primary regBtn" style="cursor : pointer;"><b>승인</b></h5> <h5 class="badge bg-danger delBtn" style="cursor : pointer;"><b>거절</b></h5></td>
 <td class="h5"></td></tr>
-
+<input type="hidden" value="<%=temp.getSNo()%>"  id="tempSNo"/>
 <%} %>
 
 

@@ -19,15 +19,15 @@
 	
 	if(state.equals("approve")){
 		String sjNo = request.getParameter("sjNo");
-		StudyJoinDAO.cntUpdate(sNo);
 		out.print(StudyJoinDAO.approve(sjNo));
+		StudyJoinDAO.cntUpdate(sNo);
 		return;
 	}
 	
 	if(state.equals("reject")){
 		String sjNo = request.getParameter("sjNo");
-		StudyJoinDAO.cntUpdate(sNo);
 		out.print(StudyJoinDAO.reject(sjNo));
+		StudyJoinDAO.cntUpdate(sNo);
 		return;
 	}
 

@@ -21,6 +21,7 @@
 </head>
 <body>
 	<%@ include file = "/includes/header.jsp" %>
+	<script>$('#pageTitle').text("스터디 상세보기")</script>
 	<%
 		String sNo = request.getParameter("sNo");
 		StudyDTO sdto = new StudyDAO().studyView(sNo);
