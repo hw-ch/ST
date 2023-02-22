@@ -63,6 +63,7 @@
   			<tbody id="replylist">
  			 </tbody>
 		</table>	
+		 <ul class="pagination justify-content-center"></ul>
 	</div>
 	
 	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,23 +130,32 @@
 	</div>
 
 <script>
+
+var pageSize = 10;
+var currentPage = null;
+if(currentPage == null){currentPage = 1;}
+var total = <%=board.getReplyNum()%>;
+var totalPage = Math.ceil(total / pageSize);
+var pageGroup = Math.ceil(currentPage / 10);
+var last = pageGroup * 10;
+var start = last - (10 - 1);
+if (last > totalPage){last = totalPage};
+var previous = start > 1;
+var next = last < totalPage;
+var pageCount = total / pageSize + (total% pageSize == 0?0:1);
+
  	function searchFunction(){
- 	    var pageSize = 10;
- 	    var totalPages = 0;
- 	    var curPage = num;
- 	}
+
  		$.ajax({
  			type:"POST",
  			url:"/community/replylistProc.jsp?bno=<%=bno%>",
- 			data: { 
+ 			data: { pageSize : pageSize,
+					currentPage : currentPage
  			},
   			dataType:"text",
 
  			success:function(data){
  				var replies = JSON.parse(data.trim());
- 				var totalCount =parseInt(<%= board.getReplyNum() %>)
- 				if (totalCount != 0) {
- 					totalPages = Math.ceil(totalCount / pageSize);
  				var str="";
  				for(var i=0; i < replies.length; i++){
  					str += "<hr>"
@@ -163,6 +173,28 @@
  				$('#replylist').html(str);
  			} 
  		});
+ 	}
+ 	
+ 	function pagination(){
+ 		if (total <= pageSize) return;
+ 		var str = '';
+ 		if (previous) {
+ 	 		  str += "<li class='page-item prev'><a class='page-link'><a href='/notice/noticeView.jsp?page="+ (start - 10) +"'>&laquo; Previous</a></li>";
+ 	 		}
+ 		for(i=start; i<=last; i++){
+				str += "<li class='page-item "+ (i == currentPage?'active':'') +"'><a class='page-link' onclick='changereplypage("+i+")'>"+ i +"</a></li>"
+		}
+ 		if (next) {
+	 		  str += "<li class='page-item next'><a class='page-link' href='/notice/noticeView.jsp?page="+ (start + 10) +"'>Next &raquo;</a></li>"
+	 		}
+ 		
+ 	
+ 		$('.pagination').html(str);
+ 	}
+ 	
+ 	function changereplypage(i){
+		currentPage = i;
+ 		searchFunction();
  	}
 	
  	function boradDelete(){
@@ -217,6 +249,7 @@
  	
  	window.onload = function(){
  		searchFunction();
+ 		pagination();
  	}
  	
  	 $('#insertBtn').on('click', function(){
@@ -229,6 +262,16 @@
   				},
   			dataType:"text",
 
+  			success:function(data) {
+  				$('.modal-body').html('');
+  				if(data==1){
+  					$('.modal-body').html("댓글 등록성공");
+  				} else {
+  					$('.modal-body').html("댓글 등록실패");
+  				}
+  				$('#replyModal').modal("show");
+  			}
+  				
   		});
 });
   	 

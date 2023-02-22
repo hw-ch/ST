@@ -37,6 +37,7 @@ public class ReplyDAO {
 	// 댓글 리스트 모두 가져오기(남훈)
 	public static String getList(int bno){
 		sql = "SELECT rNo, bNo, content, nickname, userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i') AS regDate FROM reply WHERE bno = ? ORDER BY rNo DESC";
+		
 		JSONArray Replylist = new JSONArray();
 
 		try {
@@ -223,4 +224,49 @@ public class ReplyDAO {
 		return result;
 		
 	}
+	
+	
+	public static String getListPage(int pageNum, int pageSize, int bno){
+		sql = "select a.* FROM (select @rownum := @rownum + 1 rownum, r.rNo, r.bNo, r.content, r.nickname, r.userid, DATE_FORMAT(regDate, '%Y-%m-%d %H:%i')"
+			+  "AS regDate from reply r where(@rownum := 0) = 0 and bno = ? order by rno DESC ) as a where rownum BETWEEN (?-1)*?+1 and (?*?)";
+		JSONArray replyList = new JSONArray();
+		
+		try {
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException | SQLException e){
+				e.printStackTrace();
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, pageNum);
+			pstmt.setInt(3, pageSize);
+			pstmt.setInt(4, pageNum);
+			pstmt.setInt(5, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				JSONObject obj = new JSONObject();
+				obj.put("rowNum", rs.getString(1));
+				obj.put("rNo", rs.getString(2));
+				obj.put("bNo", rs.getString(3));
+				obj.put("content", rs.getString(4));
+				obj.put("nickname", rs.getString(5));
+				obj.put("userid", rs.getString(6));
+				obj.put("regDate", rs.getString(6));
+
+				replyList.add(obj);
+				
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+            if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+		}
+		return replyList.toJSONString();
+	}
+	
 }

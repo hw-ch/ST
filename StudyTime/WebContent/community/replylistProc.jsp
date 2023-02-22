@@ -3,6 +3,10 @@
     pageEncoding="UTF-8"%>
 <%
 	int bno = Integer.parseInt(request.getParameter("bno"));
-	out.print(ReplyDAO.getList(bno));
+	int pageSize = Integer.parseInt((String)request.getParameter("pageSize"));
+	int pageNum = Integer.parseInt((String)request.getParameter("currentPage"));
+
+
+	out.print(ReplyDAO.getListPage(pageNum, pageSize, bno));
 	
 %>

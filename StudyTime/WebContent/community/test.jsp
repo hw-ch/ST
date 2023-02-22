@@ -1,72 +1,177 @@
+<!-- 
+--------------------------------------------------------
+최초작성자 : 최혜원(wone8115@uos.ac.kr)
+최초작성일 : 2023/02/15
+
+버전 기록 : ver1(시작 23/02/15)
+		ver2(23/02/21 페이징 추가)
+
+- sid 관리자 처리 필요
+--------------------------------------------------------
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page import="jdbc.*" %>
 <%@ include file="/includes/header.jsp" %>
-<div id="page_control">
-	<%
-	String pageNum = "1";
-	BoardDAO bdao = new BoardDAO();
-	int cnt = bdao.getBoardCount();
-	int pageSize = 5;
-	int currentPage = Integer.parseInt(pageNum);
-	int startRow = (currentPage-1)*pageSize + 1;
-	 			if(cnt != 0){
-						
-	 			int pageCount = cnt / pageSize + (cnt% pageSize == 0?0:1);
-				
-	 			int pageBlock = 5;
-				
-	 			int startPage = ((currentPage -1)/pageBlock)*pageBlock+1;
-				
-	 			int endPage = startPage + pageBlock-1;
-	 			if(endPage > pageCount){
-	 				endPage = pageCount;
-	 			}
-	%>
-<ul class="pagination justify-content-center">
-	    <li class="page-item disabled">
-	      <a class="page-link">&laquo; Previous</a>
-	    </li>
-	    <li class="page-item active" aria-current="page">
-	    	<a class="page-link" href="#">1</a></li>
-	    <li class="page-item">
-	        <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Next &raquo;</a>
-	    </li>
-</ul>
-<%} %>
+<% 
+	// sid 확인
+	if(session.getAttribute("sid") != null){
+		sid = (String)session.getAttribute("sid");
+	}
 
-			    <li class="page-item disabled">
-				<a href="boardlist.jsp?pageNum=<%= startPage-pageBlock %>">&laquo; Prev</a>
-				</li>
+	int total = NoticeDAO.count();
+	
+	String pageNum = "";
+	if(request.getParameter("page") != null){
+		pageNum = request.getParameter("page");	
+	}
+%>
+<style>
+	a {
+  text-decoration: none;
+  color:black;
+	}
+	
+	.pagination a:hover,
+	.pagination .active a {
+    background-color: #f0ad4e;
+    color: #ffffff;
+    border : none;
+	}
+	
+	.pagination a {
+    float: left;
+    padding: 0 14px;
+    line-height: 34px;
+    color: #000000;
+    text-decoration: none;
+    border-left-width: 0;
+	}	
+
+	
+</style>
+<body>
+<div class="container">
+	<div class="row p-2">
+		<div class="col">
+			<div style="float:right;">
+				<button class="col btn btn-warning" onclick="location.href='noticeAdd.jsp'">글작성</button>
+			</div>
+		</div>
+	</div>
+  <table class="table table-hover">
+  <tbody id="notice">
+  </tbody>
+</table>
+<ul class="pagination justify-content-center">	   
+</ul>
 </div>
+
+<script>
+	var pageSize = 2;
+	var currentPage = <%=request.getParameter("page")%>
+	if(currentPage == null){currentPage = 1;}
+	var total = <%=total%>;
+	var totalPage = Math.ceil(total / pageSize);
+	var pageGroup = Math.ceil(currentPage / 10);
+	var last = pageGroup * 10;
+	var start = last - (10 - 1);
+	if (last > totalPage){last = totalPage};
+	var previous = start > 1;
+	var next = last < totalPage;
+	
+
+ 	function searchFunction(){
+ 		$.ajax({
+ 			type:"POST",
+ 			url:"/notice/noticeViewProc.jsp",
+ 			data : {pageSize : pageSize,
+ 					currentPage : currentPage
+				
+			},	
+ 			success:function(data){
+ 				var notices = JSON.parse(data.trim());
+ 				var str="";
+ 				for(var i=0; i < notices.length; i++){
+ 					str += "<tr><small><td>" + notices[i].bNo + "</small></td>";
+ 					str += "<td class='w-75'><a href='/notice/noticeDetail.jsp?bNo="+notices[i].bNo+"'><div width='100%'>" + notices[i].title + "</div></a></td>";
+ 					str += "<td>" + notices[i].regDate +"</td></tr>";
+
+ 				}
+ 				$('#notice').html(str);
+ 			}
+ 			
+ 		});
+ 	}
+ 	
+ 	
+ 	window.onload = function(){
+ 		searchFunction();
+ 		pagination();
+ 	}
+ 	
+ 	function pagination(){
+ 		if (total <= pageSize) return;
+ 		var str = '';
+ 		if (previous) {
+ 	 		  str += "<li class='page-item prev'><a class='page-link'><a href='/notice/noticeView.jsp?page="+ (start - 10) +"'>&laquo; Previous</a></li>";
+ 	 		}
+ 		for(i=start; i<=last; i++){
+				str += "<li class='page-item "+ (i==currentPage?'active':'') +"'><a class='page-link' href='/notice/noticeView.jsp?page=" + i +"'>"+ i +"</a></li>"
+		}
+ 		if (next) {
+	 		  str += "<li class='page-item next'><a class='page-link' href='/notice/noticeView.jsp?page="+ (start + 10) +"'>Next &raquo;</a></li>"
+	 		}
+
+ 		
+ 	
+ 		$('.pagination').html(str);
+ 	}
+ 	
+ </script>
 </body>
 </html>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+public static String getListPage(int pageNum, int pageSize){
+			sql = "select a.* " + 
+					"from (select @rownum := @rownum + 1 rownum, t.bNo, t.title, t.content, DATE_FORMAT(t.regDate, '%y-%m-%d') AS regDate, t.hit from notice t where(@rownum := 0) = 0 order by bno desc) as a " + 
+					"where rownum between (?-1)*?+1 and (?*?)";
+			JSONArray noticeList = new JSONArray();
+			
+			try {
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException | SQLException e){
+					e.printStackTrace();
+				}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pageNum);
+				pstmt.setInt(2, pageSize);
+				pstmt.setInt(3, pageNum);
+				pstmt.setInt(4, pageSize);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					JSONObject obj = new JSONObject();
+					obj.put("rowNum", rs.getString(1));
+					obj.put("bNo", rs.getString(2));
+					obj.put("title", rs.getString(3));
+					obj.put("content", rs.getString(4));
+					obj.put("regDate", rs.getString(5));
+					obj.put("hit", rs.getString(6));
+				
+					noticeList.add(obj);
+					
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	            if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			return noticeList.toJSONString();
+		}
+		
