@@ -23,46 +23,51 @@ public class UserDAO {
 	private static ResultSet rs;
 	private static Connection conn;
 	
-//  회원정보 수정 메서드(도영)
-  public static boolean update(String userId, String nickName, String name, String gender, String image, String phone){
+//	회원정보 수정 메서드(도영)
+	public static boolean update(String userId, String nickName, String name, String gender, String image,
+			String phone, String originId) {
 
-      try {
-          sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? "
-                  + " WHERE userId=? ";
+		try {
+			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? " + " WHERE userId=? ";
 
-          try {
-              conn = ConnectionPool.get();
-          } catch (NamingException e) {
-              e.printStackTrace();
-          }
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 
-          pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 
-          pstmt.setString(1, userId);
-          pstmt.setString(2, nickName);
-          pstmt.setString(3, name);
-          pstmt.setString(4, gender);
-          pstmt.setString(5, image);
-          pstmt.setString(6, phone);
-          int result = pstmt.executeUpdate();
-          if (result == 1) {
-              return true;
-          }
-      } catch (SQLException e) {
-          e.printStackTrace();
-      } finally {
-          try {
-              if(pstmt != null)    pstmt.close();
-              if(conn != null)    conn.close();
-              if(rs != null)    rs.close();
-          } catch (SQLException e) {
-              e.printStackTrace();
-          }
-      }
+			pstmt.setString(1, userId);
+			pstmt.setString(2, nickName);
+			pstmt.setString(3, name);
+			pstmt.setString(4, gender);
+			pstmt.setString(5, image);
+			pstmt.setString(6, phone);
+			pstmt.setString(7, originId);
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
-      return false;
+		return false;
 
-  }
+	}
+
 
 //	회원 목록 메서드(도영)
 	public static ArrayList<UserDTO> getAllList(){
@@ -161,47 +166,6 @@ public class UserDAO {
 						return users;
 
 						}
-	
-//  회원정보 수정 메서드(도영)
-public static boolean update(String userId, String nickName, String name, String gender, String image, String phone){
-
-	try {
-		sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? "
-				+ " WHERE userId=? ";
-
-		try {
-			conn = ConnectionPool.get();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-
-		pstmt = conn.prepareStatement(sql);
-
-		pstmt.setString(1, userId);
-		pstmt.setString(2, nickName);
-		pstmt.setString(3, name);
-		pstmt.setString(4, gender);
-		pstmt.setString(5, image);
-		pstmt.setString(6, phone);
-		int result = pstmt.executeUpdate();
-		if (result == 1) {
-			return true;
-		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		try {
-			if(pstmt != null)    pstmt.close();
-			if(conn != null)    conn.close();
-			if(rs != null)    rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	return false;
-
-}
 
 	// 본인 정보 수정(소영)
 	public static int myEdit(String userId, String password, String nickName, String image, String phone)

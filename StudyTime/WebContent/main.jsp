@@ -11,7 +11,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*, java.security.*, java.io.*, java.net.*" %>
-
     
 <%@page import="jdbc.*"%>
 <!DOCTYPE html>
@@ -46,6 +45,8 @@ padding:0;
   <body class="text-center">
 
   <%@ include file="/includes/header.jsp"%>
+  
+
 <main>
 
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="">
@@ -125,9 +126,7 @@ padding:0;
 </main>
      
      <script type="text/javascript">
-     
      $("#headerImage").hide();
-     
      
      function searchFunction() {
    	
@@ -267,7 +266,5 @@ padding:0;
      
 
      </script>
-     
-     
   </body>
 </html>
