@@ -159,6 +159,7 @@ if(sid != null) {
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
 				 
+				
 				StudyJoinDTO check = StudyJoinDAO.checkManager(sid);
 				
 				
