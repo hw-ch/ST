@@ -12,8 +12,8 @@
 </head>
 <body>
 <%@ include file="/includes/header.jsp" %>
+
 <%
-	sid = request.getParameter("sid");
 	int bNo = Integer.parseInt(request.getParameter("bNo"));
 	BoardDTO board = new BoardDAO().getboard(bNo);
 	if(sid == null){

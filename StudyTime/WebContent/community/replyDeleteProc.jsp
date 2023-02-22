@@ -5,7 +5,6 @@
 <%	
 	int bNo = Integer.parseInt(request.getParameter("bno"));
 	int rno = Integer.parseInt(request.getParameter("rno"));
-	sid = request.getParameter("sid");
 	ReplyDTO reply = new ReplyDAO().getreply(rno);
 	if(sid != null && sid.equals(reply.getUserid())){
 	out.print(ReplyDAO.Replydelete(rno));
