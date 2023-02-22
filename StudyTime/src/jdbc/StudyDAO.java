@@ -725,30 +725,27 @@ public class StudyDAO {
 	}
 
 
-	//스터디 수정 (지원) 수정필요 조인안해도 될듯
-	 public static boolean studyUpdate(String sTitle, String sWriter, int cNo, String category1,
-	            String category2,String address, int recruitCnt, int joinCnt, String expDate,
-	            String startDate, String scontent,String process,String sNo) {
+	//스터디 수정 (지원)
+	 public static boolean studyUpdate(String sTitle, String category1,
+	            String category2,String address, String recruitCnt, String expDate,
+	            String startDate, String sContent,String process,String sNo) {
 
-	            sql = "UPDATE study A INNER JOIN category B ON A.cno = B.cno SET A.sTitle=?,A.sWriter=?,B.cNo=?,B.category1=?,B.category2=?,"
-	                    + "A.address=?,A.recruitCnt=?,A.joinCnt=?,A.expDate=?,A.startDate=?,A.scontent=?,A.process=? where A.sNo = ?";
+	            sql = "UPDATE study SET sTitle=?,category1=?,category2=?,"
+	                    + "address=?,recruitCnt=?,expDate=?,startDate=?,scontent=?,process=? where sNo = ?";
 	            try {
 
 	                pstmt = conn.prepareStatement(sql);
 	                pstmt.setString(1, sTitle);
-	                pstmt.setString(2, sWriter);
-	                pstmt.setInt(3, cNo);
-	                pstmt.setString(4, category1);
-	                pstmt.setString(5, category2);
-	                pstmt.setString(6, address);
-	                pstmt.setInt(7, recruitCnt);
-	                pstmt.setInt(8, joinCnt);
-	                pstmt.setString(9, expDate);
-	                pstmt.setString(10, startDate);
-	                pstmt.setString(11, scontent);
-	                pstmt.setString(12, process);
-	                pstmt.setString(13, sNo);
-
+	                pstmt.setString(2, category1);
+	                pstmt.setString(3, category2);
+	                pstmt.setString(4, address);
+	                pstmt.setString(5, recruitCnt);
+	                pstmt.setString(6, expDate);
+	                pstmt.setString(7, startDate);
+	                pstmt.setString(8, sContent);
+	                pstmt.setString(9, process);
+	                pstmt.setString(10, sNo);
+	             
 	                if(pstmt.executeUpdate()==1) return true;
 
 	            }catch (Exception e) {

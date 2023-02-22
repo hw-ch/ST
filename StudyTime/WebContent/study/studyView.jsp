@@ -63,7 +63,7 @@
 			</div>
 			<div>
 				<%
-					if(sdto.getAddress()!=null && sdto.getProcess().equals("오프라인") && !sdto.getAddress().equals("")){%>
+					if(sdto.getAddress()!=null && sdto.getProcess().equals("오프라인") && sdto.getAddress().length()!=0){%>
 						 <h1>스터디 위치</h1>
 						 <div id="map" class ="pb-3 mb-5" style="width:700px;height:300px;"></div>
 						<!-- 카카오맵API-->	
