@@ -31,7 +31,7 @@ for(StudyDTO study : studys) {
             <div class="card-title pricing-card-title display-5"><%=study.getSTitle() %></div>
           </div>
           <div class="card-body" style="height: 350px;">
-          	<div style="padding-right: 350px; padding-top: 10px;">
+          	<div style="padding-right: 200px; padding-top: 10px;">
           	<a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory1() %></a> 
           	 <a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory2() %></a>
           	</div>
@@ -40,10 +40,10 @@ for(StudyDTO study : studys) {
             	  %><%=study.getSContent().substring(0, 20) + "..." %>
               <%}else{ %>
               <%=study.getSContent() %><%} %></div>
-              <div style="padding-top: 50px; padding-right: 450px;" class="card-title pricing-card-title h5">모집인원 : <%=study.getRecruitCnt() %> </div>
+              <div style="padding-top: 50px; padding-right: 300px;" class="card-title pricing-card-title h5">모집인원 : <%=study.getRecruitCnt() %> </div>
               <hr class="featurette-divider">
          		                
-         <div style="padding-right: 400px;" class="card-title pricing-card-title h5"><img class="box" style="width: 40px; height: 40px;" src="/images/study3.png"> <%=user.getNickName() %></div>
+         <div style="padding-right: 300px;" class="card-title pricing-card-title h5"><img class="box" style="width: 40px; height: 40px;" src="/images/study3.png"> <%=user.getNickName() %></div>
          
                 </div>
         </div>
