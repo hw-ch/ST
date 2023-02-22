@@ -202,6 +202,8 @@
 		document.form.addr2.value = addrDetail;
 		document.form.addr3.value = roadAddrPart2;
   }
+  	
+  	
     </script>
 </body>
 </html>
