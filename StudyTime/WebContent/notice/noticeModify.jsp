@@ -33,8 +33,8 @@
 	<div class="row justify-content-end">
 		<div class="col p-2">
 			<div style="float:right;">
-				<button class="btn btn-light" onclick="history.back()">취소</button>
-				<button class="btn btn-warning" id="modifyBtn">수정</button>
+				<button class="btn btn-secondary" onclick="history.back()">취소</button>
+				<button class="btn btn-primary" id="modifyBtn">수정</button>
 			</div>
 		</div>
 	</div>
@@ -50,7 +50,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
       </div>
     </div>
   </div>

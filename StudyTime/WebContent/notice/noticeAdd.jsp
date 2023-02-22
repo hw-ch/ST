@@ -33,8 +33,8 @@
 	<div class="row p-2">
 		<div class="col">
 			<div style="float:right;">
-				<button class="btn btn-light" onclick="location.href='/notice/noticeView.jsp'">취소</button>
-				<button class="btn btn-warning" id="insertBtn">등록</button>
+				<button class="btn btn-secondary" onclick="location.href='/notice/noticeView.jsp'">취소</button>
+				<button class="btn btn-primary" id="insertBtn">등록</button>
 			</div>
 		</div>
 	</div>
@@ -50,7 +50,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/notice/noticeView.jsp'">닫기</button>
       </div>
     </div>
   </div>
@@ -85,9 +85,9 @@
     	  			success:function(data) {
     	  				$('.modal-body').html('');
     	  				if(data==1){
-    	  					$('.modal-body').html(data + '<p>등록 완료되었습니다.</p>');
+    	  					$('.modal-body').html('<p>등록 완료되었습니다.</p>');
     	  				} else {
-    	  					$('.modal-body').html(data + '<p>등록 실패하였습니다.<br>다시 시도해주세요.</p>');
+    	  					$('.modal-body').html('<p>등록 실패하였습니다.<br>다시 시도해주세요.</p>');
     	  				}
     	  				$('.modal').show()
     	  			}

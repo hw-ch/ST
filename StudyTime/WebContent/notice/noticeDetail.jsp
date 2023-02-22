@@ -21,7 +21,6 @@
 	
 	NoticeDAO.updateHit(bNo);
 	
-	sid = "";
 %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +48,7 @@
 			<%
 			}
 			%>
-				<button class="btn btn btn-outline-dark" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
+				<button class="btn btn btn-secondary" onclick="location.href='/notice/noticeView.jsp'">목록으로</button>
 			</div>
 		</div>
 		</div>
@@ -65,8 +64,8 @@
       	<p>정말 삭제하시겠습니까?</p>
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-warning" onclick="location.href='/notice/noticeDeleteProc.jsp?bNo=<%=bNo%>'">확인</button>
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">닫기</button>
+      	<button type="button" class="btn btn-primary" onclick="location.href='/notice/noticeDeleteProc.jsp?bNo=<%=bNo%>'">확인</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>

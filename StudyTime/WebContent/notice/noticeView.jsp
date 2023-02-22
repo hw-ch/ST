@@ -59,7 +59,7 @@
 		<div class="row p-2">
 		<div class="col">
 			<div style="float:right;">
-				<button class="col btn btn-warning" onclick="location.href='noticeAdd.jsp'">글작성</button>
+				<button class="col btn btn-primary" onclick="location.href='noticeAdd.jsp'">글작성</button>
 			</div>
 		</div>
 	</div>
