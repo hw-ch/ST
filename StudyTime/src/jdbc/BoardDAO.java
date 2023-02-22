@@ -83,7 +83,7 @@ public class BoardDAO {
 	}
 	
 //	게시물 보기(남훈)
-	public static BoardDTO getboard(int bNo){
+	public static BoardDTO getboard(int bNo){		
 		String sql = "SELECT bNo, subject, content, nickname, userid, hit, good, bad, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate, replyNum from board WHERE bNo = ?";
 		try {
 			
