@@ -28,7 +28,6 @@
 
 %>
 
-<%-- 		<input type="hidden" id="sid" value="<%= userid.getUserId() %>"> --%>
 	<div class="communityView">
 	<div><button class="btn btn-secondary btn-lg" onclick="location.href='boardList.jsp'">&laquo; 목록으로</button></div>
 		<section class="communityView_Postheader">
@@ -285,10 +284,10 @@ if (last > totalPage){last = totalPage};
     	});
  	 
  	});
+ 	
+ 	 $("#home").hide();
  </script>
  
- <script>
- $("#home").hide();
- </script>
+
 </body>
 </html>

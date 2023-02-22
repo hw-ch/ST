@@ -46,9 +46,9 @@
 	if( sid != null && sid.equals(board.getUserId()))
 	{
 %>
-	<form action="boardModifyProc.jsp?bno=<%= bNo%>">
-	<INPUT TYPE="hidden" NAME="bNo" value=<%= bNo %>>
 	<div class="communityView">	
+		<form action="boardModifyProc.jsp?bno=<%= bNo%>">
+		<div><button class="btn btn-secondary btn-lg" onclick="location.href='boardList.jsp'">&laquo; 목록으로</button></div>
 		<section class="communityView_Postheader">
    		<div class="community_title" >  
    		<textarea name="subject"><%= board.getSubject() %></textarea>
@@ -61,13 +61,13 @@
    			<div class="hits"><%= board.getHit() %></div>
    		</div>
    		<hr>
-   		</section>
-   		<div class=community_content_wrap>
+   		<div class=content>
    		<textarea class="community_content" name="content"><%= board.getContent() %></textarea>
    		</div>
+   		</section>
    		<div class="community_delete"><button>수정</button></div>
+   			</form>
 	</div>
-	</form>
 <%
 	}
 %>
