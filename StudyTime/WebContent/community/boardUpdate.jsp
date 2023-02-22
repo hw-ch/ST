@@ -13,8 +13,9 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 <%
-	// sid 확인
-	sid = "abc";
+	sid = request.getParameter("sid");
+	int bNo = Integer.parseInt(request.getParameter("bNo"));
+	BoardDTO board = new BoardDAO().getboard(bNo);
 	if(sid == null){
 %>
 <!-- Modal -->
@@ -26,11 +27,10 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-				로그인을 한 회원만 사용가능한 메뉴입니다.<br>
-				로그인 화면으로 이동합니다.
+				게시글 수정 권한이 없습니다.
 		      </div>
 		      <div class="modal-footer">
-		        <button onclick="location.href='login.jsp'" class="btn btn-secondary" data-bs-dismiss="modal">로그인 이동</button>
+		        <button onclick="history.back()" class="btn btn-secondary" data-bs-dismiss="modal">이전으로</button>
 		      </div>
 		    </div>
 		  </div>
@@ -43,13 +43,10 @@
 		</script>
 <%
 	}
-	int bNo = 0;
-	if(request.getParameter("bNo") != null){
-		bNo = Integer.parseInt(request.getParameter("bNo"));
-	}
-	BoardDTO board = new BoardDAO().getboard(bNo);
+	if( sid != null && sid.equals(board.getUserId()))
+	{
 %>
-	<form action="updateAction.jsp">
+	<form action="boardModifyProc.jsp?bno=<%= bNo%>">
 	<INPUT TYPE="hidden" NAME="bNo" value=<%= bNo %>>
 	<div class="communityView">	
 		<section class="communityView_Postheader">
@@ -71,7 +68,9 @@
    		<div class="community_delete"><button>수정</button></div>
 	</div>
 	</form>
-
+<%
+	}
+%>
 <script>
 	window.onload = function(){
  	}

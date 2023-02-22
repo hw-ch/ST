@@ -14,7 +14,11 @@
 	
 	String nickname = user.getNickName();
 	String userid = user.getUserId();
+	
+	if( sid == null & sid.equals(userid)){
 	out.print(ReplyDAO.Replyinsert(content, nickname, userid, bNo));
 	ReplyDAO.replyCount(bNo);
-
+	} else {
+		out.print(0);
+	}
 %>	

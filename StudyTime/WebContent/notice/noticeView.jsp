@@ -1,4 +1,4 @@
-<!-- 
+<!--
 --------------------------------------------------------
 최초작성자 : 최혜원(wone8115@uos.ac.kr)
 최초작성일 : 2023/02/15
@@ -14,18 +14,18 @@
     pageEncoding="UTF-8"%>
 <%@ page import="jdbc.*" %>
 <%@ include file="/includes/header.jsp" %>
-<% 
+<%
 	// sid 확인
 	sid = "";
 	if(session.getAttribute("sid") != null){
-		sid = (String)session.getAttribute("sid");	
+		sid = (String)session.getAttribute("sid");
 	}
 
 	int total = NoticeDAO.count();
-	
+
 	String pageNum = "";
 	if(request.getParameter("page") != null){
-		pageNum = request.getParameter("page");	
+		pageNum = request.getParameter("page");
 	}
 %>
 <style>
@@ -33,14 +33,14 @@
   text-decoration: none;
   color:black;
 	}
-	
+
 	.pagination a:hover,
 	.pagination .active a {
     background-color: #f0ad4e;
     color: #ffffff;
     border : none;
 	}
-	
+
 	.pagination a {
     float: left;
     padding: 0 14px;
@@ -48,9 +48,9 @@
     color: #000000;
     text-decoration: none;
     border-left-width: 0;
-	}	
+	}
 
-	
+
 </style>
 <body>
 <div class="container">
@@ -70,7 +70,7 @@
   <tbody id="notice">
   </tbody>
 </table>
-<ul class="pagination justify-content-center">	   
+<ul class="pagination justify-content-center">
 </ul>
 </div>
 
@@ -86,7 +86,7 @@
 	if (last > totalPage){last = totalPage};
 	var previous = start > 1;
 	var next = last < totalPage;
-	
+
 
  	function searchFunction(){
  		$.ajax({
@@ -94,8 +94,8 @@
  			url:"/notice/noticeViewProc.jsp",
  			data : {pageSize : pageSize,
  					currentPage : currentPage
-				
-			},	
+
+			},
  			success:function(data){
  				var notices = JSON.parse(data.trim());
  				var str="";
@@ -108,16 +108,16 @@
  				}
  				$('#notice').html(str);
  			}
- 			
+
  		});
  	}
- 	
- 	
+
+
  	window.onload = function(){
  		searchFunction();
  		pagination();
  	}
- 	
+
  	function pagination(){
  		if (total <= pageSize) return;
  		var str = '';
@@ -131,11 +131,11 @@
 	 		  str += "<li class='page-item next'><a class='page-link' href='/notice/noticeView.jsp?page="+ (start + 10) +"'>Next &raquo;</a></li>"
 	 		}
 
- 		
- 	
+
+
  		$('.pagination').html(str);
  	}
- 	
+
  </script>
 </body>
 </html>

@@ -20,7 +20,9 @@
 	String subject = request.getParameter("subject");
 	String content = request.getParameter("content");
 	int bno =  Integer.parseInt(request.getParameter("bNo"));
+	if( subject != null && content != null){
 	if(BoardDAO.Boardupdate(bno, subject, content) == 1) {
-		 response.sendRedirect("boardview.jsp");
+		 response.sendRedirect("boardview.jsp?bno='+bno");
+	}
 	}
 %>

@@ -74,9 +74,9 @@ public class ReplyDAO {
 		return Replylist.toJSONString();
 	}
 	
-	// 수정할 댓글 내용 가져오기(남훈) * 임시
-	public static ReplyDTO getUpdateReply(int rno){
-		String sql = "SELECT content FROM reply WHERE rno = ?";
+	// 댓글 정보 (남훈)
+	public static ReplyDTO getreply(int rno){
+		String sql = "SELECT rNo, bNo, content, nickname, userid, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate FROM reply WHERE rno = ?";
 
 	try {
 				conn = ConnectionPool.get();
@@ -85,8 +85,13 @@ public class ReplyDAO {
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					ReplyDTO reply = new ReplyDTO();
-					reply.setContent(rs.getString(1));
-
+					reply.setRNo(rs.getString(1));
+					reply.setBNo(rs.getString(2));
+					reply.setContent(rs.getNString(3));
+					reply.setNickname(rs.getNString(4));
+					reply.setUserid(rs.getNString(5));
+					reply.setRegDate(rs.getNString(6));
+					
 					return reply;
 				}
 			} catch(Exception e) {

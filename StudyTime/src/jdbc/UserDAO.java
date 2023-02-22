@@ -318,7 +318,39 @@ public class UserDAO {
 
 	}
 
-	
+	// 회원 탈퇴(소영)
+	public static boolean unregister(String userId, String password) {
+
+		try {
+
+			String sql = "DELETE from user where userId=? AND password = ?";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(1, password);
+
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt!= null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
 
 	//회원가입 (두현)
 		public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image){
