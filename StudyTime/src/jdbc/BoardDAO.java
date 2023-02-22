@@ -233,7 +233,34 @@ public class BoardDAO {
 			return false;
 		}
 
+	//조회수 추가(남훈)
+	public static int updateHit(int bno) {
+		int result = 0;
 		
+		try {
+			String sql = "UPDATE board SET hit = hit+1 where bno = ?";
+			
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException | SQLException e){
+				e.printStackTrace();
+			}
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		
+		}finally {
+            if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+		}
+		
+		return result;
+	}		
 
 	
 
