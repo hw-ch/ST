@@ -9,6 +9,9 @@ import java.util.*;
 
 import javax.naming.NamingException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import util.ConnectionPool;
 
 public class StudyDAO {
@@ -241,5 +244,43 @@ public class StudyDAO {
            }
            return false;
        }
+	   
+	   
+	// 그룹장 스터디 모두 가져오기(혜원)
+		public static String leaderGetList(String userid){
+			sql = "select s.sNo, s.sTitle, s.category1, u.nickname, DATE_FORMAT(s.regDate, '%y-%m-%d') AS regDate from study s INNER JOIN user u on (s.sWriter = u.userid) where s.sNo in (select sj.sNo from studyJoin sj where sj.userid= ? and sj.approve = '그룹장')";
+			JSONArray studyList = new JSONArray();
+			
+			try {
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException | SQLException e){
+					e.printStackTrace();
+				}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userid);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					JSONObject obj = new JSONObject();
+					obj.put("sNo", rs.getString(1));
+					obj.put("sTitle", rs.getString(2));
+					obj.put("category1", rs.getString(3));
+					obj.put("nickname", rs.getString(4));
+					obj.put("regDate", rs.getString(5));
+				
+					studyList.add(obj);
+					
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	            if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+	            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			}
+			return studyList.toJSONString();
+		}
 
 }

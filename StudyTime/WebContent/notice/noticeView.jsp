@@ -53,6 +53,9 @@
 </style>
 <body>
 <div class="container">
+	<%
+	if(sid.equals("admin")){
+	%>
 	<div class="row p-2">
 		<div class="col">
 			<div style="float:right;">
@@ -60,6 +63,9 @@
 			</div>
 		</div>
 	</div>
+	<%
+	}
+	%>
   <table class="table table-hover">
   <tbody id="notice">
   </tbody>
