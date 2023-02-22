@@ -37,13 +37,13 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 		    <h1 class="modal-title fs-5" id="exampleModalLabel">스터디 수정</h1>
-		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		    <button onclick = "location.href = '/study/studyView.jsp?sNo=<%=sNo %>'" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 		    	수정이 완료되었습니다.
 		  </div>
 		  <div class="modal-footer">
-		    <button onclick = "location.href = '/study/studyView.jsp?sNo=<%=sNo %>'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인
+		    <button onclick = "location.href = '/study/studyView.jsp?sNo=<%=sNo %>'" type="button" class="btn btn-info" data-bs-dismiss="modal">확인
 		    </button>
 		  </div>
 		</div>

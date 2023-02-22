@@ -143,12 +143,13 @@
 		</main>
 			<footer class="pt-5 my-5 text-muted border-top">
 		  		<div class="mb-5">
-			      <a href="javascript:void(0);" onclick = "confirmBack();" class="btn btn-danger btn-lg px-4 text text-white">취소</a>
-			      <button class="btn btn-warning btn-lg px-4 text text-white addBtn" type="submit">글 등록</button>
+			      <a href="javascript:void(0);" onclick = "confirmBack();" class="btn btn-warning btn-lg px-4 text text-white">취소</a>
+			      <button class="btn btn-primary btn-lg px-4 text text-white addBtn" type="submit">글 등록</button>
 		  		</div>
 			</footer>
 		</form>  	
 	</div>
+	<script>$('#pageTitle').text("스터디 등록");</script>
 	<script>
 	 function confirmBack() {
 	        if(confirm("작성한 내용이 저장되지 않습니다.\n정말 이전으로 돌아가시겠습니까?") ) {

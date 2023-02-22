@@ -32,6 +32,7 @@
 		}
 		
 	%>
+	
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
 		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
 	    	<img src="/images/favicon.ico" width="40" height="32" class="me-2"></img>
@@ -84,22 +85,25 @@
 		%>
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
-		      <a href="javascript:history.back();" class="btn btn-danger btn-lg px-4 text text-white">이전으로</a>
+		      <a href="javascript:history.back();" class="btn btn-secondary btn-lg px-4 text text-white">이전으로</a>
 		   <%if(sid!=null && cnt == 0) { %>
-   				<a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">참여하기</a>
+   				<a href="/study/studyJoinProc.jsp?sNo=<%=sNo %>" class="btn btn-primary btn-lg px-4 text text-white">참여하기</a>
    			<%}%>
 		      
 		  	<%if(sid!=null && (sid.equals("admin") || sdto.getSWriter().equals(sid))){ %>
-	      		 <a href="/study/studyModify.jsp?sNo=<%=sNo %>" class="btn btn-primary btn-lg px-4 text text-white">수정</a>
+	      		 <a href="/study/studyModify.jsp?sNo=<%=sNo %>" class="btn btn-warning btn-lg px-4 text text-white">수정</a>
 		     	 <a href="/study/studyRemoveProc.jsp?sNo=<%=sNo %>" class="btn btn-danger btn-lg px-4 text text-white">삭제</a>
 	      	<%}%>
 		     
 		     
-	  		</div>
+	  		</div>	
 		</footer>
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b228c636b51d3c9d389fa37c9bd68e8e&libraries=services"></script>
 	<script>
+	
+	$('#pageTitle').text("스터디 조회"); 
+	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -151,9 +155,7 @@
 	} 
 	}); 
 
-
-
-		    
+	  
 		   
 		
 	</script>
