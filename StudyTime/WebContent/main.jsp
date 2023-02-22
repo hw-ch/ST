@@ -11,7 +11,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.*, java.security.*, java.io.*, java.net.*" %>
-    <%@ page errorPage = "page_error_page.jsp" %>
     
 <%@page import="jdbc.*"%>
 <!DOCTYPE html>
@@ -20,8 +19,27 @@
 <meta charset="UTF-8">
 <title>STUDY TIME</title>
 <link href="carousel.css" rel="stylesheet">
-
 </head>
+
+<style>
+#floatdiv {
+position:fixed; _position:absolute; _z-index:-1;
+width:170px;
+overflow:hidden;
+right:-30px;
+bottom:15px;
+background-color: transparent;
+margin:0;
+padding:0;
+}
+#floatdiv ul { list-style: none; }
+#floatdiv li { margin-bottom: 2px; text-align: center; }
+#floatdiv a { color: #5D5D5D; border: 0; text-decoration: none; display: block; }
+#floatdiv .menu { background-color: #5D5D5D; color: #fff; }
+#floatdiv .menu, #floatdiv .last { margin-bottom: 0px; }
+</style>
+
+
   <body class="text-center">
 
   <%@ include file="/includes/header.jsp"%>
@@ -64,18 +82,21 @@
     
    <div class="row featurette" style="padding-top: 100px;">
       <div class="col-md-7" style="padding-bottom: 10px;">
-       <span class="h2" style="padding-right: 100px; padding-left: 50px;">전체 </span><span class="h2" style="padding-right: 100px;">영어 </span><span class="h2" style="padding-right: 100px;">중국어 </span><span class="h2" style="padding-right: 100px;">일본어 </span><span class="h2" style="padding-right: 100px;">운동/스포츠 </span><span class="h2" style="padding-right: 100px;">	IT </span>
-            </div>
+				<span class="h2 all"
+					style="padding-right: 100px; padding-left: 50px; cursor: pointer;">전체
+				</span><span class="h2 english"
+					style="padding-right: 100px; cursor: pointer;">영어 </span><span
+					class="h2 china" style="padding-right: 100px; cursor: pointer;">중국어
+				</span><span class="h2 japan"
+					style="padding-right: 100px; cursor: pointer;">일본어 </span><span
+					class="h2 sport" style="padding-right: 100px; cursor: pointer;">운동/스포츠
+				</span><span class="h2 IT"
+					style="padding-right: 100px; cursor: pointer;"> IT </span>
+			</div>
               <hr class="featurette-divider">
-        <div style="padding-right: 1550px;">
+        <div id="category2" class="text-start" style="padding-left: 50px; width: 50%;">
         
-<%--         <% --%>
-//         String category1 = 
-<%--          CategoryDTO category = CategoryDAO.select(category1); %> --%>
-        <a class="btn btn-lg  border-warning text-primary rounded-5" href="../product/productList.jsp">TOEIC</a>
-         <a class="btn btn-lg border-warning text-primary rounded-5" href="../product/productList.jsp">TOEFL</a>
-          <a class="btn btn-lg border-warning text-primary rounded-5" href="../product/productList.jsp">TOEIC</a></div>
-
+</div>
       </div>
       <div class="col-md-5">
 
@@ -92,6 +113,13 @@
     </div>
   </div>
  
+ 
+<div id="floatdiv">
+ <a href="#"><img src="/images/top.png" class="box" style="border:3px solid black;"></a>
+</div>
+
+
+
 
 </main>
      
@@ -102,13 +130,12 @@
    	
    	  $.ajax({
    		type:'post',
-   		url:'studyCheckAJAX.jsp',
+   		url:'studyCheckAJAX.jsp?category1=all',
    		datatype : 'json',
    		success:function(result){
-			var str = result;
-//    			var str = result.split("__TEMP__");
-   			$("#study").html(str);
-//    			$("#ajaxTable2").html(str[1]);
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
    			
    			
    		}
@@ -116,36 +143,124 @@
    	  });
    	  
    }
-
+     $(document).on('click', '.all', function(event) {
+      	  $.ajax({
+         		type:'post',
+         		url:'studyCheckAJAX.jsp?category1=all',
+         		datatype : 'json',
+         		success:function(result){
+      			var str = result.split("__CATEGORY__");
+      			$("#study").html(str[0]);
+      			$("#category2").html(str[1]);
+         			
+         			
+         		}
+         	  
+         	  });
+   	});     
      
+     $(document).on('click', '.english', function(event) {
+      	  $.ajax({
+         		type:'post',
+         		url:'studyCheckAJAX.jsp?category1=영어',
+         		datatype : 'json',
+         		success:function(result){
+      			var str = result.split("__CATEGORY__");
+      			$("#study").html(str[0]);
+      			$("#category2").html(str[1]);
+         			
+         			
+         		}
+         	  
+         	  });
+   	});
      
+     $(document).on('click', '.japan', function(event) {
+   	  $.ajax({
+     		type:'post',
+     		url:'studyCheckAJAX.jsp?category1=일본어',
+     		datatype : 'json',
+     		success:function(result){
+  			var str = result.split("__CATEGORY__");
+  			$("#study").html(str[0]);
+  			$("#category2").html(str[1]);
+     			
+     			
+     		}
+     	  
+     	  });
+   	}); 
      
+  $(document).on('click', '.china', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=중국어',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+  
+  $(document).on('click', '.sport', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=운동/스포츠',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+     
+  $(document).on('click', '.IT', function(event) {
+   	  $.ajax({
+   		type:'post',
+   		url:'studyCheckAJAX.jsp?category1=IT',
+   		datatype : 'json',
+   		success:function(result){
+			var str = result.split("__CATEGORY__");
+			$("#study").html(str[0]);
+			$("#category2").html(str[1]);
+   			
+   			
+   		}
+   	  
+   	  });
+	});
+        
+  $(document).on('click', '#category3', function(event) {
+	  console.log(this)
+   	  $.ajax({
+   		type:'post',
+   		url:'categoryCheckAJAX.jsp?category3=' + this.text,
+   		datatype : 'json',
+   		success:function(result){
+			var str = result;
+			$("#study").html(str);
+			// ajax 중복 방지					
+			if( window.ajaxCheck == 1 ) return false;
+   			
+   		}
+   	  
+   	  });
+	});
+  
      window.onload = function() {
    	searchFunction();
    }
      
-     $(document).on('click', '.regBtn', function(event) {
-   	  $.ajax({
-   			type:'post',
-   			url:'categoryCheckAJAX.jsp?check=승인&id=' + document.getElementById("tempId").innerText,
-   			success:function(result){
-   				searchFunction();
-   			}
-   		  
-   		  });
-   	});
      
-     
-     $(document).on('click', '.delBtn', function(event) {
-   	  $.ajax({
-   			type:'post',
-   			url:'tempCheckAJAX.jsp?check=거부&id=' + document.getElementById("tempId").innerText,
-   			success:function(result){
-   				searchFunction();
-   			}
-   		  
-   		  });
-   	});
      </script>
   </body>
 </html>
