@@ -479,13 +479,12 @@ public class StudyJoinDAO {
 	//스터디참여 식별 메소드(지원)
 	public static List<StudyJoinDTO> selectJoinTable(String sNo){	
 		sql = "SELECT * FROM studyjoin where sNo = ?";
-		List<StudyJoinDTO> list = null;
+		List<StudyJoinDTO> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sNo);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list = new ArrayList<>();
 				list.add(new StudyJoinDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
 			}
 		} catch (SQLException e) {
