@@ -47,7 +47,7 @@ for(StudyDTO studyinfo : study){
     <input type="hidden" name="sno" value="<%=studyinfo.getSNo() %>">
     
     
-    <input type="submit" class="btn btn-secondary" value="스터디 탈퇴">
+    <input type="submit" class="btn btn-danger" value="스터디 탈퇴">
    	<a href="myStudy.jsp" class="btn btn-secondary">My Study</a>
     
     
