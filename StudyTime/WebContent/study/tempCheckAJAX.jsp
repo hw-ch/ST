@@ -10,18 +10,18 @@
     pageEncoding="UTF-8"%>
 <%
 	String check = request.getParameter("check");
-String tempTitle = request.getParameter("tempTitle");
+String tempSNo = request.getParameter("tempSNo");
 
 
 if(check.equals("승인")){
 
-StudyDAO.apply(tempTitle);
-StudyDTO study = StudyDAO.getOneList(tempTitle);
+StudyDAO.apply(tempSNo);
+StudyDTO study = StudyDAO.getOneList(tempSNo);
 StudyJoinDAO.insertManager(study.getSWriter(), study.getSNo());
 
 }else{
 
-	StudyDAO.deny(tempTitle);
+	StudyDAO.deny(tempSNo);
 	
 }
 %>

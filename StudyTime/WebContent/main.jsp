@@ -81,17 +81,17 @@ padding:0;
     
     
    <div class="row featurette" style="padding-top: 100px;">
-      <div class="col-md-7" style="padding-bottom: 10px;">
+      <div class="col-md-8" style="padding-bottom: 10px;">
 				<span class="h2 all"
-					style="padding-right: 100px; padding-left: 50px; cursor: pointer;">전체
+					style="padding-right: 90px; padding-left: 40px; cursor: pointer;">전체
 				</span><span class="h2 english"
-					style="padding-right: 100px; cursor: pointer;">영어 </span><span
+					style="padding-right: 90px; cursor: pointer;">영어 </span><span
 					class="h2 china" style="padding-right: 100px; cursor: pointer;">중국어
 				</span><span class="h2 japan"
-					style="padding-right: 100px; cursor: pointer;">일본어 </span><span
-					class="h2 sport" style="padding-right: 100px; cursor: pointer;">운동/스포츠
+					style="padding-right: 90px; cursor: pointer;">일본어 </span><span
+					class="h2 sport" style="padding-right: 90px; cursor: pointer;">운동/스포츠
 				</span><span class="h2 IT"
-					style="padding-right: 100px; cursor: pointer;"> IT </span>
+					style="cursor: pointer;"> IT </span>
 			</div>
               <hr class="featurette-divider">
         <div id="category2" class="text-start" style="padding-left: 50px; width: 50%;">
