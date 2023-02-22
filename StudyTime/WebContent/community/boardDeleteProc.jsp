@@ -3,6 +3,7 @@
 	-->
 
 
+<%@page import="jdbc.BoardDTO"%>
 <%@page import="java.awt.print.Printable"%>
 <%@page import="javax.security.auth.Subject"%>
 <%@page import="jdbc.BoardDAO"%>
@@ -12,11 +13,13 @@
     
 <%
 	request.setCharacterEncoding("utf-8"); //한글 처리
+
+	int bNo = Integer.parseInt(request.getParameter("bNo"));
+	BoardDTO board = new BoardDAO().getboard(bNo);
 	
-	int bNo = Integer.parseInt((String)request.getParameter("bNo"));
-	if(request.getParameter("bNo") != null){
+	if(request.getParameter("bNo") != null && bNo == Integer.parseInt(board.getBNo())){
 	BoardDAO.Replydelete(bNo);
 	BoardDAO.Boarddelete(bNo);
-	response.sendRedirect("index.jsp");
+	response.sendRedirect("boardList.jsp");
 	}
 %>
