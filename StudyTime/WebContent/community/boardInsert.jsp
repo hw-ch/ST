@@ -67,7 +67,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="button" onclick="history.back()" value="이전으로"
 						class="btn btn-lg btn-secondary backBtn" style="margin-right: 10px;"> 
-						 <input type="submit" value="등록" class="btn btn-lg btn-info regBtn">
+						 <input type="submit" value="등록" class="btn btn-lg btn-primary regBtn">
 				</div>
 			</div>
 		</form>

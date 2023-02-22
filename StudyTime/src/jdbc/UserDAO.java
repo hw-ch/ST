@@ -78,7 +78,7 @@ public class UserDAO {
 			String phone, String originId) {
 
 		try {
-			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? " + " WHERE userId=? ";
+			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=IFNULL(? , image), phone=? " + " WHERE userId=? ";
 
 			try {
 				conn = ConnectionPool.get();

@@ -93,7 +93,7 @@
 		   정말 탈퇴하시겠습니까?
 		      </div>
 		      <div class="modal-footer">
-		     <button type="button" class="btn btn-secondary" onclick="$('#delForm').submit()" data-bs-dismiss="modal">확인</button>		      </div>
+		     <button type="button" class="btn btn-info" onclick="$('#delForm').submit()" data-bs-dismiss="modal">확인</button>		      </div>
 		    </div>
 		  </div>
 		</div>

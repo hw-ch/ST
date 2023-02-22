@@ -35,7 +35,11 @@ for(StudyDTO study : studys) {
           	<a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory1() %></a> 
           	 <a class="btn btn-lg btn-light border-dark rounded-5"><%=study.getCategory2() %></a>
           	</div>
-              <div style="padding-top: 50px;" class="card-title pricing-card-title h3"><%=study.getSContent() %></div>
+              <div style="padding-top: 50px;" class="card-title pricing-card-title h3">
+              <%if(study.getSContent().length() >= 20){
+            	  %><%=study.getSContent().substring(0, 20) + "..." %>
+              <%}else{ %>
+              <%=study.getSContent() %><%} %></div>
               <div style="padding-top: 50px; padding-right: 450px;" class="card-title pricing-card-title h5">모집인원 : <%=study.getRecruitCnt() %> </div>
               <hr class="featurette-divider">
          		                
