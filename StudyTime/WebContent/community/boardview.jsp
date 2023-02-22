@@ -287,5 +287,9 @@ if (last > totalPage){last = totalPage};
  	 
  	});
  </script>
+ 
+ <script>
+ $("#home").hide();
+ </script>
 </body>
 </html>
