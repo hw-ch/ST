@@ -81,16 +81,17 @@
 
           <div class="mb-3">
             <label for="email">아이디</label>
-            <input type="email" class="form-control" name="userId" placeholder="you@example.com" maxlength="30" required>
+            <input type="email" class="form-control" name="userId" placeholder="you@example.com" id="userId" maxlength="30" required>
             
-            <div class="invalid-feedback">이메일 형태의 아이디를 입력해주세요.</div>
+            
+            <div class="invalid-feedback">이메일 형태의 아이디로 입력해주세요.</div>
               
             
           </div>
 
           <div class="mb-3">
             <label for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="pw"  required>
+            <input type="password" class="form-control" name="password" id="pw" minlength="10" required>
             
             <div class="valid-feedback">사용가능한 비밀번호입니다.</div>
             <div class="invalid-feedback">영문자, 숫자, 특수문자 포함 10자이상 비밀번호를 입력해주세요.</div>
@@ -181,10 +182,10 @@
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
-            form.classList.add('was-validated');
+            
           }
 
-         
+          form.classList.add('was-validated');
         }, false);
       });
     }, false);  
@@ -206,6 +207,24 @@
         this.classList.add("is-invalid");
      }
   });
+ 
+//아이디 유효성 검사
+document.querySelector("#userId").addEventListener("input", function(event){
+	  let reg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+	  let inputId=this.value;
+	  
+     if(reg.test(inputId)){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+        
+     }
+  });
+
+  
+  
   
 //비밀번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
   let isPwValid=false;
@@ -236,6 +255,24 @@
      let inputPwChk=this.value;
      
      if(inputPw == inputPwChk){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+     }
+  });
+  
+  
+//휴대전화번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
+  let isPhoneValid = false;
+  
+  // id 가 pwChk 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#phone").addEventListener("input", function(){
+	  
+     let inputPhoneChk=this.value;
+     
+     if(inputPhoneChk.length == 13){
         this.classList.remove("is-invalid");
         this.classList.add("is-valid");
      }else{
