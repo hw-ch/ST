@@ -21,8 +21,7 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 <% 
-// 	sid = (String) session.getAttribute("sid");
-	sid = "abc";
+
 	UserDTO userid = new UserDAO().getOneList(sid);
 
 %>

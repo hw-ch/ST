@@ -19,9 +19,8 @@
 
 <body>
 <%@ include file="/includes/header.jsp" %>
+
 <% 
-// 	sid = (String) session.getAttribute("sid");
-	sid = "abc";
 	UserDTO userid = new UserDAO().getOneList(sid);
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);
@@ -30,7 +29,6 @@
 
 %>
 
-<%-- 		<input type="hidden" id="sid" value="<%= userid.getUserId() %>"> --%>
 	<div class="communityView">
 	<div><button class="btn btn-secondary btn-lg" onclick="location.href='boardList.jsp'">&laquo; 목록으로</button></div>
 		<section class="communityView_Postheader">
@@ -287,6 +285,10 @@ if (last > totalPage){last = totalPage};
     	});
  	 
  	});
+ 	
+ 	 $("#home").hide();
  </script>
+ 
+
 </body>
 </html>
