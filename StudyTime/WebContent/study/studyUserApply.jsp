@@ -2,7 +2,6 @@
 --------------------------------------------------------
 최초작성자 : 최혜원(wone8115@uos.ac.kr)
 최초작성일 : 2023/02/21
-
 버전 기록 : ver1(시작 23/02/21)
 --------------------------------------------------------
  -->
@@ -11,13 +10,10 @@
 <%@ include file="/includes/header.jsp" %>
 <%
 	// 이후 처리
-	String sNo = "";
-	try{
-		sNo = request.getParameter("sno");
-	} catch(Exception e){
-		e.printStackTrace();
-	}
-	request.setAttribute("sNo", sNo);
+
+
+	String sNo = request.getParameter("sNo");
+
 	
 %>
 <!DOCTYPE html>
@@ -63,8 +59,12 @@
 	function searchFunction(){
 		$.ajax({
 			type:"POST",
-			url:"/study/studyUserApplyProc.jsp?sNo=<%=sNo%>&state='list'",
+			url:"/study/studyUserApplyProc.jsp",
+			data : {sNo : <%=sNo%>,
+					state : 'list'
+			},	
 			success:function(data){
+				console.log(data);
 				if(data == null){
 					str += "<p>가입 신청 유저가 없습니다.</p>";
 				} else{
@@ -80,7 +80,6 @@
 						str += "</div>";
 						str += "</div>";
 						str += "</li>";
-
 						 }
 	
 				}
@@ -99,8 +98,12 @@
  		
   		$.ajax({
 				type:"POST",
-				url:"/study/studyUserApplyProc.jsp?sNo=<%=sNo%>&state=" + $(this).attr('id') + "&sjNo=" + $(this).data('sjno'),
-
+				url:"/study/studyUserApplyProc.jsp",
+				data : {sNo : <%=sNo%>,
+						state : $(this).attr('id'),
+						sjNo : $(this).data('sjno')
+						
+				},	
 				success:function(data){
 					$('#exampleModal').modal('show');
 				}
@@ -112,7 +115,6 @@
         $('.modal').on('hidden.bs.modal', function () {
              searchFunction();
        });
-
     });
 </script>
 </body>
