@@ -29,9 +29,10 @@ $("#home").hide();
 		
 
 		
-		if(check.getApprove().equals("그룹장")){
-			UserDAO.dropout(userId);
+		if(StudyJoinDAO.checkManager(userId) != null && check.getApprove().equals("그룹장")){
 			StudyDAO.dropout(userId);
+			UserDAO.dropout(userId);
+
 		}else{
 			
 		ArrayList<String> sNos = StudyJoinDAO.getAllsNo(userId);

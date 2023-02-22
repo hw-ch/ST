@@ -15,10 +15,10 @@
 
 for(UserDTO user : users) {
 %>
- <tr><td onclick="location.href='/user/myInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5 tempTitle1" id="<%=user.getUserId()%>"> <%=user.getNickName()%> </td>
-<td onclick="location.href='/user/myInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getName()%> </td>
-<td onclick="location.href='/user/myInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getGender()%> </td>
-<td onclick="location.href='/user/myInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getTs()%> </td>
+ <tr><td onclick="location.href='/admin/memberInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5 tempTitle1" id="<%=user.getUserId()%>"> <%=user.getNickName()%> </td>
+<td onclick="location.href='/admin/memberInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getName()%> </td>
+<td onclick="location.href='/admin/memberInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getGender()%> </td>
+<td onclick="location.href='/admin/memberInfo.jsp?userId=<%=user.getUserId()%>'" style="cursor : pointer;" class="h5"> <%=user.getTs()%> </td>
 <td class="h5"></td></tr>
 <%
 	}

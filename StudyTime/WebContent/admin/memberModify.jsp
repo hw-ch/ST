@@ -35,7 +35,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 			<div class="col-md-4">
 
 			
-				<img src="/images/profile.png"
+				<img src="/upload/<%=userInfo.getImage() %>"
 					style="width: 200px; height: 300px;">
 			</div>
 
@@ -123,7 +123,7 @@ UserDTO userInfo = UserDAO.getOneList(sid);
 						<div class="col-sm-offset-2 col-sm-10">
 							<input type="button" onclick="history.back()" value="이전으로"
 								class="btn btn-lg btn-secondary backBtn"> <input type="submit"
-								value="수정" class="btn btn-lg btn-info regBtn">
+								value="수정" class="btn btn-lg btn-warning regBtn">
 
 						</div>
 					</div>

@@ -1,4 +1,5 @@
 
+
 <!-- -------------------------------------------------------- -->
 <!-- 최초작성자 : 김도영(difbfl4750@naver.com) -->
 <!-- 최초작성일 : 2023/02/15 -->
@@ -122,6 +123,9 @@ if(sid != null) {
             <% }else if(sid != null && sid.equals("admin")){ %>
     <ul class="nav nav-pills" style="padding-top: 10px;">
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
+                <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
+        <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
+         <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
         <li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
      	
@@ -132,8 +136,8 @@ if(sid != null) {
   <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
-				<li><a class="dropdown-item h5" href="/user/manage.jsp">회원관리</a></li>
+				<li><a class="dropdown-item h5" href="/admin/memberInfo.jsp">내 정보</a></li>
+				<li><a class="dropdown-item h5" href="/admin/userManage.jsp">회원관리</a></li>
 				<li><a class="dropdown-item h5" href="/study/studyApply.jsp">스터디관리</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item h5" href="/user/logout.jsp">로그아웃</a></li>
@@ -146,6 +150,7 @@ if(sid != null) {
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
         <li class="nav-item" style="padding-right: 50px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
         <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
+                 <li class="nav-item" style="padding-right: 50px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
      	<li class="nav-item" style="padding-right: 50px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
       </ul>
       
@@ -154,17 +159,16 @@ if(sid != null) {
    <img src="/upload/<%=user.getImage() %>" alt="mdo" width="60px" height="60px" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-				<li><a class="dropdown-item h5" href="/user/myInfo.jsp">내 정보</a></li>
+				<li><a class="dropdown-item h5" href="/admin/memberInfo.jsp">내 정보</a></li>
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
 				 
-				
 				StudyJoinDTO check = StudyJoinDAO.checkManager(sid);
 				
 				
 				
 				if(StudyJoinDAO.checkManager(sid) != null && check.getApprove().equals("그룹장")) { %>
-				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
+				<li><a class="dropdown-item h5" href="/study/studyLeaderList.jsp">스터디관리</a></li>
 				<%}else{ %>
 				
 				<%} %>

@@ -41,7 +41,7 @@ userInfo = UserDAO.getOneList(sid);
 			<div class="col-md-4">
 
 			
-				<img src="/images/profile.png"
+				<img src="/upload/<%=userInfo.getImage() %>"
 					style="width: 200px; height: 300px;">
 			</div>
 
@@ -104,7 +104,7 @@ userInfo = UserDAO.getOneList(sid);
 						<div class="col-sm-offset-2 col-sm-10">
 							<input type="button" onclick="history.back()" value="이전으로"
 								class="btn btn-lg btn-secondary backBtn"> 
-								<input type="button" onclick="location.href='/admin/memberModify.jsp'" value="수정" class="btn btn-lg btn-info regBtn">
+								<input type="button" onclick="location.href='/admin/memberModify.jsp'" value="수정" class="btn btn-lg btn-warning regBtn">
 <%if(sid.equals("admin")){ %>
 <a class="btn btn-lg btn-danger removeBtn">회원삭제</a>
 <%}else{%>
@@ -219,7 +219,7 @@ userInfo = UserDAO.getOneList(sid);
 		   정말 삭제하시겠습니까?
 		      </div>
 		      <div class="modal-footer">
-		     <button type="button" class="btn btn-secondary" onclick="$('#delForm').submit()" data-bs-dismiss="modal">확인</button>		      </div>
+		     <button type="button" class="btn btn-info" onclick="$('#delForm').submit()" data-bs-dismiss="modal">확인</button>		      </div>
 		    </div>
 		  </div>
 		</div>
