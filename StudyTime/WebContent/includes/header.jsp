@@ -164,7 +164,7 @@ if(sid != null) {
 				
 				
 				
-				if(check.getApprove().equals("그룹장")) { %>
+				if(StudyJoinDAO.checkManager(sid) != null && check.getApprove().equals("그룹장")) { %>
 				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
 				<%}else{ %>
 				
