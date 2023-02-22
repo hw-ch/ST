@@ -21,14 +21,17 @@
 <%@ include file="/includes/header.jsp" %>
 <% 
 // 	sid = (String) session.getAttribute("sid");
-	UserDTO userid = new UserDAO().getOneList(sid);
 	sid = "abc";
+	UserDTO userid = new UserDAO().getOneList(sid);
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);
+	ReplyDAO.replyCount(bno);
+
 %>
 
 <%-- 		<input type="hidden" id="sid" value="<%= userid.getUserId() %>"> --%>
 	<div class="communityView">
+	<div><button class="btn btn-secondary btn-lg" onclick="location.href='boardList.jsp'">&laquo; 목록으로</button></div>
 		<section class="communityView_Postheader">
    		<div class="community_title"><%=board.getSubject() %></div>
    		<div class ="writer_wrap">
@@ -36,8 +39,8 @@
    		<% if(sid != null && sid.equals(board.getUserId()))
    		{
 		%>   
-   		<div class="community_update"><button onclick="location.href='boardUpdate.jsp?bNo=<%= bno %>'">수정</button></div>
-   		<div class="community_delete"><button type="button" onclick="boradDelete()">삭제</button></div>
+   		<div class="community_update" style="margin-right: 10px;"><button class="btn btn-warning btn-lg" onclick="location.href='boardUpdate.jsp?sid=<%=sid %>&bNo=<%= bno %>'">수정</button></div>
+   		<div class="community_delete"><button class="btn btn-danger btn-lg" type="button" onclick="boradDelete()">삭제</button></div>
 		<%
    		}
 		%>
@@ -56,7 +59,7 @@
    			<h1 class="comment_count">댓글 수 <%=board.getReplyNum() %> </h1>
   			<textarea class="community_content" id="replycontent"></textarea>
 	  			<div class="replyinsert_wrap">
-	  			<button type="button" id="insertBtn">댓글 등록</button>
+	  			<button class="btn btn-primary" type="button" id="insertBtn">댓글 등록</button>
 	  			</div>
 	  		</div>
   	 	<table class="table table-hover">
@@ -95,7 +98,7 @@
 			정말로 삭제하시겠습니까?
 	      </div>
 	      <div class="modal-footer">
-	        <button onclick="location.href='deleteAction.jsp?bNo=<%= bno %>'" class="btn btn-secondary">예</button>
+	        <button onclick="location.href='boardDeleteProc.jsp?bNo=<%= bno %>'" class="btn btn-danger">예</button>
   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
 	      </div>
 	    </div>
@@ -161,10 +164,10 @@ if (last > totalPage){last = totalPage};
  					str += "<div><div class ='writer_wrap'>"
  					str += "<div class='Writer'>" +replies[i].nickname + "&nbsp&nbsp&nbsp&nbsp 작성 날짜 :" + replies[i].regDate +"</div>"
  					if("<%= sid %>" != null && "<%= sid %>"  == replies[i].userid){
- 	 					str += "<div class='community_update'>"
- 	 					str += "<button style='display:none' id='replyUpdateBtn="+ replies[i].rNo +"' onclick='replyUpdate("+ replies[i].rNo +")'>수정하기</button>"
- 	 					str += "<button id='replyModifyBtn="+ replies[i].rNo +"' type='button' onclick='replyModify("+ replies[i].rNo +")'>수정</button></div>"
- 						str += "<div class='community_delete'><button id='replydelteBtn="+ replies[i].rNo +"' type='button' onclick='replyDel("+ replies[i].rNo +")'>삭제</button></div>"
+ 	 					str += "<div class='community_update' style='margin-right:10px;'>"
+ 	 					str += "<button class='btn btn-warning' style='display:none' id='replyUpdateBtn="+ replies[i].rNo +"' onclick='replyUpdate("+ replies[i].rNo +")'>수정하기</button>"
+ 	 					str += "<button class='btn btn-warning' id='replyModifyBtn="+ replies[i].rNo +"' type='button' onclick='replyModify("+ replies[i].rNo +")'>수정</button></div>"
+ 						str += "<div class='community_delete'><button class='btn btn-danger'id='replydelteBtn="+ replies[i].rNo +"' type='button' onclick='replyDel("+ replies[i].rNo +")'>삭제</button></div>"
  					}
  					str += "</div>"
  					str += "<div><p id='replycontent="+ replies[i].rNo +"'>" + replies[i].content + "</p></div></div>"
@@ -224,7 +227,7 @@ if (last > totalPage){last = totalPage};
  	function replyUpdate(rno){
  		var testName = "replycontent="+ rno;
  		var content =$("textarea[name='"+testName+"']").val();
- 		location.href="replyUpdateAction.jsp?rno="+rno+"&content=" +content;
+ 		location.href="replyUpdateProc.jsp?rno="+rno+"&content=" +content;
  		}
 
  	

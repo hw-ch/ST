@@ -6,7 +6,10 @@
 	int rno = Integer.parseInt(request.getParameter("rno"));
 	String content = request.getParameter("content");
 	String referer = request.getHeader("referer");
-	if(ReplyDAO.replyupdate(content, rno) == 1) {
+	
+	ReplyDTO reply = new ReplyDAO().getreply(rno);
+	if(sid != null && sid.equals(reply.getUserid())){
+	ReplyDAO.replyupdate(content, rno);
 		 response.sendRedirect(referer);
 	} else{
 		 response.sendRedirect(referer);

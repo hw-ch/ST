@@ -63,3 +63,8 @@
     font-style: normal;
     font-size : 1em;    
 }
+
+#exampleModalLabel
+{
+    font-family: 'KIMM_Bold';
+}
