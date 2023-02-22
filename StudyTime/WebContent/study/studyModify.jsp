@@ -144,7 +144,7 @@
 		</main>
 			<footer class="pt-5 my-5 text-muted border-top">
 		  		<div class="mb-5">
-			      <a href="javascript:void(0);" onclick = "confirmBack();" class="btn btn-danger btn-lg px-4 text text-white">취소</a>
+			      <a href="javascript:void(0);" onclick = "confirmBack();" class="btn btn-warning btn-lg px-4 text text-white">취소</a>
 			      <button class="btn btn-warning btn-lg px-4 text text-white modifyBtn" type="submit">글 수정</button>
 		  		</div>
 			</footer>

@@ -43,7 +43,7 @@
 		    	수정이 완료되었습니다.
 		  </div>
 		  <div class="modal-footer">
-		    <button onclick = "location.href = '/study/studyView.jsp?sNo=<%=sNo %>'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인
+		    <button onclick = "location.href = '/study/studyView.jsp?sNo=<%=sNo %>'" type="button" class="btn btn-info" data-bs-dismiss="modal">확인
 		    </button>
 		  </div>
 		</div>
