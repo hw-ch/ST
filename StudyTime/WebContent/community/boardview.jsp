@@ -26,6 +26,7 @@
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);
 	ReplyDAO.replyCount(bno);
+	NoticeDAO.updateHit(bno);
 
 %>
 
