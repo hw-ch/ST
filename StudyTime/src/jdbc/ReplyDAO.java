@@ -87,10 +87,10 @@ public class ReplyDAO {
 					ReplyDTO reply = new ReplyDTO();
 					reply.setRNo(rs.getString(1));
 					reply.setBNo(rs.getString(2));
-					reply.setContent(rs.getNString(3));
-					reply.setNickname(rs.getNString(4));
-					reply.setUserid(rs.getNString(5));
-					reply.setRegDate(rs.getNString(6));
+					reply.setContent(rs.getString(3));
+					reply.setNickname(rs.getString(4));
+					reply.setUserid(rs.getString(5));
+					reply.setRegDate(rs.getString(6));
 					
 					return reply;
 				}
@@ -258,7 +258,7 @@ public class ReplyDAO {
 				obj.put("content", rs.getString(4));
 				obj.put("nickname", rs.getString(5));
 				obj.put("userid", rs.getString(6));
-				obj.put("regDate", rs.getString(6));
+				obj.put("regDate", rs.getString(7));
 
 				replyList.add(obj);
 				

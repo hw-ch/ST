@@ -58,7 +58,7 @@
    		<hr>
    			<div class="community_comment">
    			<h1 class="comment_count">댓글 수 <%=board.getReplyNum() %> </h1>
-  			<textarea class="community_content" id="replycontent"></textarea>
+  			<textarea class="form-control col-sm-5" rows="5" id="replycontent"></textarea>
 	  			<div class="replyinsert_wrap">
 	  			<button class="btn btn-primary" type="button" id="insertBtn">댓글 등록</button>
 	  			</div>
@@ -215,7 +215,7 @@ if (last > totalPage){last = totalPage};
  	
  	function replyModify(rno){
  		var element = document.getElementById("replycontent=" +rno);
- 		$( element ).contents().unwrap().wrap( "<textarea name='replycontent="+ rno +"'>'" );
+ 		$( element ).contents().unwrap().wrap( "<textarea class='form-control col-sm-5' rows='5' name='replycontent="+ rno +"'>'" );
  		const btn1 = document.getElementById('replydelteBtn='+rno);
  		const btn2 = document.getElementById('replyModifyBtn='+rno);
  		const btn3 = document.getElementById('replyUpdateBtn='+rno);
