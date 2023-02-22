@@ -607,7 +607,7 @@ public class UserDAO {
 		
 	}
 	
-	//비밀번호 변경(두현)
+	//임시 비밀번호를 받은 후 비밀번호를 변경하는 메소드(두현)
 	public static int pwModify(String id, String currPass, String newPass) {
 		
 		sql = "UPDATE user SET password=? WHERE userId=? and password=? ";
