@@ -10,7 +10,17 @@
 <%@page import="jdbc.StudyDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>STUDY TIME</title>
+</head>
+<body>
 <%@ include file="/includes/header.jsp" %>
+<script>$('#pageTitle').text("스터디 탈퇴")</script>
+
 <%
 	request.setCharacterEncoding("utf-8");
 
@@ -53,4 +63,7 @@
 		
 <%
 	}
-%>		
+%>	
+	</script>
+</body>
+</html>	
