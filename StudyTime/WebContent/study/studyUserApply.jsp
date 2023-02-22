@@ -63,10 +63,7 @@
 	function searchFunction(){
 		$.ajax({
 			type:"POST",
-			url:"/study/studyUserApplyProc.jsp",
-			data : {sNo : <%=sNo%>,
-					state : 'list'
-			},	
+			url:"/study/studyUserApplyProc.jsp?sNo=<%=sNo%>&state='list'",
 			success:function(data){
 				if(data == null){
 					str += "<p>가입 신청 유저가 없습니다.</p>";
@@ -102,12 +99,8 @@
  		
   		$.ajax({
 				type:"POST",
-				url:"/study/studyUserApplyProc.jsp",
-				data : {sNo : <%=sNo%>,
-						state : $(this).attr('id'),
-						sjNo : $(this).data('sjno')
-						
-				},	
+				url:"/study/studyUserApplyProc.jsp?sNo=<%=sNo%>&state=" + $(this).attr('id') + "&sjNo=" + $(this).data('sjno'),
+
 				success:function(data){
 					$('#exampleModal').modal('show');
 				}
