@@ -24,15 +24,16 @@ public class CategoryDAO {
 		try {conn = ConnectionPool.get();} catch (NamingException | SQLException e) {e.printStackTrace();}
 	}
 	
-	//카테고리 드롭다운 목록(지원)
-			public static List<CategoryDTO> categoryList(){	
-				sql = "SELECT * FROM category ORDER BY cNo";
-				List<CategoryDTO> categoryList = new ArrayList<>();
+	//카테고리 드롭다운(지원)
+			public static CategoryDTO category(String cNo){	
+				sql = "SELECT * FROM category where cNo = ?";
+				CategoryDTO cdto = null;
 				try {
 					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, cNo);
 					rs = pstmt.executeQuery();
-					while(rs.next()) {
-						categoryList.add(new CategoryDTO(rs.getString(1),rs.getString(2),rs.getString(3)));
+					if(rs.next()) {
+						return new CategoryDTO(rs.getString(1),rs.getString(2),rs.getString(3));
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -41,7 +42,7 @@ public class CategoryDAO {
 					if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 					if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
 				}
-				return categoryList;
+				return cdto;
 			}	
 	
 
@@ -93,9 +94,52 @@ public class CategoryDAO {
 		}
 
 		return category;
-
-		}
+	
+	}
+	
+	//카테고리 1 목록(지원)
+		public static List<CategoryDTO> category1List(){	
+			sql = "SELECT DISTINCT category1 FROM category";
+			List<CategoryDTO> categoryList = new ArrayList<>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					categoryList.add(new CategoryDTO(rs.getString(1)));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+				if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+				if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+			}
+			return categoryList;
+		}	
 		
+	//카테고리 2 목록(지원)
+	public static List<CategoryDTO> category2List(){	
+		sql = "SELECT * FROM category ORDER BY cNo";
+		List<CategoryDTO> categoryList = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1, category1);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				categoryList.add(new CategoryDTO(rs.getString(1),rs.getString(2),rs.getString(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
+			if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+			if (rs != null) try { rs.close(); } catch (SQLException e) {e.printStackTrace();}
+		}
+		return categoryList;
+	}	
+
+
+
 
 
 

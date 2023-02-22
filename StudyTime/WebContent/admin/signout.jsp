@@ -52,7 +52,7 @@
 				<thead>
 					<tr>
 						<th scope="col">아이디</th>
-						<td scope="col"><input type="text" name="id" id="id"
+						<td scope="col"><input type="text" name="userId" id="id"
 						class="form-control" required></td>
 					</tr>
 				</thead>
@@ -86,7 +86,7 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">DaDaMall</h1>
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">STUDY TIME</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
@@ -98,11 +98,6 @@
 		  </div>
 		</div>
 
-		<script>
-			$(function() {
-				
-			});
-		</script>
 
 	<script>
 	$('.removeBtn').click(function() {
@@ -122,8 +117,6 @@
 	<br>
 	<br>
 
-	
-	     <%@ include file="../includes/footer.jsp"%>
 </body>
 
 

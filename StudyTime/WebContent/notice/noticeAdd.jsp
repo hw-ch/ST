@@ -27,7 +27,7 @@
 	</div>
 	<div class="row p-2">
 		<div class="col">
-			<input type="textarea" rows="8" id="summernote">
+			<textarea id="summernote"></textarea>
 		</div>
 	</div>
 	<div class="row p-2">
@@ -60,7 +60,7 @@
       $('#summernote').summernote({
         placeholder: '내용을 입력하세요.',
         tabsize: 5,
-        height: 180,
+        height: 400,
         toolbar: [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],

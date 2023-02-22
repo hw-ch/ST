@@ -16,10 +16,12 @@ String sNo = request.getParameter("sNo");
 if(check.equals("재가입")){
 
 StudyJoinDAO.reRegister(userId, sNo);
+StudyDAO.updateJoinCnt1(sNo);
+
 
 }else{
 
 	StudyJoinDAO.delete(userId, sNo);
-	
+	StudyDAO.updateJoinCnt2(sNo);
 }
 %>

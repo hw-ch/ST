@@ -1,3 +1,10 @@
+<!-- ---------------------------------------------------------->
+<!-- 최초작성자 : 권두현(secure3141@naver.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- ---------------------------------------------------------->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,6 +44,13 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    #im {
+    margin: auto;
+    display: block;
+    }
+    
+    #st{ font-size : 30px;}
+    
   </style>
 </head>
 
@@ -45,12 +59,12 @@
 
   <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
+      <div class="input-form col-md-9 mx-auto">
         <form class="validation-form" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" name="name" placeholder="" value="" required>
+              <input type="text" class="form-control" name="name" autofocus required>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
@@ -90,10 +104,10 @@
 
           <div class="row">
           <div class="col-md-6 mb-3">
-              <label for="phone">휴대폰 번호</label>
-              <input type="text" class="form-control" name="phone" placeholder="010-0000-0000" required>
+              <label for="phone">휴대전화번호</label>
+              <input type="text" class="form-control" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13" required>
               <div class="invalid-feedback">
-                휴대폰 번호를 입력해주세요.
+                휴대전화번호를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -132,13 +146,22 @@
       <p class="mb-1">&copy; STUDY TIME</p>
     </footer>
   </div>
+  
+  
   <script>
   
-  $('#pageTitle').text("회원가입")
+  $('#home').hide();
+  
+  //전화번호에 자동 하이픈 넣기
+  const autoHyphen = (target) => {
+	  target.value = target.value
+	    .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	 }
   
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
+			
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
           if (form.checkValidity() === false) {
@@ -150,27 +173,30 @@
         }, false);
       });
     }, false);
-  
+    
   
 //비밀번호 유효성 검사
   var password = document.getElementById("pw")
   ,confirm_password = document.getElementById("pwChk");
 
   function validatePassword(){
-  if(password.value != confirm_password.value) { // 만일 두 인풋 필드값이 같지 않을 경우
-    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-    confirm_password.setCustomValidity("비밀번호와 일치하지 않습니다."); 
-  } 
-  else { // 만일 두 인풋 필드값이 같을 경우
-    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
-    // 따라서 빈값을 주어 submit 처리되게 한다
-    confirm_password.setCustomValidity(''); 
-  }
+			if(password.value != confirm_password.value) { // 만일 두 인풋 필드값이 같지 않을 경우
+			    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
+			    confirm_password.setCustomValidity("비밀번호와 일치하지 않습니다."); 
+			  } 
+			  else { // 만일 두 인풋 필드값이 같을 경우
+			    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
+			    // 따라서 빈값을 주어 submit 처리되게 한다
+			    confirm_password.setCustomValidity(''); 
+			  }
   }
 
   password.onchange = validatePassword;
   confirm_password.onkeyup = validatePassword;
-  // End 비밀번호 유효성 검사
+// End 비밀번호 유효성 검사
+  
   </script>
+  
+  
 </body>
 </html>

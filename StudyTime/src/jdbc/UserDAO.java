@@ -22,8 +22,53 @@ public class UserDAO {
 	private static String sql;
 	private static ResultSet rs;
 	private static Connection conn;
-
 	
+//	회원정보 수정 메서드(도영)
+	public static boolean update(String userId, String nickName, String name, String gender, String image,
+			String phone, String originId) {
+
+		try {
+			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? " + " WHERE userId=? ";
+
+			try {
+				conn = ConnectionPool.get();
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+			pstmt.setString(2, nickName);
+			pstmt.setString(3, name);
+			pstmt.setString(4, gender);
+			pstmt.setString(5, image);
+			pstmt.setString(6, phone);
+			pstmt.setString(7, originId);
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return false;
+
+	}
+
+
 //	회원 목록 메서드(도영)
 	public static ArrayList<UserDTO> getAllList(){
 
@@ -71,224 +116,56 @@ public class UserDAO {
 
 		return users;
 
-		}
-	
-//	회원정보 수정 메서드(도영)
-	public static boolean update(String userId, String nickName, String name, String gender, String image,
-			String phone) {
+	}
+
+	// 내 정보(소영)
+	public static UserDTO myInfo(String userId) {
+		
+		UserDTO users = null;
 
 		try {
-			sql = "UPDATE user SET userId=?, nickName=?, name=?, gender=?, image=?, phone=? " + " WHERE userId=? ";
-
+			sql = "SELECT * from user where userid=? ";
+	
 			try {
 				conn = ConnectionPool.get();
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
-
+	
 			pstmt = conn.prepareStatement(sql);
-
+	
 			pstmt.setString(1, userId);
-			pstmt.setString(2, nickName);
-			pstmt.setString(3, name);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, image);
-			pstmt.setString(6, phone);
-			int result = pstmt.executeUpdate();
-			if (result == 1) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-				if (rs != null)
-					rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+			
+		rs = pstmt.executeQuery();
+	
+		if (rs.next()) {
+			users = new UserDTO(rs.getString("userId"),
+					rs.getString("password"), 
+					rs.getString("nickname"),
+					rs.getString("name"), 
+					rs.getString("ts"), 
+					rs.getString("gender"),
+					rs.getString("image"),
+					rs.getString("phone"));	
+										}
+							
+						return users;
 
-		return false;
+						} catch (SQLException e) {
+						e.printStackTrace();
+						} finally {
+						try {
+							if(rs!=null) rs.close();
+							if(pstmt!= null) pstmt.close();
+							if(conn!=null) conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						}
 
-	}
+						return users;
 
-	// My Study(소영)
-	public static String myList(String sWriter) {
-		JSONArray study = new JSONArray();
-		try {
-			String sql = "SELECT sTitle, sWriter, joinCnt, startDate FROM study WHERE sWriter = ? ORDER BY ts DESC";
-
-			try {
-				conn = ConnectionPool.get();
-
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, sWriter);
-
-				rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-					JSONObject obj = new JSONObject();
-					obj.put("sTitle", rs.getString(1));
-					obj.put("sWriter", rs.getString(2));
-					obj.put("joinCnt", rs.getString(3));
-					obj.put("startDate", rs.getString(4));
-
-					study.add(obj);
-				}
-
-			} catch (NamingException | SQLException e) {
-				e.printStackTrace();
-			}
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-		}
-		return study.toJSONString();
-	}
-
-	// 스터디 조회(소영)
-	public static String myView(String sWriter) throws NamingException, SQLException {
-
-		try {
-			String sql = "SELECT sTitle, sWriter, joinCnt, startDate, process, expDate, cNo  FROM study WHERE sWriter = ? ORDER BY ts DESC";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, sWriter);
-
-			rs = pstmt.executeQuery();
-
-			JSONArray study = new JSONArray();
-
-			while (rs.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("sTitle", rs.getString(1));
-				obj.put("sWriter", rs.getString(2));
-				obj.put("joinCnt", rs.getString(3));
-				obj.put("startDate", rs.getString(4));
-				obj.put("process", rs.getString(5));
-				obj.put("expDate", rs.getString(6));
-				obj.put("cNo", rs.getString(7));
-
-				study.add(obj);
-			}
-
-			return study.toJSONString();
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-
-	}
-
-	// 스터디 탈퇴(소영)
-	public static int studyDelete(String userId, String sNo) throws NamingException, SQLException {
-
-		try {
-			String sql = "DELETE FROM studyJoin WHERE userId = ? AND sNo = ? ";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, sNo);
-
-			int result = pstmt.executeUpdate();
-
-			return result;
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-	}
-
-	// 내 정보(소영)
-	public static String myInfo(String userId) throws NamingException, SQLException {
-
-		try {
-			String sql = "SELECT * FROM user WHERE userId = ? ORDER BY ts DESC";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-
-			rs = pstmt.executeQuery();
-
-			JSONArray study = new JSONArray();
-
-			while (rs.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("userId", rs.getString(1));
-				obj.put("nickName", rs.getString(2));
-				obj.put("name", rs.getString(3));
-				obj.put("gender", rs.getString(4));
-				obj.put("phone", rs.getString(5));
-				obj.put("ts", rs.getString(6));
-
-				study.add(obj);
-			}
-
-			return study.toJSONString();
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-
-	}
+						}
 
 	// 본인 정보 수정(소영)
 	public static int myEdit(String userId, String password, String nickName, String image, String phone)
@@ -307,21 +184,54 @@ public class UserDAO {
 
 			return pstmt.executeUpdate(); // 성공 1, 실패 0을 가지고 나간다.
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
+			try {
+				if(pstmt != null)pstmt.close();
+				if(conn != null)conn.close();
+				if(rs != null)rs.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 		}
 	}
 
+	// 회원 탈퇴(소영)
+		public static boolean unregister(String userId) {
+
+			try {
+
+				String sql = "DELETE from user where userId=? ";
+
+				try {
+					conn = ConnectionPool.get();
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
+
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+
+				int result = pstmt.executeUpdate();
+				if (result == 1) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt!= null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return false;
+		}
+	
+	
+	
+	
+
+	
 //	회원정보 삭제 메서드(도영)
 	public static boolean dropout(String userId) {
 
@@ -408,35 +318,7 @@ public class UserDAO {
 
 	}
 
-	// 회원 탈퇴(소영)
-	public static int withdrawal(String userId) throws NamingException, SQLException {
-
-		try {
-			String sql = "DELETE FROM user WHERE userId = ? ";
-
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-
-			int result = pstmt.executeUpdate();
-
-			return result;
-
-		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-	}
+	
 
 	//회원가입 (두현)
 		public static boolean join(String userId, String password, String name, String nickname, String gender, String phone, String image){
@@ -504,7 +386,7 @@ public class UserDAO {
 		//카카오 로그인(두현)
 		public static int kakaoLogin(String id) {
 			
-			sql = "SELECT userId FROM user WHERE userId=?";
+			sql = "SELECT userId FROM user WHERE userId=? ";
 			
 			try {
 				conn = ConnectionPool.get();	
@@ -607,8 +489,8 @@ public class UserDAO {
 		try {
 			conn = ConnectionPool.get();	
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pw);
-			pstmt.setString(2, id);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
@@ -626,6 +508,35 @@ public class UserDAO {
 			}
 		}
 		return false;
+	}
+		
+	// 회원가입시 아이디가 이미 존재하는지 여부 확인(두현)
+	public static boolean exist(String id) {
+		
+		sql = "SELECT userId FROM user WHERE userId=?";
+		
+		try {
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			return rs.next(); // 조회한 아이디가 DB에 존재하면 true, 없으면 false
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		finally {
+			try {
+				if(rs!= null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+		
 	}
 
 	

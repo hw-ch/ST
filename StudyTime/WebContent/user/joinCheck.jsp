@@ -1,3 +1,9 @@
+<!-- ---------------------------------------------------------->
+<!-- 최초작성자 : 권두현(secure3141@naver.com) -->
+<!-- 최초작성일 : 2023/02/15 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/15) -->
+<!-- ---------------------------------------------------------->
 <%@page import="smtp.SendMail"%>
 <%@page import="jdbc.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,12 +31,61 @@
 	
 	String userFileName = multiReq.getFilesystemName("image");	//이미지
 	
+	if(UserDAO.exist(id)){ %>
+		<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">이미 존재하는 회원입니다.</h1>
+        <button type="button" class="btn-close" onclick="location.href='/user/join.jsp'" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        다른 아이디를 사용하여 가입해주세요.
+      </div>
+      <div class="modal-footer">
+        <button onclick="location.href='/user/join.jsp'" class="btn btn-primary">재가입</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+<script>
+$(function(){
+	$("#exampleModal").modal("show");
+	
+});
+</script>
+<% 	} else{
+	
 	boolean result = UserDAO.join(id, pw, name, nickname, gender, phone, userFileName);
 	
 	if(result == true){
-		SendMail.sending(id, name);	//메일 보내기
-		out.print("회원가입 성공");
-	}	else{
-		out.print("회원가입 실패");
-	}
+		SendMail.sending(id, name);	//메일 보내기 %>
+		<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">회원가입 성공</h1>
+        <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= name %>님 환영합니다.
+      </div>
+      <div class="modal-footer">
+        <button onclick="location.href='/user/login.jsp'" class="btn btn-primary">로그인 페이지</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+<script>
+$(function(){
+	$("#exampleModal").modal("show");
+	
+});
+</script>	
+<% 	}}	
 %>	

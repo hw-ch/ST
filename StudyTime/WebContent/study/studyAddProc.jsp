@@ -1,3 +1,11 @@
+<!-- -------------------------------------------------------- -->
+<!-- 최초작성자 : 박지원 -->
+<!-- 최초작성일 : 2023/02/20 -->
+
+<!-- 버전 기록 : ver1(시작 23/02/20) -->
+<!-- -------------------------------------------------------- -->
+
+<%@page import="java.util.*"%>
 <%@page import="jdbc.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,26 +16,34 @@
 <%
 	request.setCharacterEncoding("utf-8");
 
-	String id = request.getParameter("id");
-	String password = request.getParameter("password");
-	String name = request.getParameter("name");
-	String email = request.getParameter("email");
-	
-	if(StudyDAO.studyCreate(sTitle, sWriter, cNo, category1, category2, address, recruitCnt, joinCnt, expDate, startDate, scontent, process)(id)){
+	String sTitle = request.getParameter("sTitle");
+	String sWriter = (String)session.getAttribute("sid");
+	String cNo = request.getParameter("cNo");
+	CategoryDTO cdto = new CategoryDAO().category(cNo);
+	String category1 = cdto.getCategory1();
+	String category2 = cdto.getCategory2();
+	String address = request.getParameter("address");
+	String recruitCnt = request.getParameter("recruitCnt");
+	String joinCnt = "1";
+	String expDate = request.getParameter("expDate");
+	String startDate = request.getParameter("startDate");
+	String sContent = request.getParameter("sContent");
+	String process = request.getParameter("process");
+	if(new StudyDAO().studyCreate(sTitle, sWriter, cNo, category1, category2, address, recruitCnt, joinCnt, expDate, startDate, sContent, process)){
 		%>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header">
-		    <h1 class="modal-title fs-5" id="exampleModalLabel">로그인</h1>
+		    <h1 class="modal-title fs-5" id="exampleModalLabel">스터디 등록</h1>
 		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
-		    	이미 존재하는 아이디
+		    	등록이 완료되었습니다.
 		  </div>
 		  <div class="modal-footer">
-		    <button onclick = "location.href = '/user/signupForm.jsp'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인
+		    <button onclick = "location.href = '/main.jsp'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인
 		    </button>
 		  </div>
 		</div>
@@ -39,36 +55,5 @@
 			})
 		</script>
 <% 
-	} else{
-		if(new UserDAO().joinTemp(id,password,name,email)){
-			//SendMail.sending(email, name);
-			%>
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			<div class="modal-content">
-			  <div class="modal-header">
-			    <h1 class="modal-title fs-5" id="exampleModalLabel2">회원가입</h1>
-			    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			  </div>
-			  <div class="modal-body">
-			    	회원가입 신청 완료.<br> 관리자 확인 후 승인/거부 처리 됩니다.
-			  </div>
-			  <div class="modal-footer">
-			    <button onclick = "location.href = '/user/loginForm.jsp'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-			  </div>
-			</div>
-			</div>
-			</div>
-			<script>
-				$(function(){
-					$("#exampleModal2").modal("show");
-				})
-			</script>
-		<% 
-			
-		}
 	}
-	
-	
 %>
