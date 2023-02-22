@@ -32,6 +32,7 @@
 		}
 		
 	%>
+	
 	<div class="col-lg-8 mx-auto p-4 py-md-5">
 		<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
 	    	<img src="/images/favicon.ico" width="40" height="32" class="me-2"></img>
@@ -100,6 +101,9 @@
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b228c636b51d3c9d389fa37c9bd68e8e&libraries=services"></script>
 	<script>
+	
+	$('#pageTitle').text("스터디 조회"); 
+	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -151,9 +155,7 @@
 	} 
 	}); 
 
-
-
-		    
+	  
 		   
 		
 	</script>

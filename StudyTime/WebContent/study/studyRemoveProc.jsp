@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <%
 	String sNo = request.getParameter("sNo");
-	if(new StudyJoinDAO().deleteAllMember(sNo) && new StudyDAO().studyDelete(sNo)){
+	if(new StudyDAO().studyDelete(sNo)){
 		%>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -149,6 +149,7 @@
 			</footer>
 		</form>  	
 	</div>
+	<script>$('#pageTitle').text("스터디 등록");</script>
 	<script>
 	 function confirmBack() {
 	        if(confirm("작성한 내용이 저장되지 않습니다.\n정말 이전으로 돌아가시겠습니까?") ) {
