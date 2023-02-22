@@ -27,7 +27,7 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 		    <h1 class="modal-title fs-5" id="exampleModalLabel">스터디 참여</h1>
-		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		    <button onclick = "location.href = '/main.jsp'" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 		    	참여신청이 완료되었습니다.
