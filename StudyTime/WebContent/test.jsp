@@ -65,48 +65,58 @@
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" name="name" autofocus required>
+              
               <div class="invalid-feedback">이름을 입력해주세요.</div>
+              
             </div>
             <div class="col-md-6 mb-3">
               <label for="nickname">닉네임</label>
-              <input type="text" class="form-control" name="nickname" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                별명을 입력해주세요.
-              </div>
+              <input type="text" class="form-control" name="nickname" id="nickname" minlength="2" required>
+              
+              <div class="valid-feedback">사용 가능한 닉네임 입니다.</div>
+              <div class="invalid-feedback">2글자 이상 10글자 이하로 작성해 주세요.</div>
+              
             </div>
           </div>
 
           <div class="mb-3">
             <label for="email">아이디</label>
             <input type="email" class="form-control" name="userId" placeholder="you@example.com" required>
-            <div class="invalid-feedback">
-              이메일을 입력해주세요.
-            </div>
+            
+            <div class="invalid-feedback">이메일 형태의 아이디를 입력해주세요.</div>
+              
+            
           </div>
 
           <div class="mb-3">
             <label for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="pw" maxlength="15" required>
-            <div class="invalid-feedback">
-              비밀번호를 입력해주세요.
-            </div>
+            <input type="password" class="form-control" name="password" id="pw" minlength="10" maxlength="15" required>
+            
+            <div class="valid-feedback">사용가능한 비밀번호입니다.</div>
+            <div class="invalid-feedback">영문자, 숫자, 특수문자 포함 10자이상 비밀번호를 입력해주세요.</div>
+             
+            
           </div>
 
           <div class="mb-3">
             <label for="passwordChk">비밀번호확인<!-- <span class="text-muted">&nbsp;(필수 아님)</span> --></label>
             <input type="password" class="form-control" id="pwChk" required>
-          	<div class="invalid-feedback">
-          	비밀번호와 일치하지 않습니다.
-            </div>
+            
+            <div class="valid-feedback">비밀번호와 일치합니다.</div>
+          	<div class="invalid-feedback">비밀번호와 일치하지 않습니다.</div>
+          	
+            
           </div>
 
           <div class="row">
           <div class="col-md-6 mb-3">
               <label for="phone">휴대전화번호</label>
-              <input type="text" class="form-control" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13" required>
-              <div class="invalid-feedback">
-                휴대전화번호를 입력해주세요.
-              </div>
+              <input type="text" class="form-control" name="phone" id="phone" oninput="autoHyphen(this)" minlength="13" maxlength="13" required>
+              
+              <div class="valid-feedback">사용가능한 비밀번호입니다.</div>
+              <div class="invalid-feedback">휴대전화번호를 입력해주세요.</div>
+              
+              
             </div>
             <div class="col-md-6 mb-3">
               <label for="gender">성별</label>
@@ -114,18 +124,20 @@
                 <option value="male">남성</option>
                 <option value="female">여성</option>
               </select>
-              <div class="invalid-feedback">
-                성별을 선택해주세요.
-              </div>
+              
+              <div class="invalid-feedback">성별을 선택해주세요.</div>
+                
+              
             </div>
           </div>
           
           <div class="mb-3">
             <label for="email">이미지</label>
             <input type="file" class="form-control" name="image" required>
-            <div class="invalid-feedback">
-              이미지를 선택해주세요.
-            </div>
+            
+            <div class="invalid-feedback">이미지를 선택해주세요.</div>
+              
+            
           </div>
           
           <hr class="mb-4">
@@ -157,9 +169,65 @@
 	    .replace(/[^0-9]/g, '')
 	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 	 }
+
+  
+  //유효성 검사
+  window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+			
+      Array.prototype.filter.call(forms, (form) => {
+    	  form.classList.add('is-validated');
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+          }
+
+         
+        }, false);
+      });
+    }, false);  
+  
+//닉네임의 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
+  let isNickValid=false;
+
+  // id 가 nickname 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#nickname").addEventListener("input", function(){
+     //1. 입력한 value 값을 읽어온다.
+     let inputNick=this.value;
+     //2. 유효성(2글자이상 10글자 이하)을 검증한다.
+     isNickValid = inputNick.length >= 2 && inputNick.length <= 10;
+     //3. 유효하다면 input 요소에 is-valid 클래스 추가, 아니라면 is-invalid 클래스 추가
+     if(isNickValid){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+     }
+  });
+  
+//비밀번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
+  let isPwValid=false;
+
+  // id 가 pw 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#pw").addEventListener("input", function(){
+     //1. 입력한 value 값을 읽어온다.
+     let inputPw=this.value;
+     //2. 유효성(2글자이상 10글자 이하)을 검증한다.
+     isPwValid = '^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$';
+     //3. 유효하다면 input 요소에 is-valid 클래스 추가, 아니라면 is-invalid 클래스 추가
+     if(isPwValid){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+     }
+  });
   
   
-    
   
 //비밀번호 유효성 검사
   var password = document.getElementById("pw")
