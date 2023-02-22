@@ -28,6 +28,7 @@
         <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        가입한 이메일로 임시 비밀번호가 전송되었습니다.<br>
         이메일을 확인해주세요.
       </div>
       <div class="modal-footer">
