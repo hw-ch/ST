@@ -538,6 +538,35 @@ public class UserDAO {
 		return false;
 		
 	}
+	
+	//임시 비밀번호를 받은 후 비밀번호를 변경하는 메소드(두현)
+	public static int pwModify(String id, String currPass, String newPass) {
+		
+		sql = "UPDATE user SET password=? WHERE userId=? and password=? ";
+		int result=0;
+		
+		try {
+			conn = ConnectionPool.get(); //커넥션 풀 사용
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPass);
+			pstmt.setString(2, id);
+			pstmt.setString(3, currPass);
+			
+			result = pstmt.executeUpdate();
+			
+		}	catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				if(pstmt!= null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 
 	
 	
