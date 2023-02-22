@@ -19,8 +19,10 @@
 
 <body>
 <%@ include file="/includes/header.jsp" %>
+<nav class="boardnav"></nav>
 
 <% 
+	sid = "aaa@naver.com";
 	UserDTO userid = new UserDAO().getOneList(sid);
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);
@@ -55,7 +57,7 @@
    		</section>
    		<hr>
    			<div class="community_comment">
-   			<h1 class="comment_count">댓글 수 <%=board.getReplyNum() %> </h1>
+   			<div class="comment_count">댓글 수 <%=board.getReplyNum() %> </div>
   			<textarea class="form-control col-sm-5" rows="5" id="replycontent"></textarea>
 	  			<div class="replyinsert_wrap">
 	  			<button class="btn btn-primary" type="button" id="insertBtn">댓글 등록</button>
@@ -124,7 +126,7 @@
 			정말로 삭제하시겠습니까?
 	      </div>
 	      <div class="modal-footer">
-	        <button onclick="replydelete()" class="btn btn-secondary" data-bs-dismiss="modal">예</button>
+	        <button onclick="replydelete()" class="btn btn-danger" data-bs-dismiss="modal">예</button>
   		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
 	      </div>
 	    </div>
@@ -268,10 +270,10 @@ if (last > totalPage){last = totalPage};
 
   			success:function(data) {
   				$('.modal-body').html('');
-  				if(data==1){
+  				if(data == 1){
   					$('.modal-body').html("댓글 등록성공");
   				} else {
-  					$('.modal-body').html("댓글 등록실패");
+  					$('.modal-body').html("댓글을 입력해주세요");
   				}
   				$('#replyModal').modal("show");
   			}

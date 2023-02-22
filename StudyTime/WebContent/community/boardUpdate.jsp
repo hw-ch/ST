@@ -13,7 +13,8 @@
 <body>
 <%@ include file="/includes/header.jsp" %>
 
-<%
+<%	
+	sid = "aaa@naver.com";
 	int bNo = Integer.parseInt(request.getParameter("bNo"));
 	BoardDTO board = new BoardDAO().getboard(bNo);
 	if(sid == null){
@@ -46,26 +47,22 @@
 	if( sid != null && sid.equals(board.getUserId()))
 	{
 %>
+<nav class="boardnav"></nav>
 	<div class="communityView">	
 		<form action="boardModifyProc.jsp?bno=<%= bNo%>">
-		<div><button class="btn btn-secondary btn-lg" onclick="location.href='boardList.jsp'">&laquo; 목록으로</button></div>
+		<div><button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">&laquo; 수정취소</button></div>
 		<section class="communityView_Postheader">
-   		<div class="community_title" >  
-   		<textarea name="subject"><%= board.getSubject() %></textarea>
-   		</div>
-   		<div class ="writer_wrap">
-   		<div class="Writer"><%= board.getNickName() %></div>
-   		</div>
-   		<div class="DateAndViews">
-   			<div class="Date"><%= board.getRegDate() %></div>
-   			<div class="hits"><%= board.getHit() %></div>
+   		<div class="community_title" >
+   		<div class="boardtitle">글 제목</div>
+   		<textarea class="form-control col-sm-5" name="subject"><%= board.getSubject() %></textarea>
    		</div>
    		<hr>
    		<div class=content>
-   		<textarea class="community_content" name="content"><%= board.getContent() %></textarea>
+   		<div class="boardtitle">글 내용</div>
+   		<textarea class="form-control col-sm-5" rows="5" name="content"><%= board.getContent() %></textarea>
    		</div>
    		</section>
-   		<div class="community_delete"><button>수정</button></div>
+   		<div class="community_Modify"><button class="btn btn-warning btn-lg">수정</button></div>
    			</form>
 	</div>
 <%
@@ -74,6 +71,9 @@
 <script>
 	window.onload = function(){
  	}
+	
+	$("#home").hide();
+
 </script>
 </body>
 </html>

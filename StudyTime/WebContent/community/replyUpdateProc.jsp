@@ -10,10 +10,7 @@
 	String referer = request.getHeader("referer");
 	
 	ReplyDTO reply = new ReplyDAO().getreply(rno);
-	if(sid != null && sid.equals(reply.getUserid())){
 	ReplyDAO.replyupdate(content, rno);
-		 response.sendRedirect(referer);
-	} else{
-		 response.sendRedirect(referer);
-	}
+	response.sendRedirect(referer);
+	
 %>
