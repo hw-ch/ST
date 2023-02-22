@@ -513,10 +513,10 @@ public class StudyDAO {
 		}
 
 //	스터디 승인 메서드(도영)
-	public static boolean apply(String tempTitle){
+	public static boolean apply(String sNo){
 
 			sql = "UPDATE study SET apply='승인' "
-					+ " WHERE sTitle=? ";
+					+ " WHERE sNo=? ";
 
 			try {
 			
@@ -528,7 +528,7 @@ public class StudyDAO {
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, tempTitle);
+			pstmt.setString(1, sNo);
 
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
@@ -550,10 +550,10 @@ public class StudyDAO {
 	}
 	
 //	스터디 거절 메서드(도영)
-	public static boolean deny(String tempTitle){
+	public static boolean deny(String sNo){
 
 			sql = "UPDATE study SET apply='거절' "
-					+ " WHERE sTitle=? ";
+					+ " WHERE sNo=? ";
 
 			try {
 				
@@ -565,7 +565,7 @@ public class StudyDAO {
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, tempTitle);
+			pstmt.setString(1, sNo);
 
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
@@ -587,11 +587,11 @@ public class StudyDAO {
 	}
 	
 //	회원정보 가져오기 메서드(도영)
-	public static StudyDTO getOneList(String sTitle) {
+	public static StudyDTO getOneList(String sNo) {
 
 		StudyDTO study = null;
 		try {
-			sql = "SELECT * from study where sTitle=? ";
+			sql = "SELECT * from study where sNo=? ";
 
 			try {
 				conn = ConnectionPool.get();
@@ -601,7 +601,7 @@ public class StudyDAO {
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, sTitle);
+			pstmt.setString(1, sNo);
 
 			rs = pstmt.executeQuery();
 

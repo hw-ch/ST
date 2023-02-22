@@ -82,8 +82,8 @@ public class BoardDAO {
 	public static boolean insert(String subject, String content, String nickName, String userId){
 			
 			try {
-				sql = " INSERT INTO board (subject, content, nickName, userId) "
-						+ " VALUES(?, ?, ?, ?) ";
+				sql = " INSERT INTO board (subject, content, nickName, userId, hit) "
+						+ " VALUES(?, ?, ?, ?, 0) ";
 	
 				try {
 					conn = ConnectionPool.get();

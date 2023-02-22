@@ -102,7 +102,7 @@
   $(document).on('click', '.regBtn', function(event) {
 	  $.ajax({
 			type:'post',
-			url:'tempCheckAJAX.jsp?check=승인&tempTitle=' + document.getElementById("tempTitle").innerText,
+			url:'tempCheckAJAX.jsp?check=승인&tempSNo=' + document.getElementById("tempSNo").value,
 			success:function(result){
 				searchFunction();
 			}
@@ -114,7 +114,7 @@
   $(document).on('click', '.delBtn', function(event) {
 	  $.ajax({
 			type:'post',
-			url:'tempCheckAJAX.jsp?check=거부&tempTitle=' + document.getElementById("tempTitle").innerText,
+			url:'tempCheckAJAX.jsp?check=거부&tempSNo=' + document.getElementById("tempSNo").value,
 			success:function(result){
 				searchFunction();
 			}
