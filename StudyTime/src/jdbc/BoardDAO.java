@@ -23,12 +23,12 @@ import org.json.simple.JSONObject;
 import util.ConnectionPool;
 
 public class BoardDAO {
-	
+
 	private static PreparedStatement pstmt;
 	private static String sql;
 	private static ResultSet rs;
 	private static Connection conn;
-	
+
 	//게시글 수 가져오기 (남훈)
 	public static int getBoardCount(){
 		int count = 0;
@@ -38,17 +38,17 @@ public class BoardDAO {
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()){
 				count = rs.getInt(1);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return count;
 	}
-	
+
 	//게시물 목록가져오기(남훈)
 	public static ArrayList<BoardDTO> getallList(int startRow, int pageSize) {
 		ArrayList<BoardDTO> boards = new ArrayList<BoardDTO>();
@@ -60,7 +60,7 @@ public class BoardDAO {
 			pstmt.setInt(1, startRow-1);
 			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				boards.add(new BoardDTO(rs.getString(1),
 										rs.getString(2),
@@ -75,18 +75,18 @@ public class BoardDAO {
 										rs.getString(11)));
 			}
 			return boards;
-	
+
 	}catch(Exception e) {
 		e.printStackTrace();
-	} 
+	}
 		return boards;
 	}
-	
+
 //	게시물 보기(남훈)
-	public static BoardDTO getboard(int bNo){		
+	public static BoardDTO getboard(int bNo){
 		String sql = "SELECT bNo, subject, content, nickname, userid, hit, good, bad, DATE_FORMAT(regDate, '%Y-%m-%d') AS regDate, replyNum from board WHERE bNo = ?";
 		try {
-			
+
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bNo);
@@ -111,19 +111,19 @@ public class BoardDAO {
 		}
 		return null;
 	}
-	
-	
+
+
 //	게시물 삭제(남훈)
 	public static void Boarddelete(int bno) {
-		
+
 		try {
 			String sql = "DELETE FROM Board WHERE bno = ?";
-			
+
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -135,7 +135,7 @@ public class BoardDAO {
 			}
 		}
 	}
-	
+
 	//게시글 안에 댓글 삭제(남훈)
 	public static void Replydelete(int bno) {
 
@@ -146,7 +146,7 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();
-	
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -161,16 +161,16 @@ public class BoardDAO {
 		}
 
 	}
-	
-//	게시물 수정(남훈)	
+
+//	게시물 수정(남훈)
 	public static int Boardupdate(int bno, String subject, String content) {
-		
+
 		try {
 			String sql = "UPDATE board SET subject= ?, content = ? WHERE bno = ?";
-			
+
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, subject);
 			pstmt.setString(2, content);
 			pstmt.setInt(3, bno);
@@ -183,35 +183,35 @@ public class BoardDAO {
 			if(pstmt != null) pstmt.close();
 			if(conn != null) conn.close();
 			if(rs != null) rs.close();
-				
-				
+
+
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
 		return -1;
 	}
-	
+
 //	커뮤니티 게시물 등록 메서드(도영)
 	public static boolean insert(String subject, String content, String nickName, String userId){
-			
+
 			try {
 				sql = " INSERT INTO board (subject, content, nickName, userId) "
 						+ " VALUES(?, ?, ?, ?) ";
-	
+
 				try {
 					conn = ConnectionPool.get();
 				} catch (NamingException e) {
 					e.printStackTrace();
 				}
-				
+
 				pstmt = conn.prepareStatement(sql);
-	
+
 				pstmt.setString(1, subject);
 				pstmt.setString(2, content);
 				pstmt.setString(3, nickName);
 				pstmt.setString(4, userId);
-	
+
 				int result = pstmt.executeUpdate();
 				if (result == 1) {
 					return true;
@@ -223,23 +223,23 @@ public class BoardDAO {
 				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 				if(rs != null) rs.close();
-					
-					
+
+
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 				}
-	
+
 			return false;
 		}
 
-		//조회수 추가 (남훈)
+	//조회수 추가(남훈)
 	public static int updateHit(int bno) {
 		int result = 0;
-		
+
 		try {
 			String sql = "UPDATE board SET hit = hit+1 where bno = ?";
-			
+
 			try {
 				conn = ConnectionPool.get();
 			} catch (NamingException | SQLException e){
@@ -248,21 +248,21 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, bno);
-			
+
 			result = pstmt.executeUpdate();
-						
+
 		}catch (Exception e) {
 			e.printStackTrace();
-		
+
 		}finally {
             if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
             if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
 		}
-		
+
 		return result;
 	}
 
-	
+
 
 
 }
