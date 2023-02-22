@@ -20,7 +20,7 @@
 <div class="container">
 
 <% 
-	sid = (String) session.getAttribute("userid");
+	sid = (String) session.getAttribute("sid");
 %>
 	<%-- if (sid == null){
 %>		

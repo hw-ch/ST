@@ -774,7 +774,8 @@ public class StudyDAO {
          }
          return false;
      }
-	// 스터디 삭제(소영)
+	
+	// 스터디 탈퇴(소영)
 	   public static boolean studyDelete(String userid, String sNo) {
            try {
         	   String sql = "DELETE FROM studyjoin WHERE userid = ? AND sNo = ? ";
