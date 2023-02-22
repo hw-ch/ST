@@ -23,7 +23,7 @@
 </head>
 <body>
 <%@ include file="/includes/header.jsp" %>
-
+<script>$('#pageTitle').text("My Study")</script>
 
  <% 
 		sid = (String) session.getAttribute("sid");
@@ -64,10 +64,10 @@
 			</div>
 			
               <div style="padding-top: 50px; padding-right: 450px;" class="card-title pricing-card-title h5"> 
-              <div class="d-grid gap-2 col-6 mx-auto">
+              <!-- <div class="d-grid gap-2 col-6 mx-auto"> -->
+              <div class="mb-5">
 			  <a href="/user/studyView.jsp?sNo=<%=studyinfo.getSNo() %>" class="btn btn-secondary">스터디 상세보기</a>
 			  <a href="/user/studyDeleteCheck.jsp?sNo=<%=studyinfo.getSNo() %>"  class="btn btn-danger">스터디 탈퇴하기</a>
-			  <%-- <button class="btn btn-danger" onclick="location.href='/user/studyDeleteCheck.jsp?sNo=<%=studyinfo.getSNo() %>' " type="submit"></button> --%>
 			</div>
 			</div>
               <hr class="featurette-divider">
