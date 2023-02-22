@@ -91,7 +91,7 @@
 		%>
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
-            	<button onclick = "location.href = '.jsp'" type="button" class="w-100 btn btn-lg btn-">스터디 입장</button>
+            	 <a href="/main.jsp" class="btn btn-primary btn-lg px-4 text text-white">스터디 입장</a>
             	 <a href="javascript:history.back();" class="btn btn-secondary btn-lg px-4 text text-white">이전으로</a>
 	  		</div>
 		</footer>

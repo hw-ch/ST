@@ -1,3 +1,4 @@
+
 <!-- -------------------------------------------------------- -->
 <!-- 최초작성자 : 김도영(difbfl4750@naver.com) -->
 <!-- 최초작성일 : 2023/02/15 -->
@@ -157,11 +158,12 @@ if(sid != null) {
 				<li><a class="dropdown-item h5" href="/user/myStudy.jsp">내 참여스터디</a></li>
 				<%
 				 
+				
 				StudyJoinDTO check = StudyJoinDAO.checkManager(sid);
 				
 				
 				
-				if(check.getApprove().equals("그룹장")) { %>
+				if(StudyJoinDAO.checkManager(sid) != null && check.getApprove().equals("그룹장")) { %>
 				<li><a class="dropdown-item h5" href="/study/studyInfo.jsp">스터디관리</a></li>
 				<%}else{ %>
 				
