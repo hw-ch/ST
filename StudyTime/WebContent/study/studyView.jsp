@@ -15,6 +15,7 @@
 <title>STUDY TIME</title>
 </head>
 <body>
+
 	<%@ include file = "/includes/header.jsp" %>
 	<%
 		String sNo = request.getParameter("sNo");
