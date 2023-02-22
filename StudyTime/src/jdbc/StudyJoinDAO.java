@@ -562,7 +562,7 @@ public class StudyJoinDAO {
 				int result = 0;
 
 				try {
-					String sql = "UPDATE study SET joinCnt = (SELECT count(sjNo) FROM studyjoin WHERE sno = ? AND approve='승인') WHERE sNo = ?";
+					String sql = "UPDATE study SET joinCnt = (SELECT count(sjNo) FROM studyjoin WHERE sno = ? AND approve IN('승인','그룹장')) WHERE sNo = ?";
 
 					conn = ConnectionPool.get();
 					pstmt = conn.prepareStatement(sql);

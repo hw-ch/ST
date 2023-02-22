@@ -56,6 +56,7 @@
   </div>
 </div>
 <script>
+	$('#pageTitle').text("스터디 관리");
 	function searchFunction(){
 		$.ajax({
 			type:"POST",

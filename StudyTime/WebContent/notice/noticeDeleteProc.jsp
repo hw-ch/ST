@@ -21,7 +21,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-warning" id="check">확인</button>
+      	<button type="button" class="btn btn-primary" id="check">확인</button>
       </div>
     </div>
   </div>

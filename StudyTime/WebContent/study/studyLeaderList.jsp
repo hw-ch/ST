@@ -49,7 +49,7 @@
  
 </body>
   <script>
-	$('#pageTitle').text("스터디 관리")
+	$('#pageTitle').text("스터디 관리");
   
   function searchFunction() {	
 		$.ajax({

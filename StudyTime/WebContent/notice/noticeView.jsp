@@ -75,7 +75,8 @@
 </div>
 
 <script>
-	var pageSize = 2;
+	$('#pageTitle').text("공지사항");
+	var pageSize = 10;
 	var currentPage = <%=request.getParameter("page")%>
 	if(currentPage == null){currentPage = 1;}
 	var total = <%=total%>;
