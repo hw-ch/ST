@@ -20,7 +20,7 @@
 
   
 
-<main class="form-signin w-100 m-auto" style="padding-top: 150px;">
+<main class="form-signin w-100 m-auto" style="padding-top: 150px; padding-bottom: 200px;">
 
 
    <h2><b> 스터디 목록 </b></h2>
@@ -54,9 +54,7 @@
   function searchFunction() {	
 		$.ajax({
  			type:"POST",
- 			url:"/study/studyLeaderListProc.jsp",
- 			data : { sid : <%=sid%>
-			},	
+ 			url:"/study/studyLeaderListProc.jsp?sid=<%=sid%>",
  			success:function(data){
  				var study = JSON.parse(data.trim());
  				var str="";
@@ -66,7 +64,7 @@
  					str += "<td class='h5 view' id=" + study[i].sNo + ">" + study[i].category1 + "</td>";
  					str += "<td class='h5 view' id=" + study[i].sNo + ">" + study[i].nickname + "</td>";
  					str += "<td class='h5 view' id=" + study[i].sNo + ">" + study[i].regDate + "</td>";
- 					str += "<td class='h5'><span class='btn' id="+ study[i].sNo +">이동</span></td>";
+ 					str += "<td class='h5'><button class='btn' id="+ study[i].sNo +">이동</button></td>";
  					str += "<td class='h5'></td></tr>"
 
  				}
