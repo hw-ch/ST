@@ -71,7 +71,9 @@ $(function(){
 	
 });
 
-$('#home').hide()
 </script>	
 <% }%>
+<script>
+$('#home').hide();
+</script>
 
