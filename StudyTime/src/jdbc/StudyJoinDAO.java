@@ -552,7 +552,41 @@ public class StudyJoinDAO {
 				}
 				return false;
 			}
-	// study joincnt update 메소드 (혜원)
+			
+			// study joincnt update 메소드 (혜원)
+			public static int cntUpdate(String sNo) {
+
+
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				int result = 0;
+
+				try {
+					String sql = "UPDATE study SET joinCnt = (SELECT count(sjNo) FROM studyjoin WHERE sno = ? AND approve='승인') WHERE sNo = ?";
+
+					conn = ConnectionPool.get();
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, sNo);
+					pstmt.setString(2, sNo);
+
+					result = pstmt.executeUpdate();
+
+				}catch (Exception e) {
+					e.printStackTrace();
+
+				}finally {
+					try {
+						if(pstmt != null) pstmt.close();
+						if(conn != null) conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+
+				return result;
+			}
 
 
 //			가입한 스터디 번호 목록 메서드(도영)
