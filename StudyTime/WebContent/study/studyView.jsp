@@ -95,7 +95,7 @@
 	      	<%}%>
 		     
 		     
-	  		</div>
+	  		</div>	
 		</footer>
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b228c636b51d3c9d389fa37c9bd68e8e&libraries=services"></script>
