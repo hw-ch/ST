@@ -60,7 +60,7 @@
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-9 mx-auto">
-        <form class="validation-form" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
+        <form class="validation-form" id="joinFrm" action="/user/joinCheck.jsp" method="post" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
@@ -147,7 +147,7 @@
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" id="joinBtn" type="button">가입 완료</button>
         </form>
       </div>
     </div>
@@ -163,7 +163,6 @@
   
   $('#home').hide();
   
-  
   //전화번호에 자동 하이픈 넣기
   const autoHyphen = (target) => {
 	  target.value = target.value
@@ -172,6 +171,10 @@
 	 }
 
   
+  
+$('#joinBtn').click(function(event){
+	$('#joinFrm').submit();
+});  
   //유효성 검사
   window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
@@ -197,7 +200,7 @@
   document.querySelector("#nickname").addEventListener("input", function(){
      
 	  let inputNick=this.value;
-     isNickValid = inputNick.length >= 2 && inputNick.length <= 10;
+     isNickValid = inputNick.length >=2 && inputNick.length <= 10;
      
      if(isNickValid){
         this.classList.remove("is-invalid");
@@ -209,7 +212,7 @@
   });
  
 //아이디 유효성 검사
-document.querySelector("#userId").addEventListener("input", function(event){
+document.querySelector("#userId").addEventListener("input", function(	){
 	  let reg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 	  let inputId=this.value;
 	  
@@ -225,13 +228,9 @@ document.querySelector("#userId").addEventListener("input", function(event){
 
   
   
-  
-//비밀번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
-  let isPwValid=false;
-
   // id 가 pw 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
-  document.querySelector("#pw").addEventListener("input", function(event){
-	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$/ ;
+  document.querySelector("#pw").addEventListener("input", function(){
+	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~@$!%*#?&])[A-Za-z\d~@$!%*#?&]{10,}$/ ;
 	  let inputPw=this.value;
 	  
      if(reg.test(inputPw)){
@@ -264,10 +263,7 @@ document.querySelector("#userId").addEventListener("input", function(event){
   });
   
   
-//휴대전화번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
-  let isPhoneValid = false;
-  
-  // id 가 pwChk 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  // id 가 phone 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
   document.querySelector("#phone").addEventListener("input", function(){
 	  
      let inputPhoneChk=this.value;

@@ -41,7 +41,7 @@
 				<div class="row g-3">
 			         <div class="col-sm-6">
 				          <label for="process" class="form-label">진행방식</label>
-			              <select class="form-select" name = "process" id = "process" required>
+			              <select class="form-select" name = "process" id = "process" required onchange = "changeValue2()">
 			                <option value="온라인" <% if(sdto.getProcess().equals("온라인")){%>selected<%}%>>온라인</option>
 			                <option value="오프라인" <% if(sdto.getProcess().equals("오프라인")){%>selected<%}%>>오프라인</option>
 			              </select>
@@ -109,18 +109,18 @@
 			             </select>
 			             
 		         	 </div>
-		         	 <div class = "col-sm-6">
+		         	 <div class = "col-sm-6" id = "addressDiv">
 						<label for="addr1" class="form-label">도로명 주소</label>
-							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="주소 검색을 눌러주세요.">
 							<input type = "button" class = "form-control btn btn-outline-secondary" value = "검색"
 							onclick="goPopup()"> 
 					</div>
-					 <div class = "col-sm-6">
+					 <div class = "col-sm-6" id = addressDiv2>
 						<label for="addr2" class="form-label">상세 주소</label>
-							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="주소 검색을 눌러주세요.">
 							<input type = "text" class = "form-control" id = "addr2" name = "addr2">
+							<input type = "hidden" name = "address" id = "address">
 					</div>
-					<input type = "hidden" name = "address" id = "address">
 					<input type = "hidden" name = "sNo" id = "sno" value="<%=sNo%>">
 			</div>
 					
@@ -152,6 +152,30 @@
 	</div>
 	<script>
 		$('#pageTitle').text("스터디 수정");
+	</script>
+	<script>
+	$(function changeValue(){
+		var value_str = document.getElementById('process');
+		if(value_str.options[value_str.selectedIndex].text != "오프라인"){
+			$("#addressDiv").hide();
+			$("#addressDiv2").hide();
+		}
+		else{
+			$("#addressDiv").show();
+			$("#addressDiv2").show();
+		}
+	});
+	function changeValue2(){
+		var value_str = document.getElementById('process');
+		if(value_str.options[value_str.selectedIndex].text != "오프라인"){
+			$("#addressDiv").hide();
+			$("#addressDiv2").hide();
+		}
+		else{
+			$("#addressDiv").show();
+			$("#addressDiv2").show();
+		}
+	}	
 	</script>
 	<script>
 	 function confirmBack() {
