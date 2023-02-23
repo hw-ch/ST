@@ -8,11 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>communityView</title>
+
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%@ include file="/includes/header.jsp" %>
-
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <%	
 // 	sid = "difbfl4750@naver.com";
  	int bNo = Integer.parseInt(request.getParameter("bNo"));
@@ -50,17 +52,21 @@
 <nav class="boardnav"></nav>
 	<div class="communityView">	
 		<form onsubmit="return ModifyCheck();" action="boardModifyProc.jsp">
-		<input name="bNo" type="hidden" value=<%=bNo %>>
+		<input name="bno" type="hidden" value=<%=bNo %>>
+		<input name="modify" type="hidden" value=1>
 		<div><button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">&laquo; 수정취소</button></div>
 		<section class="communityView_Postheader">
    		<div class="community_title" >
    		<div class="boardtitle">글 제목</div>
-   		<textarea id ="ModifySubject" class="form-control col-sm-5" name="subject"><%= board.getSubject() %></textarea>
+			<input type="text" class="form-control" id="title" name="title" value=<%=board.getSubject() %>>
    		</div>
    		<hr>
    		<div class=content>
    		<div class="boardtitle">글 내용</div>
-   		<textarea id ="ModifyContent" class="form-control col-sm-5" rows="5" name="content"><%= board.getContent() %></textarea>
+<%--    		<textarea id ="ModifyContent" class="form-control col-sm-5" rows="5" name="content"><%= board.getContent() %></textarea> --%>
+		<div class="col p-2">
+			<textarea name ="summernote" id="summernote"></textarea>
+		</div>
    		</div>
    		</section>
    		<div class="community_Modify"><button class="btn btn-warning btn-lg">수정</button></div>
@@ -84,22 +90,54 @@
 <script>
 	
 	function ModifyCheck(){
-		ModifySubject = $("#ModifySubject").val();
-		ModifyContent =$("#ModifyContent").val();
+		ModifySubject = $("#title").val();
+		ModifyContent =$("#summernote").val();
 		if(ModifySubject.length <1){
 			$('.modal-body').html("제목을 입력해주세요");
 			$('#ModifyModal').modal("show");
 			return false;
 
 		} else if(ModifyContent.length < 1){
-			$('.modal-body').html("내용을 입력해주세요");
+			$('.modal-body').html("내용을 수정해주세요");
 			$('#ModifyModal').modal("show");
 			return false;
-		}else{ 
+		}else{
 			return true;	
 		}
 	}
 	
+    $('#summernote').summernote({
+        tabsize: 5,
+        height: 180,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+	
+    
+    $(document).ready(function(){
+  	  $.ajax({
+   			type:"POST",
+   			url:"/community/boardModifyProc.jsp",
+   			data : {bno : <%=request.getParameter("bNo")%>,
+					modify : 2
+				},
+				
+			dataType:"text",
+   			success:function(data){
+   				var board = data;
+   				$('.note-editable').html(board);
+   			}
+   			
+   		});  
+    })
+    
 	$("#home").hide();
 
 </script>
