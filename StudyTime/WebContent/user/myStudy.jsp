@@ -22,10 +22,7 @@
 <link href="carousel.css" rel="stylesheet">
 </head>
 <style>
-#content {
-    display: flex;
-}
-#study {
+.row row-cols-1 row-cols-md-3 mb-3 text-center {
     flex: 1;
 }
 </style>
@@ -50,7 +47,7 @@
 	for(StudyDTO studyinfo : study){
 	
 %>	
-	<div id="content">
+	<div class="content">
        <div id="study" class="row row-cols-1 row-cols-md-3 mb-3 text-center"  style="height: 500px;">
 	<div onclick="location.href = '/study/studyView.jsp?sNo=<%=studyinfo.getSNo() %>'" style="cursor: pointer;">
 	 <div class="col" style="font-family: 'PyeongChangPeace-Bold';">
