@@ -59,7 +59,7 @@
 	for( BoardDTO board: boards) {
 %>
  <tr><td><%=board.getBNo() %></td>
-	<td><a class="td" href="boardview.jsp?bno=<%=board.getBNo() %>"><%=board.getSubject() %></a></td>
+	<td><a class="td" href="boardview.jsp?bno=<%=board.getBNo() %>"><%=board.getSubject() %>[<%=board.getReplyNum() %>]</a></td>
 	<td><%=board.getUserId() %></td>
 	<td><%=board.getRegDate() %></td>
 	<td><%=board.getHit() %></td>

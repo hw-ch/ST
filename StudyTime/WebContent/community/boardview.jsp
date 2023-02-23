@@ -52,7 +52,7 @@
    		</div>
    		<hr>
    		<div class="content">
-   		<p><%= board.getContent() %></p>
+   		<%= board.getContent() %>
    		</div>
    		</section>
    		<hr>
