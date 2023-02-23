@@ -197,7 +197,7 @@
   document.querySelector("#nickname").addEventListener("input", function(){
      
 	  let inputNick=this.value;
-     isNickValid = inputNick.length >= 2 && inputNick.length <= 10;
+     isNickValid = inputNick.length >=2 && inputNick.length <= 10;
      
      if(isNickValid){
         this.classList.remove("is-invalid");
@@ -225,10 +225,6 @@ document.querySelector("#userId").addEventListener("input", function(event){
 
   
   
-  
-//비밀번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
-  let isPwValid=false;
-
   // id 가 pw 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
   document.querySelector("#pw").addEventListener("input", function(event){
 	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~@$!%*#?&])[A-Za-z\d~@$!%*#?&]{10,}$/ ;
@@ -249,7 +245,7 @@ document.querySelector("#userId").addEventListener("input", function(event){
   let isPwChkValid = false;
   
   // id 가 pwChk 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
-  document.querySelector("#pwChk").addEventListener("input", function(){
+  document.querySelector("#pwChk").addEventListener("input", function(event){
 	  
      let inputPw = document.querySelector("#pw").value;
      let inputPwChk=this.value;
@@ -260,6 +256,7 @@ document.querySelector("#userId").addEventListener("input", function(event){
      }else{
         this.classList.remove("is-valid");
         this.classList.add("is-invalid");
+        return false;
      }
   });
   
