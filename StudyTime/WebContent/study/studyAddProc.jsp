@@ -40,7 +40,7 @@
 		    <button onclick = "location.href = '/main.jsp'" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
-		    	등록이 완료되었습니다.
+		    	등록 신청 완료<br>관리자 승인을 기다려주세요.
 		  </div>
 		  <div class="modal-footer">
 		    <button onclick = "location.href = '/main.jsp'" type="button" class="btn btn-info" data-bs-dismiss="modal">확인
