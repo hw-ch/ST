@@ -22,14 +22,8 @@
 	
 	
 <%
-
 String userId = request.getParameter("userId");
-UserDTO userInfo;
-if(sid.equals("admin")){
-userInfo = UserDAO.getOneList(userId);
-}else{
-userInfo = UserDAO.getOneList(sid);
-}
+UserDTO userInfo = UserDAO.getOneList(sid);
 %>
 
 	<div class="container h4" style="padding-top: 200px; padding-left: 200px;">
