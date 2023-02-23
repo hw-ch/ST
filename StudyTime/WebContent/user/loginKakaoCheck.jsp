@@ -58,11 +58,11 @@ $(function(){
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">로그인 실패</h1> 
+        <h1 class="modal-title fs-5" id="exampleModalLabel">카카오 로그인 실패</h1> 
         <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
       </div>  
       <div class="modal-body">
-      카카오 로그인을 위해 회원가입 부탁드립니다!
+      카카오 로그인을 위해 회원가입 부탁드립니다.
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" onclick="history.back()">이전으로</button>
