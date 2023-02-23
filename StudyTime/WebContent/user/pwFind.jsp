@@ -87,7 +87,7 @@
           
           <div class="mb-3">
             <label for="phone">휴대전화번호</label>
-            <input type="text" class="form-control" name="phone" oninput="autoHyphen(this)" required>
+            <input type="text" class="form-control" name="phone" oninput="autoHyphen(this)" minlength="13" maxlength="13" required>
             <div class="invalid-feedback">
               휴대전화번호를 입력해주세요.
             </div>
