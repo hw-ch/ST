@@ -29,7 +29,7 @@ public static void sending(String id, String name, String phone) {
 		emailInfo.put("subject", "STUDY TIME 계정 - 비밀번호 변경 안내");// 메일 제목
 		emailInfo.put("content", name + " 회원님 비밀번호 변경을 도와드리겠습니다.\n"
 									  + "임시 비밀번호는 [" + br + "]" + "입니다.\n"
-									  + "임시 비밀번호로 로그인 후 비밀번호 변경 부탁드립니다.");// 메일 내용
+									  + "비밀번호 변경 페이지에서 임시 비밀번호를 이용해 비밀번호 변경 부탁드립니다.");// 메일 내용
 
 		emailInfo.put("format", "text/plain;charset=UTF-8");// 메일의 형식을 설정 일단 text 로 고정
 
