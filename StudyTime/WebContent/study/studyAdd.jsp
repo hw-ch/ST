@@ -37,7 +37,7 @@
 				<div class="row g-3">
 			         <div class="col-sm-6">
 				          <label for="process" class="form-label">진행방식</label>
-			              <select class="form-select" name = "process" id = "process" required>
+			              <select class="form-select" name = "process" id = "process" onchange="changeValue()" required>
 			                <option value="" selected disabled>온라인/오프라인</option>
 			                <option value="온라인">온라인</option>
 			                <option value="오프라인">오프라인</option>
@@ -107,20 +107,22 @@
 			           			
 			           			
 			             </select>
-			             
 		         	 </div>
-		         	 <div class = "col-sm-6">
+		         	
+		         	 <div class = "col-sm-6" id = "addressDiv">
 						<label for="addr1" class="form-label">도로명 주소</label>
-							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="오프라인 스터디만 입력해주세요.">
-							<input type = "button" class = "form-control btn btn-outline-secondary" value = "검색"
+							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="주소 검색을 눌러주세요.">
+							<input type = "button" class = "form-control btn btn-outline-secondary" value = "주소 검색"
 							onclick="goPopup()"> 
 					</div>
-					 <div class = "col-sm-6">
+					<div class = "col-sm-6" id = "addressDiv2">
 						<label for="addr2" class="form-label">상세 주소</label>
-							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="주소 검색을 눌러주세요.">
 							<input type = "text" class = "form-control" id = "addr2" name = "addr2">
+							<input type = "hidden" name = "address" id = "address">
 					</div>
-					<input type = "hidden" name = "address" id = "address">
+	         		 
+					
 			</div>
 					
 					
@@ -149,7 +151,24 @@
 			</footer>
 		</form>  	
 	</div>
-	<script>$('#pageTitle').text("스터디 등록");</script>
+	<script>
+		$('#pageTitle').text("스터디 등록");
+	</script>
+	<script>
+		$("#addressDiv").hide();
+		$("#addressDiv2").hide();
+		function changeValue(){
+			var value_str = document.getElementById('process');
+			if(value_str.options[value_str.selectedIndex].text != "오프라인"){
+				$("#addressDiv").hide();
+				$("#addressDiv2").hide();
+			}
+			else{
+				$("#addressDiv").show();
+				$("#addressDiv2").show();
+			}
+		}
+	</script>
 	<script>
 	 function confirmBack() {
 	        if(confirm("작성한 내용이 저장되지 않습니다.\n정말 이전으로 돌아가시겠습니까?") ) {
