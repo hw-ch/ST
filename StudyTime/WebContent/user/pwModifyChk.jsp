@@ -16,7 +16,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 변경</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 변경 성공</h1>
         <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -42,7 +42,7 @@ $(function(){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 변경</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 변경 실패</h1>
         <button type="button" class="btn-close" onclick="location.href='/user/pwModify.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">

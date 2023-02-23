@@ -267,7 +267,7 @@ document.querySelector("#userId").addEventListener("input", function(event){
 //휴대전화번호 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
   let isPhoneValid = false;
   
-  // id 가 pwChk 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  // id 가 phone 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
   document.querySelector("#phone").addEventListener("input", function(){
 	  
      let inputPhoneChk=this.value;

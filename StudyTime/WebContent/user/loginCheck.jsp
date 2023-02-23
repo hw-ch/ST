@@ -80,7 +80,7 @@ $(function(){
         <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
       </div>  
       <div class="modal-body">
-      재로그인 해주시기 바랍니다.
+      비밀번호 확인 후 다시시도 해주시기 바랍니다.
       </div>
       <div class="modal-footer">
        <button onclick="location.href='/user/login.jsp'" class="btn btn-primary">로그인</button>

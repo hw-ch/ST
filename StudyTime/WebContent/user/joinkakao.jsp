@@ -81,33 +81,35 @@ String gender = request.getParameter("gender");
             <label for="email">아이디</label>
             <input type="email" class="form-control" name="userId" value=<%= userId %> readonly required>
             <div class="invalid-feedback">
-              이메일을 입력해주세요.
+              아이디를 입력해주세요.
             </div>
           </div>
 
           <div class="mb-3">
             <label for="password">비밀번호</label>
             <input type="password" class="form-control" name="password" id="pw" required>
-            <div class="invalid-feedback">
-              비밀번호를 입력해주세요.
-            </div>
+            
+            <div class="valid-feedback">사용가능한 비밀번호입니다.</div>
+            <div class="invalid-feedback">영문자, 숫자, 특수문자 포함 10자이상 비밀번호를 입력해주세요.</div>
+          
           </div>
 
           <div class="mb-3">
             <label for="passwordChk">비밀번호확인<!-- <span class="text-muted">&nbsp;(필수 아님)</span> --></label>
             <input type="password" class="form-control" id="pwChk" required>
-          	<div class="invalid-feedback">
-          	비밀번호와 일치하지 않습니다.
-            </div>
+          	
+          	<div class="valid-feedback">비밀번호와 일치합니다.</div>
+          	<div class="invalid-feedback">비밀번호와 일치하지 않습니다.</div>
+          	
           </div>
 
           <div class="row">
           <div class="col-md-6 mb-3">
               <label for="phone">휴대폰 번호</label>
-              <input type="text" class="form-control" name="phone" placeholder="010-0000-0000" required>
-              <div class="invalid-feedback">
-                휴대폰 번호를 입력해주세요.
-              </div>
+              <input type="text" class="form-control" name="phone" id="phone" oninput="autoHyphen(this)" minlength="13" maxlength="13" required>
+              
+			<div class="invalid-feedback">완전한 휴대전화번호를 입력해주세요.</div>
+			
             </div>
             <div class="col-md-6 mb-3">
               <label for="gender">성별</label>
@@ -153,43 +155,76 @@ String gender = request.getParameter("gender");
   
   $('#home').hide();
   
-  $('#pageTitle').text("회원가입")
   
-    window.addEventListener('load', () => {
+//전화번호에 자동 하이픈 넣기
+  const autoHyphen = (target) => {
+	  target.value = target.value
+	    .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	 }
+  
+  
+//유효성 검사
+  window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
+			
       Array.prototype.filter.call(forms, (form) => {
+    	  form.classList.add('is-validated');
         form.addEventListener('submit', function (event) {
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+            
           }
 
           form.classList.add('was-validated');
         }, false);
       });
-    }, false);
+    }, false);  
+    
+//id 가 pw 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#pw").addEventListener("input", function(event){
+	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~@$!%*#?&])[A-Za-z\d~@$!%*#?&]{10,}$/ ;
+	  let inputPw=this.value;
+	  
+     if(reg.test(inputPw)){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+        
+     }
+  });
   
+//id 가 pwChk 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#pwChk").addEventListener("input", function(){
+	  
+     let inputPw = document.querySelector("#pw").value;
+     let inputPwChk=this.value;
+     
+     if(inputPw == inputPwChk){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+     }
+  });
   
-//비밀번호 유효성 검사
-  var password = document.getElementById("pw")
-  ,confirm_password = document.getElementById("pwChk");
-
-  function validatePassword(){
-  if(password.value != confirm_password.value) { // 만일 두 인풋 필드값이 같지 않을 경우
-    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-    confirm_password.setCustomValidity("비밀번호와 일치하지 않습니다."); 
-  } 
-  else { // 만일 두 인풋 필드값이 같을 경우
-    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
-    // 따라서 빈값을 주어 submit 처리되게 한다
-    confirm_password.setCustomValidity(''); 
-  }
-  }
-
-  password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;
-  // End 비밀번호 유효성 검사
+//id 가 phone 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
+  document.querySelector("#phone").addEventListener("input", function(){
+	  
+     let inputPhoneChk=this.value;
+     
+     if(inputPhoneChk.length == 13){
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+     }else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+     }
+  });
   </script>
 
 </body>
