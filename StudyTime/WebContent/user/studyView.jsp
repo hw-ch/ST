@@ -92,7 +92,6 @@
 		%>
 		<footer class="pt-5 my-5 text-muted border-top">
 	  		<div class="mb-5">
-            	 <a href="/main.jsp" class="btn btn-primary btn-lg px-4 text text-white">스터디 입장</a>
             	 <a href="javascript:history.back();" class="btn btn-secondary btn-lg px-4 text text-white">이전으로</a>
 	  		</div>
 		</footer>
