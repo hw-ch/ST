@@ -89,11 +89,12 @@
 		  <img src="/images/kakao1.png" width="200" height="45">
 		  </a><br><br>
 		  </div>
-		  <div style="text-align: right";>
+		  <div style="text-align: right">
           <a href="/user/idFind.jsp">아이디 찾기</a>
-		  <a href="/user/pwFind.jsp">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		  <a href="/user/pwFind.jsp">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  <a href="/user/pwModify.jsp">비밀번호 변경</a>
 		  </div>
+		 
         </form>
       </div>
     </div>

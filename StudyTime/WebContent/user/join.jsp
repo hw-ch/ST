@@ -231,7 +231,7 @@ document.querySelector("#userId").addEventListener("input", function(event){
 
   // id 가 pw 인 input 요소에 input 이벤트가 일어났을때 실행할 함수 등록 
   document.querySelector("#pw").addEventListener("input", function(event){
-	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$/ ;
+	  let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~@$!%*#?&])[A-Za-z\d~@$!%*#?&]{10,}$/ ;
 	  let inputPw=this.value;
 	  
      if(reg.test(inputPw)){
