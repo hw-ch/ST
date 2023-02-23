@@ -14,7 +14,7 @@
 <%@ include file="/includes/header.jsp" %>
 
 <%	
-	sid = "aaa@naver.com";
+// 	sid = "aaa@naver.com";
 	int bNo = Integer.parseInt(request.getParameter("bNo"));
 	BoardDTO board = new BoardDAO().getboard(bNo);
 	if(sid == null){
@@ -49,28 +49,56 @@
 %>
 <nav class="boardnav"></nav>
 	<div class="communityView">	
-		<form action="boardModifyProc.jsp?bno=<%= bNo%>">
+		<form onsubmit="return ModifyCheck();" action="boardModifyProc.jsp">
+		<input name="bNo" type="hidden" value=<%=bNo %>>
 		<div><button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">&laquo; 수정취소</button></div>
 		<section class="communityView_Postheader">
    		<div class="community_title" >
    		<div class="boardtitle">글 제목</div>
-   		<textarea class="form-control col-sm-5" name="subject"><%= board.getSubject() %></textarea>
+   		<textarea id ="ModifySubject" class="form-control col-sm-5" name="subject"><%= board.getSubject() %></textarea>
    		</div>
    		<hr>
    		<div class=content>
    		<div class="boardtitle">글 내용</div>
-   		<textarea class="form-control col-sm-5" rows="5" name="content"><%= board.getContent() %></textarea>
+   		<textarea id ="ModifyContent" class="form-control col-sm-5" rows="5" name="content"><%= board.getContent() %></textarea>
    		</div>
    		</section>
    		<div class="community_Modify"><button class="btn btn-warning btn-lg">수정</button></div>
    			</form>
 	</div>
+	
+	<div class="modal fade" id="ModifyModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-info" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 <%
 	}
 %>
 <script>
-	window.onload = function(){
- 	}
+	
+	function ModifyCheck(){
+		ModifySubject = $("#ModifySubject").val();
+		ModifyContent =$("#ModifyContent").val();
+		if(ModifySubject.length <1){
+			$('.modal-body').html("제목을 입력해주세요");
+			$('#ModifyModal').modal("show");
+			return false;
+
+		} else if(ModifyContent.length < 1){
+			$('.modal-body').html("내용을 입력해주세요");
+			$('#ModifyModal').modal("show");
+			return false;
+		}else{ 
+			return true;	
+		}
+	}
 	
 	$("#home").hide();
 

@@ -22,7 +22,7 @@
 <nav class="boardnav"></nav>
 
 <% 
-	sid = "aaa@naver.com";
+// 	sid = "aaa@naver.com";
 	UserDTO userid = new UserDAO().getOneList(sid);
 	int bno = Integer.parseInt(request.getParameter("bno"));
 	BoardDTO board = new BoardDAO().getboard(bno);

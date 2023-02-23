@@ -3,7 +3,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String sid = "aaa@naver.com";
+	String sid = request.getParameter("sid");
+			
 
 	int bNo = Integer.parseInt(request.getParameter("bno"));
 	String content = request.getParameter("content");
