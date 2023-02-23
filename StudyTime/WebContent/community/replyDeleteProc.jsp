@@ -1,3 +1,8 @@
+<%--작업자: 김남훈 
+	작업 내용 : 댓글 삭제
+	--%>
+
+
 <%@page import="jdbc.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

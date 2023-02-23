@@ -55,18 +55,19 @@
 }
 .DateAndViews
 {
-    margin: 10px auto;
+	margin: 10px auto;
 	display:flex;
 	font-size: 20px;
-}
-
-.Date
-{
+	position: relative;
 }
 
 .hits
 {
-    margin-left: 10px;
+	margin-left: auto;
+	float: right;
+}
+.Date
+{
 }
 
 .content

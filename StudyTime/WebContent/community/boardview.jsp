@@ -25,9 +25,9 @@
 // 	sid = "aaa@naver.com";
 	UserDTO userid = new UserDAO().getOneList(sid);
 	int bno = Integer.parseInt(request.getParameter("bno"));
+	BoardDAO.updateHit(bno);
 	BoardDTO board = new BoardDAO().getboard(bno);
 	ReplyDAO.replyCount(bno);
-	NoticeDAO.updateHit(bno);
 
 %>
 
@@ -48,7 +48,7 @@
    		</div>
    		<div class="DateAndViews">
    			<div class="Date"><%=board.getRegDate() %></div>
-   			<div class="hits"><%=board.getHit() %></div>
+   			<div class="hits">조회수 : <%=board.getHit() %></div>
    		</div>
    		<hr>
    		<div class="content">
