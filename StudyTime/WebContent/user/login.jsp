@@ -91,7 +91,8 @@
 		  </div>
 		  <div style="text-align: right";>
           <a href="/user/idFind.jsp">아이디 찾기</a>
-		  <a href="/user/pwFind.jsp">비밀번호 찾기</a>
+		  <a href="/user/pwFind.jsp">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		  <a href="/user/pwModify.jsp">비밀번호 변경</a>
 		  </div>
         </form>
       </div>
