@@ -125,7 +125,7 @@ if(sid != null) {
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
                 <li class="nav-item" style="padding-right: 10px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
         <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
-         <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
+         <li class="nav-item" style="padding-right: 10px;"><a href="/studyCommunity/studyBoard.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
         <li class="nav-item" style="padding-right: 10px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
 
      	
@@ -150,7 +150,7 @@ if(sid != null) {
 <!--         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->
         <li class="nav-item" style="padding-right: 10px;"><a href="/study/studyAdd.jsp" class="nav-link text-dark">새 글 쓰기</a></li>
         <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">자유게시판</a></li>
-                 <li class="nav-item" style="padding-right: 10px;"><a href="/community/boardList.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
+                 <li class="nav-item" style="padding-right: 10px;"><a href="/studyCommunity/studyBoard.jsp" class="nav-link text-dark">스터디 커뮤니티</a></li>
      	<li class="nav-item" style="padding-right: 10px;"><a href="/notice/noticeView.jsp" class="nav-link text-dark">공지사항</a></li>
       </ul>
       

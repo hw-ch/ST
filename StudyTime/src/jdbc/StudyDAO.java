@@ -906,7 +906,7 @@ public class StudyDAO {
 			ArrayList<StudyDTO> study = new ArrayList<StudyDTO>();
 			
 			try {
-				String sql = "SELECT study.* FROM study WHERE sNo IN (SELECT sNo FROM studyjoin WHERE userid=?) ";
+				String sql = "SELECT study. * FROM study WHERE sNo IN (SELECT sNo FROM studyjoin WHERE userid=? AND approve IN ('승인', '그룹장') ) ";
 				try {
 					conn = ConnectionPool.get();
 				} catch (NamingException e) {

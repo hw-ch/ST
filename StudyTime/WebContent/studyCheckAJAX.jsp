@@ -43,7 +43,7 @@ for(StudyDTO study : studys) {
               <div style="padding-top: 50px; padding-right: 300px;" class="card-title pricing-card-title h5">모집인원 : <%=study.getRecruitCnt() %> </div>
               <hr class="featurette-divider">
          		                
-         <div style="padding-right: 300px;" class="card-title pricing-card-title h5"><img class="box" style="width: 40px; height: 40px;" src="/images/study3.png"> <%=user.getNickName() %></div>
+         <div style="padding-right: 250px;" class="card-title pricing-card-title h5"><img class="box" style="width: 40px; height: 40px;" src="/images/study3.png"> <%=user.getNickName() %></div>
          
                 </div>
         </div>
