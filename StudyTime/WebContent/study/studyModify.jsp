@@ -111,13 +111,13 @@
 		         	 </div>
 		         	 <div class = "col-sm-6" id = "addressDiv">
 						<label for="addr1" class="form-label">도로명 주소</label>
-							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr1" name = "addr1" placeholder="주소 검색을 눌러주세요.">
 							<input type = "button" class = "form-control btn btn-outline-secondary" value = "검색"
 							onclick="goPopup()"> 
 					</div>
 					 <div class = "col-sm-6" id = addressDiv2>
 						<label for="addr2" class="form-label">상세 주소</label>
-							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="오프라인 스터디만 입력해주세요.">
+							<input type = "text" class = "form-control" id = "addr3" name = "addr3" placeholder="주소 검색을 눌러주세요.">
 							<input type = "text" class = "form-control" id = "addr2" name = "addr2">
 							<input type = "hidden" name = "address" id = "address">
 					</div>
