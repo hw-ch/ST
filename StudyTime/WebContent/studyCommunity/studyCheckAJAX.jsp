@@ -19,7 +19,7 @@ for(StudyDTO study : studys) {
 	String userid = study.getSWriter();
 	UserDTO user = UserDAO.getOneList(userid);
 %>
- <tr onclick="location.href='/study/studyView.jsp?sNo=<%=study.getSNo()%>'" style="cursor : pointer;"><td class="h5"> <%=study.getSTitle()%> </td>
+ <tr onclick="location.href='/studyCommunity/boardView.jsp?sNo=<%=study.getSNo()%>'" style="cursor : pointer;"><td class="h5"> <%=study.getSTitle()%> </td>
 <td class="h5"> <%=study.getCategory1()%> </td>
 <td class="h5"> <%=user.getNickName()%> </td>
 <td class="h5"> <%=study.getRegDate()%> </td>
