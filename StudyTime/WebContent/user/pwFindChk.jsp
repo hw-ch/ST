@@ -25,7 +25,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 찾기</h1>
-        <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
+        <button type="button" class="btn-close" onclick="location.href='/user/pwModify.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         가입한 이메일로 임시 비밀번호가 전송되었습니다.<br>
@@ -33,7 +33,7 @@
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" onclick="history.back()">이전으로</button>
-       <button onclick="location.href='login.jsp'" class="btn btn-primary">로그인 페이지</button>
+       <button onclick="location.href='/user/pwModify.jsp'" class="btn btn-primary">비밀번호 변경</button>
       </div>
     </div>
   </div>
