@@ -14,8 +14,8 @@
 <%@ include file="/includes/header.jsp" %>
 
 <%	
-// 	sid = "aaa@naver.com";
-	int bNo = Integer.parseInt(request.getParameter("bNo"));
+// 	sid = "difbfl4750@naver.com";
+ 	int bNo = Integer.parseInt(request.getParameter("bNo"));
 	BoardDTO board = new BoardDAO().getboard(bNo);
 	if(sid == null){
 %>
