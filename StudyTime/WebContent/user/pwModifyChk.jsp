@@ -43,7 +43,7 @@ $(function(){
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 변경</h1>
-        <button type="button" class="btn-close" onclick="location.href='/user/login.jsp'" aria-label="Close"></button>
+        <button type="button" class="btn-close" onclick="location.href='/user/pwModify.jsp'" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         아이디와 비밀번호가 일치하지 않습니다.<br>
