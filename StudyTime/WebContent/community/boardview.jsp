@@ -40,7 +40,7 @@
    		<% if(sid != null && sid.equals(board.getUserId()))
    		{
 		%>   
-   		<div class="community_update" style="margin-right: 10px;"><button class="btn btn-warning btn-lg" onclick="location.href='boardUpdate.jsp?sid=<%=sid %>&bNo=<%= bno %>'">수정</button></div>
+   		<div class="community_update" style="margin-right: 10px;"><button class="btn btn-warning btn-lg" onclick="location.href='/community/boardUpdate.jsp?sid=<%=sid %>&bNo=<%= bno %>'">수정</button></div>
    		<div class="community_delete"><button class="btn btn-danger btn-lg" type="button" onclick="boradDelete()">삭제</button></div>
 		<%
    		}
