@@ -21,6 +21,14 @@
 <title>STUDY TIME</title>
 <link href="carousel.css" rel="stylesheet">
 </head>
+<style>
+#content {
+    display: flex;
+}
+#study {
+    flex: 1;
+}
+</style>
 <body>
 <%@ include file="/includes/header.jsp" %>
 <script>$('#pageTitle').text("My Study")</script>
@@ -33,21 +41,21 @@
 %>		
   
 <main>
-<hr class="featurette-divider">
+      <div class="row" data-masonry='{"percentPosition": true }' style="padding-top: 200px;">
+      <hr class="featurette-divider">
+
+    <div class="col mb-4" style="height: 500px;">
 <%
 	ArrayList<StudyDTO> study = StudyDAO.myStudy(sid);
 	for(StudyDTO studyinfo : study){
 	
 %>	
-
-<div class="row" data-masonry='{"percentPosition": true }' style="padding-top: 200px;">
-      <hr class="featurette-divider">
-    <div class="col mb-4" style="height: 500px;">
+	<div id="content">
        <div id="study" class="row row-cols-1 row-cols-md-3 mb-3 text-center"  style="height: 500px;">
-<div onclick="location.href = '/study/studyView.jsp?sNo=<%=studyinfo.getSNo() %>'" style="cursor: pointer;">
- <div class="col" style="font-family: 'PyeongChangPeace-Bold';">
+	<div onclick="location.href = '/study/studyView.jsp?sNo=<%=studyinfo.getSNo() %>'" style="cursor: pointer;">
+	 <div class="col" style="font-family: 'PyeongChangPeace-Bold';">
 
-        <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card mb-4 rounded-3 shadow-sm" id="content">
                                      <div class="card-header py-3 bg-warning">
             <div class="card-title pricing-card-title display-5"><%=studyinfo.getSTitle() %></div>
           </div>
@@ -77,6 +85,7 @@
          </div>
         </div>
       </div>
+     </div>
      </div>
          </div>
     </div>
