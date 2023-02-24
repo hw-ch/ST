@@ -46,6 +46,14 @@ public class BoardDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
@@ -79,6 +87,14 @@ public class BoardDAO {
 
 	}catch(Exception e) {
 		e.printStackTrace();
+	} finally {
+		try {
+			if(rs != null) rs.close();
+			if(pstmt!= null) pstmt.close();
+			if(conn != null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 		return boards;
 	}
@@ -109,6 +125,14 @@ public class BoardDAO {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt!= null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

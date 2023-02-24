@@ -474,7 +474,7 @@ public class UserDAO {
 					if(pstmt!= null) pstmt.close();
 					if(conn != null) conn.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					e.printStackTrace(); 
 				}
 			}
 			return id;

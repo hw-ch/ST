@@ -58,3 +58,6 @@
 <% 
 	}
 %>
+<script>
+$('home').hide();
+</script>
