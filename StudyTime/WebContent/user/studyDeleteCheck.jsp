@@ -33,6 +33,7 @@
  
  if(study == true){
 	 StudyDAO.studyDelete(userid, sno); 	 
+	 StudyJoinDAO.cntUpdate(sno);
  	/* response.sendRedirect("myStudy.jsp"); */
 %>
 
