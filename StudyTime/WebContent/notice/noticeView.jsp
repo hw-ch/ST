@@ -66,7 +66,7 @@
 	<%
 	}
 	%>
-  <table class="table table-hover">
+  <table class="table table-hover" style="margin-bottom: 300px;">
   <tbody id="notice">
   </tbody>
 </table>

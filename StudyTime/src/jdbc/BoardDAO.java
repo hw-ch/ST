@@ -46,6 +46,17 @@ public class BoardDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return count;
 	}
@@ -79,6 +90,17 @@ public class BoardDAO {
 
 	}catch(Exception e) {
 		e.printStackTrace();
+	} finally {
+		try {
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+			if (rs != null)
+				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 		return boards;
 	}
@@ -109,6 +131,17 @@ public class BoardDAO {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -129,8 +162,12 @@ public class BoardDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(pstmt!= null) pstmt.close();
-				if(conn!=null) conn.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -156,6 +193,8 @@ public class BoardDAO {
 					pstmt.close();
 				if (conn != null)
 					conn.close();
+				if (rs != null)
+					rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -181,13 +220,14 @@ public class BoardDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-			if(rs != null) rs.close();
-
-
-			} catch (Exception e2) {
-				e2.printStackTrace();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return -1;
@@ -221,15 +261,16 @@ public class BoardDAO {
 				e.printStackTrace();
 			} finally {
 				try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-				if(rs != null) rs.close();
-
-
-				} catch (Exception e2) {
-					e2.printStackTrace();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+					if (rs != null)
+						rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				}
+			}
 
 			return false;
 		}
@@ -255,9 +296,17 @@ public class BoardDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 
-		}finally {
-            if (pstmt != null) try { pstmt.close(); } catch(Exception e) {e.printStackTrace();}
-            if (conn != null) try { conn.close(); } catch(Exception e) {e.printStackTrace();}
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return result;

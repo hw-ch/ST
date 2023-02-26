@@ -56,8 +56,8 @@
           </div>
           <div class="card-body" style="height: 350px;">
           	<div style="padding-right: 200px; padding-top: 10px;">
-          	<a class="btn btn-lg btn-light border-dark rounded-5" href="../product/productList.jsp"><%=studyinfo.getCategory1() %></a> 
-          	<a class="btn btn-lg btn-light border-dark rounded-5" href="../product/productList.jsp"><%=studyinfo.getCategory2() %></a>
+          	<a class="btn btn-lg btn-light border-dark rounded-5"><%=studyinfo.getCategory1() %></a> 
+          	<a class="btn btn-lg btn-light border-dark rounded-5"><%=studyinfo.getCategory2() %></a>
           	</div>
    
           					<input type="hidden" name="sNo" value="<%=studyinfo.getSNo() %>">

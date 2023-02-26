@@ -51,6 +51,7 @@ padding:0;
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
      </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -62,6 +63,13 @@ padding:0;
       </div>
       <div class="carousel-item">
       <img src="images/study2.png"  width="100%" height="100%"> 
+              <div class="container">
+          <div class="carousel-caption text-warning">
+                     </div>
+        </div>
+      </div>
+            <div class="carousel-item">
+      <img src="images/study5.png"  width="100%" height="100%"> 
               <div class="container">
           <div class="carousel-caption text-warning">
                      </div>
