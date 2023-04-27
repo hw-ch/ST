@@ -28,8 +28,33 @@
 
 
 ## 🛠️ 사용 기술 및 라이브러리
-
 JSP, Servlet, JAVA, JavaScript, AJAX
 
+## 🎤 시연
 
+### 메인 화면 ###
+
+![제목 없음](https://user-images.githubusercontent.com/107527861/234769578-00c3b08a-9580-40c1-8f3f-ecac75a21e90.png)
+![제목 없음1](https://user-images.githubusercontent.com/107527861/234769397-3050077e-39d9-4bc8-bf7f-5fe87dc7c7d5.png)
+
+<hr>
+<br/>
+
+### 회원가입 & 로그인 화면 ###
+![회원가입](https://user-images.githubusercontent.com/107527861/234771503-a187ccbb-8e14-4ba8-8447-763cdfa626fe.png)
+![로그인](https://user-images.githubusercontent.com/107527861/234771569-e886a0a0-7ae2-4743-9c96-9770e04a8e44.png)
+
+<hr>
+<br/>
+
+### 스터디 등록 ###
+![글쓰기1](https://user-images.githubusercontent.com/107527861/234773006-5b06452f-2215-433a-9c24-7191d8c5e396.png)
+![글쓰기2](https://user-images.githubusercontent.com/107527861/234772999-974a4b34-555a-4479-abbd-f34e67bff3b1.png)
+
+
+<hr>
+<br/>
+
+### 자유게시판 ###
+![자유게시판](https://user-images.githubusercontent.com/107527861/234773391-89a0eb76-3524-44e6-a72f-8eef3b4d24e8.png)
 
