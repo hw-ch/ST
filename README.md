@@ -11,6 +11,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About ST Project
 
+## DB
+<img src="https://file.notion.so/f/s/adef0615-4d93-4a3a-bffb-7ebee7f405ba/board.png?id=1cf67e0f-ec31-44ba-b5fa-7f6a5a7c3951&table=block&spaceId=43c03df8-58d2-49b3-b468-13d6af71e3e2&expirationTimestamp=1682669445448&signature=zAskRRXCWsqPLBBssav3dszYwTkKtxLyN4B4XxibADg&downloadName=board.png">
+
 ## ⭐ 서비스 개요
 <img src="https://file.notion.so/f/s/32a92803-a93d-469e-8774-cfbb6ff304a5/Untitled.png?id=97512cd5-a2a8-4a34-80d9-fc36a5629c78&table=block&spaceId=43c03df8-58d2-49b3-b468-13d6af71e3e2&expirationTimestamp=1682649402956&signature=3Lo4C3qM4A6cu00qigLCZ2nT1E5u9_yYbiBiqyQivts&downloadName=Untitled.png">
 
